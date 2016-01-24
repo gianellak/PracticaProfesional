@@ -1,4 +1,4 @@
-package moduloCobranzas.ventas;
+package moduloCobranzas.altaVenta;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
@@ -17,7 +17,7 @@ public class FormularioAlta extends JPanel {
 
 	
 
-	FormularioAlta(){
+	public FormularioAlta(){
 	
 		this.setLayout(null);
 

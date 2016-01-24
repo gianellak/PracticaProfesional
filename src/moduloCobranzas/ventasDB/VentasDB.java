@@ -30,7 +30,7 @@ public class VentasDB implements VentasDBInterface {
 			"INSERT INTO Vehiculo VALUES (?, ?, ?, ?, ?)";	
 	
 	private static final String SQL_INSERT_VENTA =
-			"INSERT INTO Venta VALUES (?, ?, ?, ?, ?)";	
+			"INSERT INTO Ventas VALUES (?, ?, ?, ?, ?)";	
 	
 	
 	private static final String SQL_FIND_BY_ID =
@@ -225,7 +225,32 @@ public class VentasDB implements VentasDBInterface {
 
 
 
+	@Override
+	public void altaVenta(Venta v) throws DBException {
+		Object[] values = {
+	            v.getIdVenta(),
+	            v.getDniComprador(),
+	            v.getPatente(),
+	            v.getDniGarante(),
+	            v.getDesc()
+	        };
+
+	        try (
+	            Connection connection = this.connectionProvider.getConnection();
+	            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_INSERT_VENTA, true, values);
+	        ) 
+	            
+	        	{
+		        	 statement.executeUpdate();
+		        	 
+		       } catch (SQLException e) {
+		    	   if(e.getErrorCode() == MYSQL_DUPLICATE_PK){
+		    		   throw new DBException("Duplicated Key, cannot insert product");
+		    	    }else{
+	            throw new DBException(e);}
+	        }
+	}
 	
-	
+
 
 }

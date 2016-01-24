@@ -29,6 +29,7 @@ import listeners.ListenerSalirV;
 import listeners.ListenerVolverV;
 import moduloAdministracion.clienteABM.FormularioCliente;
 import moduloAdministracion.clienteABM.FormularioNuevoCliente;
+import moduloCobranzas.altaVenta.FormularioAlta;
 import moduloStock.StockInterface;
 
 public class VentasView implements VentasInterface {
@@ -197,7 +198,7 @@ public class VentasView implements VentasInterface {
 
 	@Override
 	public Venta getNuevaVenta() {
-		Venta v = new Venta(0, 
+		Venta v = new Venta(1, 
 				Integer.parseInt(panelF.getDniCompradorText().getText()), 
 				panelF.getPatenteText().getText(),
 				Integer.parseInt(panelF.getDniGaranteText().getText()), 

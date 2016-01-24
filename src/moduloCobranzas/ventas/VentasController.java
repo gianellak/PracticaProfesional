@@ -94,6 +94,7 @@ public class VentasController {
 		Persona p = ventasDB.getPersona(v.getDniComprador());
 		
 		if(p == null){
+			ventasDB.altaVenta(v);
 			ventas.altaCliente(v.getDniComprador());
 		}
 		else{

@@ -21,5 +21,8 @@ public interface VentasDBInterface {
 	void altaPersona(Persona p) throws DBException;
 
 
+	void altaVenta(Venta v) throws DBException;
+
+
 
 }
