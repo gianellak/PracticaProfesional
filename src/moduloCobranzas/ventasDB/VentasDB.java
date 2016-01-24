@@ -24,13 +24,13 @@ public class VentasDB implements VentasDBInterface {
 	        "SELECT * FROM Cliente WHERE dni=?";
 	
 	private static final String SQL_INSERT_PERSONA =
-			 "INSERT INTO Persona VALUES (?, ?, ?, ?, ?)";	
+			 "INSERT INTO Persona VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";	
 	
 	private static final String SQL_INSERT_VEHICULO =
-			"INSERT INTO Persona VALUES (?, ?, ?, ?, ?)";	
+			"INSERT INTO Vehiculo VALUES (?, ?, ?, ?, ?)";	
 	
 	private static final String SQL_INSERT_VENTA =
-			"INSERT INTO Persona VALUES (?, ?, ?, ?, ?)";	
+			"INSERT INTO Venta VALUES (?, ?, ?, ?, ?)";	
 	
 	
 	private static final String SQL_FIND_BY_ID =

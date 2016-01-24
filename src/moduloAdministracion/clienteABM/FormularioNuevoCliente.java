@@ -52,7 +52,7 @@ public class FormularioNuevoCliente extends JPanel {
 		descripcionText.setBounds(100, 200, 260, 25);
 		this.add(descripcionText);
 
-		btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Ingresar Cliente");
 		btnAceptar.setBounds(300, 120, 100, 25);
 		this.add(btnAceptar);
 	

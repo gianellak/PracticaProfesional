@@ -29,5 +29,7 @@ public interface VentasInterface {
 
 	void mostrarCliente(Persona p);
 
+	Persona getNuevaPersona();
+
 	
 }

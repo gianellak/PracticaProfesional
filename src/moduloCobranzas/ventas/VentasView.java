@@ -24,6 +24,7 @@ import listeners.ListenerBuscar;
 import listeners.ListenerC;
 import listeners.ListenerL;
 import listeners.ListenerNuevaV;
+import listeners.ListenerNuevoCliente;
 import listeners.ListenerSalirV;
 import listeners.ListenerVolverV;
 import moduloAdministracion.clienteABM.FormularioCliente;
@@ -51,6 +52,7 @@ public class VentasView implements VentasInterface {
 	private ListenerAltaV listenerAlta;
 	private FormularioCliente panelC;
 	private FormularioNuevoCliente panelNC;
+	private ListenerNuevoCliente listenerAltaCliente;
 	
 	public VentasView(){
 		//FRAME
@@ -203,6 +205,12 @@ public class VentasView implements VentasInterface {
 		
 		return v;
 	}
+	@Override
+	public Persona getNuevaPersona() {
+		Persona p = new Persona(Integer.parseInt(panelNC.getDniCompradorText().getText()), 0, 0, 0, "Rachel", "Bronstein", "dom", "ciu", "pro", "domL", "Carrefour");
+		
+		return p;
+	}
 
 	@Override
 	public void altaCliente(int dniCliente) {
@@ -210,7 +218,7 @@ public class VentasView implements VentasInterface {
 		
 		panelNC = new FormularioNuevoCliente();
 		panelF.setVisible(false);
-		frmVentas.setTitle("Nueva Cliente");
+		frmVentas.setTitle("Nuevo Cliente");
 		frmVentas.add(panelNC);
 		panelNC.getDniCompradorText().setText(String.valueOf(dniCliente));	
 		frmVentas.invalidate();
@@ -218,10 +226,12 @@ public class VentasView implements VentasInterface {
 		frmVentas.repaint();
 		
 		listenerVolver = new ListenerVolverV(ventasController);
-		listenerAlta= new ListenerAltaV(ventasController);
 		
-		panelC.getBtnCancelar().addActionListener(listenerVolver);
-		panelC.getBtnAceptar().addActionListener(listenerAlta);
+		
+		listenerAltaCliente= new ListenerNuevoCliente(ventasController);
+		
+		panelNC.getBtnCancelar().addActionListener(listenerVolver);
+		panelNC.getBtnAceptar().addActionListener(listenerAltaCliente);
 		
 	}
 	

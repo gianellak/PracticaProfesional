@@ -105,4 +105,14 @@ public class VentasController {
 	}
 
 
+
+
+	public void onInsertar() throws DBException {
+
+		Persona p = ventas.getNuevaPersona();
+		ventasDB.altaPersona(p);
+		
+	}
+
+
 }

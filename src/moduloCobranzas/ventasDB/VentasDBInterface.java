@@ -16,6 +16,10 @@ public interface VentasDBInterface {
 
 	Vehiculo getVehiculo(String patente) throws DBException;
 	
+
+
 	void altaPersona(Persona p) throws DBException;
+
+
 
 }
