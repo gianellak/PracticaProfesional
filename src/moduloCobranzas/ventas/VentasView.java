@@ -27,7 +27,7 @@ import listeners.ListenerNuevaV;
 import listeners.ListenerNuevoCliente;
 import listeners.ListenerSalirV;
 import listeners.ListenerVolverV;
-import moduloAdministracion.clienteABM.FormularioCliente;
+import moduloAdministracion.clienteABM.FormularioNuevaCompra;
 import moduloAdministracion.clienteABM.FormularioNuevoCliente;
 import moduloCobranzas.altaVenta.FormularioAlta;
 import moduloStock.StockInterface;
@@ -51,7 +51,7 @@ public class VentasView implements VentasInterface {
 	private FormularioAlta panelF;
 	private ListenerVolverV listenerVolver;
 	private ListenerAltaV listenerAlta;
-	private FormularioCliente panelC;
+	private FormularioNuevaCompra panelC;
 	private FormularioNuevoCliente panelNC;
 	private ListenerNuevoCliente listenerAltaCliente;
 	
@@ -239,7 +239,7 @@ public class VentasView implements VentasInterface {
 	@Override
 	public void mostrarCliente(Persona p) {
 		
-		panelC = new FormularioCliente();
+		panelC = new FormularioNuevaCompra();
 		panelF.setVisible(false);
 		frmVentas.setTitle("Nueva Venta");
 		frmVentas.invalidate();

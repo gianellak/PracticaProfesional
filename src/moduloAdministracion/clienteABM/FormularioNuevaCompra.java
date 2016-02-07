@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class FormularioCliente extends JPanel {
+public class FormularioNuevaCompra extends JPanel {
 	
 	private JButton btnAceptar;
 	private JButton btnCancelar;
@@ -17,7 +17,7 @@ public class FormularioCliente extends JPanel {
 
 	
 
-	public FormularioCliente(){
+	public FormularioNuevaCompra(){
 	
 		this.setLayout(null);
 
