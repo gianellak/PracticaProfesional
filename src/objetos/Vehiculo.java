@@ -11,6 +11,7 @@ public class Vehiculo {
 	Date fechaVenta;
 	String comentarios;
 	String rachel;
+	String gianella;
 	
 	
 	

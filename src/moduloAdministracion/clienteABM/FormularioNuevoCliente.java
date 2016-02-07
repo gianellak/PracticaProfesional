@@ -35,39 +35,39 @@ public class FormularioNuevoCliente extends JPanel {
 		this.add(dniGaranteLabel);
 
 		dniGaranteText = new JTextField(9);
-		dniGaranteText.setBounds(100, 80, 160, 25);
+		dniGaranteText.setBounds(100, 70, 160, 25);
 		this.add(dniGaranteText);
 		
 		JLabel patenteLabel = new JLabel("Fecha nacimiento: ");
-		patenteLabel.setBounds(100, 110, 160, 25);
+		patenteLabel.setBounds(100, 90, 160, 25);
 		this.add(patenteLabel);
 		
 		patenteText = new JTextField(6);
-		patenteText.setBounds(100, 140, 160, 25);
+		patenteText.setBounds(100, 110, 160, 25);
 		this.add(patenteText);
 		
 		JLabel descripcionLabel = new JLabel("Dom.Particular: ");
-		descripcionLabel.setBounds(100, 170, 160, 25);
+		descripcionLabel.setBounds(100, 130, 160, 25);
 		this.add(descripcionLabel);
 		
 		descripcionText = new JTextField(25);
-		descripcionText.setBounds(100, 200, 260, 25);
+		descripcionText.setBounds(100, 150, 260, 25);
 		this.add(descripcionText);
 		
 		JLabel domPartLabel = new JLabel("Dom.Laboral: ");
-		domPartLabel.setBounds(100, 230, 160, 25);
+		domPartLabel.setBounds(100, 170, 160, 25);
 		this.add(descripcionLabel);
 		
 		domPartText = new JTextField(25);
-		domPartText.setBounds(100, 250, 260, 25);
+		domPartText.setBounds(100, 190, 260, 25);
 		this.add(domPartText);
 		
 		JLabel telPartLabel = new JLabel("Tel. Particular: ");
-		telPartLabel.setBounds(100, 270, 160, 25);
+		telPartLabel.setBounds(100, 210, 160, 25);
 		this.add(telPartLabel);
 		
 		telPartText = new JTextField(25);
-		telPartText.setBounds(100, 290, 260, 25);
+		telPartText.setBounds(100, 230, 260, 25);
 		this.add(telPartText);
 
 		btnAceptar = new JButton("Ingresar Cliente");
