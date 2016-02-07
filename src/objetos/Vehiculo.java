@@ -17,9 +17,7 @@ public class Vehiculo {
 	Date fechaVenta;
 	Integer idCondicion;
 	Integer idProveedor;
-	Integer idtitular; //cuando vende o reserva 
+	Integer idTitular; //cuando vende o reserva 
 	String comentarios;
-	
-	
 	
 }
