@@ -10,6 +10,7 @@ public class Vehiculo {
 	Date fechaIngreso;
 	Date fechaVenta;
 	String comentarios;
+	String rachel;
 	
 	
 	
