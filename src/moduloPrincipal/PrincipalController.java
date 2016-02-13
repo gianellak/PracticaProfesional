@@ -18,6 +18,20 @@ public class PrincipalController {
 		this.conn = conn;
 	}
 	
+	
+	
+	public Usuario getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
+
+
+
 	public void showPrincipal(){
 		
 		principal.showPrincipal(this);
