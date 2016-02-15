@@ -22,6 +22,11 @@ public class vehiculoDB implements vehiculoInterface {
 		this.connectionProvider = connection;
 	}
 
+	/**
+	 * getVehiculo. Dado un string con una patente, devuelve el Vehiculo que
+	 * corresponde o null si no existe un vehiculo registrado con ese nro de
+	 * patente.
+	 */
 	public Vehiculo getVehiculo(String patenteInput) {
 
 		Vehiculo vehiculo = null;
@@ -60,7 +65,11 @@ public class vehiculoDB implements vehiculoInterface {
 		return vehiculo;
 	}
 
-	public List<Vehiculo> getStock() throws DBException {
+	/**
+	 * getAllVehiculos. devuelve una lista de todos los vehiculos que alguna vez estuvieron registrados en la BD.
+	 * 
+	 */
+	public List<Vehiculo> getAllVehiculos() throws DBException {
 
 		List<Vehiculo> stock = new ArrayList<>();
 
@@ -101,7 +110,9 @@ public class vehiculoDB implements vehiculoInterface {
 		return stock;
 	}
 
-	@Override
+	/**
+	 * createVehiculo. Dado un objeto vehiculo como parametro se crea el registro en la BD. 
+	 */
 	public Boolean createVehiculo(Vehiculo vehiculo) throws DBException {
 		Object[] values = { 
 				vehiculo.getPatente(),
@@ -135,6 +146,14 @@ public class vehiculoDB implements vehiculoInterface {
 	            throw new DBException(e);}
 	        }
 
+		return null;
+	}
+
+	/**
+	 * updateVehiculo. Modifica datos.
+	 */
+	public Boolean updateVehiculo(Vehiculo vehiculo, Vehiculo newVehiculo) {
+		
 		return null;
 	}
 }
