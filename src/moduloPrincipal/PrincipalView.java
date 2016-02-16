@@ -13,9 +13,9 @@ import javax.swing.border.EmptyBorder;
 
 import listeners.ListenerC;
 import listeners.ListenerL;
-import listeners.ListenerVehiculo;
 import listeners.ListenerV;
 import listeners.ListenerCV;
+import listenersVehiculo.ListenerVehiculo;
 import moduloCobranzas.ventas.VentasInterface;
 
 public class PrincipalView implements PrincipalInterface {

@@ -1,22 +1,25 @@
-package listeners;
+package listenersVehiculo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import vehiculo.ABM.VehiculoController;
 
-public class ListenerSalirVehiculo implements ActionListener {
+public class ListenerBuscarVehiculo implements ActionListener {
 
-	private VehiculoController vc;
+	VehiculoController vc;
 
-	public ListenerSalirVehiculo(VehiculoController vc) {
+	public ListenerBuscarVehiculo(VehiculoController vc) {
 		super();
 		this.vc = vc;
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		vc.onCancel();
+
+		vc.onBuscarPorPatente();
+
 	}
 
 }
