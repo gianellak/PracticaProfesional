@@ -1,5 +1,8 @@
 package vehiculo.ABM;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -123,8 +126,10 @@ public class VehiculoView implements VehiculoInterface {
 		listenerNuevo = new ListenerNuevoVehiculo(vc);
 
 		panelNuevoVehiculo.getBtnCancelar().addActionListener(listenerVolver);
-		panelNuevoVehiculo.getBtnAceptar().addActionListener(listenerNuevo);
-
+		panelNuevoVehiculo.getBtnAceptar().addActionListener(listenerNuevo)
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+		
 		Vehiculo v = new Vehiculo(
 				panelNuevoVehiculo.getTxtPatente().getText(),
 				panelNuevoVehiculo.getTxtMarca().getText(),
@@ -134,12 +139,14 @@ public class VehiculoView implements VehiculoInterface {
 				Integer.parseInt(panelNuevoVehiculo.getTxtKm().getText()),
 				panelNuevoVehiculo.getTxtMotor().getText(),
 				panelNuevoVehiculo.getTxtDominio().getText(),
-				panelNuevoVehiculo.getTxtPvc().getText(),
-				panelNuevoVehiculo.getTxtFechaIngreso().getText(), // En un futuro ver
-				panelNuevoVehiculo.getTxtFechaVenta().getText(), // que sea tipo DATE CALENDAR
-				panelNuevoVehiculo.getTxtCondicion().getText(), // Ver que sea combo box.
-				panelNuevoVehiculo.getTxtProveedor().getText(),
-				panelNuevoVehiculo.getTxtComentarios());
+				Integer.parseInt(panelNuevoVehiculo.getTxtPvc().getText()),
+				formatter.parse(panelNuevoVehiculo.getTxtFechaIngreso().getText()), // En un futuro ver
+				formatter.parse(panelNuevoVehiculo.getTxtFechaVenta().getText()), // que sea tipo DATE CALENDAR y remover el 
+				Integer.parseInt(panelNuevoVehiculo.getTxtCondicion().getText()), // Ver que sea combo box.
+				Integer.parseInt(panelNuevoVehiculo.getTxtProveedor().getText()),
+				Integer.parseInt(panelNuevoVehiculo.getTxtCliente().getText()),
+				panelNuevoVehiculo.getTxtComentarios().getText()
+				);
 		
 				
 				

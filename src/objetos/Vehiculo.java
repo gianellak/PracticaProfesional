@@ -2,6 +2,8 @@ package objetos;
 
 import java.util.Date;
 
+import javax.swing.JTextField;
+
 public class Vehiculo {
 	
 	String patente;
@@ -42,6 +44,7 @@ public class Vehiculo {
 		this.idCliente = idCliente;
 		this.comentarios = comentarios;
 	}
+
 
 	public String getPatente() {
 		return patente;
