@@ -1,10 +1,13 @@
 package vehiculo.ABM;
 
+import objetos.Vehiculo;
+
 
 public interface VehiculoInterface {
 
-	void showStock(VehiculoController vc);
-
+	void showVehiculo(VehiculoController vc);
 	void closeVehiculo();
+	Vehiculo getNuevoVehiculo ();
+	Vehiculo getVehiculoPorPatente(String patente);
 
 }
