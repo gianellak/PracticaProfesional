@@ -2,7 +2,6 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import moduloCobranzas.ventas.VentasController;
 import moduloCobranzas.ventas.VentasView;
 import moduloPrincipal.PrincipalController;
@@ -15,7 +14,13 @@ public class ListenerS implements ActionListener {
 
 	private StockInterface si;
 	
+//	public ListenerS(VehiculoController vc) {
+//		super();
+//		this.vc = vc;
+//}
 
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
