@@ -1,28 +1,37 @@
-package listeners;
+package ModuloUsuario.Listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import ModuloUsuario.UsuarioController;
+import ModuloUsuario.View.UsuarioView;
+import exceptions.DBException;
 import moduloCobranzas.ventas.VentasController;
 import moduloCobranzas.ventas.VentasView;
 import moduloPrincipal.PrincipalController;
-import moduloPrincipal.login.LoginController;
 import moduloStock.StockController;
 import moduloStock.StockInterface;
 import moduloStock.StockView;
 
-public class ListenerS implements ActionListener {
+public class ListenerUsuarioAlta implements ActionListener {
 
-	private StockInterface si;
+
+	private UsuarioController uc;
+
+
+	public ListenerUsuarioAlta(UsuarioController uc){
+		this.uc = uc;
+		
+	}
 	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		si = new StockView();
+		uc.dispose();
 		
-		StockController sc = new StockController(si);
 		
 	}
-
+	
 }

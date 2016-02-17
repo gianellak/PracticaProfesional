@@ -13,9 +13,9 @@ import javax.swing.border.EmptyBorder;
 
 import listeners.ListenerC;
 import listeners.ListenerL;
-import listeners.ListenerS;
 import listeners.ListenerV;
 import listeners.ListenerCV;
+//import listenersVehiculo.ListenerVehiculo;
 import moduloCobranzas.ventas.VentasInterface;
 
 public class PrincipalView implements PrincipalInterface {
@@ -23,11 +23,11 @@ public class PrincipalView implements PrincipalInterface {
 	private JFrame frmPrin;
 	private JPanel contentPane;
 	private JButton btnSalir;
-	private JButton btnStock;
+	private JButton btnVehiculo;
 	private JButton btnVenta;
 	private PrincipalController pc;
 	private ListenerCV listenerCV;
-	private ListenerS listenerStock;
+	//private ListenerVehiculo listenerVehiculo;
 	private ListenerV listenerVenta;
 	private PanelGeneral panelGeneral;
 	private JPanel contentPanel;
@@ -43,24 +43,18 @@ public class PrincipalView implements PrincipalInterface {
 		frmPrin.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frmPrin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
-		
-		
-		
 	
 		//PANEL
 		
 		contentPane =new PanelMenu();
 		contentPanel =new JPanel();
-		
-		
-		
+
 		
 		//BOTONES	
 			
-		btnStock= new JButton("Menu Usuario ");
-		btnStock.setBounds(50, 130, 200, 25);
-		contentPane.add(btnStock);
+		btnVehiculo= new JButton("Menu Usuario ");
+		btnVehiculo.setBounds(50, 130, 200, 25);
+		contentPane.add(btnVehiculo);
 		
 		btnCliente= new JButton("Menu Cliente");
 		btnCliente.setBounds(50, 160, 200, 25);
@@ -70,9 +64,9 @@ public class PrincipalView implements PrincipalInterface {
 		btnVenta.setBounds(50, 190, 200, 25);
 		contentPane.add(btnVenta);
 
-		btnStock= new JButton("Menu Vehiculos/Stock ");
-		btnStock.setBounds(50, 220, 200, 25);
-		contentPane.add(btnStock);
+		btnVehiculo= new JButton("Menu Vehículo");
+		btnVehiculo.setBounds(50, 220, 200, 25);
+		contentPane.add(btnVehiculo);
 
 		btnCaja= new JButton("Menu Caja ");
 		btnCaja.setBounds(50, 250, 200, 25);
@@ -95,13 +89,14 @@ public class PrincipalView implements PrincipalInterface {
 		panelGeneral = new PanelGeneral(pc.getUser());
 		
 		listenerCV = new ListenerCV(pc);
-		listenerStock = new ListenerS();
+		//listenerVehiculo = new ListenerVehiculo(pc);
 		listenerVenta = new ListenerV(pc);
 		
 		
-		btnStock.addActionListener(listenerStock);
+		//btnVehiculo.addActionListener(listenerVehiculo);
 		btnVenta.addActionListener(listenerVenta);
 		btnSalir.addActionListener(listenerCV);
+		
 		
 		frmPrin.add(panelGeneral);
 		
@@ -130,9 +125,22 @@ public class PrincipalView implements PrincipalInterface {
 	}
 
 
-	
 
 
-	
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
