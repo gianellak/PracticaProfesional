@@ -51,7 +51,11 @@ public class FormularioNuevoCliente extends JPanel {
 		
 		JLabel fechaNacLabel = new JLabel("Fecha nacimiento: ");
 		fechaNacLabel.setBounds(100, 130, 160, 25);
+<<<<<<< HEAD
 		this.add(fechaNacLabel);
+=======
+		this.add(patenteLabel);
+>>>>>>> 55ca4cd6e85cf554b762872c4c39690ddd529990
 		
 		fechaNacText = new JTextField(6);
 		fechaNacText.setBounds(100, 150, 160, 25);
@@ -106,6 +110,7 @@ public class FormularioNuevoCliente extends JPanel {
 		this.add(btnCancelar);
 	
 	}
+<<<<<<< HEAD
 
 
 
@@ -226,6 +231,13 @@ public class FormularioNuevoCliente extends JPanel {
 	public void setTelCelText(JTextField telCelText) {
 		this.telCelText = telCelText;
 	}
+=======
+	
+	//generar get-set
+
+	
+
+>>>>>>> 55ca4cd6e85cf554b762872c4c39690ddd529990
 
 
 

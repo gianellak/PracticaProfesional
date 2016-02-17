@@ -3,7 +3,6 @@ package listenersVehiculo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-
 import exceptions.DBException;
 import objetos.Vehiculo;
 import vehiculo.ABM.VehiculoController;

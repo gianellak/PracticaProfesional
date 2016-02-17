@@ -15,7 +15,11 @@ import listeners.ListenerC;
 import listeners.ListenerL;
 import listeners.ListenerV;
 import listeners.ListenerCV;
+<<<<<<< HEAD
 //import listenersVehiculo.ListenerVehiculo;
+=======
+import listenersVehiculo.ListenerVehiculo;
+>>>>>>> 55ca4cd6e85cf554b762872c4c39690ddd529990
 import moduloCobranzas.ventas.VentasInterface;
 
 public class PrincipalView implements PrincipalInterface {
@@ -27,7 +31,11 @@ public class PrincipalView implements PrincipalInterface {
 	private JButton btnVenta;
 	private PrincipalController pc;
 	private ListenerCV listenerCV;
+<<<<<<< HEAD
 	//private ListenerVehiculo listenerVehiculo;
+=======
+	private ListenerVehiculo listenerVehiculo;
+>>>>>>> 55ca4cd6e85cf554b762872c4c39690ddd529990
 	private ListenerV listenerVenta;
 	private PanelGeneral panelGeneral;
 	private JPanel contentPanel;
@@ -89,11 +97,19 @@ public class PrincipalView implements PrincipalInterface {
 		panelGeneral = new PanelGeneral(pc.getUser());
 		
 		listenerCV = new ListenerCV(pc);
+<<<<<<< HEAD
 		//listenerVehiculo = new ListenerVehiculo(pc);
 		listenerVenta = new ListenerV(pc);
 		
 		
 		//btnVehiculo.addActionListener(listenerVehiculo);
+=======
+		listenerVehiculo = new ListenerVehiculo(pc);
+		listenerVenta = new ListenerV(pc);
+		
+		
+		btnVehiculo.addActionListener(listenerVehiculo);
+>>>>>>> 55ca4cd6e85cf554b762872c4c39690ddd529990
 		btnVenta.addActionListener(listenerVenta);
 		btnSalir.addActionListener(listenerCV);
 		
