@@ -1,4 +1,4 @@
-package listeners;
+package moduloPrincipal.listenerPrincipal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,12 +6,12 @@ import java.awt.event.ActionListener;
 import moduloPrincipal.PrincipalController;
 import moduloPrincipal.login.LoginController;
 
-public class ListenerCV implements ActionListener {
+public class ListenerSalirPrincipal implements ActionListener {
 
 	private PrincipalController pc;
 	
 
-	public ListenerCV(PrincipalController pc) {
+	public ListenerSalirPrincipal(PrincipalController pc) {
 		super();
 		this.pc = pc;
 	}

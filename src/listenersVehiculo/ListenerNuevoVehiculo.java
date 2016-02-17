@@ -25,9 +25,6 @@ public class ListenerNuevoVehiculo implements ActionListener {
 			} catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block

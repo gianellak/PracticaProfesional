@@ -1,4 +1,4 @@
-package moduloPrincipal;
+package moduloPrincipal.paneles;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -12,7 +12,7 @@ import objetos.Usuario;
 
 public class PanelGeneral extends JPanel {
 	
-	PanelGeneral(Usuario user){
+	public PanelGeneral(Usuario user){
 		
 		
 		System.out.println("Creo nuevo panel");

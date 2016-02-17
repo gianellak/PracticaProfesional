@@ -109,7 +109,7 @@ public class VehiculoView implements VehiculoInterface {
 	}
 
 	@Override
-	public Vehiculo getNuevoVehiculo() throws NumberFormatException, ParseException {
+	public Vehiculo getNuevoVehiculo() {
 
 		panelNuevoVehiculo = new FormNuevoVehiculo();
 		panel.setVisible(false);
@@ -132,23 +132,32 @@ public class VehiculoView implements VehiculoInterface {
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 		
-		Vehiculo v = new Vehiculo(
-				panelNuevoVehiculo.getTxtPatente().getText(),
-				panelNuevoVehiculo.getTxtMarca().getText(),
-				panelNuevoVehiculo.getTxtModelo().getText(),
-				Integer.parseInt(panelNuevoVehiculo.getTxtYear().getText()),
-				panelNuevoVehiculo.getTxtColor().getText(),
-				Integer.parseInt(panelNuevoVehiculo.getTxtKm().getText()),
-				panelNuevoVehiculo.getTxtMotor().getText(),
-				panelNuevoVehiculo.getTxtDominio().getText(),
-				Integer.parseInt(panelNuevoVehiculo.getTxtPvc().getText()),
-				formatter.parse(panelNuevoVehiculo.getTxtFechaIngreso().getText()), // En un futuro ver
-				formatter.parse(panelNuevoVehiculo.getTxtFechaVenta().getText()), // que sea tipo DATE CALENDAR y remover el 
-				Integer.parseInt(panelNuevoVehiculo.getTxtCondicion().getText()), // Ver que sea combo box.
-				Integer.parseInt(panelNuevoVehiculo.getTxtProveedor().getText()),
-				Integer.parseInt(panelNuevoVehiculo.getTxtCliente().getText()),
-				panelNuevoVehiculo.getTxtComentarios().getText()
-				);
+		Vehiculo v = null;
+		try {
+			v = new Vehiculo(
+					panelNuevoVehiculo.getTxtPatente().getText(),
+					panelNuevoVehiculo.getTxtMarca().getText(),
+					panelNuevoVehiculo.getTxtModelo().getText(),
+					Integer.parseInt(panelNuevoVehiculo.getTxtYear().getText()),
+					panelNuevoVehiculo.getTxtColor().getText(),
+					Integer.parseInt(panelNuevoVehiculo.getTxtKm().getText()),
+					panelNuevoVehiculo.getTxtMotor().getText(),
+					panelNuevoVehiculo.getTxtDominio().getText(),
+					Integer.parseInt(panelNuevoVehiculo.getTxtPvc().getText()),
+					formatter.parse(panelNuevoVehiculo.getTxtFechaIngreso().getText()), // En un futuro ver
+					formatter.parse(panelNuevoVehiculo.getTxtFechaVenta().getText()), // que sea tipo DATE CALENDAR y remover el 
+					Integer.parseInt(panelNuevoVehiculo.getTxtCondicion().getText()), // Ver que sea combo box.
+					Integer.parseInt(panelNuevoVehiculo.getTxtProveedor().getText()),
+					Integer.parseInt(panelNuevoVehiculo.getTxtCliente().getText()),
+					panelNuevoVehiculo.getTxtComentarios().getText()
+					);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 				
 				

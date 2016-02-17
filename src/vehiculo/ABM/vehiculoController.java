@@ -1,11 +1,6 @@
 package vehiculo.ABM;
 
 import java.sql.SQLException;
-<<<<<<< HEAD
-import java.text.ParseException;
-=======
->>>>>>> 55ca4cd6e85cf554b762872c4c39690ddd529990
-
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 import objetos.Persona;
@@ -35,11 +30,9 @@ public class VehiculoController {
 		vehiculo.closeVehiculo();
 	}
 
-<<<<<<< HEAD
-	public void onCreateVehiculo() throws DBException, NumberFormatException, ParseException{
-=======
+
 	public void onCreateVehiculo() throws DBException{
->>>>>>> 55ca4cd6e85cf554b762872c4c39690ddd529990
+
 		
 		Vehiculo v = vehiculo.getNuevoVehiculo();
 		

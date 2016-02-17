@@ -1,4 +1,4 @@
-package listeners;
+package moduloPrincipal.listenerPrincipal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,14 +10,14 @@ import moduloCobranzas.ventas.VentasView;
 import moduloPrincipal.PrincipalController;
 import moduloPrincipal.login.LoginController;
 
-public class ListenerV implements ActionListener {
+public class ListenerVenta implements ActionListener {
 
 	private VentasInterface vi;
 	
 	private PrincipalController pc;
 	
 
-	public ListenerV(PrincipalController pc) {
+	public ListenerVenta(PrincipalController pc) {
 		super();
 		this.pc = pc;
 	}
