@@ -63,6 +63,7 @@ public class PrincipalView implements PrincipalInterface {
 		
 		panelGeneral = new PanelGeneral(pc.getUser());
 		
+		//CREATE LISTENERS
 		listenerCV = new ListenerSalirPrincipal(pc);
 		listenerVenta = new ListenerVenta(pc);
 		listenerVehiculo = new ListenerVehiculo(pc);
@@ -70,7 +71,7 @@ public class PrincipalView implements PrincipalInterface {
 		listenerCliente= new ListenerCliente(pc);
 		listenerUsuario= new ListenerUsuario(pc);
 		
-		
+		//ADD LISTENER TO BUTTONS
 		contentPane.getBtnVehiculo().addActionListener(listenerVehiculo);
 		contentPane.getBtnVenta().addActionListener(listenerVenta);
 		contentPane.getBtnSalir().addActionListener(listenerCV);

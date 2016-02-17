@@ -1,4 +1,4 @@
-package ModuloUsuario.View;
+package moduloUsuarios.paneles;
 
 import java.awt.Color;
 

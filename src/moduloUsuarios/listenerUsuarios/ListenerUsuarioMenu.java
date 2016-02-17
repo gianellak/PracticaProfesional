@@ -1,12 +1,10 @@
-package ModuloUsuario.Listener;
+package moduloUsuarios.listenerUsuarios;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import ModuloUsuario.UsuarioController;
-import ModuloUsuario.View.UsuarioView;
 import exceptions.DBException;
 import moduloCobranzas.ventas.VentasController;
 import moduloCobranzas.ventas.VentasView;
@@ -14,6 +12,8 @@ import moduloPrincipal.PrincipalController;
 import moduloStock.StockController;
 import moduloStock.StockInterface;
 import moduloStock.StockView;
+import moduloUsuarios.UsuarioController;
+import moduloUsuarios.UsuarioView;
 
 public class ListenerUsuarioMenu implements ActionListener {
 

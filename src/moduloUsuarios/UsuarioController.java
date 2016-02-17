@@ -1,10 +1,10 @@
-package ModuloUsuario;
+package moduloUsuarios;
 
 import java.sql.Connection;
 
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
-import ModuloUsuario.View.UsuarioView;
+import moduloUsuarios.UsuarioView;
 
 public class UsuarioController {
 

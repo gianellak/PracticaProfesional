@@ -1,4 +1,4 @@
-package ModuloUsuario.View;
+package moduloUsuarios;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,10 +12,11 @@ import javax.swing.JPanel;
 import exceptions.DBException;
 import objetos.Usuario;
 import moduloPrincipal.PrincipalController;
-import ModuloUsuario.UsuarioController;
-import ModuloUsuario.UsuarioInterface;
-import ModuloUsuario.Listener.ListenerUsuarioVer;
-import ModuloUsuario.Listener.ListenerUsuarioVolver;
+import moduloUsuarios.UsuarioController;
+import moduloUsuarios.UsuarioInterface;
+import moduloUsuarios.listenerUsuarios.ListenerUsuarioVer;
+import moduloUsuarios.listenerUsuarios.ListenerUsuarioVolver;
+import moduloUsuarios.paneles.UsuarioMenu;
 
 public class UsuarioView implements UsuarioInterface {
 	
@@ -27,7 +28,6 @@ public class UsuarioView implements UsuarioInterface {
 	private JButton btnVerU;
 	private JButton btnVolver;
 	private JPanel panelAux;
-	private ListenerUsuarioVolver ListenerVolver;
 	private ListenerUsuarioVolver listenerVolver;
 	private ListenerUsuarioVer listenerVer;
 
