@@ -1,5 +1,6 @@
-package vehiculo.ABM;
+package moduloVehiculo;
 
+import java.awt.Dimension;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,11 +69,11 @@ public class vehiculoView implements vehiculoInterface {
 		btnBuscar.setBounds(100, 120, 80, 25);
 		panel.add(btnBuscar);
 
-		btnStock = new JButton("Consultar stock");
+		btnStock = new JButton("Stock");
 		btnStock.setBounds(100, 150, 80, 25);
 		panel.add(btnStock);
 
-		btnNuevo = new JButton("Nuevo vehículo");
+		btnNuevo = new JButton("Nuevo");
 		btnNuevo.setBounds(100, 180, 80, 25);
 		panel.add(btnNuevo);
 

@@ -3,10 +3,10 @@ package moduloPrincipal.listenerPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vehiculo.ABM.vehiculoController;
-import vehiculo.ABM.vehiculoInterface;
-import vehiculo.ABM.vehiculoView;
 import moduloPrincipal.PrincipalController;
+import moduloVehiculo.vehiculoController;
+import moduloVehiculo.vehiculoInterface;
+import moduloVehiculo.vehiculoView;
 
 
 public class ListenerVehiculo implements ActionListener {
@@ -28,7 +28,7 @@ public class ListenerVehiculo implements ActionListener {
 
 		vehiculoController vc = new vehiculoController(vi, pc);
 		
-		vc.showStock();
+		vc.onMenuVehiculo();
 		pc.onCancel();
 
 	}

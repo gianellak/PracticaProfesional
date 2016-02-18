@@ -1,4 +1,4 @@
-package vehiculo.ABM;
+package moduloVehiculo;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package vehiculo.ABM;
+package moduloVehiculo;
 
 import java.util.List;
 

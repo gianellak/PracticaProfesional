@@ -3,9 +3,10 @@ package moduloVehiculo.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+
+import moduloVehiculo.vehiculoController;
 import exceptions.DBException;
 import objetos.Vehiculo;
-import vehiculo.ABM.vehiculoController;
 
 public class ListenerNuevoVehiculo implements ActionListener {
 

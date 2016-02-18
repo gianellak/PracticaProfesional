@@ -1,4 +1,4 @@
-package vehiculo.ABM;
+package moduloVehiculo;
 
 import java.text.ParseException;
 
@@ -20,7 +20,7 @@ public class vehiculoController {
 
 	}
 	
-	public void showStock (){
+	public void onMenuVehiculo (){
 		vehiculoDB = new VehiculoDB(pc.getConn());
 		vehiculo.showVehiculo(this);
 	}
@@ -32,9 +32,7 @@ public class vehiculoController {
 
 	public void onCreateVehiculo() throws DBException, NumberFormatException, ParseException{
 
-		
-		Vehiculo v = vehiculo.getNuevoVehiculo();
-		
+		Vehiculo v = vehiculo.getNuevoVehiculo();		
 		vehiculoDB.createVehiculo(v);			
 	}
 	
@@ -51,7 +49,5 @@ public class vehiculoController {
 	public void onVolver(){
 		vehiculo.refresh();
 	}
-	
-	
 	
 }

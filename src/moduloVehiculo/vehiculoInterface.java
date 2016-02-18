@@ -1,4 +1,4 @@
-package vehiculo.ABM;
+package moduloVehiculo;
 
 import java.text.ParseException;
 import objetos.Vehiculo;

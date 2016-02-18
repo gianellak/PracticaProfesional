@@ -1,4 +1,4 @@
-package vehiculo.ABM;
+package moduloVehiculo;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -55,7 +55,7 @@ public class FormNuevoVehiculo extends JPanel {
 
 		JLabel lblColor = new JLabel("Color: ");
 		lblColor.setBounds(100, 170, 160, 25);
-		this.add(lblYear);
+		this.add(lblColor);
 
 		txtColor = new JTextField(25);
 		txtColor.setBounds(100, 190, 260, 25);
@@ -71,7 +71,7 @@ public class FormNuevoVehiculo extends JPanel {
 		
 		JLabel lblMotor = new JLabel("Motor: ");
 		lblMotor.setBounds(100, 250, 160, 25);
-		this.add(lblKm);
+		this.add(lblMotor);
 
 		txtMotor = new JTextField(25);
 		txtMotor.setBounds(100, 270, 260, 25);
@@ -79,31 +79,31 @@ public class FormNuevoVehiculo extends JPanel {
 		
 		JLabel lblDominio = new JLabel("Dominio: ");
 		lblDominio.setBounds(100, 290, 160, 25);
-		this.add(lblKm);
+		this.add(lblDominio);
 
 		txtDominio = new JTextField(25);
 		txtDominio.setBounds(100, 310, 260, 25);
 		this.add(txtDominio);
 		
-		JLabel lblPvc = new JLabel("Pvc: ");
+		JLabel lblPvc = new JLabel("PVC: ");
 		lblPvc.setBounds(100, 330, 160, 25);
-		this.add(lblKm);
+		this.add(lblPvc);
 
 		txtPvc = new JTextField(25);
 		txtPvc.setBounds(100, 350, 260, 25);
 		this.add(txtPvc);
 		
-		JLabel lblfechaIngreso = new JLabel("fechaIngreso: ");
+		JLabel lblfechaIngreso = new JLabel("Fecha de ingreso: ");
 		lblfechaIngreso.setBounds(100, 370, 160, 25);
-		this.add(lblKm);
+		this.add(lblfechaIngreso);
 
 		txtFechaIngreso = new JTextField(25);
 		txtFechaIngreso.setBounds(100, 390, 260, 25);
 		this.add(txtFechaIngreso);
 		
-		JLabel lblFechaVenta = new JLabel("FechaVenta: ");
+		JLabel lblFechaVenta = new JLabel("Fecha de venta: ");
 		lblFechaVenta.setBounds(100, 410, 160, 25);
-		this.add(lblKm);
+		this.add(lblFechaVenta);
 
 		txtFechaVenta = new JTextField(25);
 		txtFechaVenta.setBounds(100, 430, 260, 25);
@@ -111,7 +111,7 @@ public class FormNuevoVehiculo extends JPanel {
 		
 		JLabel lblCondicion = new JLabel("Condicion: ");
 		lblCondicion.setBounds(100, 450, 160, 25);
-		this.add(lblKm);
+		this.add(lblCondicion);
 
 		txtCondicion = new JTextField(25);
 		txtCondicion.setBounds(100, 470, 260, 25);
@@ -119,7 +119,7 @@ public class FormNuevoVehiculo extends JPanel {
 		
 		JLabel lblProveedor = new JLabel("Proveedor: ");
 		lblProveedor.setBounds(100, 490, 160, 25);
-		this.add(lblKm);
+		this.add(lblProveedor);
 
 		txtProveedor = new JTextField(25);
 		txtProveedor.setBounds(100, 510, 260, 25);
@@ -127,7 +127,7 @@ public class FormNuevoVehiculo extends JPanel {
 		
 		JLabel lblCliente = new JLabel("Cliente: ");
 		lblCliente.setBounds(100, 530, 160, 25);
-		this.add(lblKm);
+		this.add(lblCliente);
 
 		txtCliente = new JTextField(25);
 		txtCliente.setBounds(100, 550, 260, 25);
@@ -136,7 +136,7 @@ public class FormNuevoVehiculo extends JPanel {
 		
 		JLabel lblComentarios = new JLabel("Comentarios: ");
 		lblComentarios.setBounds(100, 570, 160, 25);
-		this.add(lblKm);
+		this.add(lblComentarios);
 
 		txtComentarios = new JTextField(25);
 		txtComentarios.setBounds(100, 590, 260, 25);
@@ -144,12 +144,12 @@ public class FormNuevoVehiculo extends JPanel {
 		
 		
 
-		btnAceptar = new JButton("Ingresar Vehículo");
-		btnAceptar.setBounds(300, 120, 100, 25);
+		btnAceptar = new JButton("Guardar");
+		btnAceptar.setBounds(500, 220, 100, 25);
 		this.add(btnAceptar);
 
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(300, 150, 100, 25);
+		btnCancelar.setBounds(500, 250, 100, 25);
 		this.add(btnCancelar);
 
 	}

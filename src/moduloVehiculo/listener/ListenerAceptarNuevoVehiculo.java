@@ -3,7 +3,7 @@ package moduloVehiculo.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vehiculo.ABM.vehiculoController;
+import moduloVehiculo.vehiculoController;
 
 public class ListenerAceptarNuevoVehiculo implements ActionListener {
 
