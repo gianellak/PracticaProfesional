@@ -1,6 +1,7 @@
 package vehiculo.ABM;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
@@ -31,35 +32,16 @@ public class VehiculoController {
 		vehiculo.closeVehiculo();
 	}
 
-	public void onCreateVehiculo() throws DBException{
+	public void onCreateVehiculo() throws DBException, NumberFormatException, ParseException{
 		
 		Vehiculo v = vehiculo.getNuevoVehiculo();
 		
-		vehiculoDB.createVehiculo(v);
-		
-			
+		vehiculoDB.createVehiculo(v);			
 	}
 	
 	
 	public void onAceptarNuevoVehiculo(){
-		
-//		
-//		Venta v = ventas.getNuevaVenta();
-//		// ventas.refreshVenta(); //Deberia Avisar que estuvo ok, y llevar a
-//		// cargarcliente. Primero busca si no existe ya.
-//		System.out.println(v.getDniComprador() + "-" + v.getDniGarante() + "-"
-//				+ v.getDesc() + "-" + v.getPatente() + "-" + v.getIdVenta());
-//
-//		Persona p = ventasDB.getPersona(v.getDniComprador());
-//
-//		if (p == null) {
-//			ventasDB.altaVenta(v);
-//			ventas.altaCliente(v.getDniComprador());
-//		} else {
-//			System.out.println("Persona: " + p.getApellido());
-//			ventas.mostrarCliente(p);
-//		}
-		
+			
 	}
 	
 	public void onBuscarPorPatente(){

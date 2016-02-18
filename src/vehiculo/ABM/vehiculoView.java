@@ -1,5 +1,6 @@
 package vehiculo.ABM;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -107,7 +108,7 @@ public class VehiculoView implements VehiculoInterface {
 	}
 
 	@Override
-	public Vehiculo getNuevoVehiculo() {
+	public Vehiculo getNuevoVehiculo() throws NumberFormatException, ParseException {
 
 		panelNuevoVehiculo = new FormNuevoVehiculo();
 		panel.setVisible(false);
@@ -126,7 +127,7 @@ public class VehiculoView implements VehiculoInterface {
 		listenerNuevo = new ListenerNuevoVehiculo(vc);
 
 		panelNuevoVehiculo.getBtnCancelar().addActionListener(listenerVolver);
-		panelNuevoVehiculo.getBtnAceptar().addActionListener(listenerNuevo)
+		panelNuevoVehiculo.getBtnAceptar().addActionListener(listenerNuevo);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 		
