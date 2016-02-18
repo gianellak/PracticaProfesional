@@ -10,7 +10,7 @@ import utilitarios.DBUtil;
 import connections.ConnectionProvider;
 import exceptions.DBException;
 
-public class VehiculoDB implements VehiculoInterfaceDB {
+public class VehiculoDB implements vehiculoInterfaceDB {
 
 	private static final String SQL_INSERT_VEHICULO = "INSERT INTO Vehiculo (patente, marca, modelo, year, color, km, motor, dominio, pvc, fechaIngreso, fechaVenta, idCondicion, idProveedor, idCliente, comentarios) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final int MYSQL_DUPLICATE_PK = -104;

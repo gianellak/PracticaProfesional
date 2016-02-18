@@ -5,7 +5,7 @@ import java.util.List;
 import exceptions.DBException;
 import objetos.Vehiculo;
 
-public interface VehiculoInterfaceDB {
+public interface vehiculoInterfaceDB {
 	
 	Vehiculo getVehiculo(String patente);
 	List<Vehiculo> getAllVehiculos() throws DBException;

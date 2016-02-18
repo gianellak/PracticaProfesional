@@ -115,15 +115,16 @@ public class VentasDB implements VentasDBInterface {
 	}
 
 	private Vehiculo mapVehiculo(ResultSet resultSet) throws SQLException {
-		Vehiculo vehiculo = new Vehiculo(
-				resultSet.getString("patente"),
-				resultSet.getString("marca"),
-				resultSet.getString("modelo"),
-				resultSet.getDate("fecha_ingreso"),
-				resultSet.getDate("fecha_venta"),
-				resultSet.getString("comentarios"));
+		//Vehiculo vehiculo = new Vehiculo(
+			//	resultSet.getString("patente"),
+				//resultSet.getString("marca"),
+				//resultSet.getString("modelo"),
+				//resultSet.getDate("fecha_ingreso"),
+				//resultSet.getDate("fecha_venta"),
+				//resultSet.getString("comentarios"));
 		
-		return vehiculo;
+		//return vehiculo;
+		return null;
 	}
 
 	@Override

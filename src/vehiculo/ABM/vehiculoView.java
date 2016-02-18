@@ -18,11 +18,11 @@ import listenersVehiculo.ListenerStock;
 import listenersVehiculo.ListenerVolverAVehiculo;
 import moduloCobranzas.altaVenta.FormularioAlta;
 
-public class VehiculoView implements VehiculoInterface {
+public class vehiculoView implements vehiculoInterface {
 
 	private JPanel panel;
 	private JFrame frmVehiculo;
-	private VehiculoController vc;
+	private vehiculoController vc;
 
 	// LISTENERS
 
@@ -211,6 +211,12 @@ public class VehiculoView implements VehiculoInterface {
 
 	public void setBtnStock(JButton btnStock) {
 		this.btnStock = btnStock;
+	}
+
+	@Override
+	public void showVehiculo(vehiculoController vc) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
