@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import moduloCobranzas.ventas.VentasController;
 import moduloCobranzas.ventas.VentasInterface;
 import moduloCobranzas.ventas.VentasView;
+import moduloLogin.LoginController;
 import moduloPrincipal.PrincipalController;
-import moduloPrincipal.login.LoginController;
 
 public class ListenerVenta implements ActionListener {
 

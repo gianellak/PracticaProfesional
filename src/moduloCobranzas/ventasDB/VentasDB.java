@@ -16,7 +16,6 @@ import objetos.Venta;
 import utilitarios.DBUtil;
 import exceptions.DBException;
 import exceptions.LoginException;
-import moduloPrincipal.loginDB.LoginDBInterface;
 
 public class VentasDB implements VentasDBInterface {
 	

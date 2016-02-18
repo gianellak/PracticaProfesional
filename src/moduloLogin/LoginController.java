@@ -1,4 +1,4 @@
-package moduloPrincipal.login;
+package moduloLogin;
 
 
 import java.sql.SQLException;
@@ -10,7 +10,6 @@ import objetos.Usuario;
 import moduloPrincipal.PrincipalController;
 import moduloPrincipal.PrincipalInterface;
 import moduloPrincipal.PrincipalView;
-import moduloPrincipal.loginDB.LoginDB;
 
 public class LoginController {
 	
@@ -32,7 +31,8 @@ public class LoginController {
 
 
 	public void showLogin() {
-		login.showLogin(this);
+		login.viewLogin(this);
+		
 	}
 	
 	public void onCancel() {		
@@ -40,20 +40,47 @@ public class LoginController {
 		
 	}
 	
-	public void onLogin() throws LoginException, SQLException {
+	public Usuario login(String usuario, String password) {
+		
+		try {
+			Usuario u = logindb.findId(usuario);
+			System.out.println(password + "-" + u.getPassword());
+			
+			 if (password.equals(u.getPassword())) {
+				 System.out.println("LoginOK");
+			        return u;
+			      } 
+			 
+		} catch (Exception e) {
+			try {
+				throw new LoginException( "Usuario o contraseña incorrectos" );
+			} catch (LoginException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null; 
+		
+		
+		
+		
+	}
+	
+	public Usuario onLogin() throws LoginException, SQLException {
 		
 		String u = login.getUsernameInput();
 		String p = login.getPasswordInput();
 		
 		System.out.println(u + p);
 		
-		Usuario user = logindb.login(u, p);
+		Usuario user = this.login(u, p);
 			System.out.println(user);
 			 if (user!= null) {
-			       login.loginSuccessful(user);
-			       
-			       unUsuario = user;
-			       
+				 
+				 login.loginSuccessful(user);
+				 PrincipalInterface pi = new PrincipalView();
+				 PrincipalController pc = new PrincipalController(user, pi, conn);
+				 pc.showPrincipal();
 			      
 			       
 			      }else{
@@ -61,6 +88,7 @@ public class LoginController {
 				 login.loginFailed();
 				 	
 			      }
+			return unUsuario;
 			 
 		
 		
@@ -71,7 +99,7 @@ public class LoginController {
 
 	public Usuario getUser() throws SQLException {
 		
-		 logindb.close();
+		 login.closeLogin();
 		 return unUsuario;
 		
 	}

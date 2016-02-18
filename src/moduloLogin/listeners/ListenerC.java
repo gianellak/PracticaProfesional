@@ -1,9 +1,9 @@
-package listeners;
+package moduloLogin.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import moduloPrincipal.login.LoginController;
+import moduloLogin.LoginController;
 
 public class ListenerC implements ActionListener {
 

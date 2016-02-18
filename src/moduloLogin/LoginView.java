@@ -1,4 +1,7 @@
-package moduloPrincipal.login;
+package moduloLogin;
+
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,19 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-
-
-
-
-
-
-
-
+import exceptions.DBException;
 import exceptions.LoginException;
 import objetos.Usuario;
-import listeners.ListenerC;
-import listeners.ListenerL;
+import moduloLogin.listeners.ListenerC;
+import moduloLogin.listeners.ListenerLogin;
+import moduloLogin.listeners.ListenerLogin;
 
 public class LoginView implements LoginInterface {
 	
@@ -31,7 +27,7 @@ public class LoginView implements LoginInterface {
 	private JButton loginButton;
 	private JButton cancelButton;
 	private ListenerC listenerCan;
-	private ListenerL listenerLog;
+	private ListenerLogin listenerLog;
 	private LoginController lc;
 
 	public LoginView(){
@@ -78,16 +74,15 @@ public class LoginView implements LoginInterface {
 
 
 	@Override
-	public void showLogin(LoginController loginController) {
+	public void viewLogin(LoginController loginController) {
 		
 		lc = loginController;
 		
 		listenerCan = new ListenerC(lc);
-		listenerLog = new ListenerL(lc);
+		listenerLog = new ListenerLogin(lc);
 		
 		loginButton.addActionListener(listenerLog);
 		cancelButton.addActionListener(listenerCan);
-		
 		
 		frmLogin.setVisible(true);
 		
@@ -126,6 +121,63 @@ public class LoginView implements LoginInterface {
 	public void loginFailed() {
 		
 		JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrectos.");
+		
+	}
+
+
+	@Override
+	public void insert(Usuario usuario) throws DBException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void delete(Usuario usuario) throws DBException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void update(Usuario usuario) throws DBException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Usuario findId(String idUser) throws DBException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Usuario> findAll() throws DBException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Usuario login(String usernameInput, String passwordInput)
+			throws LoginException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void close() throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void showLogin(LoginController loginController) {
+		// TODO Auto-generated method stub
 		
 	}
 

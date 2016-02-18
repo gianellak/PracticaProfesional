@@ -1,19 +1,19 @@
-package listeners;
+package moduloLogin.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import exceptions.LoginException;
-import moduloPrincipal.login.LoginController;
+import moduloLogin.LoginController;
 
 
-public class ListenerL implements ActionListener {
+public class ListenerLogin implements ActionListener {
 
 	private LoginController lc;
 
 
-	public ListenerL(LoginController lc) {
+	public ListenerLogin(LoginController lc) {
 		super();
 		this.lc = lc;
 	}

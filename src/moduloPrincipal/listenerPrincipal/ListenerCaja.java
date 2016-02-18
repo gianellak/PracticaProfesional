@@ -3,8 +3,8 @@ package moduloPrincipal.listenerPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import moduloLogin.LoginController;
 import moduloPrincipal.PrincipalController;
-import moduloPrincipal.login.LoginController;
 
 public class ListenerCaja implements ActionListener {
 

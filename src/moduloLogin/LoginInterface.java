@@ -1,4 +1,4 @@
-package moduloPrincipal.loginDB;
+package moduloLogin;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -7,11 +7,21 @@ import exceptions.DBException;
 import exceptions.LoginException;
 import objetos.Usuario;
 
-
-
-public interface LoginDBInterface {
+public interface LoginInterface {
 	
+	
+	void showLogin(LoginController loginController);
 
+	void closeLogin();
+
+	String getPasswordInput();
+
+	String getUsernameInput();
+
+	boolean loginSuccessful(Usuario user);
+
+	void loginFailed();
+	
 	public void insert(Usuario usuario) throws DBException;
     
     public void delete(Usuario usuario) throws DBException;
@@ -26,4 +36,6 @@ public interface LoginDBInterface {
 
 	public void close() throws SQLException;
 	
+	public void viewLogin(LoginController loginController);
+
 }

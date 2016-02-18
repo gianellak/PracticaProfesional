@@ -1,25 +1,9 @@
 package moduloPrincipal;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import listeners.ListenerC;
-import listeners.ListenerL;
 import moduloCobranzas.ventas.VentasInterface;
-import moduloPrincipal.listenerPrincipal.ListenerCaja;
-import moduloPrincipal.listenerPrincipal.ListenerCliente;
-import moduloPrincipal.listenerPrincipal.ListenerSalirPrincipal;
-import moduloPrincipal.listenerPrincipal.ListenerUsuario;
-import moduloPrincipal.listenerPrincipal.ListenerVehiculo;
-import moduloPrincipal.listenerPrincipal.ListenerVenta;
+import moduloPrincipal.listenerPrincipal.*;
 import moduloPrincipal.paneles.PanelGeneral;
 import moduloPrincipal.paneles.PanelMenu;
 
@@ -32,7 +16,6 @@ public class PrincipalView implements PrincipalInterface {
 	private ListenerCliente listenerCliente;
 	private ListenerCaja listenerCaja;
 	private PanelGeneral panelGeneral;
-	private JPanel contentPanel;
 	private PanelMenu contentPane;
 	private PrincipalController pc;
 	private ListenerUsuario listenerUsuario;
@@ -47,10 +30,8 @@ public class PrincipalView implements PrincipalInterface {
 		
 	
 		//PANELES
-		
 		contentPane =new PanelMenu();
-		contentPanel =new JPanel();
-
+		
 		
 		}
 
