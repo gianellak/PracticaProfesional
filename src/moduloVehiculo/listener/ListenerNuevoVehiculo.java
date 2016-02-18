@@ -1,4 +1,4 @@
-package listenersVehiculo;
+package moduloVehiculo.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +22,7 @@ public class ListenerNuevoVehiculo implements ActionListener {
 		try {
 			try {
 				vc.onCreateVehiculo();
-			} catch (NumberFormatException e1) {
+			} catch (NumberFormatException | ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

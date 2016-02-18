@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Array;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -19,18 +18,11 @@ import javax.swing.table.DefaultTableModel;
 
 import objetos.Persona;
 import objetos.Venta;
-import listeners.ListenerAltaV;
-import listeners.ListenerBuscar;
-import listeners.ListenerC;
-import listeners.ListenerL;
-import listeners.ListenerNuevaV;
-import listeners.ListenerNuevoCliente;
-import listeners.ListenerSalirV;
-import listeners.ListenerVolverV;
+import listeners.*;
 import moduloAdministracion.clienteABM.FormularioNuevaCompra;
 import moduloAdministracion.clienteABM.FormularioNuevoCliente;
 import moduloCobranzas.altaVenta.FormularioAlta;
-import moduloStock.StockInterface;
+
 
 public class VentasView implements VentasInterface {
 

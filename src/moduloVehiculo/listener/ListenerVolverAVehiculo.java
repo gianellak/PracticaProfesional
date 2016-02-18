@@ -1,9 +1,8 @@
-package listenersVehiculo;
+package moduloVehiculo.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vehiculo.ABM.VehiculoController;
 import vehiculo.ABM.vehiculoController;
 
 public class ListenerVolverAVehiculo implements ActionListener {

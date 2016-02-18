@@ -8,9 +8,7 @@ import exceptions.DBException;
 import moduloCobranzas.ventas.VentasController;
 import moduloCobranzas.ventas.VentasView;
 import moduloPrincipal.PrincipalController;
-import moduloStock.StockController;
-import moduloStock.StockInterface;
-import moduloStock.StockView;
+
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;
 

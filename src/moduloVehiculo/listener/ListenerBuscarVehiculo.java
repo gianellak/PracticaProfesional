@@ -1,15 +1,15 @@
-package listenersVehiculo;
+package moduloVehiculo.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vehiculo.ABM.VehiculoController;
+import vehiculo.ABM.vehiculoController;
 
 public class ListenerBuscarVehiculo implements ActionListener {
 
-	VehiculoController vc;
+	vehiculoController vc;
 
-	public ListenerBuscarVehiculo(VehiculoController vc) {
+	public ListenerBuscarVehiculo(vehiculoController vc) {
 		super();
 		this.vc = vc;
 

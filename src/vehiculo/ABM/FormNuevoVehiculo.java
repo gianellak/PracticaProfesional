@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import listenersVehiculo.ListenerAceptarNuevoVehiculo;
+import moduloVehiculo.listener.ListenerAceptarNuevoVehiculo;
 
 public class FormNuevoVehiculo extends JPanel {
 

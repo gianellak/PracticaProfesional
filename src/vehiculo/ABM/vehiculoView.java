@@ -11,12 +11,12 @@ import javax.swing.table.DefaultTableModel;
 import objetos.Vehiculo;
 import listeners.ListenerAltaV;
 import listeners.ListenerVolverV;
-import listenersVehiculo.ListenerBuscarVehiculo;
-import listenersVehiculo.ListenerNuevoVehiculo;
-import listenersVehiculo.ListenerSalirVehiculo;
-import listenersVehiculo.ListenerStock;
-import listenersVehiculo.ListenerVolverAVehiculo;
 import moduloCobranzas.altaVenta.FormularioAlta;
+import moduloVehiculo.listener.ListenerBuscarVehiculo;
+import moduloVehiculo.listener.ListenerNuevoVehiculo;
+import moduloVehiculo.listener.ListenerSalirVehiculo;
+import moduloVehiculo.listener.ListenerStock;
+import moduloVehiculo.listener.ListenerVolverAVehiculo;
 
 public class vehiculoView implements vehiculoInterface {
 
@@ -41,7 +41,7 @@ public class vehiculoView implements vehiculoInterface {
 
 	private FormNuevoVehiculo panelNuevoVehiculo;
 
-	public VehiculoView() {
+	public vehiculoView() {
 
 		// FRAME
 		frmVehiculo = new JFrame("Menú Vehiculo");
@@ -83,7 +83,7 @@ public class vehiculoView implements vehiculoInterface {
 	}
 
 	@Override
-	public void showVehiculo(VehiculoController vehiculoController) {
+	public void showVehiculo(vehiculoController vehiculoController) {
 
 		vc = vehiculoController;
 
@@ -213,10 +213,5 @@ public class vehiculoView implements vehiculoInterface {
 		this.btnStock = btnStock;
 	}
 
-	@Override
-	public void showVehiculo(vehiculoController vc) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
