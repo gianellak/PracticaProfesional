@@ -16,9 +16,9 @@ public class UsuarioController {
 		this.pc = pc;
 	}
 
-	public void showUsuario(PrincipalController pc) {
+	public void showUsuario() {
 		
-		ui.showMenuUsuario(this);
+		ui.showMenuUsuario(this, pc.getView(), pc.getUser());
 	
 		
 	}
@@ -35,6 +35,19 @@ public class UsuarioController {
 		UsuarioDB uDB = new UsuarioDB(pc);
 		
 		uDB.findAll();
+		
+	}
+
+	public void getBack() {
+		
+		pc.getBack();
+		
+		
+	}
+
+	public void showAlta() {
+		
+		ui.onAlta();
 		
 	}
 

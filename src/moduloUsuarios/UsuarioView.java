@@ -12,86 +12,101 @@ import javax.swing.JPanel;
 import exceptions.DBException;
 import objetos.Usuario;
 import moduloPrincipal.PrincipalController;
+import moduloPrincipal.PrincipalView;
+import moduloPrincipal.paneles.PanelAux;
+import moduloPrincipal.paneles.PanelMenu;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioInterface;
-import moduloUsuarios.listenerUsuarios.ListenerUsuarioVer;
-import moduloUsuarios.listenerUsuarios.ListenerUsuarioVolver;
+import moduloUsuarios.listener.ListenerUsuarioAlta;
+import moduloUsuarios.listener.ListenerUsuarioVer;
+import moduloUsuarios.listener.ListenerUsuarioVolver;
+import moduloPrincipal.paneles.PanelGeneral;
+import moduloUsuarios.paneles.PanelUsuario;
 import moduloUsuarios.paneles.UsuarioMenu;
 
 public class UsuarioView implements UsuarioInterface {
 	
-	private UsuarioMenu panelUsuario;
-	private JFrame frmUsuario;
-	private JButton btnAltaU;
-	private JButton btnBajaU;
-	private JButton btnModU;
-	private JButton btnVerU;
-	private JButton btnVolver;
-	private JPanel panelAux;
+	private JFrame frame;
+	private PanelUsuario panelUsuario;
 	private ListenerUsuarioVolver listenerVolver;
 	private ListenerUsuarioVer listenerVer;
+	private UsuarioMenu panelUsuarioMenu;
+	private ListenerUsuarioAlta listenerAlta;
 
 	public UsuarioView(){
 		
-		frmUsuario = new JFrame("Menu Usuario");
-		frmUsuario.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frmUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 	
-		panelUsuario = new UsuarioMenu();
-		frmUsuario.add(panelUsuario);
-		
-		panelAux = new JPanel();
-		frmUsuario.add(panelAux);
-		
-		btnAltaU = new JButton("Alta Usuario");
-		btnAltaU.setBounds(100, 120, 150, 25);
-		panelUsuario.add(btnAltaU);
-		
-		btnBajaU = new JButton("Baja Usuario");
-		btnBajaU.setBounds(100, 150, 150, 25);
-		panelUsuario.add(btnBajaU);
-		
-		btnModU = new JButton("Modificacion Usuario");
-		btnModU.setBounds(100, 180, 150, 25);
-		panelUsuario.add(btnModU);
-		
-		btnVerU = new JButton("Ver Usuario");
-		btnVerU.setBounds(100, 210, 150, 25);
-		panelUsuario.add(btnVerU);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(100, 240, 150, 25);
-		panelUsuario.add(btnVolver);
-		
-		
-		
-		frmUsuario.pack();
+		panelUsuarioMenu= new UsuarioMenu();
+		panelUsuario = new PanelUsuario();
+	
 		
 		
 		
 	
 	}
 
-	public void showMenuUsuario(UsuarioController uc) {
-		
-		listenerVolver = new ListenerUsuarioVolver(uc);
-		btnVolver.addActionListener(listenerVolver);
-		listenerVer = new ListenerUsuarioVer(uc);
-		btnVerU.addActionListener(listenerVer);
-		frmUsuario.setVisible(true);
-		
-		
-	}
+	
 
-	public void dispose() {
-		frmUsuario.dispose();
-		
-	}
+	
 
 	@Override
 	public List<Usuario> findAll() throws DBException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void showMenuUsuario(UsuarioController uc,
+			JFrame f, Usuario u) {
+		
+		frame = f;
+		PanelGeneral panelGeneral = new PanelGeneral(u);
+		
+		listenerVolver = new ListenerUsuarioVolver(uc);
+		listenerVer = new ListenerUsuarioVer(uc);
+		listenerAlta = new ListenerUsuarioAlta(uc);
+		panelUsuarioMenu.getBtnVolver().addActionListener(listenerVolver);
+		panelUsuarioMenu.getBtnVerU().addActionListener(listenerVer);
+		panelUsuarioMenu.getBtnAltaU().addActionListener(listenerAlta);
+		
+		
+		//frame.setVisible(false);
+		frame.setTitle("Menu Usuarios");
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(panelGeneral, BorderLayout.PAGE_START);
+		frame.getContentPane().add(panelUsuarioMenu, BorderLayout.WEST);
+		frame.getContentPane().add(panelUsuario, BorderLayout.LINE_END);
+		frame.validate();
+		frame.repaint();
+		//frame.setVisible(true);
+		
+		
+	}
+
+
+
+
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+	@Override
+	public void onAlta() {
+		
+		System.out.println("O Alta VIEW");
+		panelUsuario.onAlta();
+		frame.validate();
+		frame.repaint();
+		
 	}
 	
 

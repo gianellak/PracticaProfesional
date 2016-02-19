@@ -2,16 +2,19 @@ package moduloUsuarios;
 
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import exceptions.DBException;
 import objetos.Usuario;
-import moduloPrincipal.PrincipalController;
 
 public interface UsuarioInterface {
 
-	void showMenuUsuario(UsuarioController usuarioController);
+	public void dispose();
 
-	void dispose();
+	public List<Usuario> findAll() throws DBException;
 
-	List<Usuario> findAll() throws DBException;
+	public void showMenuUsuario(UsuarioController uc, JFrame frame, Usuario u);
+
+	public void onAlta();
 
 }

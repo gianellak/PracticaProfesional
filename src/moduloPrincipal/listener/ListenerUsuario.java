@@ -1,4 +1,4 @@
-package moduloPrincipal.listenerPrincipal;
+package moduloPrincipal.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +34,7 @@ private Connection conn;
 		
 		System.out.println("ListenerUsuarioMenu");
 		
-		uc.showUsuario(pc);
+		uc.showUsuario();
 		
 		
 	}

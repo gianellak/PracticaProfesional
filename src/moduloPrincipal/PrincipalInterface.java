@@ -1,6 +1,9 @@
 package moduloPrincipal;
 
+import javax.swing.JFrame;
+
 import moduloCobranzas.ventas.VentasInterface;
+import moduloPrincipal.paneles.PanelGeneral;
 
 public interface PrincipalInterface {
 
@@ -8,7 +11,11 @@ public interface PrincipalInterface {
 
 	public void closePrincipal();
 
-	public void showVenta(VentasInterface sc);
+	public JFrame getPView();
+
+	PanelGeneral getGeneral();
+
+	public void getBack();
 
 	
 }

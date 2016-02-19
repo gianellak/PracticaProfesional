@@ -1,4 +1,4 @@
-package moduloUsuarios.listenerUsuarios;
+package moduloUsuarios.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,8 +25,8 @@ public class ListenerUsuarioAlta implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		uc.dispose();
+		System.out.println("Listener On ALta Usuario");
+		uc.showAlta();
 		
 		
 	}

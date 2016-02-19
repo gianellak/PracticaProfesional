@@ -1,5 +1,9 @@
 package moduloPrincipal;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
 import connections.ConnectionProvider;
 import objetos.Usuario;
 
@@ -40,5 +44,21 @@ public class PrincipalController {
 	public ConnectionProvider getConn() {
 		return conn;
 	}
+
+
+
+	public JFrame getView() {
+		
+		return principal.getPView();
+		
+	}
+
+	public void getBack() {
+		
+		principal.getBack();
+		
+	}
+
+
 
 }

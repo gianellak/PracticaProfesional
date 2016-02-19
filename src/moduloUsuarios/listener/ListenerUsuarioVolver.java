@@ -1,4 +1,4 @@
-package moduloUsuarios.listenerUsuarios;
+package moduloUsuarios.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ public class ListenerUsuarioVolver implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		uc.dispose();
+		uc.getBack();
 		
 		
 	}

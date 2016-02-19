@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.swing.JFrame;
 import exceptions.DBException;
 import objetos.Usuario;
 import objetos.Venta;
 import utilitarios.DBUtil;
 import moduloPrincipal.PrincipalController;
+import moduloPrincipal.PrincipalView;
+import moduloPrincipal.paneles.PanelAux;
 
 public class UsuarioDB implements UsuarioInterface {
 
@@ -63,7 +65,21 @@ public class UsuarioDB implements UsuarioInterface {
         }
 
         return users;
-		}
+	}
+
+
+
+	@Override
+	public void showMenuUsuario(UsuarioController uc, JFrame frame, Usuario u) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAlta() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 

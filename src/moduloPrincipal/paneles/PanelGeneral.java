@@ -1,6 +1,8 @@
 package moduloPrincipal.paneles;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Rectangle;
 
 import javax.swing.JFrame;
@@ -12,26 +14,30 @@ import objetos.Usuario;
 
 public class PanelGeneral extends JPanel {
 	
+	private Dimension preferredSize =new Dimension(300,25) ;
+	
 	public PanelGeneral(Usuario user){
 		
 		
 		System.out.println("Creo nuevo panel");
 		
-		this.setBackground(Color.red);
-		this.setLayout(null);
-
-		this.setSize(500, 100);
+		//this.setBackground(Color.red);
 		
-		this.setLocation(1, 1);
+		this.setPreferredSize(new Dimension(100, 100));
+		
+		this.setLayout(new BorderLayout());
+	   
 		
 		JLabel usuarioLabel = new JLabel("Usuario: " + user.getNombre() + " " + user.getApellido());
-		usuarioLabel.setBounds(10, 10, 300, 20);
+		usuarioLabel.setPreferredSize(preferredSize);
 	
 		JLabel editarLabel = new JLabel("Editar Perfil");
-		editarLabel.setBounds(10, 35, 300, 20);
+		editarLabel.setPreferredSize(preferredSize);
 		
-		this.add(usuarioLabel);
+		this.add(usuarioLabel, BorderLayout.LINE_START);
 		this.add(editarLabel);
+		
+		this.revalidate();
 		
 		
 	}

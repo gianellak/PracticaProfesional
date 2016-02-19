@@ -1,6 +1,8 @@
 package moduloPrincipal.paneles;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,41 +15,39 @@ public class PanelMenu extends JPanel {
 	private JButton btnCliente;
 	private JButton btnCaja;
 	private JButton btnUsuario;
+	private Dimension preferredSize =new Dimension(200,25) ;
 
 
 	public PanelMenu(){
 		
-		this.setBackground(Color.green);
+	
+		
+		this.setPreferredSize(new Dimension(250, 500));
+		
 		
 		btnUsuario= new JButton("Menu Usuario ");
-		btnUsuario.setBounds(50, 130, 200, 25);
+		btnUsuario.setPreferredSize(preferredSize);
 		this.add(btnUsuario);
 		
 		btnCliente= new JButton("Menu Cliente");
-		btnCliente.setBounds(50, 160, 200, 25);
+		btnCliente.setPreferredSize(preferredSize);
 		this.add(btnCliente);
 	
 		btnVenta= new JButton("Menu Ventas");
-		btnVenta.setBounds(50, 190, 200, 25);
+		btnVenta.setPreferredSize(preferredSize);
 		this.add(btnVenta);
 
 		btnVehiculo= new JButton("Menu Vehículo");
-		btnVehiculo.setBounds(50, 220, 200, 25);
+		btnVehiculo.setPreferredSize(preferredSize);
 		this.add(btnVehiculo);
 
 		btnCaja= new JButton("Menu Caja ");
-		btnCaja.setBounds(50, 250, 200, 25);
+		btnCaja.setPreferredSize(preferredSize);
 		this.add(btnCaja);
 		
 		btnSalir= new JButton("Salir ");
-		btnSalir.setBounds(50, 280, 100, 25);
+		btnSalir.setPreferredSize(preferredSize);
 		this.add(btnSalir);
-
-		this.setLayout(null);
-		
-		this.setSize(500, 500);
-		
-		this.setLocation(1, 101);
 		
 
 	}
