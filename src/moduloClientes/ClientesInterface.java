@@ -20,8 +20,6 @@ public interface ClientesInterface {
 
 	public void insertBad();
 
-	public void onBaja();
-
 	public void onMod();
 
 	public void showNotFound();
@@ -42,5 +40,11 @@ public interface ClientesInterface {
 	int getBajaPersona();
 
 	void cleanPanelClientes();
+	
+	public void verMod();
+
+	public int getModPersona();
+
+	public void verCliente(Persona p);
 
 }

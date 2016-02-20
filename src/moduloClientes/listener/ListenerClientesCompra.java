@@ -5,15 +5,16 @@ import java.awt.event.ActionListener;
 import exceptions.DBException;
 import moduloClientes.ClientesController;
 
-public class ListenerBajaAceptar implements ActionListener {
+public class ListenerClientesCompra implements ActionListener {
 
 
 	private ClientesController cc;
+	
 
 
-	public ListenerBajaAceptar(ClientesController cc){
+	public ListenerClientesCompra(ClientesController uc){
 		
-		this.cc = cc;
+		this.cc = uc;
 		
 	}
 	
@@ -22,7 +23,7 @@ public class ListenerBajaAceptar implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		try {
-			cc.bajaPersona();
+			cc.altaPersona();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -30,4 +31,5 @@ public class ListenerBajaAceptar implements ActionListener {
 		
 		
 	}
+	
 }

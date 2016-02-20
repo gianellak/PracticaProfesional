@@ -1,18 +1,14 @@
 package moduloClientes;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Persona;
 import objetos.Usuario;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
-import moduloUsuarios.UsuarioView;
 
 public class ClientesController {
 
@@ -96,7 +92,7 @@ public class ClientesController {
 					ci.deleteBad();
 				}
 	        }else if(codigo==JOptionPane.NO_OPTION){
-	            ci.onBaja();
+	            ci.verCliente(persona);
 	        }
 		
 		}else{
@@ -123,11 +119,6 @@ public class ClientesController {
 		
 	}
 
-	public void showBaja() {
-
-		ci.onBaja();
-		
-	}
 
 	public void showMod() {
 		ci.onMod();
@@ -143,8 +134,28 @@ public class ClientesController {
 	}
 
 	public void modPersona() {
-		// TODO Auto-generated method stub
+		
+		ci.verMod();
 		
 	}
+
+	public void verUnClienteMod() throws DBException {
+		
+		int dni = ci.getModPersona();
+		
+		Persona p = cDB.findId(dni);
+		
+		if(p != null){
+			
+			ci.verCliente(p);
+		}else
+		{
+			ci.showNotFound();
+		}
+		
+		
+	}
+
+	
 
 }

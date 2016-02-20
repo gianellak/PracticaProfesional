@@ -20,7 +20,7 @@ import moduloPrincipal.PrincipalView;
 import moduloPrincipal.paneles.*;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioInterface;
-import moduloClientes.listener.*;
+import moduloCaja.listener.*;
 import moduloPrincipal.paneles.PanelGeneral;
 import moduloClientes.paneles.*;
 
@@ -28,17 +28,7 @@ public class CajaView implements CajaInterface {
 	
 	private JFrame frame;
 	private PanelClientes panelClientes;
-	private ListenerClientesVolver listenerVolver;
-	private ListenerClientesVer listenerVer;
 	private ClientesMenu panelClientesMenu;
-	private ListenerClientesAlta listenerAlta;
-	private ListenerAltaAceptar listenerAltaAceptar;
-	private ListenerMenuClientesVolver listenerMenuClientesVolver;
-	private ListenerMenuClientesVolver listenerBajaVolver;
-	private ListenerBajaAceptar listenerBajaAceptar;
-	private ListenerClientesBaja listenerBaja;
-	private ListenerModAceptar listenerModAceptar;
-	private ListenerClientesMod listenerMod;
 	private CajaController clientesController;
 
 	public CajaView(){
@@ -73,12 +63,8 @@ public class CajaView implements CajaInterface {
 		
 		//new listeners
 		
-		panelClientesMenu.getBtnVolver().addActionListener(listenerVolver);
-		panelClientesMenu.getBtnVerU().addActionListener(listenerVer);
-		panelClientesMenu.getBtnAltaU().addActionListener(listenerAlta);
-		panelClientesMenu.getBtnBajaU().addActionListener(listenerBaja);
-		panelClientesMenu.getBtnModU().addActionListener(listenerMod);
-		panelClientesMenu.getBtnVerU().addActionListener(listenerVer);
+	//	panelClientesMenu.getBtnVolver().addActionListener(listenerVolver);
+		
 		
 		
 		//frame.setVisible(false);
@@ -113,8 +99,8 @@ public class CajaView implements CajaInterface {
 	//	listenerAltaAceptar = new ListenerAltaAceptar(clientesController);
 		//listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		
-		panelClientes.getBtnAceptar().addActionListener(listenerAltaAceptar);
-		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
+	//	panelClientes.getBtnAceptar().addActionListener(listenerAltaAceptar);
+		//panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
 		
 		frame.validate();
@@ -131,13 +117,13 @@ public class CajaView implements CajaInterface {
 		panelClientes.validate();
 		panelClientes.repaint();
 		
-		panelClientes.onVer();
+		//panelClientes.onVer();
 		
 		
 //		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		
 		
-		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
+//		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
 		
 		frame.validate();
@@ -154,13 +140,13 @@ public class CajaView implements CajaInterface {
 		panelClientes.validate();
 		panelClientes.repaint();
 		
-		panelClientes.onBaja();
+	//	panelClientes.onBaja();
 		
 		//listenerBajaAceptar = new ListenerBajaAceptar(clientesController);
 		//listenerBajaVolver = new ListenerMenuClientesVolver(clientesController);
 		
-		panelClientes.getBtnAceptar().addActionListener(listenerBajaAceptar);
-		panelClientes.getBtnVolver().addActionListener(listenerBajaVolver);
+		//panelClientes.getBtnAceptar().addActionListener(listenerBajaAceptar);
+		//panelClientes.getBtnVolver().addActionListener(listenerBajaVolver);
 		
 		
 		frame.validate();
@@ -170,18 +156,7 @@ public class CajaView implements CajaInterface {
 		
 	}
 	
-	public Usuario getNuevoUsuario(){
-		
-		String s = new String(panelClientes.getPasswordText().getPassword());
-		
-		Usuario u = new Usuario(panelClientes.getUserText().getText(), s,
-				Integer.parseInt(panelClientes.getPermisosText().getText()), 
-				panelClientes.getNombreText().getText(),
-				panelClientes.getApellidoText().getText());
-		
-		return u;
 
-	}
 
 
 
@@ -217,7 +192,7 @@ public class CajaView implements CajaInterface {
 	@Override
 	public int getBajaPersona() {
 
-		return Integer.parseInt(panelClientes.getDniText().getText());
+		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
 		
 		
 	}
@@ -250,8 +225,8 @@ public class CajaView implements CajaInterface {
 	//	listenerModAceptar = new ListenerModAceptar(clientesController);
 	//  listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		
-		panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
-		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
+		//panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
+		//panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
 		
 		frame.validate();

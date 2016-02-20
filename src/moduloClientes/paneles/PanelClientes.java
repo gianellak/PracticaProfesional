@@ -1,35 +1,21 @@
 package moduloClientes.paneles;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Rectangle;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import moduloUsuarios.listener.ListenerAltaAceptar;
-import moduloUsuarios.listener.ListenerMenuUsuarioVolver;
-import moduloUsuarios.listener.ListenerUsuarioVolver;
-import objetos.Usuario;
+import objetos.Persona;
 
 public class PanelClientes extends JPanel {
 	
-	private Dimension preferredSize =new Dimension(200,25);
+	
 	private JButton btnVolver;
-	private JTextField userText;
-	private JTextField permisosText;
-	private JPasswordField passwordText;
-	private JTextField nombreText;
-	private JTextField apellidoText;
 	private JButton btnAceptar;
-	private JTextField dniText;
 	private JTextField nombreCompradorText;
 	private JTextField apellidoCompradorText;
 	private JTextField dniCompradorText;
@@ -39,6 +25,12 @@ public class PanelClientes extends JPanel {
 	private JTextField telPartText;
 	private JTextField telCelText;
 	private JTextField telLabText;
+	private JButton btnBuscar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private JButton btnVender;
+	private JButton btnComprar;
+	
 	
 	public PanelClientes(){
 		
@@ -59,30 +51,29 @@ public class PanelClientes extends JPanel {
 		this.removeAll();
 		System.out.println("ONALTA");
 		
-		
-		JLabel nombreCompradorLabel = new JLabel("Nombre: ");
-		nombreCompradorLabel.setBounds(150, 0, 80, 25);
-		this.add(nombreCompradorLabel);
-
-		nombreCompradorText = new JTextField(9);
-		nombreCompradorText.setBounds(300, 0, 160, 25);
-		this.add(nombreCompradorText);
-	
-		JLabel apellidoCompradorLabel = new JLabel("Apellido: ");
-		apellidoCompradorLabel.setBounds(150, 30, 80, 25);
-		this.add(apellidoCompradorLabel);
-
-		apellidoCompradorText = new JTextField(9);
-		apellidoCompradorText.setBounds(300, 30, 160, 25);
-		this.add(apellidoCompradorText);
-		
 		JLabel dniCompradorLabel = new JLabel("DNI: ");
-		dniCompradorLabel.setBounds(150, 60, 160, 25);
+		dniCompradorLabel.setBounds(150, 0, 160, 25);
 		this.add(dniCompradorLabel);
 
 		dniCompradorText = new JTextField(9);
-		dniCompradorText.setBounds(300, 60, 160, 25);
+		dniCompradorText.setBounds(300, 0, 160, 25);
 		this.add(dniCompradorText);
+		
+		JLabel nombreCompradorLabel = new JLabel("Nombre: ");
+		nombreCompradorLabel.setBounds(150, 30, 80, 25);
+		this.add(nombreCompradorLabel);
+
+		nombreCompradorText = new JTextField(9);
+		nombreCompradorText.setBounds(300, 30, 160, 25);
+		this.add(nombreCompradorText);
+	
+		JLabel apellidoCompradorLabel = new JLabel("Apellido: ");
+		apellidoCompradorLabel.setBounds(150, 60, 80, 25);
+		this.add(apellidoCompradorLabel);
+
+		apellidoCompradorText = new JTextField(9);
+		apellidoCompradorText.setBounds(300, 60, 160, 25);
+		this.add(apellidoCompradorText);
 		
 		JLabel fechaNacLabel = new JLabel("Fecha nacimiento: ");
 		fechaNacLabel.setBounds(150, 90, 160, 25);
@@ -134,11 +125,11 @@ public class PanelClientes extends JPanel {
 		
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(500, 150, 100, 25);
+		btnAceptar.setBounds(700, 270, 100, 25);
 		this.add(btnAceptar);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 180, 100, 25);
+		btnVolver.setBounds(700, 300, 100, 25);
 		this.add(btnVolver);
 		
 		
@@ -150,52 +141,204 @@ public class PanelClientes extends JPanel {
 		
 	}
 
+	
+	
+	public void onMod(){
+		
+		this.removeAll();
+		System.out.println("ONMOD");
+		
+		JLabel dniCompradorLabel = new JLabel("DNI: ");
+		dniCompradorLabel.setBounds(150, 0, 160, 25);
+		this.add(dniCompradorLabel);
+
+		dniCompradorText = new JTextField(9);
+		dniCompradorText.setBounds(300, 0, 160, 25);
+		this.add(dniCompradorText);
+		
+
+		btnBuscar = new JButton("Buscar Cliente");
+		btnBuscar.setBounds(700, 270, 160, 25);
+		this.add(btnBuscar);
+
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(700, 300, 160, 25);
+		this.add(btnVolver);
+		
+		
+		
+	
+		
+		this.validate();
+		this.repaint();
+	}
+
+	public void verCliente(Persona p) {
+		
+		this.removeAll();
+		System.out.println("ONVERMOD");
+
+		
+		JLabel dniCompradorLabel = new JLabel("DNI: ");
+		dniCompradorLabel.setBounds(150, 0, 160, 25);
+		this.add(dniCompradorLabel);
+
+		dniCompradorText= new JTextField();
+		dniCompradorText.setText(String.valueOf(p.getDni()));
+		dniCompradorText.setEditable(false);
+		dniCompradorText.setBounds(300, 0, 160, 25);
+		this.add(dniCompradorText);
+		
+		JLabel nombreCompradorLabel = new JLabel("Nombre: ");
+		nombreCompradorLabel.setBounds(150, 30, 80, 25);
+		this.add(nombreCompradorLabel);
+
+		nombreCompradorText = new JTextField(p.getNombre());
+		nombreCompradorText.setBounds(300, 30, 160, 25);
+		nombreCompradorText.setEditable(false);
+		this.add(nombreCompradorText);
+	
+		JLabel apellidoCompradorLabel = new JLabel("Apellido: ");
+		apellidoCompradorLabel.setBounds(150, 60, 80, 25);
+		this.add(apellidoCompradorLabel);
+
+		apellidoCompradorText = new JTextField(p.getApellido());
+		apellidoCompradorText.setBounds(300, 60, 160, 25);
+		apellidoCompradorText.setEditable(false);
+		this.add(apellidoCompradorText);
+		
+		JLabel fechaNacLabel = new JLabel("Fecha nacimiento: ");
+		fechaNacLabel.setBounds(150, 90, 160, 25);
+		this.add(fechaNacLabel);
+		
+		fechaNacText = new JTextField(6);
+		fechaNacText.setBounds(300, 90, 160, 25);
+		fechaNacText.setEditable(false);
+		this.add(fechaNacText);
+		
+		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
+		domicilioPartLabel.setBounds(150, 120, 160, 25);
+		this.add(domicilioPartLabel);
+		
+		domicilioPartText = new JTextField(p.getDomicilio());
+		domicilioPartText.setBounds(300, 120, 160, 25);
+		domicilioPartText.setEditable(false);
+		this.add(domicilioPartText);
+		
+		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
+		domicilioLabLabel.setBounds(150, 150, 160, 25);
+		this.add(domicilioLabLabel);
+		
+		domicilioLabText = new JTextField(p.getDomicilioL());
+		domicilioLabText.setBounds(300, 150, 260, 25);
+		domicilioLabText.setEditable(false);
+		this.add(domicilioLabText);
+		
+		JLabel telPartLabel = new JLabel("Tel. Particular: ");
+		telPartLabel.setBounds(150, 180, 160, 25);
+		this.add(telPartLabel);
+		
+		telPartText = new JTextField(p.getTelefonoP());
+		telPartText.setBounds(300, 180, 260, 25);
+		telPartText.setEditable(false);
+		this.add(telPartText);
+		
+		JLabel telCelLabel = new JLabel("Tel. Celular: ");
+		telCelLabel.setBounds(150, 210, 160, 25);
+		this.add(telCelLabel);
+		
+		telCelText = new JTextField(p.getTelefonoC());
+		telCelText.setBounds(300, 210, 260, 25);
+		telCelText.setEditable(false);
+		this.add(telCelText);
+		
+		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
+		telLabLabel.setBounds(150, 240, 160, 25);
+		this.add(telLabLabel);
+		
+		telLabText = new JTextField(p.getTelefonoL());
+		telLabText.setBounds(300, 240, 260, 25);
+		telLabText.setEditable(false);
+		this.add(telLabText);
+		
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.setBounds(700, 270, 100, 25);
+		this.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(700, 300, 100, 25);
+		this.add(btnEliminar);
+
+		btnVender = new JButton("Iniciar Venta");
+		btnVender.setBounds(700, 330, 100, 25);
+		this.add(btnVender);
+
+		btnComprar = new JButton("Comprar Vehiculo");
+		btnComprar.setBounds(700, 360, 100, 25);
+		this.add(btnComprar);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(700, 390, 100, 25);
+		this.add(btnVolver);
+		
+	
+		
+		this.validate();
+		this.repaint();
+	
+
+	}
+
+
+	public JButton getBtnBuscar() {
+		return btnBuscar;
+	}
+
+	public void setBtnBuscar(JButton btnBuscar) {
+		this.btnBuscar = btnBuscar;
+	}
+
+	public void verMod() {
+		
+		
+		System.out.println("ONVERMOD");
+
+		
+		dniCompradorText.setEditable(false);
+		nombreCompradorText.setEditable(true);
+		apellidoCompradorText.setEditable(true);
+		fechaNacText.setEditable(true);
+		domicilioPartText.setEditable(true);
+		domicilioLabText.setEditable(true);
+		telPartText.setEditable(true);
+		telCelText.setEditable(true);
+		telLabText.setEditable(true);
+		
+		btnAceptar = new JButton("Aceptar Cambios");
+		btnAceptar.setBounds(700, 270, 100, 25);
+		this.add(btnAceptar);
+
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(700, 300, 100, 25);
+		this.add(btnVolver);
+		
+	
+		
+		this.validate();
+		this.repaint();
+	
+		
+	}
+	
+	
+
 	public JButton getBtnVolver() {
 		return btnVolver;
 	}
 
 	public void setBtnVolver(JButton btnVolver) {
 		this.btnVolver = btnVolver;
-	}
-
-	public JTextField getUserText() {
-		return userText;
-	}
-
-	public void setUserText(JTextField userText) {
-		this.userText = userText;
-	}
-
-	public JTextField getPermisosText() {
-		return permisosText;
-	}
-
-	public void setPermisosText(JTextField permisosText) {
-		this.permisosText = permisosText;
-	}
-
-	public JPasswordField getPasswordText() {
-		return passwordText;
-	}
-
-	public void setPasswordText(JPasswordField passwordText) {
-		this.passwordText = passwordText;
-	}
-
-	public JTextField getNombreText() {
-		return nombreText;
-	}
-
-	public void setNombreText(JTextField nombreText) {
-		this.nombreText = nombreText;
-	}
-
-	public JTextField getApellidoText() {
-		return apellidoText;
-	}
-
-	public void setApellidoText(JTextField apellidoText) {
-		this.apellidoText = apellidoText;
 	}
 
 	public JButton getBtnAceptar() {
@@ -206,128 +349,109 @@ public class PanelClientes extends JPanel {
 		this.btnAceptar = btnAceptar;
 	}
 
-	public void onBaja() {
-		
-		this.removeAll();
-		
-		System.out.println("ONBAJA");
-		
-		JLabel dniLabel = new JLabel("Cliente a dar de baja: ");
-		dniLabel.setBounds(150, 0, 160, 25);
-		this.add(dniLabel);
-
-		dniText = new JTextField(9);
-		dniText.setBounds(300, 0, 160, 25);
-		this.add(dniText);
-
-
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(500, 150, 100, 25);
-		this.add(btnAceptar);
-
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 180, 100, 25);
-		this.add(btnVolver);
-		
-		
-	
-		
-		this.validate();
-		this.repaint();
-		
-		
-	}
-	
-	
-	public void onMod(){
-		
-		this.removeAll();
-		System.out.println("ONMOD");
-		
-		JLabel userLabel = new JLabel("Usuario: ");
-		userLabel.setBounds(150, 0, 80, 25);
-		this.add(userLabel);
-
-		userText = new JTextField(9);
-		userText.setBounds(300, 0, 160, 25);
-		this.add(userText);
-		
-		JLabel passLabel = new JLabel("Contrasena");
-		passLabel.setBounds(150, 30, 80, 25);
-		this.add(passLabel);
-
-		passwordText = new JPasswordField(8);
-		passwordText.setBounds(300, 30, 160, 25);
-		this.add(passwordText);
-		
-		JLabel patenteLabel = new JLabel("Permisos: ");
-		patenteLabel.setBounds(150, 60, 160, 25);
-		this.add(patenteLabel);
-		
-		permisosText = new JTextField(3);
-		permisosText.setBounds(300, 60, 160, 25);
-		this.add(permisosText);
-		
-		JLabel nombreLabel = new JLabel("Nombre: ");
-		nombreLabel.setBounds(150, 90, 160, 25);
-		this.add(nombreLabel);
-		
-		nombreText = new JTextField(6);
-		nombreText.setBounds(300, 90, 160, 25);
-		this.add(nombreText);
-		
-		JLabel apellidoLabel = new JLabel("Apellido: ");
-		apellidoLabel.setBounds(150, 120, 160, 25);
-		this.add(apellidoLabel);
-
-		apellidoText = new JTextField(6);
-		apellidoText.setBounds(300, 120, 160, 25);
-		this.add(apellidoText);
-		
-
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(500, 150, 100, 25);
-		this.add(btnAceptar);
-
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 180, 100, 25);
-		this.add(btnVolver);
-		
-		
-	
-		
-		this.validate();
-		this.repaint();
+	public JTextField getNombreCompradorText() {
+		return nombreCompradorText;
 	}
 
-	public void onVer() {
-		
-		this.removeAll();
-		System.out.println("ONVER");
-
-		JLabel userLabel = new JLabel("Usuarios habilitados a usar el sistema: ");
-		userLabel.setBounds(150, 0, 280, 25);
-		this.add(userLabel);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 180, 100, 25);
-		this.add(btnVolver);
-		
-		
-		this.validate();
-		this.repaint();
-
+	public void setNombreCompradorText(JTextField nombreCompradorText) {
+		this.nombreCompradorText = nombreCompradorText;
 	}
 
-	public JTextField getDniText() {
-		return dniText;
+	public JTextField getApellidoCompradorText() {
+		return apellidoCompradorText;
 	}
 
-	public void setDniText(JTextField dniText) {
-		this.dniText = dniText;
+	public void setApellidoCompradorText(JTextField apellidoCompradorText) {
+		this.apellidoCompradorText = apellidoCompradorText;
 	}
 
-	
-	
+	public JTextField getDniCompradorText() {
+		return dniCompradorText;
+	}
+
+	public void setDniCompradorText(JTextField dniCompradorText) {
+		this.dniCompradorText = dniCompradorText;
+	}
+
+	public JTextField getFechaNacText() {
+		return fechaNacText;
+	}
+
+	public void setFechaNacText(JTextField fechaNacText) {
+		this.fechaNacText = fechaNacText;
+	}
+
+	public JTextField getDomicilioPartText() {
+		return domicilioPartText;
+	}
+
+	public void setDomicilioPartText(JTextField domicilioPartText) {
+		this.domicilioPartText = domicilioPartText;
+	}
+
+	public JTextField getDomicilioLabText() {
+		return domicilioLabText;
+	}
+
+	public void setDomicilioLabText(JTextField domicilioLabText) {
+		this.domicilioLabText = domicilioLabText;
+	}
+
+	public JTextField getTelPartText() {
+		return telPartText;
+	}
+
+	public void setTelPartText(JTextField telPartText) {
+		this.telPartText = telPartText;
+	}
+
+	public JTextField getTelCelText() {
+		return telCelText;
+	}
+
+	public void setTelCelText(JTextField telCelText) {
+		this.telCelText = telCelText;
+	}
+
+	public JTextField getTelLabText() {
+		return telLabText;
+	}
+
+	public void setTelLabText(JTextField telLabText) {
+		this.telLabText = telLabText;
+	}
+
+	public JButton getBtnModificar() {
+		return btnModificar;
+	}
+
+	public void setBtnModificar(JButton btnModificar) {
+		this.btnModificar = btnModificar;
+	}
+
+	public JButton getBtnEliminar() {
+		return btnEliminar;
+	}
+
+	public void setBtnEliminar(JButton btnEliminar) {
+		this.btnEliminar = btnEliminar;
+	}
+
+	public JButton getBtnVender() {
+		return btnVender;
+	}
+
+	public void setBtnVender(JButton btnVender) {
+		this.btnVender = btnVender;
+	}
+
+	public JButton getBtnComprar() {
+		return btnComprar;
+	}
+
+	public void setBtnComprar(JButton btnComprar) {
+		this.btnComprar = btnComprar;
+	}
+
 
 }

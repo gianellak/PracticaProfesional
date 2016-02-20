@@ -10,11 +10,9 @@ import javax.swing.JPanel;
 public class ClientesMenu extends JPanel {
 	
 	private Dimension preferredSize =new Dimension(200,25) ;
-	private JButton btnAltaU;
-	private JButton btnBajaU;
-	private JButton btnModU;
-	private JButton btnVerU;
 	private JButton btnVolver;
+	private JButton btnVerC;
+	private JButton btnAltaC;
 
 
 public ClientesMenu() {
@@ -22,21 +20,13 @@ public ClientesMenu() {
 
 		this.setPreferredSize(new Dimension(250, 500));
 		
-		btnAltaU = new JButton("Alta Usuario");
-		btnAltaU.setPreferredSize(preferredSize);
-		this.add(btnAltaU);
+		btnAltaC = new JButton("Alta Cliente");
+		btnAltaC.setPreferredSize(preferredSize);
+		this.add(btnAltaC);
 		
-		btnBajaU = new JButton("Baja Usuario");
-		btnBajaU.setPreferredSize(preferredSize);
-		this.add(btnBajaU);
-		
-		btnModU = new JButton("Modificacion Usuario");
-		btnModU.setPreferredSize(preferredSize);
-		this.add(btnModU);
-		
-		btnVerU = new JButton("Ver Usuario");
-		btnVerU.setPreferredSize(preferredSize);
-		this.add(btnVerU);
+		btnVerC = new JButton("Ver Cliente");
+		btnVerC.setPreferredSize(preferredSize);
+		this.add(btnVerC);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setPreferredSize(preferredSize);
@@ -47,37 +37,14 @@ public ClientesMenu() {
 	}
 
 	
-	public JButton getBtnAltaU() {
-		return btnAltaU;
+	public JButton getBtnAltaC() {
+		return btnAltaC;
 	}
 
-	public void setBtnAltaU(JButton btnAltaU) {
-		this.btnAltaU = btnAltaU;
+	public void setBtnAltaC(JButton btnAltaC) {
+		this.btnAltaC = btnAltaC;
 	}
 
-	public JButton getBtnBajaU() {
-		return btnBajaU;
-	}
-
-	public void setBtnBajaU(JButton btnBajaU) {
-		this.btnBajaU = btnBajaU;
-	}
-
-	public JButton getBtnModU() {
-		return btnModU;
-	}
-
-	public void setBtnModU(JButton btnModU) {
-		this.btnModU = btnModU;
-	}
-
-	public JButton getBtnVerU() {
-		return btnVerU;
-	}
-
-	public void setBtnVerU(JButton btnVerU) {
-		this.btnVerU = btnVerU;
-	}
 
 	public JButton getBtnVolver() {
 		return btnVolver;
@@ -85,6 +52,16 @@ public ClientesMenu() {
 
 	public void setBtnVolver(JButton btnVolver) {
 		this.btnVolver = btnVolver;
+	}
+
+
+	public JButton getBtnVerC() {
+		return btnVerC;
+	}
+
+
+	public void setBtnVerC(JButton btnVerC) {
+		this.btnVerC = btnVerC;
 	}
 	
 

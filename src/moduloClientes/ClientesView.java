@@ -2,8 +2,11 @@ package moduloClientes;
 
 import java.awt.BorderLayout;
 import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
@@ -24,11 +27,13 @@ public class ClientesView implements ClientesInterface {
 	private ListenerAltaAceptar listenerAltaAceptar;
 	private ListenerMenuClientesVolver listenerMenuClientesVolver;
 	private ListenerMenuClientesVolver listenerBajaVolver;
-	private ListenerBajaAceptar listenerBajaAceptar;
-	private ListenerClientesBaja listenerBaja;
 	private ListenerModAceptar listenerModAceptar;
-	private ListenerClientesMod listenerMod;
 	private ClientesController clientesController;
+	private ListenerBuscarCliente listenerBuscarCliente;
+	private ListenerClientesMod listenerClientesMod;
+	private ListenerClientesBaja listenerClientesBaja;
+	private ListenerClientesVenta listenerClientesVenta;
+	private ListenerClientesCompra listenerClientesCompra;
 
 	public ClientesView(){
 		
@@ -61,18 +66,12 @@ public class ClientesView implements ClientesInterface {
 		PanelGeneral panelGeneral = new PanelGeneral(u);
 		
 		listenerVolver = new ListenerClientesVolver(cc);
-		listenerVer = new ListenerClientesVer(cc);
 		listenerAlta = new ListenerClientesAlta(cc);
-		listenerBaja = new ListenerClientesBaja(cc);
-		listenerMod = new ListenerClientesMod(cc);
 		listenerVer= new ListenerClientesVer(cc);
 		
 		panelClientesMenu.getBtnVolver().addActionListener(listenerVolver);
-		panelClientesMenu.getBtnVerU().addActionListener(listenerVer);
-		panelClientesMenu.getBtnAltaU().addActionListener(listenerAlta);
-		panelClientesMenu.getBtnBajaU().addActionListener(listenerBaja);
-		panelClientesMenu.getBtnModU().addActionListener(listenerMod);
-		panelClientesMenu.getBtnVerU().addActionListener(listenerVer);
+		panelClientesMenu.getBtnVerC().addActionListener(listenerVer);
+		panelClientesMenu.getBtnAltaC().addActionListener(listenerAlta);
 		
 		
 		//frame.setVisible(false);
@@ -126,7 +125,7 @@ public class ClientesView implements ClientesInterface {
 		panelClientes.validate();
 		panelClientes.repaint();
 		
-		panelClientes.onVer();
+		//panelClientes.onVer();
 		
 		
 		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
@@ -142,46 +141,6 @@ public class ClientesView implements ClientesInterface {
 		
 	}
 	
-	@Override
-	public void onBaja() {
-		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
-		
-		panelClientes.onBaja();
-		
-		listenerBajaAceptar = new ListenerBajaAceptar(clientesController);
-		listenerBajaVolver = new ListenerMenuClientesVolver(clientesController);
-		
-		panelClientes.getBtnAceptar().addActionListener(listenerBajaAceptar);
-		panelClientes.getBtnVolver().addActionListener(listenerBajaVolver);
-		
-		
-		frame.validate();
-		frame.repaint();
-		
-		
-		
-	}
-	
-	public Usuario getNuevoUsuario(){
-		
-		String s = new String(panelClientes.getPasswordText().getPassword());
-		
-		Usuario u = new Usuario(panelClientes.getUserText().getText(), s,
-				Integer.parseInt(panelClientes.getPermisosText().getText()), 
-				panelClientes.getNombreText().getText(),
-				panelClientes.getApellidoText().getText());
-		
-		return u;
-
-	}
-
-
-
-
-
 	@Override
 	public void insertOk() {
 		
@@ -212,7 +171,7 @@ public class ClientesView implements ClientesInterface {
 	@Override
 	public int getBajaPersona() {
 
-		return Integer.parseInt(panelClientes.getDniText().getText());
+		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
 		
 		
 	}
@@ -242,12 +201,12 @@ public class ClientesView implements ClientesInterface {
 		
 		panelClientes.onMod();
 		
-		listenerModAceptar = new ListenerModAceptar(clientesController);
+		listenerBuscarCliente= new ListenerBuscarCliente(clientesController);
+		panelClientes.getBtnBuscar().addActionListener(listenerBuscarCliente);
 		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
-		
-		panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
-		
+
+			
 		
 		frame.validate();
 		frame.repaint();
@@ -312,6 +271,57 @@ public class ClientesView implements ClientesInterface {
 	public Persona getNuevoCliente() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+
+
+	@Override
+	public void verCliente(Persona p) {
+		
+		panelClientes.verCliente(p);
+		
+		//NEW LISTENERS
+		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
+		listenerClientesMod =new ListenerClientesMod(clientesController);
+		listenerClientesBaja =new ListenerClientesBaja(clientesController);
+		listenerClientesVenta =new ListenerClientesVenta(clientesController);
+		listenerClientesCompra =new ListenerClientesCompra(clientesController);
+	
+		//ADD LISTENERS
+		panelClientes.getBtnModificar().addActionListener(listenerClientesMod);
+		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
+		panelClientes.getBtnVender().addActionListener(listenerClientesVenta);
+		panelClientes.getBtnComprar().addActionListener(listenerClientesCompra);
+		panelClientes.getBtnEliminar().addActionListener(listenerClientesBaja);
+	
+	}
+	
+
+	@Override
+	public void verMod() {
+		
+		panelClientes.verMod();
+		
+		//LISTENERS
+		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
+		listenerModAceptar = new ListenerModAceptar(clientesController);
+		
+		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
+		panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
+		
+		
+		
+	}
+
+
+
+
+
+	@Override
+	public int getModPersona() {
+		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
 	}
 
 

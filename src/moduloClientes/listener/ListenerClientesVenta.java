@@ -5,23 +5,29 @@ import java.awt.event.ActionListener;
 import exceptions.DBException;
 import moduloClientes.ClientesController;
 
-
-public class ListenerClientesVer implements ActionListener {
+public class ListenerClientesVenta implements ActionListener {
 
 
 	private ClientesController cc;
+	
 
 
-	public ListenerClientesVer(ClientesController cc){
-		this.cc = cc;
+	public ListenerClientesVenta(ClientesController uc){
+		
+		this.cc = uc;
 		
 	}
 	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		cc.showMod();
+		
+		try {
+			cc.altaPersona();
+		} catch (DBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 	}

@@ -20,7 +20,6 @@ import objetos.Persona;
 import objetos.Venta;
 import listeners.*;
 import moduloAdministracion.clienteABM.FormularioNuevaCompra;
-import moduloAdministracion.clienteABM.FormularioNuevoCliente;
 import moduloCobranzas.altaVenta.FormularioAlta;
 
 
@@ -44,7 +43,7 @@ public class VentasView implements VentasInterface {
 	private ListenerVolverV listenerVolver;
 	private ListenerAltaV listenerAlta;
 	private FormularioNuevaCompra panelC;
-	private FormularioNuevoCliente panelNC;
+	//private FormularioNuevoCliente panelNC;
 	private ListenerNuevoCliente listenerAltaCliente;
 	
 	public VentasView(){
@@ -200,7 +199,8 @@ public class VentasView implements VentasInterface {
 	}
 	@Override
 	public Persona getNuevaPersona() {
-		Persona p = new Persona(Integer.parseInt(panelNC.getDniCompradorText().getText()), 0, 0, 0, "Rachel", "Bronstein", "dom", "ciu", "pro", "domL", "Carrefour");
+		//Persona p = new Persona(Integer.parseInt(panelNC.getDniCompradorText().getText()), 0, 0, 0, "Rachel", "Bronstein", "dom", "ciu", "pro", "domL", "Carrefour");
+		Persona p = null;
 		
 		return p;
 	}
@@ -209,11 +209,11 @@ public class VentasView implements VentasInterface {
 	public void altaCliente(int dniCliente) {
 		// TODO Auto-generated method stub
 		
-		panelNC = new FormularioNuevoCliente();
+		//panelNC = new FormularioNuevoCliente();
 		panelF.setVisible(false);
 		frmVentas.setTitle("Nuevo Cliente");
-		frmVentas.add(panelNC);
-		panelNC.getDniCompradorText().setText(String.valueOf(dniCliente));	
+		//frmVentas.add(panelNC);
+		//panelNC.getDniCompradorText().setText(String.valueOf(dniCliente));	
 		frmVentas.invalidate();
 		frmVentas.validate();
 		frmVentas.repaint();
@@ -223,8 +223,8 @@ public class VentasView implements VentasInterface {
 		
 		listenerAltaCliente= new ListenerNuevoCliente(ventasController);
 		
-		panelNC.getBtnCancelar().addActionListener(listenerVolver);
-		panelNC.getBtnAceptar().addActionListener(listenerAltaCliente);
+		//panelNC.getBtnCancelar().addActionListener(listenerVolver);
+		//panelNC.getBtnAceptar().addActionListener(listenerAltaCliente);
 		
 	}
 	
