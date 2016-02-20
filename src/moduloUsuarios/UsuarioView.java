@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 
 import exceptions.DBException;
 import objetos.Usuario;
+import moduloClientes.paneles.PanelClientes;
+import moduloClientes.paneles.ClientesMenu;
 import moduloPrincipal.PrincipalController;
 import moduloPrincipal.PrincipalView;
 import moduloPrincipal.paneles.PanelAux;
@@ -19,9 +21,9 @@ import moduloPrincipal.paneles.PanelMenu;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioInterface;
 import moduloUsuarios.listener.*;
-import moduloPrincipal.paneles.PanelGeneral;
 import moduloUsuarios.paneles.PanelUsuario;
 import moduloUsuarios.paneles.UsuarioMenu;
+import moduloPrincipal.paneles.PanelGeneral;
 
 public class UsuarioView implements UsuarioInterface {
 	

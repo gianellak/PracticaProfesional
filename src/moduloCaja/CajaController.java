@@ -1,4 +1,4 @@
-package moduloClientes;
+package moduloCaja;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,13 +14,13 @@ import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioView;
 
-public class ClientesController {
+public class CajaController {
 
-	private ClientesInterface ci;
+	private CajaInterface ci;
 	private PrincipalController pc;
-	private ClientesDB cDB;
+	private CajaDB cDB;
 	
-	public ClientesController(ClientesView ci, PrincipalController pc) {
+	public CajaController(CajaView ci, PrincipalController pc) {
 		this.ci = ci;
 		this.pc = pc;
 	}
@@ -53,7 +53,7 @@ public class ClientesController {
 			e.printStackTrace();
 		}
 		
-		cDB = new ClientesDB(pro);
+		cDB = new CajaDB(pro);
 		
 	}
 

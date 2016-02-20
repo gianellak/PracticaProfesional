@@ -1,19 +1,30 @@
-package moduloClientes;
+package moduloCaja;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
 import moduloClientes.paneles.ClientesMenu;
 import moduloClientes.paneles.PanelClientes;
+import moduloPrincipal.PrincipalController;
+import moduloPrincipal.PrincipalView;
+import moduloPrincipal.paneles.*;
+import moduloUsuarios.UsuarioController;
+import moduloUsuarios.UsuarioInterface;
 import moduloClientes.listener.*;
 import moduloPrincipal.paneles.PanelGeneral;
 import moduloClientes.paneles.*;
 
-public class ClientesView implements ClientesInterface {
+public class CajaView implements CajaInterface {
 	
 	private JFrame frame;
 	private PanelClientes panelClientes;
@@ -28,9 +39,9 @@ public class ClientesView implements ClientesInterface {
 	private ListenerClientesBaja listenerBaja;
 	private ListenerModAceptar listenerModAceptar;
 	private ListenerClientesMod listenerMod;
-	private ClientesController clientesController;
+	private CajaController clientesController;
 
-	public ClientesView(){
+	public CajaView(){
 		
 		
 	
@@ -50,7 +61,7 @@ public class ClientesView implements ClientesInterface {
 	}
 
 	@Override
-	public void showMenuClientes(ClientesController cc,
+	public void showMenuClientes(CajaController cc,
 			JFrame f, Usuario u) {
 		
 		System.out.println("SHO");
@@ -60,12 +71,7 @@ public class ClientesView implements ClientesInterface {
 		
 		PanelGeneral panelGeneral = new PanelGeneral(u);
 		
-		listenerVolver = new ListenerClientesVolver(cc);
-		listenerVer = new ListenerClientesVer(cc);
-		listenerAlta = new ListenerClientesAlta(cc);
-		listenerBaja = new ListenerClientesBaja(cc);
-		listenerMod = new ListenerClientesMod(cc);
-		listenerVer= new ListenerClientesVer(cc);
+		//new listeners
 		
 		panelClientesMenu.getBtnVolver().addActionListener(listenerVolver);
 		panelClientesMenu.getBtnVerU().addActionListener(listenerVer);
@@ -98,15 +104,14 @@ public class ClientesView implements ClientesInterface {
 
 	@Override
 	public void onAlta() {
-		
 		panelClientes.removeAll();
 		panelClientes.validate();
 		panelClientes.repaint();
 		
 		panelClientes.onAlta();
 		
-		listenerAltaAceptar = new ListenerAltaAceptar(clientesController);
-		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
+	//	listenerAltaAceptar = new ListenerAltaAceptar(clientesController);
+		//listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		
 		panelClientes.getBtnAceptar().addActionListener(listenerAltaAceptar);
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
@@ -129,7 +134,7 @@ public class ClientesView implements ClientesInterface {
 		panelClientes.onVer();
 		
 		
-		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
+//		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		
 		
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
@@ -151,8 +156,8 @@ public class ClientesView implements ClientesInterface {
 		
 		panelClientes.onBaja();
 		
-		listenerBajaAceptar = new ListenerBajaAceptar(clientesController);
-		listenerBajaVolver = new ListenerMenuClientesVolver(clientesController);
+		//listenerBajaAceptar = new ListenerBajaAceptar(clientesController);
+		//listenerBajaVolver = new ListenerMenuClientesVolver(clientesController);
 		
 		panelClientes.getBtnAceptar().addActionListener(listenerBajaAceptar);
 		panelClientes.getBtnVolver().addActionListener(listenerBajaVolver);
@@ -242,8 +247,8 @@ public class ClientesView implements ClientesInterface {
 		
 		panelClientes.onMod();
 		
-		listenerModAceptar = new ListenerModAceptar(clientesController);
-		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
+	//	listenerModAceptar = new ListenerModAceptar(clientesController);
+	//  listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		
 		panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);

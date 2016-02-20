@@ -1,4 +1,4 @@
-package moduloClientes;
+package moduloCaja;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
 
-public interface ClientesInterface {
+public interface CajaInterface {
 
 	public void dispose();
 
@@ -36,7 +36,7 @@ public interface ClientesInterface {
 
 	public Persona getNuevoCliente();
 
-	public void showMenuClientes(ClientesController clientesController,
+	public void showMenuClientes(CajaController clientesController,
 			JFrame view, Usuario user);
 
 	int getBajaPersona();

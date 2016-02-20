@@ -1,28 +1,28 @@
-package moduloUsuarios.listener;
+package moduloClientes.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import exceptions.DBException;
-import moduloUsuarios.UsuarioController;
-
-public class ListenerBajaAceptar implements ActionListener {
+import moduloClientes.ClientesController;
 
 
-	private UsuarioController uc;
+public class ListenerClientesVer implements ActionListener {
 
 
-	public ListenerBajaAceptar(UsuarioController uc){
-		
-		this.uc = uc;
+	private ClientesController cc;
+
+
+	public ListenerClientesVer(ClientesController cc){
+		this.cc = cc;
 		
 	}
 	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		try {
-			uc.bajaUsuario();
+			cc.verClientes();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -30,4 +30,5 @@ public class ListenerBajaAceptar implements ActionListener {
 		
 		
 	}
+	
 }
