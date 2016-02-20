@@ -134,16 +134,19 @@ public class CajaController {
 		
 	}
 
-	public void showClientes() {
-		
-		ci.showMenuClientes(this, pc.getView(), pc.getUser());
-		
-		this.conectar();
-		
-	}
+	
 
 	public void modPersona() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void showCaja() {
+		
+		ci.showMenuCaja(this, pc.getView(), pc.getUser());
+		
+		this.conectar();
+		
 		
 	}
 

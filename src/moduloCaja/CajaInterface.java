@@ -26,6 +26,7 @@ public interface CajaInterface {
 
 	public void showNotFound();
 
+
 	public int showToDelete(Persona persona);
 
 	public void deleteOk();
@@ -36,11 +37,10 @@ public interface CajaInterface {
 
 	public Persona getNuevoCliente();
 
-	public void showMenuClientes(CajaController clientesController,
-			JFrame view, Usuario user);
-
 	int getBajaPersona();
 
 	void cleanPanelClientes();
+
+	void showMenuCaja(CajaController cc, JFrame f, Usuario u);
 
 }

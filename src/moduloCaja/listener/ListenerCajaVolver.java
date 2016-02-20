@@ -1,4 +1,4 @@
-package moduloClientes.listener;
+package moduloCaja.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +13,12 @@ import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;
 
-public class ListenerClientesVolver implements ActionListener {
+public class ListenerCajaVolver implements ActionListener {
 
-	private ClientesController cc;
+	private CajaController cc;
 
 
-	public ListenerClientesVolver(ClientesController cc){
+	public ListenerCajaVolver(CajaController cc){
 		this.cc = cc;
 		
 	}

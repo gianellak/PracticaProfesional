@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
+import moduloClientes.listener.ListenerClientesVolver;
 import moduloClientes.paneles.ClientesMenu;
 import moduloClientes.paneles.PanelClientes;
 import moduloPrincipal.PrincipalController;
@@ -21,6 +22,8 @@ import moduloPrincipal.paneles.*;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioInterface;
 import moduloCaja.listener.*;
+import moduloCaja.paneles.CajaMenu;
+import moduloCaja.paneles.PanelCaja;
 import moduloPrincipal.paneles.PanelGeneral;
 import moduloClientes.paneles.*;
 
@@ -28,15 +31,17 @@ public class CajaView implements CajaInterface {
 	
 	private JFrame frame;
 	private PanelClientes panelClientes;
-	private ClientesMenu panelClientesMenu;
-	private CajaController clientesController;
+	private CajaController cajaController;
+	private PanelCaja panelCaja;
+	private CajaMenu panelCajaMenu;
+	private ListenerCajaVolver listenerCajaVolver;
 
 	public CajaView(){
 		
 		
 	
-		panelClientesMenu= new ClientesMenu();
-		panelClientes = new PanelClientes();
+		panelCajaMenu= new CajaMenu();
+		panelCaja = new PanelCaja();
 	
 	}
 
@@ -51,32 +56,39 @@ public class CajaView implements CajaInterface {
 	}
 
 	@Override
-	public void showMenuClientes(CajaController cc,
+	public void showMenuCaja(CajaController cc,
 			JFrame f, Usuario u) {
 		
-		System.out.println("SHO");
+		System.out.println("SHOW CAJA");
 		
-		clientesController = cc;
+		cajaController = cc;
 		frame = f;
 		
 		PanelGeneral panelGeneral = new PanelGeneral(u);
 		
-		//new listeners
+		//new listeners -> HAY QUE CREAR LAS CLASES LISTENERS
+		listenerCajaVolver= new ListenerCajaVolver(cc);
+		//listenerVerMovimientos =new ListenerVerMovimientos(cc);
+		//listenerAltaMovimientos =new ListenerAltaMovimientos(cc);
+		//listenerVerLog =new ListenerVerLog(cc); [ADMIN]
 		
-	//	panelClientesMenu.getBtnVolver().addActionListener(listenerVolver);
+		
+		//ESTO VA A ANDAR CUANDO CREES LO LISTENER,NO HAY QUE TOCAR NADA ACA
+		panelCajaMenu.getBtnVolver().addActionListener(listenerCajaVolver);
+		//panelClientesMenu.getBtnVerMovs().addActionListener(listenerVerMovimientos);
+		//panelClientesMenu.getBtnAltaMov().addActionListener(listenerAltaMovimientos);
+		//panelClientesMenu.getBtnVerLog().addActionListener(listenerVerLog);
 		
 		
 		
-		//frame.setVisible(false);
-		frame.setTitle("Menu Usuarios");
+		frame.setTitle("Menu Caja");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panelGeneral, BorderLayout.PAGE_START);
-		frame.getContentPane().add(panelClientesMenu, BorderLayout.WEST);
-		frame.getContentPane().add(panelClientes, BorderLayout.LINE_END);
+		frame.getContentPane().add(panelCajaMenu, BorderLayout.WEST);
+		frame.getContentPane().add(panelCaja, BorderLayout.LINE_END);
 		frame.validate();
 		frame.repaint();
-		//frame.setVisible(true);
 		
 		
 	}
