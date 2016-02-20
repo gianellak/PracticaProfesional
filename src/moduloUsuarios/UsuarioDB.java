@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JFrame;
+
+import connections.ConnectionProvider;
 import exceptions.DBException;
 import objetos.Usuario;
 import objetos.Venta;
@@ -15,35 +18,70 @@ import moduloPrincipal.PrincipalController;
 import moduloPrincipal.PrincipalView;
 import moduloPrincipal.paneles.PanelAux;
 
-public class UsuarioDB implements UsuarioInterface {
+public class UsuarioDB  {
 
 	private static final String SQL_USERS =
 	        "SELECT * FROM Usuario";
 	
-	private PrincipalController pc;
+	private static final String SQL_INSERT =
+			 "INSERT INTO Usuario VALUES (?, ?, ?, ?, ?)";
+	
+	private static final String SQL_DELETE =
+	        "DELETE FROM Usuario WHERE username = ?";
+	
+	private static final String SQL_FIND_BY_ID =
+	        "SELECT * FROM Usuario WHERE username=?";
 	
 	
-	public UsuarioDB(PrincipalController pc) {
-		this.pc = pc;
+	private static final int MYSQL_DUPLICATE_PK = -104;
+
+	private ConnectionProvider connectionProvider;
+	
+	
+
+
+
+	 
+	  public UsuarioDB(ConnectionProvider connection) {
+		    this.connectionProvider = connection;
+		  }
+	
+
+	
+	
+	public boolean delete(String u) throws DBException {
+		
+		Object[] values = { 
+	            u
+	            };
+
+	        try (
+	        	Connection connection = this.connectionProvider.getConnection();
+	            		
+	            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_DELETE, false, values);
+	        ) {
+	        	 int affectedRows = statement.executeUpdate();
+	             if (affectedRows == 0) {
+	                 throw new DBException("Deleting user failed, no rows affected.");
+	               
+	             }else{
+	            	 return true;
+	             }
+
+	        } catch (SQLException e) {
+	            throw new DBException(e);
+	        }
+	
+
 	}
 
-	public void showMenuUsuario(UsuarioController usuarioController) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public List<Usuario> findAll() throws DBException {
 		
 		List<Usuario> users = new ArrayList<>();
 
         try (
-            Connection connection = pc.getConn().getConnection();
+        	Connection connection = this.connectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_USERS);
             ResultSet resultSet = statement.executeQuery();
         ) {
@@ -69,21 +107,77 @@ public class UsuarioDB implements UsuarioInterface {
 
 
 
-	@Override
-	public void showMenuUsuario(UsuarioController uc, JFrame frame, Usuario u) {
-		// TODO Auto-generated method stub
+	
+	public boolean insert(Usuario user) throws DBException {
 		
+        
+
+        Object[] values = {
+            user.getUsername(),
+            user.getPassword(),
+            user.getPermisos(),
+            user.getNombre(),
+            user.getApellido(),
+           
+        };
+
+        		
+        		System.out.println(this.connectionProvider);
+				
+        		try (
+					Connection connection = this.connectionProvider.getConnection();
+					PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_INSERT, false, values);
+				) {
+		        	 int affectedRows = statement.executeUpdate();
+		             if (affectedRows == 0) {
+		                 throw new DBException("Inserting user failed, no rows affected.");
+		               
+		             } else {
+		            	 return true;
+		             }
+				}
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return false;
+        		
+         
+        	
+    
 	}
 
-	@Override
-	public void onAlta() {
-		// TODO Auto-generated method stub
+	public Usuario findId(String idUser) throws DBException {
 		
+		Usuario user = null;
+		
+		Object[] values = {
+                idUser
+            };
+
+        try (
+            Connection connection = this.connectionProvider.getConnection();
+            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_FIND_BY_ID, false, values);
+            ResultSet resultSet = statement.executeQuery();
+        		) {
+        	if (resultSet.next()) {
+        		user = map(resultSet);
+        	}
+    		
+        } catch (SQLException e) {
+            throw new DBException(e);
+        } 
+
+      
+       
+        return user;
 	}
-
 	
-
+	private static Usuario map(ResultSet resultSet) throws SQLException {
+        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"));
+        
+        return user;
+    }
 	
-
-
+	
 }

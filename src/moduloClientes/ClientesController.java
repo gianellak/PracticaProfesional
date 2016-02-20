@@ -1,4 +1,4 @@
-package moduloUsuarios;
+package moduloClientes;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,25 +8,26 @@ import javax.swing.JOptionPane;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
+import objetos.Persona;
 import objetos.Usuario;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioView;
 
-public class UsuarioController {
+public class ClientesController {
 
-	private UsuarioInterface ui;
+	private ClientesInterface ci;
 	private PrincipalController pc;
-	private UsuarioDB uDB;
+	private ClientesDB cDB;
 	
-	public UsuarioController(UsuarioInterface ui, PrincipalController pc) {
-		this.ui = ui;
+	public ClientesController(ClientesInterface ui, PrincipalController pc) {
+		this.ci = ci;
 		this.pc = pc;
 	}
 
 	public void showUsuario() {
 		
-		ui.showMenuUsuario(this, pc.getView(), pc.getUser());
+		ci.showMenuUsuario(this, pc.getView(), pc.getUser());
 	
 		this.conectar();
 		
@@ -34,7 +35,7 @@ public class UsuarioController {
 	}
 
 	public void dispose() {
-		ui.dispose();
+		ci.dispose();
 		
 	}
 
@@ -44,9 +45,9 @@ public class UsuarioController {
 		
 		
 		
-		List<Usuario> lista= uDB.findAll();
+		List<Usuario> lista= cDB.findAll();
 		
-		ui.onVer(lista);
+		ci.onVer(lista);
 		
 	}
 
@@ -61,7 +62,7 @@ public class UsuarioController {
 			e.printStackTrace();
 		}
 		
-		uDB = new UsuarioDB(pro);
+		cDB = new ClientesDB(pro);
 		
 	}
 
@@ -74,41 +75,41 @@ public class UsuarioController {
 	
 	public void cleanUsuario(){
 		
-		ui.cleanPanelUsuario();
+		ci.cleanPanelUsuario();
 		
 	}
 
 	public void showAlta() {
 		
-		ui.onAlta();
+		ci.onAlta();
 		
 	}
 	
 	public void bajaUsuario() throws DBException{
 		
-		String u = ui.getBajaUsuario();
+		int u = ci.getBajaUsuario();
 		
 		
-		Usuario user = uDB.findId(u);
+		Persona persona = cDB.findId(u);
 		
 		
-		if(user != null){
+		if(persona != null){
 		
-		int codigo = ui.showToDelete(user);
+		int codigo = ci.showToDelete(persona);
 		 if (codigo==JOptionPane.YES_OPTION){
-			 if(uDB.delete(u)){
+			 if(cDB.delete(u)){
 					
-					ui.deleteOk();
+					ci.deleteOk();
 				}else
 				{
-					ui.deleteBad();
+					ci.deleteBad();
 				}
 	        }else if(codigo==JOptionPane.NO_OPTION){
-	            ui.onBaja();
+	            ci.onBaja();
 	        }
 		
 		}else{
-			ui.showNotFound();
+			ci.showNotFound();
 		}
 		
 
@@ -117,14 +118,14 @@ public class UsuarioController {
 	
 	public void altaUsuario() throws DBException {
 		
-		Usuario usuario = ui.getNuevoUsuario();
+		Persona persona = ci.getNuevoCliente();
 		
-		if(uDB.insert(usuario)){
+		if(cDB.insert(persona)){
 			
-			ui.insertOk();
+			ci.insertOk();
 		}else
 		{
-			ui.insertBad();
+			ci.insertBad();
 		}
 		
 		
@@ -133,12 +134,12 @@ public class UsuarioController {
 
 	public void showBaja() {
 
-		ui.onBaja();
+		ci.onBaja();
 		
 	}
 
 	public void showMod() {
-		ui.onMod();
+		ci.onMod();
 		
 	}
 

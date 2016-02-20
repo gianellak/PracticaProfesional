@@ -19,8 +19,6 @@ import exceptions.LoginException;
 
 public class VentasDB implements VentasDBInterface {
 	
-	private static final String SQL_CLIENT_BY_ID =
-	        "SELECT * FROM Cliente WHERE dni=?";
 	
 	private static final String SQL_INSERT_PERSONA =
 			 "INSERT INTO Persona VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";	

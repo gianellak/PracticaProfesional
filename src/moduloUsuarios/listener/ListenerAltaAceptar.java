@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import objetos.Usuario;
 import exceptions.DBException;
 import moduloCobranzas.ventas.VentasController;
 import moduloCobranzas.ventas.VentasView;
@@ -11,13 +12,15 @@ import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;
 
-public class ListenerUsuarioMod implements ActionListener {
+public class ListenerAltaAceptar implements ActionListener {
 
 
 	private UsuarioController uc;
+	
 
 
-	public ListenerUsuarioMod(UsuarioController uc){
+	public ListenerAltaAceptar(UsuarioController uc){
+		
 		this.uc = uc;
 		
 	}
@@ -25,8 +28,13 @@ public class ListenerUsuarioMod implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		uc.showMod();
+		
+		try {
+			uc.altaUsuario();
+		} catch (DBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 	}

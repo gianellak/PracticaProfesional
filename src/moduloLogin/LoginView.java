@@ -54,7 +54,7 @@ public class LoginView implements LoginInterface {
 		passwordLabel.setBounds(10, 40, 80, 25);
 		panel.add(passwordLabel);
 
-		passwordText = new JPasswordField(20);
+		passwordText = new JPasswordField(8);
 		passwordText.setBounds(100, 40, 160, 25);
 		panel.add(passwordText);
 
@@ -109,8 +109,7 @@ public class LoginView implements LoginInterface {
 
 	@Override
 	public boolean loginSuccessful(Usuario user) {
-		
-	
+        
 		JOptionPane.showMessageDialog(null, "Hola " + user.getNombre()+ " " + user.getApellido());
 		this.closeLogin();
 		return true;

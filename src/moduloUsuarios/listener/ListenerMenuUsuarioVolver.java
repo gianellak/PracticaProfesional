@@ -11,13 +11,13 @@ import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;
 
-public class ListenerUsuarioMod implements ActionListener {
+public class ListenerMenuUsuarioVolver implements ActionListener {
 
 
 	private UsuarioController uc;
 
 
-	public ListenerUsuarioMod(UsuarioController uc){
+	public ListenerMenuUsuarioVolver(UsuarioController uc){
 		this.uc = uc;
 		
 	}
@@ -25,8 +25,8 @@ public class ListenerUsuarioMod implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		uc.showMod();
+		
+		uc.cleanUsuario();
 		
 		
 	}

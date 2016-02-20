@@ -42,6 +42,9 @@ public class PrincipalController {
 	}
 
 	public ConnectionProvider getConn() {
+		
+		System.out.println("RETURN CONN");
+		
 		return conn;
 	}
 

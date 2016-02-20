@@ -14,10 +14,6 @@ import utilitarios.DBUtil;
 
 public class LoginDB implements LoginInterface {
 
-	private static final String SQL_DELETE =
-	        "DELETE FROM Usuario WHERE username = ?";
-	private static final String SQL_INSERT =
-			 "INSERT INTO Usuario (username, password, permisos, nombre, apellido) VALUES (?, ?, ?, ?, ?)";
 	private static final String SQL_UPDATE =
 			 "UPDATE Usuario SET password=?, nombre=?, apellido=? WHERE username=?";
 
@@ -41,58 +37,8 @@ public class LoginDB implements LoginInterface {
 
 
 	
-	public void insert(Usuario user) throws IllegalArgumentException, DBException {
-		
-        
-
-        Object[] values = {
-            user.getUsername(),
-            user.getPassword(),
-            user.getPermisos(),
-            user.getNombre(),
-            user.getApellido(),
-           
-        };
-
-        try (
-            Connection connection = this.connectionProvider.getConnection();
-            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_INSERT, true, values);
-        ) 
-            
-        	{
-	        	 statement.executeUpdate();
-	       } catch (SQLException e) {
-	    	   if(e.getErrorCode() == MYSQL_DUPLICATE_PK){
-	    		   throw new DBException("Duplicated Key, cannot insert user");
-	    	    }else{
-            throw new DBException(e);}
-        }
-    }
-
-	public void delete(Usuario usuario) throws DBException {
-		
-		Object[] values = { 
-	            usuario.getUsername()
-	            };
-
-	        try (
-	            Connection connection = this.connectionProvider.getConnection();
-	        		
-	            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_DELETE, false, values);
-	        ) {
-	        	 int affectedRows = statement.executeUpdate();
-	             if (affectedRows == 0) {
-	                 throw new DBException("Deleting user failed, no rows affected.");
-	               
-	             }
-
-	        } catch (SQLException e) {
-	            throw new DBException(e);
-	        }
-	    
-
-	}
-
+	
+	
 
 	
 	public void update(Usuario user) throws DBException {
@@ -255,6 +201,23 @@ public class LoginDB implements LoginInterface {
 
 	@Override
 	public void viewLogin(LoginController loginController) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void insert(Usuario usuario) throws DBException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void delete(Usuario usuario) throws DBException {
 		// TODO Auto-generated method stub
 		
 	}

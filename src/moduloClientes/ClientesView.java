@@ -1,4 +1,4 @@
-package moduloUsuarios;
+package moduloClientes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,7 +23,7 @@ import moduloPrincipal.paneles.PanelGeneral;
 import moduloUsuarios.paneles.PanelUsuario;
 import moduloUsuarios.paneles.UsuarioMenu;
 
-public class UsuarioView implements UsuarioInterface {
+public class ClientesView implements UsuarioInterface {
 	
 	private JFrame frame;
 	private PanelUsuario panelUsuario;
@@ -42,7 +42,7 @@ public class UsuarioView implements UsuarioInterface {
 	private ListenerMenuUsuarioVolver listenerVerVolver;
 	private ListenerUsuarioMod listenerMod;
 
-	public UsuarioView(){
+	public ClientesView(){
 		
 		
 	

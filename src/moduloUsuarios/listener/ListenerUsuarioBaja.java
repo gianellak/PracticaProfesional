@@ -25,8 +25,8 @@ public class ListenerUsuarioBaja implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		uc.dispose();
+		
+		uc.showBaja();
 		
 		
 	}
