@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
+import connections.SchemaGenerator;
+import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
 import exceptions.DBException;
@@ -30,7 +32,7 @@ public class CajaController {
 		
 	}
 
-	public void verClientes() throws DBException {
+	public void verMovimientos() throws DBException {
 		
 		System.out.println("Ver Usuarios - Controller");
 		
@@ -45,6 +47,15 @@ public class CajaController {
 	private void conectar() {
 		
 		ConnectionProvider pro = new DBConnection();
+		
+//		SchemaGenerator s = new SchemaGenerator(pro);
+//		
+//		try {
+//			s.generateSchema();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
 		try {
 			pro.getConnection();
@@ -109,9 +120,9 @@ public class CajaController {
 	
 	public void altaPersona() throws DBException {
 		
-		Persona persona = ci.getNuevoCliente();
+		Movimiento movimiento = ci.getNuevoMovimiento();
 		
-		if(cDB.insert(persona)){
+		if(cDB.insert(movimiento)){
 			
 			ci.insertOk();
 		}else

@@ -38,4 +38,6 @@ public interface LoginInterface {
 	
 	public void viewLogin(LoginController loginController);
 
+	public void loginOut();
+
 }
