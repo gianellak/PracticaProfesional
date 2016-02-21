@@ -55,9 +55,6 @@ public class Stock {
 	public Stock get(int selectedRow) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	//HOLA TIA MOSCA MEDIALUNA OSCAR EGRESADO 2030
-	
+	}	
 	
 }

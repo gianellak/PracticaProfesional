@@ -1,10 +1,13 @@
 package moduloVehiculo;
 
-import java.text.ParseException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import connections.ConnectionProvider;
+import connections.DBConnection;
 import exceptions.DBException;
+import moduloCaja.CajaDB;
 import moduloPrincipal.PrincipalController;
 import objetos.Stock;
 import objetos.Vehiculo;
@@ -39,14 +42,16 @@ public class vehiculoController {
 		if (vehiculoDB.createVehiculo(newVehiculoAInsertar)) {
 
 			vehiculo.insertOk();
-//hh
+
 		} else {
 			vehiculo.insertError();
 		}
 
 	}
 	
-	public void onUpdateVehiculo(Vehiculo vehiculoAModificar) throws DBException{
+	public void onUpdateVehiculo() throws DBException{
+		
+		Vehiculo vehiculoAModificar = new Vehiculo(); // ACA REEMPLAZAR POR ELEM. SELECC DE LA TABLA
 		
 		Vehiculo vehiculoModificado = vehiculo.getDatosModificarVehiculo(vehiculoAModificar);
 		
@@ -95,8 +100,31 @@ public class vehiculoController {
 		vehiculo.refresh();
 	}
 
-	public void onAceptarNuevoVehiculo() {
+private void conectar() {
+		
+		ConnectionProvider pro = new DBConnection();
+		
+//		SchemaGenerator s = new SchemaGenerator(pro);
+//		String sql ="create table Vehiculo (CHARACTER MOTOR PRIMARY KEY, campos)";
+//
+//		
+//		try {
+//			s.generateSchema(sql);
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+		
+		try {
+			pro.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		vehiculoDB = new VehiculoDB(pro);
 		
 	}
+	
 
 }
