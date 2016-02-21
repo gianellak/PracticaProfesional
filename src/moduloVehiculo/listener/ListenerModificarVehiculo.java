@@ -3,6 +3,7 @@ package moduloVehiculo.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import exceptions.DBException;
 import moduloVehiculo.vehiculoController;
 
 public class ListenerModificarVehiculo implements ActionListener {
@@ -16,7 +17,12 @@ public class ListenerModificarVehiculo implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
+	try {
+		vc.onUpdateVehiculo();
+	} catch (DBException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	}
 
 }

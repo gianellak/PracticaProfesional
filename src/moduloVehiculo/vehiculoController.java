@@ -1,6 +1,5 @@
 package moduloVehiculo;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,9 @@ public class vehiculoController {
 
 	}
 	
-	public void onUpdateVehiculo(Vehiculo vehiculoAModificar) throws DBException{
+	public void onUpdateVehiculo() throws DBException{
+		
+		Vehiculo vehiculoAModificar = new Vehiculo(); // ACA REEMPLAZAR POR ELEM. SELECC DE LA TABLA
 		
 		Vehiculo vehiculoModificado = vehiculo.getDatosModificarVehiculo(vehiculoAModificar);
 		
@@ -95,8 +96,6 @@ public class vehiculoController {
 		vehiculo.refresh();
 	}
 
-	public void onAceptarNuevoVehiculo() {
-		
-	}
+	
 
 }
