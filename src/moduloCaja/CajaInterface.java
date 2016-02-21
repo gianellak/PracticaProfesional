@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import exceptions.DBException;
+import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
 
@@ -35,12 +36,12 @@ public interface CajaInterface {
 
 	void onVer(List<Usuario> lista);
 
-	public Persona getNuevoCliente();
-
 	int getBajaPersona();
 
 	void cleanPanelClientes();
 
 	void showMenuCaja(CajaController cc, JFrame f, Usuario u);
+
+	public Movimiento getNuevoMovimiento();
 
 }

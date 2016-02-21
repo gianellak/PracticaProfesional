@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import connections.ConnectionProvider;
 import exceptions.DBException;
+import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
 import objetos.Venta;
@@ -21,11 +22,11 @@ import moduloPrincipal.paneles.PanelAux;
 
 public class CajaDB  {
 	
-	private static final String SQL_INSERT_PERSONA =
-			 "INSERT INTO Persona VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";	
+	private static final String SQL_INSERT_MOVIMIENTO =
+			 "INSERT INTO Movimiento VALUES (?, ?, ?, ?, ?, ?)";	
 	
 	private static final String SQL_FIND_BY_ID =
-			"SELECT * FROM Persona WHERE dni=?";
+			"SELECT * FROM Movimiento WHERE id=?";
 	
 
 	
@@ -118,24 +119,19 @@ public class CajaDB  {
 	}
 
 	
-	public boolean insert(Persona p) throws DBException {
+	public boolean insert(Movimiento m) throws DBException {
 		Object[] values = {
-	            p.getDni(),
-	            p.getTelefonoP(),
-	            p.getTelefonoC(),
-	            p.getTelefonoL(),
-	            p.getNombre(),
-	            p.getApellido(),
-	            p.getDomicilio(),
-	            p.getCiudad(),
-	            p.getProvincia(),
-	            p.getDomicilioL(),
-	            p.getEmpresa()
+	            m.getId(),
+	            m.getDescripcion(),
+	            m.getMonto(),
+	            m.getFecha(),
+	            m.getUsuario(),
+	            m.isMarca()
 	        };
 
 		try (
 				Connection connection = this.connectionProvider.getConnection();
-				PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_INSERT_PERSONA, false, values);
+				PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_INSERT_MOVIMIENTO, false, values);
 			) {
 	        	 int affectedRows = statement.executeUpdate();
 	             if (affectedRows == 0) {

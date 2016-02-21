@@ -122,6 +122,14 @@ public class LoginView implements LoginInterface {
 		JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrectos.");
 		
 	}
+	
+	@Override
+	public void loginOut() {
+		
+		JOptionPane.showMessageDialog(null, "El usuario ha sido bloqueado por haber tenido tres intentos fallidos. Por favor "
+				+ "comuníquese con el administrador.");
+		
+	}
 
 
 	@Override

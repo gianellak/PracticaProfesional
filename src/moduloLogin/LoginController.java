@@ -19,6 +19,7 @@ public class LoginController {
 	private ConnectionProvider conn;
 	private Usuario unUsuario;
 	private boolean ok;
+	private int logAttemp;
 	
 	
 	public LoginController(LoginDB lgDB, LoginInterface l) {
@@ -27,10 +28,8 @@ public class LoginController {
 		this.logindb = lgDB;
 		}
 
-
-
-
 	public void showLogin() {
+		logAttemp = 0;
 		login.viewLogin(this);
 		
 	}
@@ -41,6 +40,7 @@ public class LoginController {
 	}
 	
 	public Usuario login(String usuario, String password) {
+		System.out.println("login");
 		
 		try {
 			Usuario u = logindb.findId(usuario);
@@ -59,43 +59,49 @@ public class LoginController {
 				e1.printStackTrace();
 			}
 		}
+		
+		if(logAttemp == 2){
+			
+			login.loginOut();
+
+			System.exit(0);
+		
+		}
+		
 		return null; 
-		
-		
-		
 		
 	}
 	
 	public Usuario onLogin() throws LoginException, SQLException {
+		System.out.println("On login");
 		
 		String u = login.getUsernameInput();
 		String p = login.getPasswordInput();
 		
 		System.out.println(u + p);
 		
-		Usuario user = this.login(u, p);
+		
+			Usuario user = this.login(u, p);
+			System.out.println(logAttemp);
+			
+				
 			System.out.println(user);
-			 if (user!= null) {
+		 
+			if (user!= null) {
 				 
-				 login.loginSuccessful(user);
-				 PrincipalInterface pi = new PrincipalView();
-				 PrincipalController pc = new PrincipalController(user, pi, conn);
-				 pc.showPrincipal();
-			      
-			       
-			      }else{
-			 
-				 login.loginFailed();
-				 	
-			      }
-			return unUsuario;
-			 
+			
+				login.loginSuccessful(user);
+				PrincipalInterface pi = new PrincipalView();
+				PrincipalController pc = new PrincipalController(user, pi, conn);
+				pc.showPrincipal();
+			}else{
+				logAttemp ++;
+				login.loginFailed();
+			}
 		
-		
+		return unUsuario;
+			
 	}
-
-
-
 
 	public Usuario getUser() throws SQLException {
 		

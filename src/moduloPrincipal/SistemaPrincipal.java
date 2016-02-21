@@ -29,11 +29,7 @@ public class SistemaPrincipal {
 			e.printStackTrace();
 		}
 		
-		
-
 		LoginInterface ventanaL = new LoginView();
-		
-		LoginInterface loginDB = new LoginDB(conn);
 		
 		LoginDB lgDB = new LoginDB(conn);
 		

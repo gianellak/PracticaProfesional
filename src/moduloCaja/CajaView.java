@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import exceptions.DBException;
+import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
 import moduloClientes.listener.ListenerClientesVolver;
@@ -35,10 +36,11 @@ public class CajaView implements CajaInterface {
 	private PanelCaja panelCaja;
 	private CajaMenu panelCajaMenu;
 	private ListenerCajaVolver listenerCajaVolver;
+	private ListenerAltaMovimiento listenerAltaMovimiento;
+	private Usuario usuario;
+	private ListenerVerMovimientos listenerVerMovimientos;
 
 	public CajaView(){
-		
-		
 	
 		panelCajaMenu= new CajaMenu();
 		panelCaja = new PanelCaja();
@@ -59,6 +61,8 @@ public class CajaView implements CajaInterface {
 	public void showMenuCaja(CajaController cc,
 			JFrame f, Usuario u) {
 		
+		usuario = u;
+		
 		System.out.println("SHOW CAJA");
 		
 		cajaController = cc;
@@ -68,15 +72,15 @@ public class CajaView implements CajaInterface {
 		
 		//new listeners -> HAY QUE CREAR LAS CLASES LISTENERS
 		listenerCajaVolver= new ListenerCajaVolver(cc);
-		//listenerVerMovimientos =new ListenerVerMovimientos(cc);
-		//listenerAltaMovimientos =new ListenerAltaMovimientos(cc);
+		listenerVerMovimientos =new ListenerVerMovimientos(cc);
+		listenerAltaMovimiento =new ListenerAltaMovimiento(cc);
 		//listenerVerLog =new ListenerVerLog(cc); [ADMIN]
 		
 		
 		//ESTO VA A ANDAR CUANDO CREES LO LISTENER,NO HAY QUE TOCAR NADA ACA
 		panelCajaMenu.getBtnVolver().addActionListener(listenerCajaVolver);
-		//panelClientesMenu.getBtnVerMovs().addActionListener(listenerVerMovimientos);
-		//panelClientesMenu.getBtnAltaMov().addActionListener(listenerAltaMovimientos);
+		panelCajaMenu.getBtnVerMovs().addActionListener(listenerVerMovimientos);
+		panelCajaMenu.getBtnAltaMov().addActionListener(listenerAltaMovimiento);
 		//panelClientesMenu.getBtnVerLog().addActionListener(listenerVerLog);
 		
 		
@@ -102,11 +106,11 @@ public class CajaView implements CajaInterface {
 
 	@Override
 	public void onAlta() {
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
+		panelCaja.removeAll();
+		panelCaja.validate();
+		panelCaja.repaint();
 		
-		panelClientes.onAlta();
+		panelCaja.onAlta(usuario);
 		
 	//	listenerAltaAceptar = new ListenerAltaAceptar(clientesController);
 		//listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
@@ -125,11 +129,11 @@ public class CajaView implements CajaInterface {
 	@Override
 	public void onVer(List<Usuario> lista) {
 		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
+		panelCaja.removeAll();
+		panelCaja.validate();
+		panelCaja.repaint();
 		
-		//panelClientes.onVer();
+		panelCaja.onVer();
 		
 		
 //		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
@@ -301,7 +305,7 @@ public class CajaView implements CajaInterface {
 
 
 	@Override
-	public Persona getNuevoCliente() {
+	public Movimiento getNuevoMovimiento() {
 		// TODO Auto-generated method stub
 		return null;
 	}

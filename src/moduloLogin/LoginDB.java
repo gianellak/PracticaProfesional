@@ -12,7 +12,7 @@ import exceptions.DBException;
 import objetos.Usuario;
 import utilitarios.DBUtil;
 
-public class LoginDB implements LoginInterface {
+public class LoginDB  {
 
 	private static final String SQL_UPDATE =
 			 "UPDATE Usuario SET password=?, nombre=?, apellido=? WHERE username=?";
@@ -135,96 +135,5 @@ public class LoginDB implements LoginInterface {
     }
 
 
-
-	@Override
-	public Usuario login(String usernameInput, String passwordInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public void close() throws SQLException {
-		connectionProvider.close();
-	}
-
-
-
-	@Override
-	public void showLogin(LoginController loginController) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void closeLogin() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public String getPasswordInput() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public String getUsernameInput() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public boolean loginSuccessful(Usuario user) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
-	@Override
-	public void loginFailed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void viewLogin(LoginController loginController) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-	@Override
-	public void insert(Usuario usuario) throws DBException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void delete(Usuario usuario) throws DBException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-		
 
 }
