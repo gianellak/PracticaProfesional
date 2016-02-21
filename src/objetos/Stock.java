@@ -57,6 +57,7 @@ public class Stock {
 		return null;
 	}
 	
+	//HOLA TIA MOSCA MEDIALUNA OSCAR EGRESADO 2030
 	
 	
 }
