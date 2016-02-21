@@ -1,16 +1,18 @@
 package moduloVehiculo;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
+import objetos.Stock;
 import objetos.Vehiculo;
-
 
 public class vehiculoController {
 
 	private vehiculoInterface vehiculo;
-	private vehiculoInterfaceDB vehiculoDB;
+	private VehiculoDB vehiculoDB;
 	private PrincipalController pc;
 
 	public vehiculoController(vehiculoInterface vehiculo, PrincipalController pc) {
@@ -19,8 +21,8 @@ public class vehiculoController {
 		this.pc = pc;
 
 	}
-	
-	public void onMenuVehiculo (){
+
+	public void onMenuVehiculo() {
 		vehiculoDB = new VehiculoDB(pc.getConn());
 		vehiculo.showVehiculo(this);
 	}
@@ -29,25 +31,72 @@ public class vehiculoController {
 		vehiculo.closeVehiculo();
 	}
 
+	public void onCreateVehiculo() throws DBException {
 
-	public void onCreateVehiculo() throws DBException, NumberFormatException, ParseException{
 
-		Vehiculo v = vehiculo.getNuevoVehiculo();		
-		vehiculoDB.createVehiculo(v);			
+		Vehiculo newVehiculoAInsertar = vehiculo.getDatosNuevoVehiculo();
+
+		if (vehiculoDB.createVehiculo(newVehiculoAInsertar)) {
+
+			vehiculo.insertOk();
+//hh
+		} else {
+			vehiculo.insertError();
+		}
+
 	}
 	
-	
-	public void onAceptarNuevoVehiculo(){
-			
+	public void onUpdateVehiculo(Vehiculo vehiculoAModificar) throws DBException{
+		
+		Vehiculo vehiculoModificado = vehiculo.getDatosModificarVehiculo(vehiculoAModificar);
+		
+		if (vehiculoDB.updateVehiculo(vehiculoAModificar.getMotor(), vehiculoModificado));
+		
+		
 	}
-	
-	public void onBuscarPorPatente(){
+
+	public void onStock() throws DBException {
+
+		
+		List<Vehiculo> stockActual = vehiculoDB.getAllVehiculos();
+		List<Stock> stockAMostrar = new ArrayList<Stock>();
+
+		for (int i = 0; i < stockActual.size(); i++) {
+
+			if (! ( (stockActual.get(i).getCondicion() == "Vendido") || (stockActual.get(i).getCondicion() == "No disponible"))) {
+
+				Stock s = new Stock();
+				
+				String patenteActual = stockActual.get(i).getPatente();
+
+				if (patenteActual == "000000"){
+					s.setPatente(stockActual.get(i).getMotor());
+				}
+				
+				s.setPatente(patenteActual);
+				s.setMarca(stockActual.get(i).getMarca());
+				s.setModelo(stockActual.get(i).getModelo());
+				s.setYear(stockActual.get(i).getYear());
+				s.setPvc(stockActual.get(i).getPvc());
+
+				stockAMostrar.add(s);
+			}
+		}
+
+		vehiculo.showStock(stockAMostrar);
+	}
+
+	public void onBuscarPorPatente() {
 		String patente = null;
 		vehiculo.getVehiculoPorPatente(patente);
 	}
-	
-	public void onVolver(){
+
+	public void onVolver() {
 		vehiculo.refresh();
 	}
-	
+
+	public void onAceptarNuevoVehiculo() {
+		
+	}
+
 }

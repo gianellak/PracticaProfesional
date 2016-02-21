@@ -2,11 +2,9 @@ package moduloVehiculo.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 
-import moduloVehiculo.vehiculoController;
 import exceptions.DBException;
-import objetos.Vehiculo;
+import moduloVehiculo.vehiculoController;
 
 public class ListenerNuevoVehiculo implements ActionListener {
 
@@ -21,17 +19,12 @@ public class ListenerNuevoVehiculo implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			try {
-				vc.onCreateVehiculo();
-			} catch (NumberFormatException | ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			vc.onCreateVehiculo();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
+	
 	}
 
 }

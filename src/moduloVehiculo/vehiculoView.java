@@ -1,23 +1,14 @@
 package moduloVehiculo;
 
-import java.awt.Dimension;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
+import exceptions.DBException;
+import objetos.Stock;
 import objetos.Vehiculo;
-import listeners.ListenerAltaV;
-import listeners.ListenerVolverV;
-import moduloCobranzas.altaVenta.FormularioAlta;
-import moduloVehiculo.listener.ListenerBuscarVehiculo;
-import moduloVehiculo.listener.ListenerNuevoVehiculo;
-import moduloVehiculo.listener.ListenerSalirVehiculo;
-import moduloVehiculo.listener.ListenerStock;
-import moduloVehiculo.listener.ListenerVolverAVehiculo;
+import moduloVehiculo.listener.*;
 
 public class vehiculoView implements vehiculoInterface {
 
@@ -32,6 +23,8 @@ public class vehiculoView implements vehiculoInterface {
 	private ListenerBuscarVehiculo listenerBuscar;
 	private ListenerStock listenerStock;
 	private ListenerVolverAVehiculo listenerVolver;
+	private ListenerVerStock listenerVerStock;
+	private ListenerModificarVehiculo listenerModificar;
 
 	private JButton btnSalir;
 	private JButton btnBuscar;
@@ -41,6 +34,8 @@ public class vehiculoView implements vehiculoInterface {
 	private JTextField txtPatente;
 
 	private FormNuevoVehiculo panelNuevoVehiculo;
+	private FormModificarVehiculo panelModificarVehiculo;
+	private FormStock panelStock;
 
 	public vehiculoView() {
 
@@ -91,7 +86,7 @@ public class vehiculoView implements vehiculoInterface {
 		listenerSalir = new ListenerSalirVehiculo(vc);
 		listenerNuevo = new ListenerNuevoVehiculo(vc);
 		listenerBuscar = new ListenerBuscarVehiculo(vc);
-		listenerStock = new ListenerStock();
+		listenerStock = new ListenerStock(vc);
 
 		btnSalir.addActionListener(listenerSalir);
 		btnNuevo.addActionListener(listenerNuevo);
@@ -109,7 +104,7 @@ public class vehiculoView implements vehiculoInterface {
 	}
 
 	@Override
-	public Vehiculo getNuevoVehiculo() throws NumberFormatException, ParseException {
+	public void showFormNuevoVehiculo() {
 
 		panelNuevoVehiculo = new FormNuevoVehiculo();
 		panel.setVisible(false);
@@ -129,9 +124,77 @@ public class vehiculoView implements vehiculoInterface {
 
 		panelNuevoVehiculo.getBtnCancelar().addActionListener(listenerVolver);
 		panelNuevoVehiculo.getBtnAceptar().addActionListener(listenerNuevo);
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-		
+
+	}
+	
+	
+	public void showFormModificarVehiculo(){
+		panelModificarVehiculo = new FormModificarVehiculo();
+		panel.setVisible(false);
+
+		frmVehiculo.setTitle("Modificar Vehículo");
+		frmVehiculo.invalidate();
+		frmVehiculo.validate();
+		frmVehiculo.repaint();
+
+		frmVehiculo.add(panelModificarVehiculo);
+		frmVehiculo.invalidate();
+		frmVehiculo.validate();
+		frmVehiculo.repaint();
+
+		listenerVolver = new ListenerVolverAVehiculo(vc);
+		listenerModificar = new ListenerModificarVehiculo(vc);
+
+		panelModificarVehiculo.getBtnCancelar().addActionListener(listenerVolver);
+		panelModificarVehiculo.getBtnAceptar().addActionListener(listenerModificar);
+	}
+
+	@Override
+	public Vehiculo getVehiculoPorPatente(String patente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void showStock(List<Stock> listaStockVehiculos) {
+
+		// panelStock = new FormStock();
+		// panel.setVisible(false);
+		//
+		// frmVehiculo.setTitle("Stock");
+		// frmVehiculo.invalidate();
+		// frmVehiculo.validate();
+		// frmVehiculo.repaint();
+		//
+		// frmVehiculo.add(panelStock);
+		// frmVehiculo.invalidate();
+		// frmVehiculo.validate();
+		// frmVehiculo.repaint();
+		//
+		// listenerVolver = new ListenerVolverAVehiculo(vc);
+		// listenerStock = new ListenerStock(vc);
+		//
+		// panelStock.getBtnCancelar().addActionListener(listenerVolver);
+		// panelStock.getBtnVerDetalle().addActionListener(listenerVerStock);
+
+	}
+
+	@Override
+	public void refresh() {
+		frmVehiculo.remove(panelNuevoVehiculo);
+		// frmVehiculo.remove(panelStock);
+		panelNuevoVehiculo = null;
+		panelStock = null;
+		panel.setVisible(true);
+
+		frmVehiculo.invalidate();
+		frmVehiculo.validate();
+		frmVehiculo.repaint();
+
+	}
+
+	public Vehiculo getDatosNuevoVehiculo() {
+
 		Vehiculo v = new Vehiculo(
 				panelNuevoVehiculo.getTxtPatente().getText(),
 				panelNuevoVehiculo.getTxtMarca().getText(),
@@ -142,41 +205,60 @@ public class vehiculoView implements vehiculoInterface {
 				panelNuevoVehiculo.getTxtMotor().getText(),
 				panelNuevoVehiculo.getTxtDominio().getText(),
 				Integer.parseInt(panelNuevoVehiculo.getTxtPvc().getText()),
-				formatter.parse(panelNuevoVehiculo.getTxtFechaIngreso().getText()), // En un futuro ver
-				formatter.parse(panelNuevoVehiculo.getTxtFechaVenta().getText()), // que sea tipo DATE CALENDAR y remover el 
-				Integer.parseInt(panelNuevoVehiculo.getTxtCondicion().getText()), // Ver que sea combo box.
+				panelNuevoVehiculo.getTxtFechaIngreso().getText(),
+				panelNuevoVehiculo.getTxtFechaVenta().getText(), 
+				panelNuevoVehiculo.getTxtCondicion().getText(), // combo box u option button
 				Integer.parseInt(panelNuevoVehiculo.getTxtProveedor().getText()),
 				Integer.parseInt(panelNuevoVehiculo.getTxtCliente().getText()),
-				panelNuevoVehiculo.getTxtComentarios().getText()
-				);
-		
-				
-				
+				panelNuevoVehiculo.getTxtComentarios().getText());
+
 		return v;
 
 	}
+	
+	@Override
+	public Vehiculo getDatosModificarVehiculo(Vehiculo vehiculo) {
+		
+		Vehiculo vehiculoModificado = new Vehiculo(
+				panelModificarVehiculo.getTxtPatente().getText(),
+				vehiculo.getMarca(),
+				vehiculo.getModelo(),
+				vehiculo.getYear(),
+				vehiculo.getColor(),
+				Integer.parseInt(panelModificarVehiculo.getTxtKm().getText()),
+				vehiculo.getMotor(),
+				vehiculo.getDominio(),
+				Integer.parseInt(panelModificarVehiculo.getTxtPvc().getText()),
+				vehiculo.getFechaIngreso(),
+				panelModificarVehiculo.getTxtFechaVenta().getText(), 
+				panelModificarVehiculo.getTxtCondicion().getText(), // combo box u option button
+				vehiculo.getIdProveedor(),
+				Integer.parseInt(panelModificarVehiculo.getTxtCliente().getText()),
+				panelModificarVehiculo.getTxtComentarios().getText());
+
+		return vehiculoModificado;
+
+	}
+
 
 	@Override
-	public Vehiculo getVehiculoPorPatente(String patente) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insertOk() {
+
+		JOptionPane.showMessageDialog(null,
+				"El vehículo fue registrado correctamente");
+
+		// PANEL ACTUAL
+
+		// removeAll();
+		// validate();
+		// repaint();
+
 	}
 
 	@Override
-	public void showStock() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void refresh() {
-		frmVehiculo.remove(panelNuevoVehiculo);
-		panelNuevoVehiculo = null;
-		panel.setVisible(true);
-
-		frmVehiculo.invalidate();
-		frmVehiculo.validate();
-		frmVehiculo.repaint();
+	public void insertError() {
+		JOptionPane.showMessageDialog(null,
+						"Error. El vehículo no ha sido registrado. Intente nuevamente.");
 
 	}
 
@@ -213,6 +295,5 @@ public class vehiculoView implements vehiculoInterface {
 	public void setBtnStock(JButton btnStock) {
 		this.btnStock = btnStock;
 	}
-
 
 }

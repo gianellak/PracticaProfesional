@@ -5,18 +5,19 @@ import java.awt.event.ActionListener;
 
 import moduloVehiculo.vehiculoController;
 
-public class ListenerAceptarNuevoVehiculo implements ActionListener {
+public class ListenerVerStock implements ActionListener{
 
 	vehiculoController vc;
-
-	public ListenerAceptarNuevoVehiculo(vehiculoController vc) {
+	
+	public ListenerVerStock(vehiculoController vc) {
 		super();
 		this.vc = vc;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		vc.onAceptarNuevoVehiculo();
+		// TODO Auto-generated method stub
+		
 	}
 
 }

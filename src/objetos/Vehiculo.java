@@ -1,8 +1,5 @@
 package objetos;
 
-import java.util.Date;
-
-import javax.swing.JTextField;
 
 public class Vehiculo {
 	
@@ -15,17 +12,24 @@ public class Vehiculo {
 	String motor;
 	String dominio;
 	Integer pvc;
-	Date fechaIngreso;
-	Date fechaVenta;
-	Integer idCondicion;
+	String fechaIngreso;
+	String fechaVenta;
+	String condicion;
 	Integer idProveedor;
 	Integer idCliente; //cuando vende o reserva 
 	String comentarios;
 	
+	
+
+	public Vehiculo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Vehiculo(String patente, String marca, String modelo, Integer year,
 			String color, Integer km, String motor, String dominio,
-			Integer pvc, Date fechaIngreso, Date fechaVenta,
-			Integer idCondicion, Integer idProveedor, Integer idCliente,
+			Integer pvc, String fechaIngreso, String fechaVenta,
+			String condicion, Integer idProveedor, Integer idCliente,
 			String comentarios) {
 		super();
 		this.patente = patente;
@@ -39,12 +43,11 @@ public class Vehiculo {
 		this.pvc = pvc;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaVenta = fechaVenta;
-		this.idCondicion = idCondicion;
+		this.condicion = condicion;
 		this.idProveedor = idProveedor;
 		this.idCliente = idCliente;
 		this.comentarios = comentarios;
 	}
-
 
 	public String getPatente() {
 		return patente;
@@ -118,28 +121,28 @@ public class Vehiculo {
 		this.pvc = pvc;
 	}
 
-	public Date getFechaIngreso() {
+	public String getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(String fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public Date getFechaVenta() {
+	public String getFechaVenta() {
 		return fechaVenta;
 	}
 
-	public void setFechaVenta(Date fechaVenta) {
+	public void setFechaVenta(String fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
 
-	public Integer getIdCondicion() {
-		return idCondicion;
+	public String getCondicion() {
+		return condicion;
 	}
 
-	public void setIdCondicion(Integer idCondicion) {
-		this.idCondicion = idCondicion;
+	public void setCondicion(String condicion) {
+		this.condicion = condicion;
 	}
 
 	public Integer getIdProveedor() {
