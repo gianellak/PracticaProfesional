@@ -5,8 +5,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import moduloVehiculo.listener.ListenerModificarVehiculo;
-
 public class FormNuevoVehiculo extends JPanel {
 
 	private JButton btnAceptar;
