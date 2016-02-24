@@ -13,7 +13,7 @@ public interface CajaInterface {
 
 	public void dispose();
 
-	public List<Usuario> findAll() throws DBException;
+	public List<Movimiento> findAll() throws DBException;
 
 	public void onAlta();
 	
@@ -27,14 +27,13 @@ public interface CajaInterface {
 
 	public void showNotFound();
 
-
-	public int showToDelete(Persona persona);
+	public void showToDelete(Movimiento movimiento);
 
 	public void deleteOk();
 
 	public void deleteBad();
 
-	void onVer(List<Usuario> lista);
+	void onVer(List<Movimiento> lista);
 
 	int getBajaPersona();
 

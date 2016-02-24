@@ -52,7 +52,7 @@ public class CajaView implements CajaInterface {
 	
 
 	@Override
-	public List<Usuario> findAll() throws DBException {
+	public List<Movimiento> findAll() throws DBException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -127,7 +127,7 @@ public class CajaView implements CajaInterface {
 	}
 
 	@Override
-	public void onVer(List<Usuario> lista) {
+	public void onVer(List<Movimiento> lista) {
 		
 		panelCaja.removeAll();
 		panelCaja.validate();
@@ -267,14 +267,14 @@ public class CajaView implements CajaInterface {
 
 
 
-	@Override
-	public int showToDelete(Persona p) {
+	
+	public void showToDelete(Movimiento v) {
 		
-		String s = new String("¿Esta seguro que desea eliminar el usuario: " + p.getApellido() + " " + p.getNombre() + "?");
-		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar Persona", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-       
-		return codigo;
-		
+//		String s = new String("¿Esta seguro que desea eliminar el usuario: " + p.getApellido() + " " + p.getNombre() + "?");
+//		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar Persona", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+//       
+//		return codigo;
+//		
 		
 	}
 
