@@ -1,21 +1,19 @@
-package moduloVehiculo;
+package moduloVehiculo.paneles;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import moduloVehiculo.listener.ListenerModificarVehiculo;
-
-public class FormModificarVehiculo extends JPanel {
+public class FormNuevoVehiculo extends JPanel {
 
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 	
-	private JTextField txtPatente, txtKm, txtPvc, txtFechaVenta, txtCondicion, txtCliente, txtComentarios;
+	private JTextField txtPatente, txtMarca, txtModelo, txtYear, txtColor, txtKm, txtMotor, txtDominio, txtPvc, txtFechaIngreso, txtFechaVenta, txtCondicion, txtProveedor, txtCliente, txtComentarios;
 	
 
-	public FormModificarVehiculo() {
+	public FormNuevoVehiculo() {
 
 		this.setLayout(null);
 
@@ -31,33 +29,33 @@ public class FormModificarVehiculo extends JPanel {
 		lblMarca.setBounds(100, 50, 160, 25);
 		this.add(lblMarca);
 
-		JLabel lblMarca2 = new JLabel(); 
-		lblMarca2.setBounds(100, 70, 160, 25);
-		this.add(lblMarca2);
+		txtMarca = new JTextField(9);
+		txtMarca.setBounds(100, 70, 160, 25);
+		this.add(txtMarca);
 
 		JLabel lblModelo = new JLabel("Modelo: ");
 		lblModelo.setBounds(100, 90, 160, 25);
 		this.add(lblModelo);
 
-		JLabel lblModelo2 = new JLabel();
-		lblModelo2.setBounds(100, 110, 160, 25);
-		this.add(lblModelo2);
+		txtModelo = new JTextField(6);
+		txtModelo.setBounds(100, 110, 160, 25);
+		this.add(txtModelo);
 
 		JLabel lblYear = new JLabel("Año: ");
 		lblYear.setBounds(100, 130, 160, 25);
 		this.add(lblYear);
 
-		JLabel lblYear2 = new JLabel();
-		lblYear2.setBounds(100, 150, 260, 25);
-		this.add(lblYear2);
+		txtYear = new JTextField(25);
+		txtYear.setBounds(100, 150, 260, 25);
+		this.add(txtYear);
 
 		JLabel lblColor = new JLabel("Color: ");
 		lblColor.setBounds(100, 170, 160, 25);
 		this.add(lblColor);
 
-		JLabel lblColor2 = new JLabel();
-		lblColor.setBounds(100, 190, 260, 25);
-		this.add(lblColor2);
+		txtColor = new JTextField(25);
+		txtColor.setBounds(100, 190, 260, 25);
+		this.add(txtColor);
 
 		JLabel lblKm = new JLabel("Km: ");
 		lblKm.setBounds(100, 210, 160, 25);
@@ -71,17 +69,17 @@ public class FormModificarVehiculo extends JPanel {
 		lblMotor.setBounds(100, 250, 160, 25);
 		this.add(lblMotor);
 
-		JLabel lblMotor2 = new JLabel();
-		lblMotor2.setBounds(100, 270, 260, 25);
-		this.add(lblMotor2);
+		txtMotor = new JTextField(25);
+		txtMotor.setBounds(100, 270, 260, 25);
+		this.add(txtMotor);
 		
 		JLabel lblDominio = new JLabel("Dominio: ");
 		lblDominio.setBounds(100, 290, 160, 25);
 		this.add(lblDominio);
 
-		JLabel lblDominio2 = new JLabel();
-		lblDominio2.setBounds(100, 310, 260, 25);
-		this.add(lblDominio2);
+		txtDominio = new JTextField(25);
+		txtDominio.setBounds(100, 310, 260, 25);
+		this.add(txtDominio);
 		
 		JLabel lblPvc = new JLabel("PVC: ");
 		lblPvc.setBounds(100, 330, 160, 25);
@@ -95,9 +93,9 @@ public class FormModificarVehiculo extends JPanel {
 		lblfechaIngreso.setBounds(100, 370, 160, 25);
 		this.add(lblfechaIngreso);
 
-		JLabel lblfechaIngreso2 = new JLabel();
-		lblfechaIngreso2.setBounds(100, 390, 260, 25);
-		this.add(lblfechaIngreso2);
+		txtFechaIngreso = new JTextField(25);
+		txtFechaIngreso.setBounds(100, 390, 260, 25);
+		this.add(txtFechaIngreso);
 		
 		JLabel lblFechaVenta = new JLabel("Fecha de venta: ");
 		lblFechaVenta.setBounds(100, 410, 160, 25);
@@ -119,10 +117,9 @@ public class FormModificarVehiculo extends JPanel {
 		lblProveedor.setBounds(100, 490, 160, 25);
 		this.add(lblProveedor);
 
-		JLabel lblProveedor2 = new JLabel();
-		lblProveedor2.setBounds(100, 510, 260, 25);
-		this.add(lblProveedor2);
-		
+		txtProveedor = new JTextField(25);
+		txtProveedor.setBounds(100, 510, 260, 25);
+		this.add(txtProveedor);
 		
 		JLabel lblCliente = new JLabel("Cliente: ");
 		lblCliente.setBounds(100, 530, 160, 25);
@@ -150,8 +147,11 @@ public class FormModificarVehiculo extends JPanel {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(500, 250, 100, 25);
 		this.add(btnCancelar);
-		
+
 	}
+	
+	
+	// GETTERS Y SETTERS
 
 	public JButton getBtnAceptar() {
 		return btnAceptar;
@@ -169,62 +169,154 @@ public class FormModificarVehiculo extends JPanel {
 		this.btnCancelar = btnCancelar;
 	}
 
+
 	public JTextField getTxtPatente() {
 		return txtPatente;
 	}
+
 
 	public void setTxtPatente(JTextField txtPatente) {
 		this.txtPatente = txtPatente;
 	}
 
+
+	public JTextField getTxtMarca() {
+		return txtMarca;
+	}
+
+
+	public void setTxtMarca(JTextField txtMarca) {
+		this.txtMarca = txtMarca;
+	}
+
+
+	public JTextField getTxtModelo() {
+		return txtModelo;
+	}
+
+
+	public void setTxtModelo(JTextField txtModelo) {
+		this.txtModelo = txtModelo;
+	}
+
+
+	public JTextField getTxtYear() {
+		return txtYear;
+	}
+
+
+	public void setTxtYear(JTextField txtYear) {
+		this.txtYear = txtYear;
+	}
+
+
+	public JTextField getTxtColor() {
+		return txtColor;
+	}
+
+
+	public void setTxtColor(JTextField txtColor) {
+		this.txtColor = txtColor;
+	}
+
+
 	public JTextField getTxtKm() {
 		return txtKm;
 	}
+
 
 	public void setTxtKm(JTextField txtKm) {
 		this.txtKm = txtKm;
 	}
 
+
+	public JTextField getTxtMotor() {
+		return txtMotor;
+	}
+
+
+	public void setTxtMotor(JTextField txtMotor) {
+		this.txtMotor = txtMotor;
+	}
+
+
+	public JTextField getTxtDominio() {
+		return txtDominio;
+	}
+
+
+	public void setTxtDominio(JTextField txtDominio) {
+		this.txtDominio = txtDominio;
+	}
+
+
 	public JTextField getTxtPvc() {
 		return txtPvc;
 	}
+
 
 	public void setTxtPvc(JTextField txtPvc) {
 		this.txtPvc = txtPvc;
 	}
 
+
+	public JTextField getTxtFechaIngreso() {
+		return txtFechaIngreso;
+	}
+
+
+	public void setTxtFechaIngreso(JTextField txtFechaIngreso) {
+		this.txtFechaIngreso = txtFechaIngreso;
+	}
+
+
 	public JTextField getTxtFechaVenta() {
 		return txtFechaVenta;
 	}
+
 
 	public void setTxtFechaVenta(JTextField txtFechaVenta) {
 		this.txtFechaVenta = txtFechaVenta;
 	}
 
+
 	public JTextField getTxtCondicion() {
 		return txtCondicion;
 	}
+
 
 	public void setTxtCondicion(JTextField txtCondicion) {
 		this.txtCondicion = txtCondicion;
 	}
 
+
+	public JTextField getTxtProveedor() {
+		return txtProveedor;
+	}
+
+
+	public void setTxtProveedor(JTextField txtProveedor) {
+		this.txtProveedor = txtProveedor;
+	}
+
+
 	public JTextField getTxtCliente() {
 		return txtCliente;
 	}
+
 
 	public void setTxtCliente(JTextField txtCliente) {
 		this.txtCliente = txtCliente;
 	}
 
+
 	public JTextField getTxtComentarios() {
 		return txtComentarios;
 	}
 
+
 	public void setTxtComentarios(JTextField txtComentarios) {
 		this.txtComentarios = txtComentarios;
 	}
-
-
 
 }

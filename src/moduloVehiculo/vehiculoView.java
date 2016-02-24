@@ -9,6 +9,9 @@ import exceptions.DBException;
 import objetos.Stock;
 import objetos.Vehiculo;
 import moduloVehiculo.listener.*;
+import moduloVehiculo.paneles.FormModificarVehiculo;
+import moduloVehiculo.paneles.FormNuevoVehiculo;
+import moduloVehiculo.paneles.FormStock;
 
 public class vehiculoView implements vehiculoInterface {
 
@@ -158,25 +161,25 @@ public class vehiculoView implements vehiculoInterface {
 	@Override
 	public void showStock(List<Stock> listaStockVehiculos) {
 
-		// panelStock = new FormStock();
-		// panel.setVisible(false);
-		//
-		// frmVehiculo.setTitle("Stock");
-		// frmVehiculo.invalidate();
-		// frmVehiculo.validate();
-		// frmVehiculo.repaint();
-		//
-		// frmVehiculo.add(panelStock);
-		// frmVehiculo.invalidate();
-		// frmVehiculo.validate();
-		// frmVehiculo.repaint();
-		//
-		// listenerVolver = new ListenerVolverAVehiculo(vc);
-		// listenerStock = new ListenerStock(vc);
-		//
-		// panelStock.getBtnCancelar().addActionListener(listenerVolver);
-		// panelStock.getBtnVerDetalle().addActionListener(listenerVerStock);
-
+		 panelStock = new FormStock();
+		 panel.setVisible(false);
+		
+		 frmVehiculo.setTitle("Stock");
+		 frmVehiculo.invalidate();
+		 frmVehiculo.validate();
+		 frmVehiculo.repaint();
+		
+		 frmVehiculo.add(panelStock);
+		 frmVehiculo.invalidate();
+		 frmVehiculo.validate();
+		 frmVehiculo.repaint();
+		
+		 listenerVolver = new ListenerVolverAVehiculo(vc);
+		 listenerStock = new ListenerStock(vc);
+		
+		 panelStock.getBtnCancelar().addActionListener(listenerVolver);
+		 panelStock.getBtnVerDetalle().addActionListener(listenerVerStock);
+		 
 	}
 
 	@Override

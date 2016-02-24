@@ -7,11 +7,11 @@ public class Movimiento {
 	int id;
 	String descripcion;
 	int monto;
-	LocalDate fecha;
+	String fecha;
 	String usuario;
-	boolean marca;
+	boolean flag;
 	
-	
+
 	public int getId() {
 		return id;
 	}
@@ -30,10 +30,10 @@ public class Movimiento {
 	public void setMonto(int monto) {
 		this.monto = monto;
 	}
-	public LocalDate getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	public String getUsuario() {
@@ -42,11 +42,21 @@ public class Movimiento {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public boolean isMarca() {
-		return marca;
+	public boolean isFlag() {
+		return flag;
 	}
-	public void setMarca(boolean marca) {
-		this.marca = marca;
+	public void setMarca(boolean flag) {
+		this.flag = flag;
+	}
+	public Movimiento(int id, String descripcion, int monto, String fecha,
+			String usuario, boolean flag) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
+		this.monto = monto;
+		this.fecha = fecha;
+		this.usuario = usuario;
+		this.flag = flag;
 	}
 	
 

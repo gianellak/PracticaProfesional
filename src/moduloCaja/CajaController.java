@@ -6,15 +6,10 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import connections.ConnectionProvider;
-import connections.DBConnection;
-import connections.SchemaGenerator;
-import objetos.Movimiento;
-import objetos.Persona;
-import objetos.Usuario;
+import connections.*;
+import objetos.*;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
-import moduloUsuarios.UsuarioView;
 
 public class CajaController {
 
@@ -34,11 +29,11 @@ public class CajaController {
 
 	public void verMovimientos() throws DBException {
 		
-		System.out.println("Ver Usuarios - Controller");
+		System.out.println("Ver Movimientos - Controller");
 		
 		
 		
-		List<Usuario> lista= cDB.findAll();
+		List<Movimiento> lista= cDB.findAll();
 		
 		ci.onVer(lista);
 		
@@ -92,23 +87,26 @@ public class CajaController {
 		int u = ci.getBajaPersona();
 		
 		
-		Persona persona = cDB.findId(u);
+		Movimiento movimiento = cDB.findId(u);
 		
 		
-		if(persona != null){
+		if(movimiento != null){
 		
-		int codigo = ci.showToDelete(persona);
-		 if (codigo==JOptionPane.YES_OPTION){
-			 if(cDB.delete(u)){
-					
-					ci.deleteOk();
-				}else
-				{
-					ci.deleteBad();
-				}
-	        }else if(codigo==JOptionPane.NO_OPTION){
-	            ci.onBaja();
-	        }
+			ci.showToDelete(movimiento);
+			
+//		int codigo = ci.showToDelete(movimiento);
+//		 
+//		if (codigo==JOptionPane.YES_OPTION){
+//			 if(cDB.delete(u)){
+//					
+//					ci.deleteOk();
+//				}else
+//				{
+//					ci.deleteBad();
+//				}
+//	        }else if(codigo==JOptionPane.NO_OPTION){
+//	            ci.onBaja();
+//	        }
 		
 		}else{
 			ci.showNotFound();
