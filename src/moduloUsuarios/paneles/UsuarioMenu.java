@@ -11,10 +11,9 @@ public class UsuarioMenu extends JPanel {
 	
 	private Dimension preferredSize =new Dimension(200,25) ;
 	private JButton btnAltaU;
-	private JButton btnBajaU;
-	private JButton btnModU;
 	private JButton btnVerU;
 	private JButton btnVolver;
+	private JButton btnListaU;
 
 
 public UsuarioMenu() {
@@ -26,15 +25,11 @@ public UsuarioMenu() {
 		btnAltaU.setPreferredSize(preferredSize);
 		this.add(btnAltaU);
 		
-		btnBajaU = new JButton("Baja Usuario");
-		btnBajaU.setPreferredSize(preferredSize);
-		this.add(btnBajaU);
+		btnListaU = new JButton("Listar Usuarios");
+		btnListaU.setPreferredSize(preferredSize);
+		this.add(btnListaU);
 		
-		btnModU = new JButton("Modificacion Usuario");
-		btnModU.setPreferredSize(preferredSize);
-		this.add(btnModU);
-		
-		btnVerU = new JButton("Ver Usuario");
+		btnVerU = new JButton("Buscar Usuario");
 		btnVerU.setPreferredSize(preferredSize);
 		this.add(btnVerU);
 		
@@ -46,29 +41,13 @@ public UsuarioMenu() {
 
 	}
 
-	
+
 	public JButton getBtnAltaU() {
 		return btnAltaU;
 	}
 
 	public void setBtnAltaU(JButton btnAltaU) {
 		this.btnAltaU = btnAltaU;
-	}
-
-	public JButton getBtnBajaU() {
-		return btnBajaU;
-	}
-
-	public void setBtnBajaU(JButton btnBajaU) {
-		this.btnBajaU = btnBajaU;
-	}
-
-	public JButton getBtnModU() {
-		return btnModU;
-	}
-
-	public void setBtnModU(JButton btnModU) {
-		this.btnModU = btnModU;
 	}
 
 	public JButton getBtnVerU() {
@@ -86,6 +65,15 @@ public UsuarioMenu() {
 	public void setBtnVolver(JButton btnVolver) {
 		this.btnVolver = btnVolver;
 	}
-	
+
+	public JButton getBtnListaU() {
+		return btnListaU;
+	}
+
+	public void setBtnListaU(JButton btnListaU) {
+		this.btnListaU = btnListaU;
+	}
+
+
 
 }

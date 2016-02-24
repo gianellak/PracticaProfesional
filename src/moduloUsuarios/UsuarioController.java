@@ -38,17 +38,6 @@ public class UsuarioController {
 		
 	}
 
-	public void verUsuarios() throws DBException {
-		
-		System.out.println("Ver Usuarios - Controller");
-		
-		
-		
-		List<Usuario> lista= uDB.findAll();
-		
-		ui.onVer(lista);
-		
-	}
 
 	private void conectar() {
 		
@@ -65,6 +54,13 @@ public class UsuarioController {
 		
 	}
 
+//*************************************
+//  MENU PRINCIPAL USUARIO - LISTENERS: 
+//	VOLVER(getBack)
+//	ALTA(showAlta)
+//	VER USUARIO(showUnUsuario)
+//	MOSTRARLISTA USUARIOS(showUsuarios)]
+	
 	public void getBack() {
 		
 		pc.getBack();
@@ -72,17 +68,81 @@ public class UsuarioController {
 		
 	}
 	
+	public void showAlta() {
+		
+		ui.onAlta();
+		
+	}
+	
+	public void showUsuarios() throws DBException {
+		
+		System.out.println("Ver Usuarios - Controller");
+		
+		
+		
+		List<Usuario> lista= uDB.findAll();
+		
+		ui.onVerLista(lista);
+		
+	}
+	
+	
+	
+	public void showUnUsuario() {
+		
+		ui.onBuscarUsuario();
+		
+	}
+	
+	
+//******************************************
+//	OPCION ALTA 
+//	ACEPTAR (altaUsuario)
+//	VOLVER (cleanUsuario)
+
+	public void altaUsuario() throws DBException {
+
+		Usuario usuario = ui.getNuevoUsuario();
+
+		if (uDB.insert(usuario)) {
+
+			ui.insertOk();
+			
+		} else {
+			
+			ui.insertBad();
+		}
+
+	}
+	
+	
 	public void cleanUsuario(){
 		
 		ui.cleanPanelUsuario();
 		
 	}
 
-	public void showAlta() {
+//*********************************
+//	ON OPCION BUSCAR UN USUARIO [LISTENER]
+	
+	public void buscarUnUsuario() throws DBException {
+		System.out.println("BUCOEN LA DB AL USUARIO");
 		
-		ui.onAlta();
+		
+		Usuario u  = uDB.findId(ui.getUsuarioABuscar());
+		
+		if(u != null){
+			
+			ui.verUsuario(u);
+		}else
+		{
+			ui.showNotFound();
+		}
 		
 	}
+	
+//**************
+//	MENU BUSCAR USUARIO - LISTENER BAJA USUARIO 
 	
 	public void bajaUsuario() throws DBException{
 		
@@ -95,6 +155,7 @@ public class UsuarioController {
 		if(user != null){
 		
 		int codigo = ui.showToDelete(user);
+		
 		 if (codigo==JOptionPane.YES_OPTION){
 			 if(uDB.delete(u)){
 					
@@ -113,40 +174,39 @@ public class UsuarioController {
 		
 
 	}
-
 	
-	public void altaUsuario() throws DBException {
-		
-		Usuario usuario = ui.getNuevoUsuario();
-		
-		if(uDB.insert(usuario)){
-			
-			ui.insertOk();
-		}else
-		{
-			ui.insertBad();
-		}
-		
-		
-		
-	}
-
-	public void showBaja() {
-
-		ui.onBaja();
-		
-	}
+//*************
+//MENU BUSCAR USUARIO - MODIFICAR USUARIO
 
 	public void showMod() {
 		ui.onMod();
 		
 	}
 
-	
-
-	
-
-	
+	public void modUsuario() throws DBException {
+		
+		Usuario user = ui.getModUsuario();
+		
+		if(user != null){
+			
+			int codigo = ui.showToUpdate(user);
+			
+			 if (codigo==JOptionPane.YES_OPTION){
+				 if(uDB.update(user)){
+						
+						ui.updateOk();
+					}else
+					{
+						ui.updateBad();
+					}
+		        }else if(codigo==JOptionPane.NO_OPTION){
+		            ui.onMod();
+		        }
+			
+			}
+		
+		
+	}
 
 	
 

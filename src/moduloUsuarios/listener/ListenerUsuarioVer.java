@@ -28,7 +28,7 @@ public class ListenerUsuarioVer implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			uc.verUsuarios();
+			uc.showUsuarios();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

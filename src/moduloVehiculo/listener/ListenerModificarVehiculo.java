@@ -18,7 +18,7 @@ public class ListenerModificarVehiculo implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	try {
-		vc.onUpdateVehiculo();
+		vc.onUpdateVehiculo(null);
 	} catch (DBException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();

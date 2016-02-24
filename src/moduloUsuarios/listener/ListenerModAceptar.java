@@ -30,7 +30,7 @@ public class ListenerModAceptar implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		try {
-			uc.altaUsuario();
+			uc.modUsuario();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

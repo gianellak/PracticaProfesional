@@ -4,14 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import moduloVehiculo.vehiculoController;
+import moduloVehiculos.VehiculosController;
 
 public class ListenerBuscarVehiculo implements ActionListener {
 
 	vehiculoController vc;
 
-	public ListenerBuscarVehiculo(vehiculoController vc) {
+	public ListenerBuscarVehiculo(vehiculoController vc2) {
 		super();
-		this.vc = vc;
+		this.vc = vc2;
 
 	}
 

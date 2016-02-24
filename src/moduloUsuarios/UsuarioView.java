@@ -1,23 +1,11 @@
 package moduloUsuarios;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.event.ActionListener;
+import utilitarios.PantallaUtil;
 import java.util.List;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import exceptions.DBException;
 import objetos.Usuario;
-import moduloClientes.paneles.PanelClientes;
-import moduloClientes.paneles.ClientesMenu;
-import moduloPrincipal.PrincipalController;
-import moduloPrincipal.PrincipalView;
-import moduloPrincipal.paneles.PanelAux;
-import moduloPrincipal.paneles.PanelMenu;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioInterface;
 import moduloUsuarios.listener.*;
@@ -33,16 +21,16 @@ public class UsuarioView implements UsuarioInterface {
 	private ListenerUsuarioVer listenerVer;
 	private UsuarioMenu panelUsuarioMenu;
 	private ListenerUsuarioAlta listenerAlta;
-	private ListenerAltaAceptar listenerAltaAceptar;
+	private ListenerBuscarUnUsuario listenerBuscarUnUsuario;
 	private ListenerMenuUsuarioVolver listenerAltaVolver;
 	private UsuarioController userController;
-	private ListenerMenuUsuarioVolver listenerBajaVolver;
-	private ListenerBajaAceptar listenerBajaAceptar;
 	private ListenerUsuarioBaja listenerBaja;
 	private ListenerModAceptar listenerModAceptar;
 	private ListenerMenuUsuarioVolver listenerModVolver;
 	private ListenerMenuUsuarioVolver listenerVerVolver;
 	private ListenerUsuarioMod listenerMod;
+	private ListenerBuscarUsuario listenerBuscar;
+	private ListenerAltaAceptar listenerAltaAceptar;
 
 	public UsuarioView(){
 		
@@ -56,11 +44,14 @@ public class UsuarioView implements UsuarioInterface {
 	
 
 	
+	//Muestrala lista de todos los usuarios. Viene desde el controller con la lista cargada, y pasa la lista al panelUsuario,
+	//donde lo carga en la tabla. 
 
 	@Override
-	public List<Usuario> findAll() throws DBException {
-		// TODO Auto-generated method stub
-		return null;
+	public void mostrarListaUsuario(List<Usuario> lista) {
+		
+		panelUsuario.mostrarListaUsuario(lista);
+		
 	}
 
 	@Override
@@ -73,16 +64,12 @@ public class UsuarioView implements UsuarioInterface {
 		listenerVolver = new ListenerUsuarioVolver(uc);
 		listenerVer = new ListenerUsuarioVer(uc);
 		listenerAlta = new ListenerUsuarioAlta(uc);
-		listenerBaja = new ListenerUsuarioBaja(uc);
-		listenerMod = new ListenerUsuarioMod(uc);
-		listenerVer= new ListenerUsuarioVer(uc);
+		listenerBuscar = new ListenerBuscarUsuario(uc);
 		
 		panelUsuarioMenu.getBtnVolver().addActionListener(listenerVolver);
-		panelUsuarioMenu.getBtnVerU().addActionListener(listenerVer);
 		panelUsuarioMenu.getBtnAltaU().addActionListener(listenerAlta);
-		panelUsuarioMenu.getBtnBajaU().addActionListener(listenerBaja);
-		panelUsuarioMenu.getBtnModU().addActionListener(listenerMod);
-		panelUsuarioMenu.getBtnVerU().addActionListener(listenerVer);
+		panelUsuarioMenu.getBtnListaU().addActionListener(listenerVer);
+		panelUsuarioMenu.getBtnVerU().addActionListener(listenerBuscar);
 		
 		
 		//frame.setVisible(false);
@@ -92,10 +79,8 @@ public class UsuarioView implements UsuarioInterface {
 		frame.getContentPane().add(panelGeneral, BorderLayout.PAGE_START);
 		frame.getContentPane().add(panelUsuarioMenu, BorderLayout.WEST);
 		frame.getContentPane().add(panelUsuario, BorderLayout.LINE_END);
-		frame.validate();
-		frame.repaint();
-		//frame.setVisible(true);
 		
+		PantallaUtil.refresh(frame);
 		
 	}
 
@@ -106,11 +91,16 @@ public class UsuarioView implements UsuarioInterface {
 		
 	}
 
+//*************************
+//	MENU PRINCIPAL Listener -> Controller -> Interface:
+//	showAlta - onAlta
+//	showUsuarios - onVerLista
+//	showUnUsuario - onBuscarUsuario
+
 	@Override
 	public void onAlta() {
-		panelUsuario.removeAll();
-		panelUsuario.validate();
-		panelUsuario.repaint();
+		
+		PantallaUtil.remove(panelUsuario);
 		
 		panelUsuario.onAlta();
 		
@@ -121,59 +111,52 @@ public class UsuarioView implements UsuarioInterface {
 		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
 		
 		
-		frame.validate();
-		frame.repaint();
+		PantallaUtil.refresh(frame);
 		
 	
 		
 	}
 
 	@Override
-	public void onVer(List<Usuario> lista) {
+	public void onVerLista(List<Usuario> lista) {
 		
-		panelUsuario.removeAll();
-		panelUsuario.validate();
-		panelUsuario.repaint();
+		PantallaUtil.remove(panelUsuario);
 		
 		panelUsuario.onVer();
 		
 		
 		listenerVerVolver = new ListenerMenuUsuarioVolver(userController);
-		
-		
 		panelUsuario.getBtnVolver().addActionListener(listenerVerVolver);
 		
 		
-		frame.validate();
-		frame.repaint();
-		
-		
-		
+		PantallaUtil.refresh(frame);
+			
 	}
 	
 	@Override
-	public void onBaja() {
+	public void onBuscarUsuario() {
+
+		PantallaUtil.remove(panelUsuario);
 		
-		panelUsuario.removeAll();
-		panelUsuario.validate();
-		panelUsuario.repaint();
+		panelUsuario.onBuscar();
 		
-		panelUsuario.onBaja();
+		listenerBuscarUnUsuario = new ListenerBuscarUnUsuario(userController);
+		listenerAltaVolver = new ListenerMenuUsuarioVolver(userController);
 		
-		listenerBajaAceptar = new ListenerBajaAceptar(userController);
-		listenerBajaVolver = new ListenerMenuUsuarioVolver(userController);
-		
-		panelUsuario.getBtnAceptar().addActionListener(listenerBajaAceptar);
-		panelUsuario.getBtnVolver().addActionListener(listenerBajaVolver);
+		panelUsuario.getBtnBuscar().addActionListener(listenerBuscarUnUsuario);
+		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
 		
 		
-		frame.validate();
-		frame.repaint();
-		
-		
+		PantallaUtil.refresh(frame);
 		
 	}
 	
+//*******************************
+//	OPCION ALTA - altaUsuario()
+// 	insertOk()
+//	insertBad()
+	
+	@Override
 	public Usuario getNuevoUsuario(){
 		
 		String s = new String(panelUsuario.getPasswordText().getPassword());
@@ -184,51 +167,25 @@ public class UsuarioView implements UsuarioInterface {
 				panelUsuario.getApellidoText().getText());
 		
 		return u;
-
+		
 	}
-
-
-
-
-
+	
 	@Override
 	public void insertOk() {
 		
 		JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
 		
-		panelUsuario.removeAll();
-		panelUsuario.validate();
-		panelUsuario.repaint();
-		
-		
+		PantallaUtil.remove(panelUsuario);
 		
 	}
-
-
-
-
 
 	@Override
 	public void insertBad() {
 		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el usuario. Por favor reintente");
-		
 	}
-
-
-
-
-
-	@Override
-	public String getBajaUsuario() {
-
-		return panelUsuario.getUserText().getText();
-		
-		
-	}
-
-
-
-
+	
+//**********************
+// OPCION VOLVER - cleanUsuario
 
 	@Override
 	public void cleanPanelUsuario() {
@@ -237,49 +194,63 @@ public class UsuarioView implements UsuarioInterface {
 		panelUsuario.repaint();
 		
 	}
-
-
-
-
-
+	
+//*************************
+// OPCION VER USUARIO - showUnUsuario() [ListenerBuscarUnUsuario]
+//	VER USUARIO
+//	NOT FOUND
+	
 	@Override
-	public void onMod() {
+	public void verUsuario(Usuario u) {
 		
-		panelUsuario.removeAll();
-		panelUsuario.validate();
-		panelUsuario.repaint();
+		PantallaUtil.remove(panelUsuario);
 		
-		panelUsuario.onMod();
+		panelUsuario.verUnUsuario(u);
 		
-		listenerModAceptar = new ListenerModAceptar(userController);
-		listenerModVolver = new ListenerMenuUsuarioVolver(userController);
-		
-		panelUsuario.getBtnAceptar().addActionListener(listenerModAceptar);
-		panelUsuario.getBtnVolver().addActionListener(listenerModVolver);
+		listenerAltaVolver = new ListenerMenuUsuarioVolver(userController);
+		listenerMod = new ListenerUsuarioMod(userController);
+		listenerBaja = new ListenerUsuarioBaja(userController);
 		
 		
-		frame.validate();
-		frame.repaint();
+		panelUsuario.getBtnModificar().addActionListener(listenerMod);
+		panelUsuario.getBtnEliminar().addActionListener(listenerBaja);
+		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
+		
+		PantallaUtil.refresh(frame);
+		
 		
 	}
-
-
-
-
-
+	
 	@Override
 	public void showNotFound() {
 		
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar borrar el usuario. Por favor reintente");
-			
+		JOptionPane.showMessageDialog(null, "Usuario no encontrado. Por favor reintente");
+
+	}
+	
+//*************
+//	OPCION BUSCAR USUARIO MENU
+//	BAJA
+	
+	@Override
+	public void onBaja() {
 		
+		PantallaUtil.remove(panelUsuario);
+		
+		panelUsuario.onBaja();
+		
+		PantallaUtil.refresh(frame);
+				
+	}
+	
+
+	@Override
+	public String getBajaUsuario() {
+
+		return panelUsuario.getUserText().getText();
 		
 	}
-
-
-
-
-
+	
 	@Override
 	public int showToDelete(Usuario user) {
 		
@@ -287,31 +258,83 @@ public class UsuarioView implements UsuarioInterface {
 		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar usuario", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
        
 		return codigo;
-		
-		
+				
 	}
-
-
-
-
 
 	@Override
 	public void deleteOk() {
 		JOptionPane.showMessageDialog(null, "Usuario borrado correctamente");
 		
-		panelUsuario.removeAll();
-		panelUsuario.validate();
-		panelUsuario.repaint();
+		PantallaUtil.remove(panelUsuario);
+	}
+	
+
+	@Override
+	public void deleteBad() {
+		JOptionPane.showMessageDialog(null, "Error al borrar usuario");
+		
+	}
+
+//	MODIFICAR 
+	@Override
+	public void onMod() {
+		
+		
+		panelUsuario.onMod();
+		
+		listenerModAceptar = new ListenerModAceptar(userController);
+		listenerModVolver = new ListenerMenuUsuarioVolver(userController);
+		
+		panelUsuario.getBtnAceptarMod().addActionListener(listenerModAceptar);
+		panelUsuario.getBtnVolver().addActionListener(listenerModVolver);
+		
+		
+		
+	}
+
+		@Override
+	public String getUsuarioABuscar(){
+		return panelUsuario.getUserText().getText();
+		
+	}
+
+
+
+	@Override
+	public int showToUpdate(Usuario user) {
+		String s = new String("¿Esta seguro que desea modificar los datos del usuario: " + user.getUsername() + "?");
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Modificar usuario", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+	}
+
+
+
+
+	@Override
+	public Usuario getModUsuario() {
+		return panelUsuario.getModUsuario();
+	}
+
+
+
+
+	@Override
+	public void updateOk() {
+
+		JOptionPane.showMessageDialog(null, "Usuario modificado correctamente");
+		
+		PantallaUtil.remove(panelUsuario);
 		
 	}
 
 
 
 
-
 	@Override
-	public void deleteBad() {
-		// TODO Auto-generated method stub
+	public void updateBad() {
+		
+		JOptionPane.showMessageDialog(null, "Error al borrar usuario. Revise los datos ingresados");
 		
 	}
 	

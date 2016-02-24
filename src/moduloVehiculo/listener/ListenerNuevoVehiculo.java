@@ -5,14 +5,15 @@ import java.awt.event.ActionListener;
 
 import exceptions.DBException;
 import moduloVehiculo.vehiculoController;
+import moduloVehiculos.VehiculosController;
 
 public class ListenerNuevoVehiculo implements ActionListener {
 
 	vehiculoController vc;
 
-	public ListenerNuevoVehiculo(vehiculoController vc) {
+	public ListenerNuevoVehiculo(vehiculoController vc2) {
 		super();
-		this.vc = vc;
+		this.vc = vc2;
 	}
 
 	@Override

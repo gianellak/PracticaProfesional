@@ -34,7 +34,7 @@ public class vehiculoView implements vehiculoInterface {
 	private JTextField txtPatente;
 
 	private FormNuevoVehiculo panelNuevoVehiculo;
-	private FormModificarVehiculo panelModificarVehiculo;
+//	private FormModificarVehiculo panelModificarVehiculo;
 	private FormStock panelStock;
 
 	public vehiculoView() {
@@ -129,7 +129,7 @@ public class vehiculoView implements vehiculoInterface {
 	
 	
 	public void showFormModificarVehiculo(){
-		panelModificarVehiculo = new FormModificarVehiculo();
+//		panelModificarVehiculo = new FormModificarVehiculo();
 		panel.setVisible(false);
 
 		frmVehiculo.setTitle("Modificar Vehículo");
@@ -137,7 +137,7 @@ public class vehiculoView implements vehiculoInterface {
 		frmVehiculo.validate();
 		frmVehiculo.repaint();
 
-		frmVehiculo.add(panelModificarVehiculo);
+	//	frmVehiculo.add(panelModificarVehiculo);
 		frmVehiculo.invalidate();
 		frmVehiculo.validate();
 		frmVehiculo.repaint();
@@ -145,8 +145,8 @@ public class vehiculoView implements vehiculoInterface {
 		listenerVolver = new ListenerVolverAVehiculo(vc);
 		listenerModificar = new ListenerModificarVehiculo(vc);
 
-		panelModificarVehiculo.getBtnCancelar().addActionListener(listenerVolver);
-		panelModificarVehiculo.getBtnAceptar().addActionListener(listenerModificar);
+		//panelModificarVehiculo.getBtnCancelar().addActionListener(listenerVolver);
+		//panelModificarVehiculo.getBtnAceptar().addActionListener(listenerModificar);
 	}
 
 	@Override
@@ -219,23 +219,24 @@ public class vehiculoView implements vehiculoInterface {
 	@Override
 	public Vehiculo getDatosModificarVehiculo(Vehiculo vehiculo) {
 		
-		Vehiculo vehiculoModificado = new Vehiculo(
-				panelModificarVehiculo.getTxtPatente().getText(),
-				vehiculo.getMarca(),
-				vehiculo.getModelo(),
-				vehiculo.getYear(),
-				vehiculo.getColor(),
-				Integer.parseInt(panelModificarVehiculo.getTxtKm().getText()),
-				vehiculo.getMotor(),
-				vehiculo.getDominio(),
-				Integer.parseInt(panelModificarVehiculo.getTxtPvc().getText()),
-				vehiculo.getFechaIngreso(),
-				panelModificarVehiculo.getTxtFechaVenta().getText(), 
-				panelModificarVehiculo.getTxtCondicion().getText(), // combo box u option button
-				vehiculo.getIdProveedor(),
-				Integer.parseInt(panelModificarVehiculo.getTxtCliente().getText()),
-				panelModificarVehiculo.getTxtComentarios().getText());
+//		Vehiculo vehiculoModificado = new Vehiculo(
+//				panelModificarVehiculo.getTxtPatente().getText(),
+//				vehiculo.getMarca(),
+//				vehiculo.getModelo(),
+//				vehiculo.getYear(),
+//				vehiculo.getColor(),
+//				Integer.parseInt(panelModificarVehiculo.getTxtKm().getText()),
+//				vehiculo.getMotor(),
+//				vehiculo.getDominio(),
+//				Integer.parseInt(panelModificarVehiculo.getTxtPvc().getText()),
+//				vehiculo.getFechaIngreso(),
+//				panelModificarVehiculo.getTxtFechaVenta().getText(), 
+//				panelModificarVehiculo.getTxtCondicion().getText(), // combo box u option button
+//				vehiculo.getIdProveedor(),
+//				Integer.parseInt(panelModificarVehiculo.getTxtCliente().getText()),
+//				panelModificarVehiculo.getTxtComentarios().getText());
 
+		Vehiculo vehiculoModificado = null;
 		return vehiculoModificado;
 
 	}

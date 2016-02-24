@@ -88,6 +88,10 @@ public class PrincipalView implements PrincipalInterface {
 		panelAux = new PanelAux();
 		panelGeneral = new PanelGeneral(pc.getUser());
 		
+		if (pc.getUser().getPermisos() != 0){
+			panelMenu.getBtnUsuario().setVisible(false);
+		}
+		
 		frmPrin.setTitle("Menu Principal");
 		
 		

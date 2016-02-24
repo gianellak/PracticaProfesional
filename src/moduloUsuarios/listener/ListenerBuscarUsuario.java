@@ -2,17 +2,19 @@ package moduloUsuarios.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import exceptions.DBException;
+import moduloClientes.ClientesController;
 import moduloUsuarios.UsuarioController;
 
-public class ListenerBajaAceptar implements ActionListener {
+
+public class ListenerBuscarUsuario implements ActionListener {
 
 
 	private UsuarioController uc;
 
 
-	public ListenerBajaAceptar(UsuarioController uc){
-		
+	public ListenerBuscarUsuario(UsuarioController uc){
 		this.uc = uc;
 		
 	}
@@ -20,14 +22,10 @@ public class ListenerBajaAceptar implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		try {
-			uc.bajaUsuario();
-		} catch (DBException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+		uc.showUnUsuario();
 		
 		
 	}
+	
 }

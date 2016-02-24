@@ -25,8 +25,13 @@ public class ListenerUsuarioBaja implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		uc.showBaja();
+			
+			try {
+				uc.bajaUsuario();
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		
 		
 	}

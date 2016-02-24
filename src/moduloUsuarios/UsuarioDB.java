@@ -32,6 +32,9 @@ public class UsuarioDB  {
 	private static final String SQL_FIND_BY_ID =
 	        "SELECT * FROM Usuario WHERE username=?";
 	
+	private static final String SQL_UPDATE =
+			 "UPDATE Usuario SET password=?, permisos=?, nombre=?, apellido=? WHERE username=?";
+	
 	
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
@@ -48,7 +51,40 @@ public class UsuarioDB  {
 	
 
 	
-	
+	  public boolean update(Usuario user) throws DBException {
+
+	        Object[] values = {
+	        		user.getPassword(),
+	        		user.getPermisos(),
+	        		user.getNombre(),
+	        		user.getApellido(),
+	                user.getUsername(),
+	            };
+	    
+		
+	        try (
+	        		
+	            Connection connection = this.connectionProvider.getConnection();
+	        		
+	            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_UPDATE, false, values);
+	        ) {
+	           
+	        	int affectedRows = statement.executeUpdate();
+	        	
+	            if (affectedRows == 0) {
+	            	
+	                throw new DBException("Updating user failed, no rows affected.");
+	            } else{
+	            	return true;
+	            }
+	           
+	           
+	        } catch (SQLException e) {
+	            throw new DBException(e);
+	        }
+	    }
+	  
+	  
 	public boolean delete(String u) throws DBException {
 		
 		Object[] values = { 
