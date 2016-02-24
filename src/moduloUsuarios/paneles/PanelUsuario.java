@@ -154,7 +154,7 @@ public class PanelUsuario extends JPanel {
 		System.out.println("ONMOD");
 		
 		
-
+		//Aca solo el permiso 0 puede modificar el campo user.
 		userText.setEditable(true);
 		passwordText.setEditable(true);
 		permisosText.setEditable(true);

@@ -98,7 +98,7 @@ public class CajaDB {
 
 	public boolean insert(Movimiento m) throws DBException {
 		Object[] values = { m.getId(), m.getDescripcion(), m.getMonto(),
-				m.getFecha(), m.getUsuario(), m.isFlag() };
+				m.getFecha(), m.getUsuario(), m.isMarca() };
 
 		try (Connection connection = this.connectionProvider.getConnection();
 				PreparedStatement statement = DBUtil.prepareStatement(
