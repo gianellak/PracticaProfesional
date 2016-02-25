@@ -192,15 +192,15 @@ public class PanelCaja extends JPanel {
 
 	private JTable createTablaMovimientos() {
 		// Create columns names
-		String columnNames[] = { "ID Mov", "Descripcion", "Monto" };
+		String columnNames[] = { "ID", "Descripcion", "Monto", "Fecha", "Usuario"}; // Marca no se muestra
 
 		// Create some data
 		String dataValues[][] =
 		{
-			{ "12", "234", "67" },
-			{ "-123", "43", "853" },
-			{ "93", "89.2", "109" },
-			{ "279", "9033", "3092" }
+			{ "12", "234", "67", "24/02/16", "Gianella"},
+			{ "-123", "43", "853","12/01/16", "admin" },
+			{ "93", "89.2", "109","04/06/15", "Rachel"},
+			{ "279", "9033", "3092","14/03/15", "Gianella" }
 		};
 		
 		JTable tabla = new JTable(dataValues, columnNames);

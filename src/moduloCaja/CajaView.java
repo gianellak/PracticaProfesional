@@ -39,8 +39,6 @@ public class CajaView implements CajaInterface {
 
 	
 
-	
-
 	@Override
 	public List<Movimiento> findAll() throws DBException {
 		// TODO Auto-generated method stub
@@ -190,7 +188,7 @@ public class CajaView implements CajaInterface {
 
 
 	@Override
-	public int getBajaPersona() {
+	public int getBajaMovimiento() {
 
 		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
 		

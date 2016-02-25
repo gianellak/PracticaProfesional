@@ -59,8 +59,5 @@ public class Movimiento {
 	public void setMarca(boolean marca) {
 		this.marca = marca;
 	}
-
-
-
-
+	
 }

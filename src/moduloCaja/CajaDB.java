@@ -18,9 +18,12 @@ public class CajaDB {
 	
 	private static final String SQL_FIND_ALL_MOVIMIENTOS = "SELECT * FROM Movimiento";
 
+	private static final String SQL_DELETE = null;
+	
+	private static final String SQL_UPDATE_MOVIMIENTO = "UPDATE FROM Movimiento WHERE id = ?";
+
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
-	private static final String SQL_DELETE = null;
 
 	private ConnectionProvider connectionProvider;
 
@@ -162,6 +165,38 @@ public class CajaDB {
         }
 
         return movimientos;
+	}
+	
+	
+	public Boolean update(int id, Movimiento mov) throws DBException {
+
+		Object[] values = {
+				
+				mov.getId(),
+				mov.getDescripcion(),
+				mov.getMonto(),
+				mov.getFecha(),
+				mov.getUsuario(),
+				mov.isMarca()
+				
+				};
+
+		try
+		
+		(Connection connection = this.connectionProvider.getConnection();
+		PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_UPDATE_MOVIMIENTO, false, values);)
+
+		{
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			if (e.getErrorCode() == MYSQL_DUPLICATE_PK) {
+				throw new DBException("Duplicated Key, cannot modify movimiento");
+			} else {
+				throw new DBException(e);
+			}
+		}
+
+		return null;
 	}
 
 }

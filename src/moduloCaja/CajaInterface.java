@@ -35,7 +35,7 @@ public interface CajaInterface {
 
 	void onVer(List<Movimiento> lista);
 
-	int getBajaPersona();
+	int getBajaMovimiento();
 
 	void cleanPanelClientes();
 
