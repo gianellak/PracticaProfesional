@@ -5,29 +5,18 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import exceptions.DBException;
-import objetos.Movimiento;
-import objetos.Persona;
-import objetos.Usuario;
+import objetos.*;
 import utilitarios.PantallaUtil;
 import moduloClientes.listener.ListenerClientesVolver;
-import moduloClientes.paneles.ClientesMenu;
-import moduloClientes.paneles.PanelClientes;
-import moduloPrincipal.PrincipalController;
-import moduloPrincipal.PrincipalView;
-import moduloPrincipal.paneles.*;
-import moduloUsuarios.UsuarioController;
-import moduloUsuarios.UsuarioInterface;
-import moduloCaja.listener.*;
-import moduloCaja.paneles.CajaMenu;
-import moduloCaja.paneles.PanelCaja;
-import moduloPrincipal.paneles.PanelGeneral;
 import moduloClientes.paneles.*;
+import moduloPrincipal.*;
+import moduloUsuarios.*;
+import moduloCaja.listener.*;
+import moduloCaja.paneles.*;
+
 
 public class CajaView implements CajaInterface {
 	
@@ -108,7 +97,7 @@ public class CajaView implements CajaInterface {
 	@Override
 	public void onAlta() {
 
-		PantallaUtil.remove(panelCaja);
+		//PantallaUtil.remove(panelCaja);
 		
 		panelCaja.onAlta(usuario);
 		
@@ -118,7 +107,7 @@ public class CajaView implements CajaInterface {
 	//	panelClientes.getBtnAceptar().addActionListener(listenerAltaAceptar);
 		//panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
-		PantallaUtil.refresh(frame);
+		//PantallaUtil.refresh(frame);
 		
 	
 		

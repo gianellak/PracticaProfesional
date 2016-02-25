@@ -30,9 +30,7 @@ public class CajaController {
 	public void verMovimientos() throws DBException {
 		
 		System.out.println("Ver Movimientos - Controller");
-		
-		
-		
+			
 		List<Movimiento> lista= cDB.findAll();
 		
 		ci.onVer(lista);

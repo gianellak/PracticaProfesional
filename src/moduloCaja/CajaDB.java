@@ -1,24 +1,14 @@
 package moduloCaja;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import connections.ConnectionProvider;
 import exceptions.DBException;
-import objetos.Movimiento;
-import objetos.Persona;
-import objetos.Usuario;
-import objetos.Venta;
+import objetos.*;
 import utilitarios.DBUtil;
-import moduloPrincipal.PrincipalController;
-import moduloPrincipal.PrincipalView;
-import moduloPrincipal.paneles.PanelAux;
+
 
 public class CajaDB {
 

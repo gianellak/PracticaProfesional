@@ -85,6 +85,7 @@ public class PanelCaja extends JPanel {
 		this.add(nombreLabel);
 
 
+		// VER!!!! PORQUE LO HABIA PUESTO STRING
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		DateFormatter df = new DateFormatter(format);
 		JFormattedTextField dateField = new JFormattedTextField(df);
