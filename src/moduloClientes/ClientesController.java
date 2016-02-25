@@ -83,6 +83,7 @@ public class ClientesController {
 		if(persona != null){
 		
 		int codigo = ci.showToDelete(persona);
+		
 		 if (codigo==JOptionPane.YES_OPTION){
 			 if(cDB.delete(u)){
 					
@@ -114,8 +115,6 @@ public class ClientesController {
 		{
 			ci.insertBad();
 		}
-		
-		
 		
 	}
 

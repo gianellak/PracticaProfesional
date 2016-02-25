@@ -31,12 +31,11 @@ public class ClientesDB  {
 			 "UPDATE Persona SET telefono_p=?, telefono_c=?, telefono_l=?, nombre=?, apellido=?, domicilio=?,"
 			 + "ciudad=?, provincia=?, domicilio_l=?, empresa=? WHERE DNI=?";
 	
-	
-	
+	private static final String SQL_DELETE =
+	        "DELETE FROM Persona WHERE dni = ?";
 	
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
-	private static final String SQL_DELETE = null;
 
 	private ConnectionProvider connectionProvider;
 	
