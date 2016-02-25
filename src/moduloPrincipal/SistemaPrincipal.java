@@ -12,6 +12,7 @@ import moduloLogin.LoginView;
 import moduloLogin.LoginDB;
 import connections.ConnectionProvider;
 import connections.DBConnection;
+import connections.SchemaGenerator;
 
 public class SistemaPrincipal {
 
@@ -28,6 +29,18 @@ public class SistemaPrincipal {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+//		TABLA USUARIO
+//		
+//		SchemaGenerator s = new SchemaGenerator(conn);
+//		
+//		try {
+//			s.generateSchemaUsuario();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+
 		
 		LoginInterface ventanaL = new LoginView();
 		

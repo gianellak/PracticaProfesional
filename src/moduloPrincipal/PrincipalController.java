@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 import connections.ConnectionProvider;
+import connections.SchemaGenerator;
 import objetos.Usuario;
 
 public class PrincipalController {
@@ -48,7 +49,7 @@ public class PrincipalController {
 		return conn;
 	}
 
-
+	
 
 	public JFrame getView() {
 		

@@ -122,7 +122,7 @@ public class UsuarioView implements UsuarioInterface {
 		
 		PantallaUtil.remove(panelUsuario);
 		
-		panelUsuario.onVer();
+		panelUsuario.onVer(lista);
 		
 		
 		listenerVerVolver = new ListenerMenuUsuarioVolver(userController);
@@ -338,5 +338,6 @@ public class UsuarioView implements UsuarioInterface {
 		
 	}
 	
+
 
 }

@@ -14,6 +14,7 @@ import exceptions.DBException;
 import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
+import utilitarios.PantallaUtil;
 import moduloClientes.listener.ListenerClientesVolver;
 import moduloClientes.paneles.ClientesMenu;
 import moduloClientes.paneles.PanelClientes;
@@ -106,9 +107,8 @@ public class CajaView implements CajaInterface {
 
 	@Override
 	public void onAlta() {
-		panelCaja.removeAll();
-		panelCaja.validate();
-		panelCaja.repaint();
+
+		PantallaUtil.remove(panelCaja);
 		
 		panelCaja.onAlta(usuario);
 		
@@ -118,9 +118,7 @@ public class CajaView implements CajaInterface {
 	//	panelClientes.getBtnAceptar().addActionListener(listenerAltaAceptar);
 		//panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
-		
-		frame.validate();
-		frame.repaint();
+		PantallaUtil.refresh(frame);
 		
 	
 		
@@ -129,9 +127,7 @@ public class CajaView implements CajaInterface {
 	@Override
 	public void onVer(List<Movimiento> lista) {
 		
-		panelCaja.removeAll();
-		panelCaja.validate();
-		panelCaja.repaint();
+		PantallaUtil.remove(panelCaja);
 		
 		panelCaja.onVer();
 		
@@ -142,8 +138,7 @@ public class CajaView implements CajaInterface {
 //		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
 		
-		frame.validate();
-		frame.repaint();
+		PantallaUtil.refresh(frame);
 		
 		
 		

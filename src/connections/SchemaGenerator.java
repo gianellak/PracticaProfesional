@@ -37,4 +37,29 @@ public class SchemaGenerator {
 		
 	}
 	
+	public boolean generateSchemaUsuario() throws SQLException{
+		
+		Connection c = this.connection.getConnection();
+		
+		Statement statement = c.createStatement();
+		
+		String sql ="create table Usuario (Username VARCHAR(8) PRIMARY KEY, Password VARCHAR(8), Permisos INTEGER, Nombre VARCHAR(15), Apellido VARCHAR(15))";
+
+		try {
+			
+	    	
+	    	statement.execute(sql);
+	    	
+	    	return true;
+			
+		} catch (SQLException e) {
+			
+		
+			return false;
+		}
+		
+		
+		
+	}
+	
 }

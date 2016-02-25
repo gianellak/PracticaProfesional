@@ -11,8 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import moduloUsuarios.listener.ListenerAltaAceptar;
 import moduloUsuarios.listener.ListenerMenuUsuarioVolver;
@@ -36,6 +39,8 @@ public class PanelUsuario extends JPanel {
 	private JButton btnResetear;
 	private Usuario user;
 	private JButton btnAceptarMod;
+	private JTable tabla;
+	private JScrollPane jp;
 	
 	public PanelUsuario(){
 		
@@ -176,7 +181,7 @@ public class PanelUsuario extends JPanel {
 		
 	}
 
-	public void onVer() {
+	public void onVer(List<Usuario> lista) {
 		
 		this.removeAll();
 		System.out.println("ONVER");
@@ -184,6 +189,10 @@ public class PanelUsuario extends JPanel {
 		JLabel userLabel = new JLabel("Usuarios habilitados a usar el sistema: ");
 		userLabel.setBounds(150, 0, 280, 25);
 		this.add(userLabel);
+		
+		createTablaUsuarios(lista);
+		
+		this.add(jp);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(500, 180, 100, 25);
@@ -195,6 +204,41 @@ public class PanelUsuario extends JPanel {
 
 	}
 
+public void createTablaUsuarios(List<Usuario> lista) {
+		
+		// Create columns names
+		String columnNames[] = { "Usuario", "Contrasena", "Nombre", "Apellido", "Permisos", "Bloqueo"};
+
+		DefaultTableModel model = new DefaultTableModel();
+		
+		model.setColumnIdentifiers(columnNames);
+		
+		tabla = new JTable();
+
+		tabla.setModel(model);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		jp= new JScrollPane(tabla);
+		
+		
+		
+		// Create some data
+		for (Usuario u : lista) {
+			
+			Object[] o = new Object[6];
+			o[0] = u.getUsername();
+			o[1] = u.getPassword();
+			o[2] = u.getNombre();
+			o[3] = u.getApellido();
+			o[4] = u.getPermisos();
+			o[5]  = "SI";
+			model.addRow(o);
+		}
+		
+		jp.setBounds(150, 50, 600, 200);
+
+
+	
+	}
 	public void onBuscar() {
 		
 		this.removeAll();
