@@ -105,7 +105,7 @@ public class ClientesController {
 	
 	public void altaPersona() throws DBException {
 		
-		Persona persona = ci.getNuevoCliente();
+		Persona persona = ci.getUpdatePersona();
 		
 		if(cDB.insert(persona)){
 			
@@ -139,7 +139,7 @@ public class ClientesController {
 		
 	}
 
-	public void verUnClienteMod() throws DBException {
+	public void buscarCliente() throws DBException {
 		
 		int dni = ci.getModPersona();
 		
@@ -153,6 +153,29 @@ public class ClientesController {
 			ci.showNotFound();
 		}
 		
+		
+	}
+
+	public void update() throws DBException {
+		Persona cliente = ci.getUpdatePersona();
+		
+		if(cliente != null){
+			
+			int codigo = ci.showToUpdate(cliente);
+			
+			 if (codigo==JOptionPane.YES_OPTION){
+				 if(cDB.updatePersona(cliente)){
+						
+						ci.updateOk();
+					}else
+					{
+						ci.updateBad();
+					}
+		        }else if(codigo==JOptionPane.NO_OPTION){
+		            ci.onMod();
+		        }
+			
+			}
 		
 	}
 

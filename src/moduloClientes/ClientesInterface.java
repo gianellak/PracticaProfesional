@@ -47,4 +47,12 @@ public interface ClientesInterface {
 
 	public void verCliente(Persona p);
 
+	public void updateOk();
+
+	public void updateBad();
+
+	public int showToUpdate(Persona cliente);
+
+	public Persona getUpdatePersona();
+
 }

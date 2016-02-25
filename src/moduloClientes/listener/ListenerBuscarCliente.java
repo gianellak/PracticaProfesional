@@ -22,7 +22,7 @@ public class ListenerBuscarCliente implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			cc.verUnClienteMod();
+			cc.buscarCliente();;
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

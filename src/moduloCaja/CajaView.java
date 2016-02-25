@@ -13,6 +13,7 @@ import utilitarios.PantallaUtil;
 import moduloClientes.listener.ListenerClientesVolver;
 import moduloClientes.paneles.*;
 import moduloPrincipal.*;
+import moduloPrincipal.paneles.PanelGeneral;
 import moduloUsuarios.*;
 import moduloCaja.listener.*;
 import moduloCaja.paneles.*;

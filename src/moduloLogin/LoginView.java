@@ -33,7 +33,7 @@ public class LoginView implements LoginInterface {
 	public LoginView(){
 		
 		frmLogin = new JFrame("Login");
-		frmLogin.setBounds(500, 100, 300, 150);
+		frmLogin.setBounds(500, 200, 300, 150);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		panel = new JPanel();

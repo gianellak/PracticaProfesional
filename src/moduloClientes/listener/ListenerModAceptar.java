@@ -27,7 +27,12 @@ public class ListenerModAceptar implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		cc.modPersona();
+		try {
+			cc.update();
+		} catch (DBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 	}

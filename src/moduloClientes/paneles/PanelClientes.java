@@ -1,19 +1,20 @@
 package moduloClientes.paneles;
 
-import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import objetos.Persona;
 
 public class PanelClientes extends JPanel {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton btnVolver;
 	private JButton btnAceptar;
 	private JTextField nombreCompradorText;
@@ -30,6 +31,9 @@ public class PanelClientes extends JPanel {
 	private JButton btnEliminar;
 	private JButton btnVender;
 	private JButton btnComprar;
+	private JTextField ciudadText;
+	private JTextField provinciaText;
+	private JTextField empresaText;
 	
 	
 	public PanelClientes(){
@@ -91,45 +95,69 @@ public class PanelClientes extends JPanel {
 		domicilioPartText.setBounds(300, 120, 160, 25);
 		this.add(domicilioPartText);
 		
+		JLabel ciudadLabel = new JLabel("Ciudad: ");
+		ciudadLabel.setBounds(150, 150, 160, 25);
+		this.add(ciudadLabel);
+		
+		ciudadText = new JTextField(25);
+		ciudadText.setBounds(300, 150, 160, 25);
+		this.add(ciudadText);
+		
+		JLabel provinciaLabel = new JLabel("Provincia: ");
+		provinciaLabel.setBounds(150, 180, 160, 25);
+		this.add(provinciaLabel);
+		
+		provinciaText = new JTextField(25);
+		provinciaText.setBounds(300, 180, 160, 25);
+		this.add(provinciaText);
+		
 		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
-		domicilioLabLabel.setBounds(150, 150, 160, 25);
+		domicilioLabLabel.setBounds(150, 210, 160, 25);
 		this.add(domicilioLabLabel);
 		
 		domicilioLabText = new JTextField(25);
-		domicilioLabText.setBounds(300, 150, 260, 25);
+		domicilioLabText.setBounds(300, 210, 260, 25);
 		this.add(domicilioLabText);
 		
 		JLabel telPartLabel = new JLabel("Tel. Particular: ");
-		telPartLabel.setBounds(150, 180, 160, 25);
+		telPartLabel.setBounds(150, 240, 160, 25);
 		this.add(telPartLabel);
 		
 		telPartText = new JTextField(25);
-		telPartText.setBounds(300, 180, 260, 25);
+		telPartText.setBounds(300,240, 260, 25);
 		this.add(telPartText);
 		
 		JLabel telCelLabel = new JLabel("Tel. Celular: ");
-		telCelLabel.setBounds(150, 210, 160, 25);
+		telCelLabel.setBounds(150, 270, 160, 25);
 		this.add(telCelLabel);
 		
 		telCelText = new JTextField(25);
-		telCelText.setBounds(300, 210, 260, 25);
+		telCelText.setBounds(300, 270, 260, 25);
 		this.add(telCelText);
 		
 		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
-		telLabLabel.setBounds(150, 240, 160, 25);
+		telLabLabel.setBounds(150, 300, 160, 25);
 		this.add(telLabLabel);
 		
 		telLabText = new JTextField(25);
-		telLabText.setBounds(300, 240, 260, 25);
+		telLabText.setBounds(300, 300, 260, 25);
 		this.add(telLabText);
+		
+		JLabel empresaLabel = new JLabel("Tel. Laboral: ");
+		empresaLabel.setBounds(150, 330, 160, 25);
+		this.add(empresaLabel);
+		
+		empresaText = new JTextField();
+		empresaText.setBounds(300, 330, 260, 25);
+		this.add(empresaText);
 		
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(700, 270, 100, 25);
+		btnAceptar.setBounds(700, 300, 100, 25);
 		this.add(btnAceptar);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(700, 300, 100, 25);
+		btnVolver.setBounds(700, 330, 100, 25);
 		this.add(btnVolver);
 		
 		
@@ -165,9 +193,6 @@ public class PanelClientes extends JPanel {
 		btnVolver.setBounds(700, 300, 160, 25);
 		this.add(btnVolver);
 		
-		
-		
-	
 		
 		this.validate();
 		this.repaint();
@@ -225,61 +250,88 @@ public class PanelClientes extends JPanel {
 		domicilioPartText.setEditable(false);
 		this.add(domicilioPartText);
 		
+		JLabel ciudadLabel = new JLabel("Ciudad: ");
+		ciudadLabel.setBounds(150, 150, 160, 25);
+		this.add(ciudadLabel);
+		
+		ciudadText = new JTextField(25);
+		ciudadText.setBounds(300, 150, 160, 25);
+		ciudadText.setEditable(false);
+		this.add(ciudadText);
+		
+		JLabel provinciaLabel = new JLabel("Provincia: ");
+		provinciaLabel.setBounds(150, 180, 160, 25);
+		this.add(provinciaLabel);
+		
+		provinciaText = new JTextField(25);
+		provinciaText.setBounds(300, 180, 160, 25);
+		provinciaText.setEditable(false);
+		this.add(provinciaText);
+		
+		
 		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
-		domicilioLabLabel.setBounds(150, 150, 160, 25);
+		domicilioLabLabel.setBounds(150, 210, 160, 25);
 		this.add(domicilioLabLabel);
 		
 		domicilioLabText = new JTextField(p.getDomicilioL());
-		domicilioLabText.setBounds(300, 150, 260, 25);
+		domicilioLabText.setBounds(300, 210, 260, 25);
 		domicilioLabText.setEditable(false);
 		this.add(domicilioLabText);
 		
 		JLabel telPartLabel = new JLabel("Tel. Particular: ");
-		telPartLabel.setBounds(150, 180, 160, 25);
+		telPartLabel.setBounds(150, 240, 160, 25);
 		this.add(telPartLabel);
 		
 		telPartText = new JTextField(p.getTelefonoP());
-		telPartText.setBounds(300, 180, 260, 25);
+		telPartText.setBounds(300, 240, 260, 25);
 		telPartText.setEditable(false);
 		this.add(telPartText);
 		
 		JLabel telCelLabel = new JLabel("Tel. Celular: ");
-		telCelLabel.setBounds(150, 210, 160, 25);
+		telCelLabel.setBounds(150, 270, 160, 25);
 		this.add(telCelLabel);
 		
 		telCelText = new JTextField(p.getTelefonoC());
-		telCelText.setBounds(300, 210, 260, 25);
+		telCelText.setBounds(300, 270, 260, 25);
 		telCelText.setEditable(false);
 		this.add(telCelText);
 		
 		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
-		telLabLabel.setBounds(150, 240, 160, 25);
+		telLabLabel.setBounds(150, 300, 160, 25);
 		this.add(telLabLabel);
 		
 		telLabText = new JTextField(p.getTelefonoL());
-		telLabText.setBounds(300, 240, 260, 25);
+		telLabText.setBounds(300, 300, 260, 25);
 		telLabText.setEditable(false);
 		this.add(telLabText);
 		
+		JLabel empresaLabel = new JLabel("Tel. Laboral: ");
+		empresaLabel.setBounds(150, 330, 160, 25);
+		this.add(empresaLabel);
+		
+		empresaText = new JTextField(p.getTelefonoL());
+		empresaText.setBounds(300, 330, 260, 25);
+		empresaText.setEditable(false);
+		this.add(empresaText);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(700, 270, 100, 25);
+		btnModificar.setBounds(700, 300, 100, 25);
 		this.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(700, 300, 100, 25);
+		btnEliminar.setBounds(700, 330, 100, 25);
 		this.add(btnEliminar);
 
 		btnVender = new JButton("Iniciar Venta");
-		btnVender.setBounds(700, 330, 100, 25);
+		btnVender.setBounds(700, 360, 100, 25);
 		this.add(btnVender);
 
 		btnComprar = new JButton("Comprar Vehiculo");
-		btnComprar.setBounds(700, 360, 100, 25);
+		btnComprar.setBounds(700, 390, 100, 25);
 		this.add(btnComprar);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(700, 390, 100, 25);
+		btnVolver.setBounds(700, 420, 100, 25);
 		this.add(btnVolver);
 		
 	
@@ -299,6 +351,22 @@ public class PanelClientes extends JPanel {
 		this.btnBuscar = btnBuscar;
 	}
 
+	public JTextField getCiudadText() {
+		return ciudadText;
+	}
+
+	public void setCiudadText(JTextField ciudadText) {
+		this.ciudadText = ciudadText;
+	}
+
+	public JTextField getProvinciaText() {
+		return provinciaText;
+	}
+
+	public void setProvinciaText(JTextField provinciaText) {
+		this.provinciaText = provinciaText;
+	}
+
 	public void verMod() {
 		
 		
@@ -310,13 +378,26 @@ public class PanelClientes extends JPanel {
 		apellidoCompradorText.setEditable(true);
 		fechaNacText.setEditable(true);
 		domicilioPartText.setEditable(true);
+		ciudadText.setEditable(true);
+		provinciaText.setEditable(true);
 		domicilioLabText.setEditable(true);
 		telPartText.setEditable(true);
 		telCelText.setEditable(true);
 		telLabText.setEditable(true);
+		empresaText.setEditable(true);
 		
+		
+		this.remove(btnModificar);
+		this.remove(btnVender);
+		this.remove(btnComprar);
+		this.remove(btnEliminar);
+		this.remove(btnVolver);
+			
+		
+		
+
 		btnAceptar = new JButton("Aceptar Cambios");
-		btnAceptar.setBounds(700, 270, 100, 25);
+		btnAceptar.setBounds(700, 270, 160, 25);
 		this.add(btnAceptar);
 
 		btnVolver = new JButton("Volver");
@@ -451,6 +532,26 @@ public class PanelClientes extends JPanel {
 
 	public void setBtnComprar(JButton btnComprar) {
 		this.btnComprar = btnComprar;
+	}
+
+	public Persona getUpdatePersona() {
+
+		
+		Persona cliente = new Persona(
+				Integer.parseInt(dniCompradorText.getText()),
+				Integer.parseInt(telPartText.getText()),
+				Integer.parseInt(telCelText.getText()),
+				Integer.parseInt(telLabText.getText()),
+				nombreCompradorText.getText(),
+				apellidoCompradorText.getText(),
+				domicilioPartText.getText(),
+				ciudadText.getText(),
+				provinciaText.getText(),
+				domicilioLabText.getText(),
+				empresaText.getText());
+		
+		return cliente;
+		
 	}
 
 

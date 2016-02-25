@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
+import utilitarios.PantallaUtil;
 import moduloClientes.paneles.ClientesMenu;
 import moduloClientes.paneles.PanelClientes;
 import moduloClientes.listener.*;
@@ -261,7 +262,8 @@ public class ClientesView implements ClientesInterface {
 
 	@Override
 	public void deleteBad() {
-		// TODO Auto-generated method stub
+		
+		JOptionPane.showMessageDialog(null, "Error al borrar cliente. Revise los datos ingresados");
 		
 	}
 
@@ -321,7 +323,53 @@ public class ClientesView implements ClientesInterface {
 
 	@Override
 	public int getModPersona() {
+		
 		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
+	}
+
+
+
+
+
+	@Override
+	public void updateOk() {
+
+		JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
+		
+		PantallaUtil.remove(panelClientes);
+		
+	}
+
+
+
+
+
+	@Override
+	public void updateBad() {
+		
+		JOptionPane.showMessageDialog(null, "Error al modificar el cliente. Revise los datos ingresados");
+		
+	}
+
+
+
+
+
+	@Override
+	public Persona getUpdatePersona() {
+		
+		return panelClientes.getUpdatePersona();
+		
+	}
+
+
+
+
+
+	@Override
+	public int showToUpdate(Persona cliente) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

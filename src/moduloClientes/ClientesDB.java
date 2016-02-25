@@ -27,7 +27,10 @@ public class ClientesDB  {
 	private static final String SQL_FIND_BY_ID =
 			"SELECT * FROM Persona WHERE dni=?";
 	
-
+	private static final String SQL_UPDATE =
+			 "UPDATE Persona SET telefono_p=?, telefono_c=?, telefono_l=?, nombre=?, apellido=?, domicilio=?,"
+			 + "ciudad=?, provincia=?, domicilio_l=?, empresa=? WHERE DNI=?";
+	
 	
 	
 	
@@ -187,6 +190,48 @@ public class ClientesDB  {
 	public List<Usuario> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+
+	public boolean updatePersona(Persona p) throws DBException {
+	
+		Object[] values = {
+	            p.getTelefonoP(),
+	            p.getTelefonoC(),
+	            p.getTelefonoL(),
+	            p.getNombre(),
+	            p.getApellido(),
+	            p.getDomicilio(),
+	            p.getCiudad(),
+	            p.getProvincia(),
+	            p.getDomicilioL(),
+	            p.getEmpresa(),
+	            p.getDni()
+	        };
+    
+	
+        try (
+        		
+            Connection connection = this.connectionProvider.getConnection();
+        		
+            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_UPDATE, false, values);
+        ) {
+           
+        	int affectedRows = statement.executeUpdate();
+        	
+            if (affectedRows == 0) {
+            	
+                throw new DBException("Updating user failed, no rows affected.");
+            } else{
+            	return true;
+            }
+           
+           
+        } catch (SQLException e) {
+            throw new DBException(e);
+        }
 	}
 
 
