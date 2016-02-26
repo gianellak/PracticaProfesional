@@ -33,16 +33,11 @@ public class UsuarioView implements UsuarioInterface {
 	private ListenerAltaAceptar listenerAltaAceptar;
 
 	public UsuarioView(){
-		
-		
 	
 		panelUsuarioMenu= new UsuarioMenu();
 		panelUsuario = new PanelUsuario();
 	
 	}
-
-	
-
 	
 	//Muestrala lista de todos los usuarios. Viene desde el controller con la lista cargada, y pasa la lista al panelUsuario,
 	//donde lo carga en la tabla. 
