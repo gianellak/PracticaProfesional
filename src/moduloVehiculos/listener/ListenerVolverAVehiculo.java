@@ -4,14 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import moduloVehiculo.vehiculoController;
+import moduloVehiculos.VehiculosController;
 
 public class ListenerVolverAVehiculo implements ActionListener {
 
-	vehiculoController vc;
+	VehiculosController vc;
 
-	public ListenerVolverAVehiculo(vehiculoController vc) {
+	public ListenerVolverAVehiculo(VehiculosController vc2) {
 		super();
-		this.vc = vc;
+		this.vc = vc2;
 	}
 
 	@Override

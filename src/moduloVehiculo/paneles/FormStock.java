@@ -14,30 +14,58 @@ public class FormStock extends JPanel {
 	private JTable tablaStock;
 	private JButton btnCancelar, btnVerDetalle;
 	private List<Stock> listaStock;
+	private JScrollPane jp;
 
-	public FormStock() {
+	public FormStock(List<Stock> listaStock) {
+		
+		this.listaStock = listaStock;
 
 		this.setLayout(null);
 
 		tablaStock = new JTable();
+		
 		DefaultTableModel modelo = new DefaultTableModel();
+		
 		tablaStock.setModel(modelo);
+		
+		tablaStock.getTableHeader().setReorderingAllowed(false);
+		
+		jp= new JScrollPane(tablaStock);
+		
 		
 
 		String columnNames[] = { "Patente", "Marca", "Modelo", "Color", "Año",
 				"PVC", "Condición" };
+		
+		modelo.setColumnIdentifiers(columnNames);
+		
 
-		for (int fila = 0; fila < listaStock.size(); fila++) {
-				
-				tablaStock.setValueAt(listaStock.get(fila).getPatente(), fila, 0);
-				tablaStock.setValueAt(listaStock.get(fila).getMarca(), fila, 1);
-				tablaStock.setValueAt(listaStock.get(fila).getModelo(), fila, 2);
-				tablaStock.setValueAt(listaStock.get(fila).getColor(), fila, 3);
-				tablaStock.setValueAt(listaStock.get(fila).getYear(), fila, 4);
-				tablaStock.setValueAt(listaStock.get(fila).getPvc(), fila, 5);
-				tablaStock.setValueAt(listaStock.get(fila).getCondicion(), fila, 6);
+		for (Stock v : listaStock) {
+			
+			Object[] o = new Object[7];
+			o[0] = v.getPatente();
+			o[1] = v.getMarca();
+			o[2] = v.getModelo();
+			o[3] = v.getColor();
+			o[4] = v.getYear();
+			o[5] = v.getPvc();
+			o[6] = v.getCondicion();
+			
+			modelo.addRow(o);
 		}
+		
+		jp.setBounds(150, 50, 600, 200);
 
+	}
+
+
+	public JScrollPane getJp() {
+		return jp;
+	}
+
+
+	public void setJp(JScrollPane jp) {
+		this.jp = jp;
 	}
 
 

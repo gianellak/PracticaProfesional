@@ -29,7 +29,7 @@ public class VehiculosController {
 
 	
 
-	private void conectar() {
+public void conectar() {
 		
 		ConnectionProvider pro = new DBConnection();
 		
@@ -41,6 +41,17 @@ public class VehiculosController {
 		}
 		
 		vDB = new VehiculosDB(pro);
+		
+//		TABLAVEHICULO
+//		SchemaGenerator v = new SchemaGenerator(conn);
+//		
+//		try {
+//			v.generateSchemaVehiculo();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+
 		
 	}
 
@@ -79,6 +90,7 @@ public class VehiculosController {
 
 		
 		List<Vehiculo> stockActual = vDB.getAllVehiculos();
+		
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
 
 		for (int i = 0; i < stockActual.size(); i++) {
@@ -122,8 +134,10 @@ public class VehiculosController {
 
 
 	public void onMenuVehiculo() {
-		vDB = new VehiculosDB(pc.getConn());
+
 		vi.showVehiculo(this, pc.getView(), pc.getUser());
+		
+		this.conectar();
 		
 	}
 

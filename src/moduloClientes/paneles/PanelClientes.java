@@ -1,11 +1,13 @@
 package moduloClientes.paneles;
 
 import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import objetos.Persona;
 
 public class PanelClientes extends JPanel {
@@ -153,11 +155,11 @@ public class PanelClientes extends JPanel {
 		
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(700, 300, 100, 25);
+		btnAceptar.setBounds(700, 300, 160, 25);
 		this.add(btnAceptar);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(700, 330, 100, 25);
+		btnVolver.setBounds(700, 330, 160, 25);
 		this.add(btnVolver);
 		
 		
@@ -315,23 +317,23 @@ public class PanelClientes extends JPanel {
 		this.add(empresaText);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(700, 300, 100, 25);
+		btnModificar.setBounds(700, 300, 160, 25);
 		this.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(700, 330, 100, 25);
+		btnEliminar.setBounds(700, 330, 160, 25);
 		this.add(btnEliminar);
 
 		btnVender = new JButton("Iniciar Venta");
-		btnVender.setBounds(700, 360, 100, 25);
+		btnVender.setBounds(700, 360, 160, 25);
 		this.add(btnVender);
 
 		btnComprar = new JButton("Comprar Vehiculo");
-		btnComprar.setBounds(700, 390, 100, 25);
+		btnComprar.setBounds(700, 390, 160, 25);
 		this.add(btnComprar);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(700, 420, 100, 25);
+		btnVolver.setBounds(700, 420, 160, 25);
 		this.add(btnVolver);
 		
 	
@@ -552,6 +554,124 @@ public class PanelClientes extends JPanel {
 		
 		return cliente;
 		
+	}
+
+	public void onAltaFromVenta(String dni) {
+		this.removeAll();
+		System.out.println("ONALTAFROMVENTA");
+		
+		JLabel dniCompradorLabel = new JLabel("DNI: ");
+		dniCompradorLabel.setBounds(150, 0, 160, 25);
+		this.add(dniCompradorLabel);
+
+		dniCompradorText = new JTextField(String.valueOf(dni));
+		dniCompradorText.setBounds(300, 0, 160, 25);
+		this.add(dniCompradorText);
+		
+		JLabel nombreCompradorLabel = new JLabel("Nombre: ");
+		nombreCompradorLabel.setBounds(150, 30, 80, 25);
+		this.add(nombreCompradorLabel);
+
+		nombreCompradorText = new JTextField(9);
+		nombreCompradorText.setBounds(300, 30, 160, 25);
+		this.add(nombreCompradorText);
+	
+		JLabel apellidoCompradorLabel = new JLabel("Apellido: ");
+		apellidoCompradorLabel.setBounds(150, 60, 80, 25);
+		this.add(apellidoCompradorLabel);
+
+		apellidoCompradorText = new JTextField(9);
+		apellidoCompradorText.setBounds(300, 60, 160, 25);
+		this.add(apellidoCompradorText);
+		
+		JLabel fechaNacLabel = new JLabel("Fecha nacimiento: ");
+		fechaNacLabel.setBounds(150, 90, 160, 25);
+		this.add(fechaNacLabel);
+		
+		fechaNacText = new JTextField(6);
+		fechaNacText.setBounds(300, 90, 160, 25);
+		this.add(fechaNacText);
+		
+		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
+		domicilioPartLabel.setBounds(150, 120, 160, 25);
+		this.add(domicilioPartLabel);
+		
+		domicilioPartText = new JTextField(25);
+		domicilioPartText.setBounds(300, 120, 160, 25);
+		this.add(domicilioPartText);
+		
+		JLabel ciudadLabel = new JLabel("Ciudad: ");
+		ciudadLabel.setBounds(150, 150, 160, 25);
+		this.add(ciudadLabel);
+		
+		ciudadText = new JTextField(25);
+		ciudadText.setBounds(300, 150, 160, 25);
+		this.add(ciudadText);
+		
+		JLabel provinciaLabel = new JLabel("Provincia: ");
+		provinciaLabel.setBounds(150, 180, 160, 25);
+		this.add(provinciaLabel);
+		
+		provinciaText = new JTextField(25);
+		provinciaText.setBounds(300, 180, 160, 25);
+		this.add(provinciaText);
+		
+		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
+		domicilioLabLabel.setBounds(150, 210, 160, 25);
+		this.add(domicilioLabLabel);
+		
+		domicilioLabText = new JTextField(25);
+		domicilioLabText.setBounds(300, 210, 260, 25);
+		this.add(domicilioLabText);
+		
+		JLabel telPartLabel = new JLabel("Tel. Particular: ");
+		telPartLabel.setBounds(150, 240, 160, 25);
+		this.add(telPartLabel);
+		
+		telPartText = new JTextField(25);
+		telPartText.setBounds(300,240, 260, 25);
+		this.add(telPartText);
+		
+		JLabel telCelLabel = new JLabel("Tel. Celular: ");
+		telCelLabel.setBounds(150, 270, 160, 25);
+		this.add(telCelLabel);
+		
+		telCelText = new JTextField(25);
+		telCelText.setBounds(300, 270, 260, 25);
+		this.add(telCelText);
+		
+		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
+		telLabLabel.setBounds(150, 300, 160, 25);
+		this.add(telLabLabel);
+		
+		telLabText = new JTextField(25);
+		telLabText.setBounds(300, 300, 260, 25);
+		this.add(telLabText);
+		
+		JLabel empresaLabel = new JLabel("Tel. Laboral: ");
+		empresaLabel.setBounds(150, 330, 160, 25);
+		this.add(empresaLabel);
+		
+		empresaText = new JTextField();
+		empresaText.setBounds(300, 330, 260, 25);
+		this.add(empresaText);
+		
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(700, 300, 160, 25);
+		this.add(btnAceptar);
+
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(700, 330, 160, 25);
+		this.add(btnVolver);
+		
+		
+	
+		
+		this.validate();
+		this.repaint();
+	
+	
 	}
 
 

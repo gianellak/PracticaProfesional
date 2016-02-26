@@ -38,8 +38,6 @@ public interface UsuarioInterface {
 	
 //showUnUsuario() - Modificar
 	
-	public void dispose();
-
 
 
 	public Usuario getNuevoUsuario();

@@ -1,13 +1,9 @@
+
 package moduloUsuarios.paneles;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.util.List;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -16,16 +12,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import moduloUsuarios.listener.ListenerAltaAceptar;
-import moduloUsuarios.listener.ListenerMenuUsuarioVolver;
-import moduloUsuarios.listener.ListenerUsuarioVolver;
 import objetos.Usuario;
-import utilitarios.PantallaUtil;
 
 public class PanelUsuario extends JPanel {
 	
 	private Dimension preferredSize =new Dimension(200,25);
+
 	private JButton btnVolver;
 	private JTextField userText;
 	private JTextField permisosText;
@@ -50,8 +42,6 @@ public class PanelUsuario extends JPanel {
 		this.setPreferredSize(new Dimension(1000, 500));
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
-		
-		
 		
 		
 	}

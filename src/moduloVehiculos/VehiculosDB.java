@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import connections.ConnectionProvider;
 import exceptions.DBException;
 import objetos.Persona;
@@ -49,7 +50,7 @@ public class VehiculosDB  {
 				ResultSet rs = statement.executeQuery();) {
 			if (rs.next()) {
 
-				Integer year = rs.getInt(4);
+				String year = rs.getString(4);
 				String fechaIngreso = rs.getString(10);
 				String fechaVenta = rs.getString(11);
 				Integer km = rs.getInt(6);
@@ -91,17 +92,17 @@ public class VehiculosDB  {
 				ResultSet rs = statement.executeQuery();) {
 			while (rs.next()) {
 
-				Integer year = rs.getInt(4);
-				String fechaIngreso = rs.getString(10);
-				String fechaVenta = rs.getString(11);
-				Integer km = rs.getInt(6);
 				String patente = rs.getString(1);
 				String marca = rs.getString(2);
 				String modelo = rs.getString(3);
+				String year = rs.getString(4);
 				String color = rs.getString(5);
+				Integer km = rs.getInt(6);
 				String motor = rs.getString(7);
 				String dominio = rs.getString(8);
 				Integer pvc = rs.getInt(9);
+				String fechaIngreso = rs.getString(10);
+				String fechaVenta = rs.getString(11);
 				String condicion = rs.getString(12);
 				Integer idProveedor = rs.getInt(13);
 				Integer idCliente = rs.getInt(14);

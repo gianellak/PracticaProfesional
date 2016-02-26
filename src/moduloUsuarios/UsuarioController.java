@@ -33,11 +33,7 @@ public class UsuarioController {
 		
 	}
 
-	public void dispose() {
-		ui.dispose();
-		
-	}
-
+	
 
 	private void conectar() {
 		

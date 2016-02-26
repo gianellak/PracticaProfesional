@@ -6,7 +6,7 @@ public class Vehiculo {
 	String patente;
 	String marca;
 	String modelo;
-	Integer year;
+	String year;
 	String color;
 	Integer km;
 	String motor;
@@ -26,7 +26,7 @@ public class Vehiculo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Vehiculo(String patente, String marca, String modelo, Integer year,
+	public Vehiculo(String patente, String marca, String modelo, String year2,
 			String color, Integer km, String motor, String dominio,
 			Integer pvc, String fechaIngreso, String fechaVenta,
 			String condicion, Integer idProveedor, Integer idCliente,
@@ -35,7 +35,7 @@ public class Vehiculo {
 		this.patente = patente;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.year = year;
+		this.year = year2;
 		this.color = color;
 		this.km = km;
 		this.motor = motor;
@@ -73,11 +73,11 @@ public class Vehiculo {
 		this.modelo = modelo;
 	}
 
-	public Integer getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(Integer year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 

@@ -43,7 +43,7 @@ public class VehiculoDB {
 				ResultSet rs = statement.executeQuery();) {
 			if (rs.next()) {
 
-				Integer year = rs.getInt(4);
+				String year = rs.getString(4);
 				String fechaIngreso = rs.getString(10);
 				String fechaVenta = rs.getString(11);
 				Integer km = rs.getInt(6);
@@ -85,7 +85,7 @@ public class VehiculoDB {
 				ResultSet rs = statement.executeQuery();) {
 			while (rs.next()) {
 
-				Integer year = rs.getInt(4);
+				String year = rs.getString(4);
 				String fechaIngreso = rs.getString(10);
 				String fechaVenta = rs.getString(11);
 				Integer km = rs.getInt(6);

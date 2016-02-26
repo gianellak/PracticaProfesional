@@ -61,19 +61,11 @@ public class PrincipalView implements PrincipalInterface {
 
 	public PrincipalView(){
 	
-		  
-	      
 		//FRAME
 		frmPrin = new JFrame("Menu Principal");
 		frmPrin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrin.getContentPane().setLayout(new BorderLayout());
 		frmPrin.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-	
-		
-		
-
-		 
-		
 		
 		}
 

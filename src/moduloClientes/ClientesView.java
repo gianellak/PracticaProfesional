@@ -3,7 +3,6 @@ package moduloClientes;
 import java.awt.BorderLayout;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -11,11 +10,9 @@ import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
 import utilitarios.PantallaUtil;
-import moduloClientes.paneles.ClientesMenu;
-import moduloClientes.paneles.PanelClientes;
 import moduloClientes.listener.*;
-import moduloPrincipal.paneles.PanelGeneral;
 import moduloClientes.paneles.*;
+import moduloPrincipal.paneles.PanelGeneral;
 
 public class ClientesView implements ClientesInterface {
 	
@@ -27,7 +24,6 @@ public class ClientesView implements ClientesInterface {
 	private ListenerClientesAlta listenerAlta;
 	private ListenerAltaAceptar listenerAltaAceptar;
 	private ListenerMenuClientesVolver listenerMenuClientesVolver;
-	private ListenerMenuClientesVolver listenerBajaVolver;
 	private ListenerModAceptar listenerModAceptar;
 	private ClientesController clientesController;
 	private ListenerBuscarCliente listenerBuscarCliente;
@@ -99,9 +95,7 @@ public class ClientesView implements ClientesInterface {
 	@Override
 	public void onAlta() {
 		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
+		PantallaUtil.remove(panelClientes);
 		
 		panelClientes.onAlta();
 		
@@ -122,9 +116,7 @@ public class ClientesView implements ClientesInterface {
 	@Override
 	public void onVer(List<Usuario> lista) {
 		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
+		PantallaUtil.remove(panelClientes);
 		
 		//panelClientes.onVer();
 		
@@ -135,40 +127,11 @@ public class ClientesView implements ClientesInterface {
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
 		
-		frame.validate();
-		frame.repaint();
-		
+		PantallaUtil.refresh(frame);
 		
 		
 	}
 	
-	@Override
-	public void insertOk() {
-		
-		JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
-		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
-		
-		
-		
-	}
-
-
-
-
-
-	@Override
-	public void insertBad() {
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el usuario. Por favor reintente");
-		
-	}
-
-
-
-
-
 	@Override
 	public int getBajaPersona() {
 
@@ -195,10 +158,8 @@ public class ClientesView implements ClientesInterface {
 
 	@Override
 	public void onMod() {
-		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
+
+		PantallaUtil.remove(panelClientes);
 		
 		panelClientes.onMod();
 		
@@ -207,63 +168,7 @@ public class ClientesView implements ClientesInterface {
 		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 
-			
-		
-		frame.validate();
-		frame.repaint();
-		
-	}
-
-
-
-
-
-	@Override
-	public void showNotFound() {
-		
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar borrar el usuario. Por favor reintente");
-			
-		
-		
-	}
-
-
-
-
-
-	@Override
-	public int showToDelete(Persona p) {
-		
-		String s = new String("¿Esta seguro que desea eliminar el usuario: " + p.getApellido() + " " + p.getNombre() + "?");
-		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar Persona", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-       
-		return codigo;
-		
-		
-	}
-
-
-
-
-
-	@Override
-	public void deleteOk() {
-		JOptionPane.showMessageDialog(null, "Usuario borrado correctamente");
-		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
-		
-	}
-
-
-
-
-
-	@Override
-	public void deleteBad() {
-		
-		JOptionPane.showMessageDialog(null, "Error al borrar cliente. Revise los datos ingresados");
+		PantallaUtil.refresh(frame);
 		
 	}
 
@@ -330,28 +235,8 @@ public class ClientesView implements ClientesInterface {
 
 
 
-
-	@Override
-	public void updateOk() {
-
-		JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
-		
-		PantallaUtil.remove(panelClientes);
-		
-	}
-
-
-
-
-
-	@Override
-	public void updateBad() {
-		
-		JOptionPane.showMessageDialog(null, "Error al modificar el cliente. Revise los datos ingresados");
-		
-	}
-
-
+	
+	
 
 
 
@@ -362,9 +247,8 @@ public class ClientesView implements ClientesInterface {
 		
 	}
 
-
-
-
+	
+//	MENSAJES DE CONFIRMACION/ERROR ~ ----------------------------
 
 	@Override
 	public int showToUpdate(Persona cliente) {
@@ -372,9 +256,74 @@ public class ClientesView implements ClientesInterface {
 		return 0;
 	}
 
+	@Override
+	public void showNotFound() {
+		
+		JOptionPane.showMessageDialog(null, "El cliente nos e encuentra en la base de datos. Por favor reintente");
+
+	}
+
+	@Override
+	public int showToDelete(Persona p) {
+		
+		String s = new String("¿Esta seguro que desea eliminar el usuario: " + p.getApellido() + " " + p.getNombre() + "?");
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar Persona", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;	
+		
+	}
+
+	@Override
+	public void deleteOk() {
+		JOptionPane.showMessageDialog(null, "Cliente borrado correctamente");
+		
+		PantallaUtil.remove(panelClientes);
+		
+	}
 
 
+	@Override
+	public void deleteBad() {
+		
+		JOptionPane.showMessageDialog(null, "Error al borrar cliente. Revise los datos ingresados");
+		
+	}
+	
+	@Override
+	public void updateOk() {
 
+		JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
+		
+		PantallaUtil.remove(panelClientes);
+		
+	}
+
+
+	@Override
+	public void updateBad() {
+		
+		JOptionPane.showMessageDialog(null, "Error al modificar el cliente. Revise los datos ingresados");
+		
+	}
+
+	@Override
+	public void insertOk() {
+		
+		JOptionPane.showMessageDialog(null, "Cliente agregado correctamente");
+		
+		PantallaUtil.remove(panelClientes);
+		
+	}
+
+
+	@Override
+	public void insertBad() {
+		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta el cliente. Por favor reintente");
+		
+	}
+	
+
+//--------------------------------------------------------------------
 
 
 }

@@ -79,13 +79,6 @@ public class UsuarioView implements UsuarioInterface {
 		
 	}
 
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
-
 //*************************
 //	MENU PRINCIPAL Listener -> Controller -> Interface:
 //	showAlta - onAlta

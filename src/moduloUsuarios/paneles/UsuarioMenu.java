@@ -19,7 +19,7 @@ public class UsuarioMenu extends JPanel {
 public UsuarioMenu() {
 		
 
-		this.setPreferredSize(new Dimension(250, 500));
+		this.setPreferredSize(new Dimension(250, 300));
 		
 		btnAltaU = new JButton("Alta Usuario");
 		btnAltaU.setPreferredSize(preferredSize);

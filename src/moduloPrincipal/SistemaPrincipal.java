@@ -41,6 +41,8 @@ public class SistemaPrincipal {
 //			e1.printStackTrace();
 //		}
 
+
+
 		
 		LoginInterface ventanaL = new LoginView();
 		

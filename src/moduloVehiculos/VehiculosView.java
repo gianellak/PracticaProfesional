@@ -8,9 +8,12 @@ import javax.swing.*;
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
+import utilitarios.PantallaUtil;
 import moduloClientes.listener.ListenerAltaAceptar;
 import moduloClientes.listener.ListenerMenuClientesVolver;
 import moduloPrincipal.paneles.PanelGeneral;
+import moduloVehiculo.StockTableModel;
+import moduloVehiculo.paneles.FormStock;
 import moduloVehiculos.listener.*;
 import moduloVehiculos.paneles.PanelVehiculos;
 import moduloVehiculos.paneles.VehiculosMenu;
@@ -35,6 +38,11 @@ public class VehiculosView implements VehiculosInterface {
 	private PanelVehiculos panelVehiculos;
 	private VehiculosController cc;
 	private JFrame frame;
+	private JTable tablaStock;
+	private JScrollPane jp;
+	private FormStock panelStock;
+	private JButton btnVolver;
+	private ListenerVolverAVehiculo listenerVolver;
 
 	
 
@@ -127,26 +135,27 @@ public class VehiculosView implements VehiculosInterface {
 
 	@Override
 	public void showStock(List<Stock> listaStockVehiculos) {
+		
+		
+		JFrame stock = new JFrame("Stock actual");
+		
+		stock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		stock.getContentPane().setLayout(new BorderLayout());
+		stock.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		
+		panelStock = new FormStock(listaStockVehiculos);
+		
+		jp= new JScrollPane(tablaStock);
+		
+		stock.getContentPane().add(panelStock.getJp());
 
-		// panelStock = new FormStock();
-		// panel.setVisible(false);
-		//
-		// frmVehiculo.setTitle("Stock");
-		// frmVehiculo.invalidate();
-		// frmVehiculo.validate();
-		// frmVehiculo.repaint();
-		//
-		// frmVehiculo.add(panelStock);
-		// frmVehiculo.invalidate();
-		// frmVehiculo.validate();
-		// frmVehiculo.repaint();
-		//
-		// listenerVolver = new ListenerVolverAVehiculo(vc);
-		// listenerStock = new ListenerStock(vc);
-		//
-		// panelStock.getBtnCancelar().addActionListener(listenerVolver);
-		// panelStock.getBtnVerDetalle().addActionListener(listenerVerStock);
-
+		
+		
+		stock.validate();
+		stock.repaint();
+		stock.setVisible(true);
+		
+		
 	}
 
 	@Override

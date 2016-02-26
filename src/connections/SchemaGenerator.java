@@ -62,4 +62,44 @@ public class SchemaGenerator {
 		
 	}
 	
+	public boolean generateSchemaVehiculo() throws SQLException{
+		
+		Connection c = this.connection.getConnection();
+		
+		Statement statement = c.createStatement();
+		
+		String sql ="create table Vehiculo (patente VARCHAR(8) PRIMARY KEY, "
+				+ "marca VARCHAR(10), "
+				+ "modelo VARCHAR(25), "
+				+ "year VARCHAR(4), "
+				+ "color VARCHAR(15), "
+				+ "km INTEGER, "
+				+ "motor VARCHAR(10), "
+				+ "dominio VARCHAR(10), "
+				+ "pvc INTEGER, "
+				+ "fechaIngreso VARCHAR(8), "
+				+ "fechaVenta VARCHAR(8), "
+				+ "condicion VARCHAR(10), "
+				+ "idProveedor VARCHAR(10), "
+				+ "idCliente INTEGER, "
+				+ "comentarios VARCHAR(25))";
+				
+		System.out.println("ACA");
+		try {
+			
+			
+			statement.execute(sql);
+			
+			return true;
+			
+		} catch (SQLException e) {
+			
+			
+			return false;
+		}
+		
+		
+		
+	}
+	
 }

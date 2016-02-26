@@ -6,9 +6,11 @@ import java.util.List;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
+import connections.SchemaGenerator;
 import exceptions.DBException;
 import moduloCaja.CajaDB;
 import moduloPrincipal.PrincipalController;
+import moduloUsuarios.UsuarioDB;
 import objetos.Stock;
 import objetos.Vehiculo;
 
@@ -26,8 +28,37 @@ public class vehiculoController {
 	}
 
 	public void onMenuVehiculo() {
-		vehiculoDB = new VehiculoDB(pc.getConn());
+		
 		vehiculo.showVehiculo(this);
+		
+		this.conectar();
+		
+	}
+	
+	public void conectar() {
+		
+		ConnectionProvider pro = new DBConnection();
+		
+		try {
+			pro.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		vehiculoDB = new VehiculoDB(pro);
+		
+//		TABLAVEHICULO
+//		SchemaGenerator v = new SchemaGenerator(conn);
+//		
+//		try {
+//			v.generateSchemaVehiculo();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+
+		
 	}
 
 	public void onCancel() {
@@ -100,31 +131,7 @@ public class vehiculoController {
 		vehiculo.refresh();
 	}
 
-private void conectar() {
-		
-		ConnectionProvider pro = new DBConnection();
-		
-//		SchemaGenerator s = new SchemaGenerator(pro);
-//		String sql ="create table Vehiculo (CHARACTER MOTOR PRIMARY KEY, campos)";
-//
-//		
-//		try {
-//			s.generateSchema(sql);
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		
-		try {
-			pro.getConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		vehiculoDB = new VehiculoDB(pro);
-		
-	}
+
 	
 
 }

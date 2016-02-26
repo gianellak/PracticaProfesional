@@ -6,7 +6,7 @@ public class Stock {
 	String marca;
 	String modelo;
 	String color;
-	int year;
+	String year;
 	int pvc;
 	String condicion;
 	
@@ -34,10 +34,10 @@ public class Stock {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	public int getPvc() {
