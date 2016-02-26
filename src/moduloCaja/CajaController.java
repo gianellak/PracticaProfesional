@@ -122,7 +122,7 @@ public class CajaController {
 
 			ci.insertOk();
 		} else {
-			ci.insertBad();
+			ci.insertError();
 		}
 	}
 
@@ -140,5 +140,6 @@ public class CajaController {
 		ci.showMenuCaja(this, pc.getView(), pc.getUser());
 		this.conectar();
 	}
+	
 
 }

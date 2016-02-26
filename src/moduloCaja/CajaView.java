@@ -148,8 +148,8 @@ public class CajaView implements CajaInterface {
 	}
 
 	@Override
-	public void insertBad() {
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el usuario. Por favor reintente");
+	public void insertError() {
+		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el movimiento. Por favor reintente");
 	}
 
 
@@ -213,7 +213,7 @@ public class CajaView implements CajaInterface {
 
 	@Override
 	public void deleteOk() {
-		JOptionPane.showMessageDialog(null, "Usuario borrado correctamente");
+		JOptionPane.showMessageDialog(null, "Movimiento borrado correctamente");
 		
 		panelClientes.removeAll();
 		panelClientes.validate();
@@ -221,11 +221,8 @@ public class CajaView implements CajaInterface {
 		
 	}
 
-
-	@Override
-	public void deleteBad() {
-		// TODO Auto-generated method stub
-		
+	public void deleteError() {
+		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar eliminar el movimiento. Por favor reintente");
 	}
 
 

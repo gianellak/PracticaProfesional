@@ -11,34 +11,30 @@ import objetos.Usuario;
 
 public interface CajaInterface {
 
-	public void dispose();
-
+	
+	// CONSULTAS 
+	
+	void onVer(List<Movimiento> lista);
 	public void onAlta();
+	public void onBaja();
+	int getBajaMovimiento();
+	public Movimiento getNuevoMovimiento();
+	
+	//public void onMod(); NO HAY MODIFICACIÓN DE MOVIMIENTOS. PERO LO DEJO POR LAS DUDAS POR SI LO VES!
+	
+	// PANTALLA
+	
+	void showMenuCaja(CajaController cc, JFrame f, Usuario u);
+	void cleanPanelClientes();
+	
+	// MENSAJES
 	
 	public void insertOk();
-
-	public void insertBad();
-
-	public void onBaja();
-
-	//public void onMod(); NO HAY MODIFICACIÓN DE MOVIMIENTOS
+	public void insertError();
+	public void showToDelete(Movimiento movimiento);
+	public void deleteOk();
+	public void deleteError();
 
 	public void showNotFound();
-
-	public void showToDelete(Movimiento movimiento);
-
-	public void deleteOk();
-
-	public void deleteBad();
-
-	void onVer(List<Movimiento> lista);
-
-	int getBajaMovimiento();
-
-	void cleanPanelClientes();
-
-	void showMenuCaja(CajaController cc, JFrame f, Usuario u);
-
-	public Movimiento getNuevoMovimiento();
-
+	public void dispose();
 }
