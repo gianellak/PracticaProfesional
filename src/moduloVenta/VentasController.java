@@ -140,7 +140,7 @@ public class VentasController {
 					
 				}
 				else{
-					if(codigo==JOptionPane.NO_OPTION){
+					if(codigo==JOptionPane.CANCEL_OPTION){
 					}
 					
 					
@@ -151,9 +151,14 @@ public class VentasController {
 
 //Doy de alta en un cliente. Vengo de la pantalla de Venta -> Nueva Venta -> Validar Cliente -> Cliente no encontrado -> Alta
 	public void altaClienteV() throws DBException {
+		
+		Persona p = vi.getPersonaAlta();
 
-		if(cDB.insert(vi.getPersonaAlta())){
+		if(cDB.insert(p)){
+			
 			vi.insertOk();
+			
+			vi.mostrarCliente(p);
 			
 		}else
 		{
@@ -166,9 +171,13 @@ public class VentasController {
 //Doy de alta en un Garante. Vengo de la pantalla de Venta -> Nueva Venta -> Validar Garante -> Garante no encontrado -> Alta
 	public void altaGaranteV() throws DBException {
 		
-		if(cDB.insert(vi.getPersonaAlta())){
-			System.out.println("insertGaranteOk");
+		Persona p = vi.getPersonaAlta();
+		
+		if(cDB.insert(p)){
+			
 			vi.insertGaranteOk();
+			
+			vi.mostrarGarante(p);
 			
 		}else
 		{

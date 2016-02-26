@@ -557,7 +557,9 @@ public class PanelClientes extends JPanel {
 	}
 
 	public void onAltaFromVenta(String dni) {
+		
 		this.removeAll();
+		
 		System.out.println("ONALTAFROMVENTA");
 		
 		JLabel dniCompradorLabel = new JLabel("DNI: ");

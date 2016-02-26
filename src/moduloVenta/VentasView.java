@@ -214,11 +214,9 @@ public class VentasView implements VentasInterface {
 		
 		JOptionPane.showMessageDialog(null, "Cliente agregado correctamente");
 		
-		PantallaUtil.remove(panelClientes);
+		panelClientes.setVisible(false);
 		
 		panelVentas.setVisible(true);
-		
-		panelVentas.getBtnValidarDniC().setEnabled(false);
 		
 		PantallaUtil.refresh(frame);
 		
@@ -229,11 +227,9 @@ public class VentasView implements VentasInterface {
 		
 		JOptionPane.showMessageDialog(null, "Garante agregado correctamente");
 		
-		PantallaUtil.remove(panelClientes);
+		panelClientes.setVisible(false);
 		
 		panelVentas.setVisible(true);
-		
-		panelVentas.getBtnValidarDniG().setEnabled(false);
 		
 		PantallaUtil.refresh(frame);
 		
