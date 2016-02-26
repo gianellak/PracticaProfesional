@@ -1,25 +1,25 @@
 package moduloVenta;
 
 import java.awt.BorderLayout;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
+import objetos.Vehiculo;
 import utilitarios.PantallaUtil;
-import moduloClientes.listener.*;
 import moduloClientes.paneles.*;
 import moduloPrincipal.paneles.PanelGeneral;
 import moduloVenta.listener.ListenerAltaClienteV;
 import moduloVenta.listener.ListenerAltaGaranteV;
+import moduloVenta.listener.ListenerBuscarVehiculoV;
 import moduloVenta.listener.ListenerNuevaCompra;
 import moduloVenta.listener.ListenerNuevaVenta;
 import moduloVenta.listener.ListenerValidarC;
 import moduloVenta.listener.ListenerValidarG;
 import moduloVenta.listener.ListenerVentasVolver;
+import moduloVenta.listener.ListenerVolverVentas;
 import moduloVenta.paneles.PanelVentas;
 import moduloVenta.paneles.VentasMenu;
 
@@ -37,7 +37,8 @@ public class VentasView implements VentasInterface {
 	private PanelClientes panelClientes;
 	private ListenerValidarG listenerValidarG;
 	private ListenerAltaGaranteV listenerAltaAceptarG;
-	private PanelClientes panelClientesG;
+	private ListenerBuscarVehiculoV listenerBuscarV;
+	private ListenerVolverVentas listenerVolverAVentas;
 
 	public VentasView(){
 		
@@ -92,19 +93,21 @@ public class VentasView implements VentasInterface {
 		panelVentas.showNuevaVenta();
 		
 		listenerValidarC = new ListenerValidarC(ventasController);
+		listenerBuscarV = new ListenerBuscarVehiculoV(ventasController);
+		listenerValidarG = new ListenerValidarG(ventasController);
+		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
 		
 //		listenerValidarV =
-//		listenerBuscarV = 
-		listenerValidarG = new ListenerValidarG(ventasController);
 //		listenerAceptarV = 
-//		listenerVolverAVentas = 
 		
 		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
+		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
 		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
+		panelVentas.getBtnVolverNuevaV().addActionListener(listenerVolverAVentas);
 		
 	}
 
-//Busco DNI COmprador. Viene de Botón "Validar DNI" del Comprador en Nueva Venta.
+//Busco DNI Comprador. Viene de Botón "Validar DNI" del Comprador en Nueva Venta.
 	@Override
 	public int getDniBuscarC() {
 		try {
@@ -127,15 +130,11 @@ public class VentasView implements VentasInterface {
 	}
 
 
-
-
 	@Override
 	public void msjErrorDNI() {
 		JOptionPane.showMessageDialog(null, "No ha ingresado un valor valido para el DNI . Por favor reintente");
 		
 	}
-
-
 
 
 	@Override
@@ -256,6 +255,16 @@ public class VentasView implements VentasInterface {
 	
 //Muestro Garante encontrado. Viene de Validar Garante -> Garante encontrado.
 	@Override
+	public void mostrarPatente(Vehiculo vehiculo) {
+		
+		panelVentas.mostrarPatente(vehiculo);
+		
+		PantallaUtil.refresh(frame);
+		
+	}
+
+//Muestro Garante encontrado. Viene de Validar Garante -> Garante encontrado.
+	@Override
 	public void mostrarGarante(Persona garante) {
 		
 		panelVentas.mostrarGarante(garante);
@@ -264,6 +273,22 @@ public class VentasView implements VentasInterface {
 		
 	}
 
+
+
+//  Envia la patente ingresada en Nueva Venta.
+	@Override
+	public String getPatenteBuscar() {
+		return panelVentas.getPatenteText().getText();
+	}
+
+	
+	@Override
+	public void cleanPanelVentas() {
+		panelVentas.removeAll();
+		panelVentas.validate();
+		panelVentas.repaint();
+		
+	}
 
 
 }

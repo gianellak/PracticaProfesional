@@ -9,6 +9,7 @@ import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Persona;
 import objetos.Usuario;
+import objetos.Vehiculo;
 import exceptions.DBException;
 import moduloClientes.ClientesDB;
 import moduloClientes.ClientesView;
@@ -25,6 +26,7 @@ public class VentasController {
 	private VehiculosDB vhDB;
 	private Persona cliente;
 	private Persona garante;
+	private Vehiculo vehiculo;
 	
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -184,6 +186,47 @@ public class VentasController {
 			vi.insertBad();
 			
 		}
+		
+	}
+
+	public void buscarVehiculo() {
+		
+		String p = vi.getPatenteBuscar().toUpperCase();
+		
+		System.out.println("patente ingresada: " + p);
+		
+		
+		if(p == null){
+			//muestro stock
+		}else{
+
+			vehiculo = vhDB.getVehiculo(p);
+			
+			
+			if (vehiculo != null){
+				
+				vi.mostrarPatente(vehiculo);
+				
+			} else{
+				System.out.println("nulo");
+				//not Found. Ingresar o reingresar?
+				//if Ingresar: Alta Vehiculo
+				//else : Nada. [Ver cliente o garante, esta el mismo proceso.]
+			}
+			
+		}
+		
+		// if vehiculo null = muestro msj de que no ingrese nada: ver stock.
+		//if algo = valido en la DB
+		// If match = guardo vehiculo
+		// if not = alta o reingresar?
+		
+	}
+
+	
+
+	public void cleanVentas() {
+		vi.cleanPanelVentas();
 		
 	}
 	

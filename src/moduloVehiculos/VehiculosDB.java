@@ -23,7 +23,7 @@ public class VehiculosDB  {
 
 	private static final String SQL_UPDATE_VEHICULO = "UPDATE FROM Usuario WHERE motor = ?";
 
-	private static final String SQL_FIND_BY_PATENTE = "SELECT * FROM Vehiculo WHERE patente= ? OR motor = ?";
+	private static final String SQL_FIND_BY_PATENTE = "SELECT * FROM Vehiculo WHERE patente=? OR motor=?";
 
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
@@ -43,32 +43,22 @@ public class VehiculosDB  {
 	public Vehiculo getVehiculo(String patenteInput) {
 
 		Vehiculo vehiculo = null;
+		
+		Object[] values = {
+				patenteInput,
+				patenteInput
+		};
 
 		try (Connection connection = this.connectionProvider.getConnection();
-				PreparedStatement statement = DBUtil.prepareStatement(
-						connection, SQL_FIND_BY_PATENTE, true, patenteInput);
+				PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_FIND_BY_PATENTE, false, values);
+				
 				ResultSet rs = statement.executeQuery();) {
+			
 			if (rs.next()) {
+				
+				vehiculo = map(rs);
 
-				String year = rs.getString(4);
-				String fechaIngreso = rs.getString(10);
-				String fechaVenta = rs.getString(11);
-				Integer km = rs.getInt(6);
-				String patente = rs.getString(1);
-				String marca = rs.getString(2);
-				String modelo = rs.getString(3);
-				String color = rs.getString(5);
-				String motor = rs.getString(7);
-				String dominio = rs.getString(8);
-				Integer pvc = rs.getInt(9);
-				String condicion = rs.getString(12);
-				Integer idProveedor = rs.getInt(13);
-				Integer idCliente = rs.getInt(14);
-				String comentarios = rs.getString(15);
-
-				vehiculo = new Vehiculo(patente, marca, modelo, year, color,
-						km, motor, dominio, pvc, fechaIngreso, fechaVenta,
-						condicion, idProveedor, idCliente, comentarios);
+				
 			}
 
 		} catch (SQLException e) {
@@ -77,12 +67,37 @@ public class VehiculosDB  {
 		return vehiculo;
 	}
 
+	private Vehiculo map(ResultSet rs) throws SQLException {
+		
+		String year = rs.getString("year");
+		String fechaIngreso = rs.getString("fechaIngreso");
+		String fechaVenta = rs.getString("fechaventa");
+		Integer km = rs.getInt("km");
+		String patente = rs.getString("patente");
+		String marca = rs.getString("marca");
+		String modelo = rs.getString("modelo");
+		String color = rs.getString("color");
+		String motor = rs.getString("motor");
+		String dominio = rs.getString("dominio");
+		Integer pvc = rs.getInt("pvc");
+		String condicion = rs.getString("condicion");
+		Integer idProveedor = rs.getInt("idproveedor");
+		Integer idCliente = rs.getInt("idcliente");
+		String comentarios = rs.getString("comentarios");
+
+		return new Vehiculo(patente, marca, modelo, year, color,
+				km, motor, dominio, pvc, fechaIngreso, fechaVenta,
+				condicion, idProveedor, idCliente, comentarios);
+	}
+
 	/**
 	 * getAllVehiculos. devuelve una lista de todos los vehiculos que alguna vez
 	 * estuvieron registrados en la BD.
 	 * 
 	 */
 	public List<Vehiculo> getAllVehiculos() throws DBException {
+		
+		
 
 		List<Vehiculo> stock = new ArrayList<>();
 

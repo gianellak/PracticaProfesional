@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
+import objetos.Vehiculo;
 
 public interface VentasInterface {
 
@@ -38,6 +39,12 @@ public interface VentasInterface {
 	void insertGaranteOk();
 
 	int getDniBuscarG();
+
+	String getPatenteBuscar();
+
+	void mostrarPatente(Vehiculo vehiculo);
+
+	void cleanPanelVentas();
 	
 	
 

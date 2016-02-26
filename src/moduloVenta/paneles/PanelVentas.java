@@ -4,13 +4,17 @@ import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import moduloVenta.listener.RequestFocusListener;
 import objetos.Persona;
+import objetos.Vehiculo;
 
 public class PanelVentas extends JPanel {
 	
@@ -28,6 +32,7 @@ public class PanelVentas extends JPanel {
 	private JButton btnBuscarVehiculo;
 	private JButton btnAceptarNuevaV;
 	private JButton btnVolverNuevaV;
+	private FocusListener l;
 
 	public PanelVentas(){
 		
@@ -89,6 +94,7 @@ public class PanelVentas extends JPanel {
 		this.add(btnValidarDniG);
 		
 		btnAceptarNuevaV = new JButton("Aceptar");
+		btnAceptarNuevaV.requestFocus(true);
 		btnAceptarNuevaV.setPreferredSize(preferredSize);
 		btnAceptarNuevaV.setBounds(480, 200, 160, 25);
 		this.add(btnAceptarNuevaV);
@@ -179,11 +185,11 @@ public class PanelVentas extends JPanel {
 		dniCompradorText.addFocusListener(new FocusListener() {
 		    public void focusGained(FocusEvent e) {
 		        btnValidarDniC.setEnabled(true);
-		        compradorLabel.setText("");		        
+		        compradorLabel.setText("");		
 		    }
 
 		    public void focusLost(FocusEvent e) {
-		        // nothing
+		    	btnAceptarNuevaV.requestFocus(true);
 		    }
 		});
 		
@@ -200,11 +206,11 @@ public class PanelVentas extends JPanel {
 		dniGaranteText.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 				btnValidarDniG.setEnabled(true);
-				garanteLabel.setText("");		        
+				garanteLabel.setText("");	
 			}
 			
 			public void focusLost(FocusEvent e) {
-				// nothing
+				btnAceptarNuevaV.requestFocus(true);
 			}
 		});
 		
@@ -212,6 +218,30 @@ public class PanelVentas extends JPanel {
 		
 	}
 
+	public void mostrarPatente(Vehiculo vehiculo) {
+		
+		JLabel vehiculoLabel = new JLabel(vehiculo.getMarca()+ " " + vehiculo.getModelo());
+		vehiculoLabel.setBounds(650, 90, 250, 25);
+		this.add(vehiculoLabel);
+		
+		patenteText.addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent e) {
+				btnBuscarVehiculo.setEnabled(true);
+				vehiculoLabel.setText("");				
+			}
+			
+
+			public void focusLost(FocusEvent e) {
+				btnAceptarNuevaV.requestFocus(true);
+			}
+		});
+		
+		btnBuscarVehiculo.setEnabled(false);
+		
+	}
+
+	
 	
 	
 }
+
