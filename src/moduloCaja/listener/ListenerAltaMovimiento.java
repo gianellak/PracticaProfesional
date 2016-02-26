@@ -14,22 +14,17 @@ import moduloUsuarios.UsuarioView;
 
 public class ListenerAltaMovimiento implements ActionListener {
 
-
 	private CajaController cc;
 
-
-	public ListenerAltaMovimiento(CajaController cc){
+	public ListenerAltaMovimiento(CajaController cc) {
 		this.cc = cc;
-		
+
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		cc.showAlta();
-		
-		
 	}
-	
+
 }

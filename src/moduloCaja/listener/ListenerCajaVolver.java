@@ -17,19 +17,16 @@ public class ListenerCajaVolver implements ActionListener {
 
 	private CajaController cc;
 
-
-	public ListenerCajaVolver(CajaController cc){
+	public ListenerCajaVolver(CajaController cc) {
 		this.cc = cc;
-		
+
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		cc.getBack();
-		
-		
+
 	}
-	
+
 }

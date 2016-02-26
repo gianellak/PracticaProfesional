@@ -38,17 +38,8 @@ public class CajaView implements CajaInterface {
 	
 	}
 
-	
-
 	@Override
-	public List<Movimiento> findAll() throws DBException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void showMenuCaja(CajaController cc,
-			JFrame f, Usuario u) {
+	public void showMenuCaja(CajaController cc, JFrame f, Usuario u) {
 		
 		usuario = u;
 		
@@ -67,13 +58,12 @@ public class CajaView implements CajaInterface {
 		
 		
 		//ESTO VA A ANDAR CUANDO CREES LO LISTENER,NO HAY QUE TOCAR NADA ACA
+		//OK TIA
 		panelCajaMenu.getBtnVolver().addActionListener(listenerCajaVolver);
 		panelCajaMenu.getBtnVerMovs().addActionListener(listenerVerMovimientos);
 		panelCajaMenu.getBtnAltaMov().addActionListener(listenerAltaMovimiento);
 		//panelClientesMenu.getBtnVerLog().addActionListener(listenerVerLog);
-		
-		
-		
+			
 		frame.setTitle("Menu Caja");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.getContentPane().removeAll();
@@ -106,10 +96,7 @@ public class CajaView implements CajaInterface {
 	//	panelClientes.getBtnAceptar().addActionListener(listenerAltaAceptar);
 		//panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
-		//PantallaUtil.refresh(frame);
-		
-	
-		
+		//PantallaUtil.refresh(frame);	
 	}
 
 	@Override
@@ -127,9 +114,7 @@ public class CajaView implements CajaInterface {
 		
 		
 		PantallaUtil.refresh(frame);
-		
-		
-		
+	
 	}
 	
 	@Override
@@ -150,17 +135,8 @@ public class CajaView implements CajaInterface {
 		
 		frame.validate();
 		frame.repaint();
-		
-		
-		
 	}
 	
-
-
-
-
-
-
 	@Override
 	public void insertOk() {
 		
@@ -168,36 +144,20 @@ public class CajaView implements CajaInterface {
 		
 		panelClientes.removeAll();
 		panelClientes.validate();
-		panelClientes.repaint();
-		
-		
-		
+		panelClientes.repaint();		
 	}
-
-
-
-
 
 	@Override
 	public void insertBad() {
 		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el usuario. Por favor reintente");
-		
 	}
-
-
-
 
 
 	@Override
 	public int getBajaMovimiento() {
 
 		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
-		
-		
 	}
-
-
-
 
 
 	@Override
@@ -208,47 +168,36 @@ public class CajaView implements CajaInterface {
 		
 	}
 
-
-
-
-
-	@Override
-	public void onMod() {
-		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
-		
-		panelClientes.onMod();
-		
-	//	listenerModAceptar = new ListenerModAceptar(clientesController);
-	//  listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
-		
-		//panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
-		//panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
-		
-		
-		frame.validate();
-		frame.repaint();
-		
-	}
-
-
-
+// NO HAY MODIFICACIÓN DE MOVIMIENTOS
+	
+//	@Override 
+//	public void onMod() {
+//		
+//		panelClientes.removeAll();
+//		panelClientes.validate();
+//		panelClientes.repaint();
+//		
+//		panelClientes.onMod();
+//		
+//		listenerModAceptar = new ListenerModAceptar(clientesController);
+//		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
+//		
+//		panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
+//		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
+//		
+//		
+//		frame.validate();
+//		frame.repaint();
+//		
+//	}
 
 
 	@Override
 	public void showNotFound() {
 		
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar borrar el usuario. Por favor reintente");
-			
-		
+		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar borrar el movimiento. Por favor reintente");	
 		
 	}
-
-
-
-
 
 	
 	public void showToDelete(Movimiento v) {
@@ -262,9 +211,6 @@ public class CajaView implements CajaInterface {
 	}
 
 
-
-
-
 	@Override
 	public void deleteOk() {
 		JOptionPane.showMessageDialog(null, "Usuario borrado correctamente");
@@ -276,9 +222,6 @@ public class CajaView implements CajaInterface {
 	}
 
 
-
-
-
 	@Override
 	public void deleteBad() {
 		// TODO Auto-generated method stub
@@ -286,16 +229,11 @@ public class CajaView implements CajaInterface {
 	}
 
 
-
 	@Override
 	public Movimiento getNuevoMovimiento() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
-
 
 
 }

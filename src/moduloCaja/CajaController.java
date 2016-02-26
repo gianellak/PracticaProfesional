@@ -92,7 +92,8 @@ public class CajaController {
 			Movimiento mov = movimiento;
 			mov.setMarca(false);
 
-			cDB.update(mov.getId(), mov);
+			cDB.update(movimiento.getId(), movimiento);
+			cDB.insert(mov);
 
 			// int codigo = ci.showToDelete(movimiento);
 			//
@@ -129,13 +130,10 @@ public class CajaController {
 		ci.onBaja();
 	}
 
-	public void showMod() {
-		ci.onMod();
-	}
+//	public void showMod() {
+//		ci.onMod();
+//	}
 
-	public void modPersona() {
-		// TODO Auto-generated method stub
-	}
 
 	public void showCaja() {
 

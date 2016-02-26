@@ -10,7 +10,6 @@ import objetos.Vehiculo;
 public interface vehiculoInterface {
 
 	
-	
 	// CONSULTAS
 
 	public Vehiculo getVehiculoPorPatente(String patente);  // Busca un veh por esa patente.
@@ -29,7 +28,5 @@ public interface vehiculoInterface {
 	
 	public void insertOk();
 	public void insertError();
-	
-	
 	
 }

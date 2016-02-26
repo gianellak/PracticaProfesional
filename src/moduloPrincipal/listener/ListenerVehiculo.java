@@ -4,17 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import moduloPrincipal.PrincipalController;
-import moduloVehiculos.VehiculosController;
-//import moduloVehiculo.vehiculoController;
-//import moduloVehiculo.vehiculoInterface;
-import moduloVehiculos.VehiculosView;
-//import moduloVehiculo.vehiculoView;
+import moduloVehiculo.*;
 
 
 public class ListenerVehiculo implements ActionListener {
 
-	private VehiculosView vi;
-//	private vehiculoInterface vi;
+//	private vehiculoView vi;
+	private vehiculoInterface vi;
 	private PrincipalController pc;
 
 	public ListenerVehiculo(PrincipalController pc) {
@@ -27,11 +23,9 @@ public class ListenerVehiculo implements ActionListener {
 
 		System.out.println("Listener Vehiculo");
 
-		//vi = new vehiculoView();
-		vi = new VehiculosView();
+		vi = new vehiculoView();
 
-//		vehiculoController vc = new vehiculoController(vi, pc);
-		VehiculosController vc = new VehiculosController(vi, pc);
+		vehiculoController vc = new vehiculoController(vi, pc);
 		
 		vc.onMenuVehiculo();
 	//	pc.onCancel();

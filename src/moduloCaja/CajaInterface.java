@@ -13,8 +13,6 @@ public interface CajaInterface {
 
 	public void dispose();
 
-	public List<Movimiento> findAll() throws DBException;
-
 	public void onAlta();
 	
 	public void insertOk();
@@ -23,7 +21,7 @@ public interface CajaInterface {
 
 	public void onBaja();
 
-	public void onMod();
+	//public void onMod(); NO HAY MODIFICACIÓN DE MOVIMIENTOS
 
 	public void showNotFound();
 
