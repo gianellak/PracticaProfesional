@@ -18,6 +18,7 @@ import moduloVenta.listener.ListenerNuevaCompra;
 import moduloVenta.listener.ListenerNuevaVenta;
 import moduloVenta.listener.ListenerValidarC;
 import moduloVenta.listener.ListenerValidarG;
+import moduloVenta.listener.ListenerValidarVenta;
 import moduloVenta.listener.ListenerVentasVolver;
 import moduloVenta.listener.ListenerVolverVentas;
 import moduloVenta.paneles.PanelVentas;
@@ -39,6 +40,7 @@ public class VentasView implements VentasInterface {
 	private ListenerAltaGaranteV listenerAltaAceptarG;
 	private ListenerBuscarVehiculoV listenerBuscarV;
 	private ListenerVolverVentas listenerVolverAVentas;
+	private ListenerValidarVenta listenerAceptarV;
 
 	public VentasView(){
 		
@@ -96,14 +98,13 @@ public class VentasView implements VentasInterface {
 		listenerBuscarV = new ListenerBuscarVehiculoV(ventasController);
 		listenerValidarG = new ListenerValidarG(ventasController);
 		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
-		
-//		listenerValidarV =
-//		listenerAceptarV = 
+		listenerAceptarV = new ListenerValidarVenta(ventasController);
 		
 		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
 		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
 		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
 		panelVentas.getBtnVolverNuevaV().addActionListener(listenerVolverAVentas);
+		panelVentas.getBtnAceptarNuevaV().addActionListener(listenerAceptarV);
 		
 	}
 
@@ -129,13 +130,11 @@ public class VentasView implements VentasInterface {
 		}
 	}
 
-
 	@Override
 	public void msjErrorDNI() {
 		JOptionPane.showMessageDialog(null, "No ha ingresado un valor valido para el DNI . Por favor reintente");
 		
 	}
-
 
 	@Override
 	public int msjClienteNotFound() {
@@ -146,9 +145,6 @@ public class VentasView implements VentasInterface {
 		return codigo;
 		
 	}
-
-
-
 
 //Muestro Alta Cliente. Viene de Validar cliente -> Cliente no encontrado -> Acepto registrarlo.
 	@Override
@@ -291,4 +287,17 @@ public class VentasView implements VentasInterface {
 	}
 
 
+
+
+	@Override
+	public Boolean getButtonState() {
+		return panelVentas.getButtonState();
+	}
+
+
+	@Override
+	public void msjVentaIncompleta() {
+		JOptionPane.showMessageDialog(null, "Alguno de los datos no ha ido validado correctamente. Por favor revise y reintente nuevamente.");
+		
+	}
 }

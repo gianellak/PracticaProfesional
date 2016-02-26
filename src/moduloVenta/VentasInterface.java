@@ -45,6 +45,10 @@ public interface VentasInterface {
 	void mostrarPatente(Vehiculo vehiculo);
 
 	void cleanPanelVentas();
+
+	Boolean getButtonState();
+
+	void msjVentaIncompleta();
 	
 	
 

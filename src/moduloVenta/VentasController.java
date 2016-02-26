@@ -27,6 +27,7 @@ public class VentasController {
 	private Persona cliente;
 	private Persona garante;
 	private Vehiculo vehiculo;
+	private Boolean ventaOk = true;
 	
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -85,6 +86,8 @@ public class VentasController {
 			
 			vi.msjErrorDNI();
 			
+			ventaOk = false;
+			
 		} else{
 			
 			cliente = cDB.findId(dni);
@@ -106,6 +109,7 @@ public class VentasController {
 				}
 				else{
 					if(codigo==JOptionPane.NO_OPTION){
+						ventaOk = false;
 				}
 			        
 				
@@ -123,6 +127,7 @@ public class VentasController {
 		if (dni == 0 ){
 			
 			vi.msjErrorDNI();
+			ventaOk = false;
 			
 		} else{
 			
@@ -143,6 +148,7 @@ public class VentasController {
 				}
 				else{
 					if(codigo==JOptionPane.CANCEL_OPTION){
+						ventaOk = false;
 					}
 					
 					
@@ -160,10 +166,13 @@ public class VentasController {
 			
 			vi.insertOk();
 			
+			ventaOk = true;
+			
 			vi.mostrarCliente(p);
 			
 		}else
 		{
+			ventaOk = false;
 			vi.insertBad();
 			
 		}
@@ -178,12 +187,14 @@ public class VentasController {
 		if(cDB.insert(p)){
 			
 			vi.insertGaranteOk();
-			
+			ventaOk = true;
 			vi.mostrarGarante(p);
 			
 		}else
 		{
 			vi.insertBad();
+			
+			ventaOk = false;
 			
 		}
 		
@@ -207,8 +218,12 @@ public class VentasController {
 				
 				vi.mostrarPatente(vehiculo);
 				
+				ventaOk = true;
+				
 			} else{
-				System.out.println("nulo");
+				
+				
+				ventaOk = false;
 				//not Found. Ingresar o reingresar?
 				//if Ingresar: Alta Vehiculo
 				//else : Nada. [Ver cliente o garante, esta el mismo proceso.]
@@ -227,6 +242,20 @@ public class VentasController {
 
 	public void cleanVentas() {
 		vi.cleanPanelVentas();
+		
+	}
+
+	public void validarVenta() {
+		
+		Boolean botones = vi.getButtonState();
+		
+		if(ventaOk == true && cliente != null && vehiculo != null && garante != null && botones == true){
+			System.out.println("Venta Ok");
+		}else{
+			vi.msjVentaIncompleta();
+		}
+		//IF LOS TRES CAMPOS CORRECTAMENTE CARGADOS: NUEVA VENTA.
+		//IF NOT REINTENTE
 		
 	}
 	

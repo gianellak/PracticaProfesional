@@ -240,6 +240,17 @@ public class PanelVentas extends JPanel {
 		
 	}
 
+	public Boolean getButtonState() {
+		
+		if(btnValidarDniG.isEnabled() ||
+		btnValidarDniC.isEnabled() ||
+		btnBuscarVehiculo.isEnabled()){
+			return false;			
+		}else{
+			return true;
+		}
+	}
+
 	
 	
 	
