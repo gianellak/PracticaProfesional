@@ -2,6 +2,7 @@ package moduloVehiculos.paneles;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -9,7 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import moduloVehiculo.paneles.FormStock;
 import objetos.Persona;
+import objetos.Stock;
+import objetos.Vehiculo;
 
 public class PanelVehiculos extends JPanel {
 	
@@ -33,6 +37,10 @@ public class PanelVehiculos extends JPanel {
 	private JTextField txtColor;
 	private JTextField txtMarca;
 	private JTextField txtModelo;
+	private FormStock panelStock;
+	private JButton btnDetalle;
+	private JButton btnSeleccionar;
+	private JButton btnVolverVenta;
 	
 	
 	public PanelVehiculos(){
@@ -403,6 +411,63 @@ public class PanelVehiculos extends JPanel {
 
 	public void setBtnVolver(JButton btnVolver) {
 		this.btnVolver = btnVolver;
+	}
+
+	public void muestroStock(List<Stock> lista) {
+		
+		panelStock = new FormStock(lista);
+		
+		this.add(panelStock.getJp());
+		
+		btnDetalle = new JButton("Ver Detalle");
+		btnDetalle.setBounds(150, 320, 150, 25);
+		this.add(btnDetalle);
+
+		btnSeleccionar = new JButton("Elegir vehiculo");
+		btnSeleccionar.setBounds(320, 320, 150, 25);
+		this.add(btnSeleccionar);
+		
+		btnVolverVenta = new JButton("Volver");
+		btnVolverVenta.setBounds(490, 320, 150, 25);
+		this.add(btnVolverVenta);
+		
+		
+		this.validate();
+		this.repaint();
+		
+	}
+
+	public JButton getBtnDetalle() {
+		return btnDetalle;
+	}
+
+	public void setBtnDetalle(JButton btnDetalle) {
+		this.btnDetalle = btnDetalle;
+	}
+
+	public JButton getBtnSeleccionar() {
+		return btnSeleccionar;
+	}
+
+	public void setBtnSeleccionar(JButton btnSeleccionar) {
+		this.btnSeleccionar = btnSeleccionar;
+	}
+
+	public JButton getBtnVolverVenta() {
+		return btnVolverVenta;
+	}
+
+	public void setBtnVolverVenta(JButton btnVolverVenta) {
+		this.btnVolverVenta = btnVolverVenta;
+	}
+
+	public String getVehiculoTabla() {
+		int a = panelStock.getTablaStock().getSelectedRow();
+		
+		String patente = String.valueOf(panelStock.getTablaStock().getModel().getValueAt(a,0));
+				
+		return patente;
+		
 	}
 
 

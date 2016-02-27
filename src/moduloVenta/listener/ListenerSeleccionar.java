@@ -8,13 +8,13 @@ import moduloVenta.VentasController;
 
 
 
-public class ListenerBuscarVehiculoV implements ActionListener {
+public class ListenerSeleccionar implements ActionListener {
 
 
 	private VentasController vc;
 
 
-	public ListenerBuscarVehiculoV(VentasController vc){
+	public ListenerSeleccionar(VentasController vc){
 		this.vc = vc;
 		
 	}
@@ -23,12 +23,7 @@ public class ListenerBuscarVehiculoV implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		try {
-			vc.buscarVehiculo();
-		} catch (DBException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		vc.seleccionaVehiculo();
 		
 		
 	}

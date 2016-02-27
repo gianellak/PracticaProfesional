@@ -1,6 +1,7 @@
 package moduloVenta;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -8,6 +9,7 @@ import javax.swing.JOptionPane;
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Persona;
+import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
 import exceptions.DBException;
@@ -200,15 +202,21 @@ public class VentasController {
 		
 	}
 
-	public void buscarVehiculo() {
+	public void buscarVehiculo() throws DBException {
 		
 		String p = vi.getPatenteBuscar().toUpperCase();
 		
 		System.out.println("patente ingresada: " + p);
 		
 		
-		if(p == null){
-			//muestro stock
+		if(p.isEmpty()){
+			
+			System.out.println("patente nula");
+			
+			List<Vehiculo> lista = vhDB.getAllVehiculos();
+			
+			muestroStock(lista);
+				
 		}else{
 
 			vehiculo = vhDB.getVehiculo(p);
@@ -240,6 +248,37 @@ public class VentasController {
 
 	
 
+	private void muestroStock(List<Vehiculo> lista) {
+		
+		
+		List<Stock> stockAMostrar = new ArrayList<Stock>();
+
+		for (int i = 0; i < lista.size(); i++) {
+
+			if (! ( (lista.get(i).getCondicion() == "Vendido") || (lista.get(i).getCondicion() == "No disponible"))) {
+
+				Stock s = new Stock();
+				
+				String patenteActual = lista.get(i).getPatente();
+
+				if (patenteActual == "000000"){
+					s.setPatente(lista.get(i).getMotor());
+				}
+				
+				s.setPatente(patenteActual);
+				s.setMarca(lista.get(i).getMarca());
+				s.setModelo(lista.get(i).getModelo());
+				s.setYear(lista.get(i).getYear());
+				s.setPvc(lista.get(i).getPvc());
+
+				stockAMostrar.add(s);
+			}
+		}
+
+		vi.muestroStock(stockAMostrar);
+		
+	}
+
 	public void cleanVentas() {
 		vi.cleanPanelVentas();
 		
@@ -256,6 +295,17 @@ public class VentasController {
 		}
 		//IF LOS TRES CAMPOS CORRECTAMENTE CARGADOS: NUEVA VENTA.
 		//IF NOT REINTENTE
+		
+	}
+
+	public void seleccionaVehiculo() {
+		
+		String p = vi.getVehiculoTabla();
+		
+		vehiculo =vhDB.getVehiculo(p);
+		
+		vi.mostrarPatente(vehiculo);
+		
 		
 	}
 	

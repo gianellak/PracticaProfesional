@@ -1,8 +1,10 @@
 package moduloVehiculo.paneles;
 
+import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import moduloVehiculo.vehiculoController;
@@ -12,25 +14,45 @@ import objetos.Usuario;
 public class FormStock extends JPanel {
 
 	private JTable tablaStock;
-	private JButton btnCancelar, btnVerDetalle;
-	private List<Stock> listaStock;
 	private JScrollPane jp;
+
+	public JTable getTablaStock() {
+		return tablaStock;
+	}
+
+	public void setTablaStock(JTable tablaStock) {
+		this.tablaStock = tablaStock;
+	}
+
 
 	public FormStock(List<Stock> listaStock) {
 		
-		this.listaStock = listaStock;
-
+		
+		this.setPreferredSize(new Dimension(1000, 300));
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
+	
 
 		tablaStock = new JTable();
 		
-		DefaultTableModel modelo = new DefaultTableModel();
+		DefaultTableModel modelo = new DefaultTableModel(){
+		
+		
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;
+		    }
+		
+		};
 		
 		tablaStock.setModel(modelo);
 		
 		tablaStock.getTableHeader().setReorderingAllowed(false);
 		
-		jp= new JScrollPane(tablaStock);
+		tablaStock.setFocusable(false);
+		
+		
+		
 		
 		
 
@@ -54,9 +76,14 @@ public class FormStock extends JPanel {
 			modelo.addRow(o);
 		}
 		
-		jp.setBounds(150, 50, 600, 200);
+		jp= new JScrollPane(tablaStock);
+		
 
+		jp.setBounds(150, 50, 600, 200);
 	}
+	
+
+	
 
 
 	public JScrollPane getJp() {
@@ -69,20 +96,13 @@ public class FormStock extends JPanel {
 	}
 
 
-	public JButton getBtnCancelar() {
-		return btnCancelar;
+	public String getRowSelected() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void setBtnCancelar(JButton btnCancelar) {
-		this.btnCancelar = btnCancelar;
-	}
 
-	public JButton getBtnVerDetalle() {
-		return btnVerDetalle;
-	}
+	
 
-	public void setBtnVerDetalle(JButton btnVerDetalle) {
-		this.btnVerDetalle = btnVerDetalle;
-	}
 
 }

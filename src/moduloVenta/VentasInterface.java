@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import exceptions.DBException;
 import objetos.Persona;
+import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
 
@@ -49,6 +50,11 @@ public interface VentasInterface {
 	Boolean getButtonState();
 
 	void msjVentaIncompleta();
+
+	void muestroStock(List<Stock> stockAMostrar);
+
+	String getVehiculoTabla();
+
 	
 	
 

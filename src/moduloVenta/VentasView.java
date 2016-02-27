@@ -1,26 +1,20 @@
 package moduloVenta;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import objetos.Persona;
+import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
 import utilitarios.PantallaUtil;
 import moduloClientes.paneles.*;
 import moduloPrincipal.paneles.PanelGeneral;
-import moduloVenta.listener.ListenerAltaClienteV;
-import moduloVenta.listener.ListenerAltaGaranteV;
-import moduloVenta.listener.ListenerBuscarVehiculoV;
-import moduloVenta.listener.ListenerNuevaCompra;
-import moduloVenta.listener.ListenerNuevaVenta;
-import moduloVenta.listener.ListenerValidarC;
-import moduloVenta.listener.ListenerValidarG;
-import moduloVenta.listener.ListenerValidarVenta;
-import moduloVenta.listener.ListenerVentasVolver;
-import moduloVenta.listener.ListenerVolverVentas;
+import moduloVehiculos.paneles.PanelVehiculos;
+import moduloVenta.listener.*;
 import moduloVenta.paneles.PanelVentas;
 import moduloVenta.paneles.VentasMenu;
 
@@ -41,6 +35,8 @@ public class VentasView implements VentasInterface {
 	private ListenerBuscarVehiculoV listenerBuscarV;
 	private ListenerVolverVentas listenerVolverAVentas;
 	private ListenerValidarVenta listenerAceptarV;
+	private PanelVehiculos panelVehiculos;
+	private ListenerSeleccionar listenerSeleccionar;
 
 	public VentasView(){
 		
@@ -253,6 +249,12 @@ public class VentasView implements VentasInterface {
 	@Override
 	public void mostrarPatente(Vehiculo vehiculo) {
 		
+		if(panelVehiculos!= null){
+			frame.remove(panelVehiculos);
+			panelVentas.getPatenteText().setText(vehiculo.getPatente());
+			panelVentas.setVisible(true);
+		}
+		
 		panelVentas.mostrarPatente(vehiculo);
 		
 		PantallaUtil.refresh(frame);
@@ -297,7 +299,44 @@ public class VentasView implements VentasInterface {
 
 	@Override
 	public void msjVentaIncompleta() {
-		JOptionPane.showMessageDialog(null, "Alguno de los datos no ha ido validado correctamente. Por favor revise y reintente nuevamente.");
+		JOptionPane.showMessageDialog(null, "Alguno de los datos ingresados no ha sido validado correctamente. Por favor revise y reintente nuevamente.");
 		
 	}
+
+
+
+
+	@Override
+	public void muestroStock(List<Stock> lista) {
+		
+		panelVehiculos = new PanelVehiculos();
+		
+		panelVehiculos.muestroStock(lista);
+		
+		frame.add(panelVehiculos);
+		
+		panelVentas.setVisible(false);
+		
+		listenerSeleccionar = new ListenerSeleccionar(ventasController);
+		
+//		listenerDetalle
+//		listenerVolverVenta
+		
+//		panelVehiculos.getBtnVolverVenta().
+		panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
+//		panelVehiculos.getBtnDetalle().
+		
+		PantallaUtil.refresh(frame);
+				
+	}
+
+
+
+
+	@Override
+	public String getVehiculoTabla() {
+		return panelVehiculos.getVehiculoTabla();
+	}
+
+
 }
