@@ -55,6 +55,14 @@ public interface VentasInterface {
 
 	String getVehiculoTabla();
 
+	int msjSinPatente();
+
+	void cleanStock();
+
+	void mostrarDetalleVehiculo(Vehiculo vehiculo);
+
+
+
 	
 	
 

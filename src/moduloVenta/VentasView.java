@@ -37,6 +37,8 @@ public class VentasView implements VentasInterface {
 	private ListenerValidarVenta listenerAceptarV;
 	private PanelVehiculos panelVehiculos;
 	private ListenerSeleccionar listenerSeleccionar;
+	private ListenerVolverVentaStock listenerVolverVenta;
+	private ListenerDetalleVehiculo listenerDetalle;
 
 	public VentasView(){
 		
@@ -290,7 +292,7 @@ public class VentasView implements VentasInterface {
 
 
 
-
+//	Devuelve true si todos los botones estan not enabled. [Ya tuvieron validación]
 	@Override
 	public Boolean getButtonState() {
 		return panelVentas.getButtonState();
@@ -319,12 +321,12 @@ public class VentasView implements VentasInterface {
 		
 		listenerSeleccionar = new ListenerSeleccionar(ventasController);
 		
-//		listenerDetalle
-//		listenerVolverVenta
+		listenerDetalle = new ListenerDetalleVehiculo(ventasController);
+		listenerVolverVenta = new ListenerVolverVentaStock(ventasController);
 		
-//		panelVehiculos.getBtnVolverVenta().
+		panelVehiculos.getBtnVolverVenta().addActionListener(listenerVolverVenta);
 		panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
-//		panelVehiculos.getBtnDetalle().
+		panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
 		
 		PantallaUtil.refresh(frame);
 				
@@ -337,6 +339,49 @@ public class VentasView implements VentasInterface {
 	public String getVehiculoTabla() {
 		return panelVehiculos.getVehiculoTabla();
 	}
+
+
+
+
+	@Override
+	public int msjSinPatente() {
+		
+		String s = new String("No se ha registrado el ingreso de una patente válida. ¿Desea ver los autos en stock?");
+		
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Not Found", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+		
+	}
+
+
+
+
+	@Override
+	public void cleanStock() {
+		
+		frame.remove(panelVehiculos);
+		
+		panelVentas.setVisible(true);
+		
+		PantallaUtil.refresh(frame);
+		
+	}
+
+
+
+
+	@Override
+	public void mostrarDetalleVehiculo(Vehiculo vehiculo){
+		
+		panelVehiculos.mostrarDetalleVehiculo(vehiculo);
+		
+		PantallaUtil.refresh(frame);
+		
+	}
+
+
+
 
 
 }

@@ -213,9 +213,24 @@ public class VentasController {
 			
 			System.out.println("patente nula");
 			
-			List<Vehiculo> lista = vhDB.getAllVehiculos();
+			int codigo = vi.msjSinPatente();
 			
-			muestroStock(lista);
+			if (codigo ==JOptionPane.YES_OPTION){
+				
+				List<Vehiculo> lista = vhDB.getAllVehiculos();
+				
+				muestroStock(lista);
+				
+				
+				
+
+			}
+			else{
+				if(codigo==JOptionPane.NO_OPTION){
+					ventaOk = false;
+			}
+			
+			}
 				
 		}else{
 
@@ -230,19 +245,29 @@ public class VentasController {
 				
 			} else{
 				
+				int codigo = vi.msjSinPatente();
 				
-				ventaOk = false;
-				//not Found. Ingresar o reingresar?
-				//if Ingresar: Alta Vehiculo
-				//else : Nada. [Ver cliente o garante, esta el mismo proceso.]
+				if (codigo ==JOptionPane.YES_OPTION){
+
+					List<Vehiculo> lista = vhDB.getAllVehiculos();
+					
+					muestroStock(lista);
+					
+				}
+				else{
+					if(codigo==JOptionPane.NO_OPTION){
+						
+						ventaOk = false;
+					}
+				
+				}
+
+				
 			}
 			
 		}
 		
-		// if vehiculo null = muestro msj de que no ingrese nada: ver stock.
-		//if algo = valido en la DB
-		// If match = guardo vehiculo
-		// if not = alta o reingresar?
+
 		
 	}
 
@@ -280,6 +305,7 @@ public class VentasController {
 	}
 
 	public void cleanVentas() {
+		System.out.println("clean");
 		vi.cleanPanelVentas();
 		
 	}
@@ -293,8 +319,6 @@ public class VentasController {
 		}else{
 			vi.msjVentaIncompleta();
 		}
-		//IF LOS TRES CAMPOS CORRECTAMENTE CARGADOS: NUEVA VENTA.
-		//IF NOT REINTENTE
 		
 	}
 
@@ -304,8 +328,25 @@ public class VentasController {
 		
 		vehiculo =vhDB.getVehiculo(p);
 		
+		ventaOk = true; 
+		
 		vi.mostrarPatente(vehiculo);
 		
+		
+	}
+
+	public void cleanStock() {
+		vi.cleanStock();
+		
+	}
+
+	public void mostrarDetalle() {
+		
+		String p = vi.getVehiculoTabla();
+		
+		vehiculo =vhDB.getVehiculo(p);
+		
+		vi.mostrarDetalleVehiculo(vehiculo);
 		
 	}
 	
