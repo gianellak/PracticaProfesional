@@ -7,19 +7,11 @@ public class Usuario {
 	private int permisos;
 	String nombre;
 	String apellido;
+	String email;
+	Boolean bloqueo;
 	
 
-	
 
-	public Usuario(String username, String password, int permisos,
-			String nombre, String apellido) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.permisos = permisos;
-		this.nombre = nombre;
-		this.apellido = apellido;
-	}
 
 	public String getUsername() {
 		return username;
@@ -61,8 +53,32 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	
-	
-	
+	public Boolean isBloqueo() {
+		return bloqueo;
+	}
+
+	public void setBloqueo(Boolean bloqueo) {
+		this.bloqueo = bloqueo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Usuario(String username, String password, int permisos,
+			String nombre, String apellido, String email, Boolean bloqueo) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.permisos = permisos;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.bloqueo = bloqueo;
+	}
 
 }

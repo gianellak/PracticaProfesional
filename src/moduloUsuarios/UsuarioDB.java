@@ -33,16 +33,13 @@ public class UsuarioDB  {
 	        "SELECT * FROM Usuario WHERE username=?";
 	
 	private static final String SQL_UPDATE =
-			 "UPDATE Usuario SET password=?, permisos=?, nombre=?, apellido=? WHERE username=?";
+			 "UPDATE Usuario SET password=?, permisos=?, nombre=?, apellido=?, email=?, bloqueo=? WHERE username=?";
 	
 	
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
 	private ConnectionProvider connectionProvider;
 	
-	
-
-
 
 	 
 	  public UsuarioDB(ConnectionProvider connection) {
@@ -58,6 +55,8 @@ public class UsuarioDB  {
 	        		user.getPermisos(),
 	        		user.getNombre(),
 	        		user.getApellido(),
+	        		user.getEmail(),
+	        		user.isBloqueo(),
 	                user.getUsername(),
 	            };
 	    
@@ -128,9 +127,11 @@ public class UsuarioDB  {
         		int permisos = resultSet.getInt(3);
         		String nombre = resultSet.getString(4);
         		String apellido = resultSet.getString(5);
+        		String email = resultSet.getString(6);
+        		Boolean bloqueo = resultSet.getBoolean(7);
         		
         		System.out.println(name);
-        		Usuario unUsuario = new Usuario(name, pass, permisos, nombre, apellido);
+        		Usuario unUsuario = new Usuario(name, pass, permisos, nombre, apellido, email, bloqueo);
         		
         		users.add(unUsuario);
             }
@@ -154,8 +155,11 @@ public class UsuarioDB  {
             user.getPermisos(),
             user.getNombre(),
             user.getApellido(),
+            user.getEmail(),
+            user.isBloqueo()
+            };
            
-        };
+        
 
         		
         		System.out.println(this.connectionProvider);
@@ -210,7 +214,7 @@ public class UsuarioDB  {
 	}
 	
 	private static Usuario map(ResultSet resultSet) throws SQLException {
-        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"));
+        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getString("email"), resultSet.getBoolean("bloqueo"));
         
         return user;
     }

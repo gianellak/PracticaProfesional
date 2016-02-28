@@ -24,13 +24,15 @@ public class PanelUsuario extends JPanel {
 	private JPasswordField passwordText;
 	private JTextField nombreText;
 	private JTextField apellidoText;
+	private JTextField emailText;
+	
 	private JButton btnAceptar;
 	private JButton btnBuscar;
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnResetear;
-	private Usuario user;
 	private JButton btnAceptarMod;
+	private Usuario user;
 	private JTable tabla;
 	private JScrollPane jp;
 	
@@ -155,6 +157,7 @@ public class PanelUsuario extends JPanel {
 		permisosText.setEditable(true);
 		nombreText.setEditable(true);
 		apellidoText.setEditable(true);
+		emailText.setEditable(true);
 		
 		btnAceptarMod = new JButton("Modificar Usuario");
 		btnAceptarMod.setBounds(500, 180, 160, 25);
@@ -197,7 +200,7 @@ public class PanelUsuario extends JPanel {
 public void createTablaUsuarios(List<Usuario> lista) {
 		
 		// Create columns names
-		String columnNames[] = { "Usuario", "Contrasena", "Nombre", "Apellido", "Permisos", "Bloqueo"};
+		String columnNames[] = { "Usuario", "Contrasena", "Nombre", "Apellido", "Permisos", "Email", "Bloqueo"};
 
 		DefaultTableModel model = new DefaultTableModel();
 		
@@ -214,13 +217,18 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		// Create some data
 		for (Usuario u : lista) {
 			
-			Object[] o = new Object[6];
+			System.out.println(u.isBloqueo().toString());
+			
+			Object[] o = new Object[7];
 			o[0] = u.getUsername();
 			o[1] = u.getPassword();
 			o[2] = u.getNombre();
 			o[3] = u.getApellido();
 			o[4] = u.getPermisos();
-			o[5]  = "SI";
+			o[5] = u.getEmail();
+			o[6]  = "NO";
+			if (u.isBloqueo())
+				o[6]  = "SI";
 			model.addRow(o);
 		}
 		
@@ -307,6 +315,16 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		apellidoText.setEditable(false);
 		apellidoText.setBounds(300, 150, 160, 25);
 		this.add(apellidoText);
+		
+		JLabel emailLabel = new JLabel("Email: ");
+		emailLabel.setBounds(150, 180, 160, 25);
+		this.add(emailLabel);
+
+		emailText = new JTextField(u.getEmail());
+		emailText.setEditable(false);
+		emailText.setBounds(300, 180, 160, 25);
+		this.add(emailText);
+	
 		
 		btnModificar = new JButton("Modificar Usuario");
 		btnModificar.setBounds(500, 180, 160, 25);
@@ -432,7 +450,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	public Usuario getModUsuario() {
 		String s = new String(passwordText.getPassword());
 		
-		Usuario u = new Usuario(userText.getText(), s, Integer.parseInt(permisosText.getText()), nombreText.getText(), apellidoText.getText());
+		Usuario u = new Usuario(userText.getText(), s, Integer.parseInt(permisosText.getText()), nombreText.getText(), apellidoText.getText(), emailText.getText(), false);
 		
 		return u;
 	}
@@ -443,6 +461,14 @@ public void createTablaUsuarios(List<Usuario> lista) {
 
 	public void setBtnAceptarMod(JButton btnAceptarMod) {
 		this.btnAceptarMod = btnAceptarMod;
+	}
+
+	public JTextField getEmailText() {
+		return emailText;
+	}
+
+	public void setEmailText(JTextField emailText) {
+		this.emailText = emailText;
 	}
 
 	

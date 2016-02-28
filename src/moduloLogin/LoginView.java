@@ -2,20 +2,12 @@ package moduloLogin;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import exceptions.DBException;
 import exceptions.LoginException;
 import objetos.Usuario;
 import moduloLogin.listeners.ListenerC;
-import moduloLogin.listeners.ListenerLogin;
 import moduloLogin.listeners.ListenerLogin;
 
 public class LoginView implements LoginInterface {
