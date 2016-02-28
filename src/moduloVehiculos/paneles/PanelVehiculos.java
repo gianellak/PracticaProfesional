@@ -3,6 +3,7 @@ package moduloVehiculos.paneles;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -50,6 +51,7 @@ public class PanelVehiculos extends JPanel {
 	private JComboBox<String> comboListModelo;
 	private JComboBox<String> comboListYear;
 	private ListenerComboModelo listenerComboModelo;
+	private JComboBox comboListMarca;
 	
 	
 	public PanelVehiculos(){
@@ -425,35 +427,19 @@ public class PanelVehiculos extends JPanel {
 	}
 
 	public void muestroStock(List<Stock> lista) {
-		
-		
-
-		
+	
 		JLabel lblMarca = new JLabel("Marca: ");
-		lblMarca.setBounds(50, 0, 70, 25);
+		lblMarca.setBounds(50, 0, 50, 25);
 		this.add(lblMarca);
 		
-		comboListModelo = new JComboBox<String>();
-		comboListModelo.setBounds(120, 0, 150, 25);
-		this.add(comboListModelo);
-
 		JLabel lblModelo = new JLabel("Modelo: ");
-		lblModelo.setBounds(50, 30, 70, 25);
+		lblModelo.setBounds(50, 30, 50, 25);
 		this.add(lblModelo);
-		
-		comboListModelo = new JComboBox<String>();
-		comboListModelo.setBounds(120, 30, 250, 25);
-		this.add(comboListModelo);
 
 		JLabel lblYear = new JLabel("Modelo: ");
-		lblYear.setBounds(200, 0, 70, 25);
+		lblYear.setBounds(280, 0, 50, 25);
 		this.add(lblYear);
-		
-		comboListYear = new JComboBox<String>();
-		comboListYear.setBounds(280, 0, 250, 25);
-		this.add(comboListYear);
-		
-		
+				
 		panelStock = new FormStock(lista);
 		
 		this.add(panelStock.getJp());
@@ -675,8 +661,20 @@ public class PanelVehiculos extends JPanel {
 		
 	}
 
-	public void preparoFiltros(List<String> comboMarca, List<String> comboModelo, List<String> comboYear) {
+	public void preparoFiltros(ArrayList<String> comboMarca, ArrayList<String> comboModelo, ArrayList<String> comboYear) {
 		
+		comboListModelo = new JComboBox(comboModelo.toArray());
+		comboListModelo.setBounds(120, 0, 150, 25);
+		this.add(comboListModelo);
+		
+		comboListMarca = new JComboBox(comboMarca.toArray());
+		comboListMarca.setBounds(120, 30, 250, 25);
+		this.add(comboListMarca);
+		
+		comboListYear = new JComboBox(comboYear.toArray());
+		comboListYear.setBounds(340, 0, 250, 25);
+		this.add(comboListYear);
+
 		
 	}
 

@@ -1,6 +1,7 @@
 package moduloVenta;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -310,7 +311,7 @@ public class VentasView implements VentasInterface {
 
 
 	@Override
-	public void muestroStock(List<Stock> lista, List<String> comboMarca, List<String> comboModelo, List<String>comboYear) {
+	public void muestroStock(List<Stock> lista, ArrayList<String> comboMarca, ArrayList<String> comboModelo, ArrayList<String>comboYear) {
 		
 		panelVehiculos = new PanelVehiculos();
 		

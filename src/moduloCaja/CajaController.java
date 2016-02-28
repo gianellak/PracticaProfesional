@@ -41,14 +41,14 @@ public class CajaController {
 
 		ConnectionProvider pro = new DBConnection();
 
-		// SchemaGenerator s = new SchemaGenerator(pro);
-		//
-		// try {
-		// s.generateSchema();
-		// } catch (SQLException e1) {
-		// // TODO Auto-generated catch block
-		// e1.printStackTrace();
-		// }
+		 SchemaGenerator s = new SchemaGenerator(pro);
+		
+		 try {
+		 s.generateSchema();
+		 } catch (SQLException e1) {
+		 // TODO Auto-generated catch block
+		 e1.printStackTrace();
+		 }
 
 		try {
 			pro.getConnection();

@@ -1,5 +1,6 @@
 package moduloVenta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -51,8 +52,6 @@ public interface VentasInterface {
 
 	void msjVentaIncompleta();
 
-	void muestroStock(List<Stock> stockAMostrar, List<String> comboMarca, List<String> comboModelo, List<String> comboYear);
-
 	String getVehiculoTabla();
 
 	int msjSinPatente();
@@ -60,6 +59,9 @@ public interface VentasInterface {
 	void cleanStock();
 
 	void mostrarDetalleVehiculo(Vehiculo vehiculo);
+
+	void muestroStock(List<Stock> lista, ArrayList<String> comboMarca,
+			ArrayList<String> comboModelo, ArrayList<String> comboYear);
 
 
 

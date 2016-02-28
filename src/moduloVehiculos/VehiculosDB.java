@@ -28,8 +28,10 @@ public class VehiculosDB  {
 	private static final String SQL_SELECT_BY_COMBO = "SELECT * FROM Vehiculo WHERE marca=? OR modelo=? OR year=?";
 
 	private static final String SQL_SELECT_LIST_MODELO = "SELECT DISTINCT modelo FROM Vehiculo";
+	
 	private static final String SQL_SELECT_LIST_YEAR = "SELECT DISTINCT year FROM Vehiculo";
-	private static final String SQL_SELECT_LIST_MARCA = "SELECT DISTINCT marca* FROM Vehiculo";
+	
+	private static final String SQL_SELECT_LIST_MARCA = "SELECT DISTINCT marca FROM Vehiculo";
 	
 
 
@@ -168,9 +170,11 @@ public class VehiculosDB  {
 		return stock;
 	}
 	
-	public List<String> getComboModelo() throws DBException {
+	public ArrayList<String> getComboModelo() throws DBException {
 
-		List<String> comboModelo = new ArrayList<>();
+		ArrayList<String> combo = new ArrayList<>();
+		
+		combo.add("-");
 		
 		try (Connection connection = this.connectionProvider.getConnection();
 				PreparedStatement statement = connection
@@ -178,53 +182,57 @@ public class VehiculosDB  {
 				ResultSet rs = statement.executeQuery();) {
 			while (rs.next()) {
 				
-				comboModelo.add(rs.getString(1));
+				combo.add(rs.getString(1));
 				
 			}
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
 		
-		return comboModelo;
+		return combo;
 	}
 	
-	public List<String> getComboMarca() throws DBException {
+	public ArrayList<String> getComboMarca() throws DBException {
 		
-		List<String> comboModelo = new ArrayList<>();
+		ArrayList<String> combo = new ArrayList<>();
+		
+		combo.add("-");
 		
 		try (Connection connection = this.connectionProvider.getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement(SQL_SELECT_LIST_MODELO);
+						.prepareStatement(SQL_SELECT_LIST_MARCA);
 				ResultSet rs = statement.executeQuery();) {
 			while (rs.next()) {
 				
-				comboModelo.add(rs.getString(1));
+				combo.add(rs.getString(1));
 				
 			}
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
 		
-		return comboModelo;
+		return combo;
 	}
-	public List<String> getComboYear() throws DBException {
+	public ArrayList<String> getComboYear() throws DBException {
 		
-		List<String> comboModelo = new ArrayList<>();
+		ArrayList<String> combo = new ArrayList<>();
+		
+		combo.add("-");
 		
 		try (Connection connection = this.connectionProvider.getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement(SQL_SELECT_LIST_MODELO);
+						.prepareStatement(SQL_SELECT_LIST_YEAR);
 				ResultSet rs = statement.executeQuery();) {
 			while (rs.next()) {
 				
-				comboModelo.add(rs.getString(1));
+				combo.add(rs.getString(1));
 				
 			}
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
 		
-		return comboModelo;
+		return combo;
 	}
 
 	/**

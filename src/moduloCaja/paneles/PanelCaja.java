@@ -4,8 +4,10 @@ import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -18,17 +20,20 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DateFormatter;
+
+import objetos.Movimiento;
 import objetos.Usuario;
 
 public class PanelCaja extends JPanel {
 
 	private JButton btnVolver;
-	private JTextField idText;
+	private JLabel idText;
 	private JTextField descripcionText;
 	private JButton btnAceptar;
 	private JTextField dniText;
-	private JTextField usuarioText;
+	private JLabel usuarioText;
 	private JTextField montoText;
+	private JTable tabla;
 	
 	public PanelCaja() {
 
@@ -42,19 +47,17 @@ public class PanelCaja extends JPanel {
 
 	public void onAlta(Usuario usuario) {
 
-		this.removeAll();
-		System.out.println("ONCAJAALTA");
 
 		JLabel idLabel = new JLabel("ID: ");
-		idLabel.setBounds(150, 0, 80, 25);
+		idLabel.setBounds(0, 420, 30, 25);
 		this.add(idLabel);
 
-		idText = new JTextField(9);
-		idText.setBounds(300, 0, 160, 25);
+		idText = new JLabel(String.valueOf(tabla.getRowCount() + 1));
+		idText.setBounds(40, 420, 40, 25);
 		this.add(idText);
 
 		JLabel passLabel = new JLabel("Descripcion");
-		passLabel.setBounds(150, 30, 80, 25);
+		passLabel.setBounds(0, 450, 80, 25);
 		this.add(passLabel);
 
 		descripcionText = new JTextField();
@@ -68,40 +71,39 @@ public class PanelCaja extends JPanel {
 	    });
 
 
-		JScrollPane jp= new JScrollPane(descripcionText);
-		jp.setBounds(300, 30, 300, 60);
-	    this.add(jp);
+		descripcionText.setBounds(100, 450, 700, 30);
+	    this.add(descripcionText);
 
 		JLabel montoLabel = new JLabel("Monto: ");
-		montoLabel.setBounds(150, 110, 160, 25);
+		montoLabel.setBounds(0, 490, 80, 25);
 		this.add(montoLabel);
 
 		montoText = new JTextField(10);
-		montoText.setBounds(300, 110, 160, 25);
+		montoText.setBounds(100, 490, 160, 25);
 		this.add(montoText);
 
 		JLabel nombreLabel = new JLabel("Fecha: ");
-		nombreLabel.setBounds(150, 140, 160, 25);
+		nombreLabel.setBounds(100, 420, 50, 25);
 		this.add(nombreLabel);
 
 
 		// VER!!!! PORQUE LO HABIA PUESTO STRING
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		DateFormatter df = new DateFormatter(format);
-		JFormattedTextField dateField = new JFormattedTextField(df);
-		dateField.setPreferredSize(new Dimension(100, 20));
-		dateField.setValue(new Date());
-		dateField.setEditable(false);
-		dateField.setBounds(300, 140, 160, 25);
+		String format = new String("dd/MM/yyyy");
+		Date d = new Date();
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		String stringDate = df.format(d);
+
+		    
+		JLabel dateField = new JLabel(stringDate);
+		dateField.setBounds(160, 420, 80, 25);
 		this.add(dateField);
 
 		JLabel usuarioLabel = new JLabel("Usuario: ");
-		usuarioLabel.setBounds(150, 170, 160, 25);
+		usuarioLabel.setBounds(280, 420, 50, 25);
 		this.add(usuarioLabel);
 
-		usuarioText = new JTextField(usuario.getUsername());
-		usuarioText.setEditable(false);
-		usuarioText.setBounds(300, 170, 160, 25);
+		usuarioText = new JLabel(usuario.getUsername());
+		usuarioText.setBounds(330, 420, 80, 25);
 		this.add(usuarioText);
 
 		btnAceptar = new JButton("Aceptar");
@@ -119,51 +121,9 @@ public class PanelCaja extends JPanel {
 
 	
 	
-	public void onBaja() {
-
-		this.removeAll();
-
-		System.out.println("ONBAJA");
-
-		JLabel dniLabel = new JLabel("Cliente a dar de baja: ");
-		dniLabel.setBounds(150, 0, 160, 25);
-		this.add(dniLabel);
-
-		dniText = new JTextField(9);
-		dniText.setBounds(300, 0, 160, 25);
-		this.add(dniText);
-
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(500, 150, 100, 25);
-		this.add(btnAceptar);
-
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 180, 100, 25);
-		this.add(btnVolver);
-
-		this.validate();
-		this.repaint();
-
-	}
-
-	public void onMod() {
-
-		this.removeAll();
-		System.out.println("ONMOD");
-
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(500, 150, 100, 25);
-		this.add(btnAceptar);
-
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 180, 100, 25);
-		this.add(btnVolver);
-
-		this.validate();
-		this.repaint();
-	}
-
-	public void onVer() {
+	
+	
+	public void onVer(Usuario usuario, List<Movimiento> lista) {
 
 		this.removeAll();
 		System.out.println("ONVER");
@@ -174,12 +134,15 @@ public class PanelCaja extends JPanel {
 		this.add(idLabel);
 
 		
-		JTable tabla = this.createTablaMovimientos();
+		tabla = this.createTablaMovimientos();
 		
 		JScrollPane jp= new JScrollPane(tabla);
 		
 		jp.setBounds(200, 30, 400, 200);
+		
 		this.add(jp);
+		
+		this.onAlta(usuario);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(500, 180, 100, 25);
@@ -192,15 +155,13 @@ public class PanelCaja extends JPanel {
 
 	private JTable createTablaMovimientos() {
 		// Create columns names
-		String columnNames[] = { "ID", "Descripcion", "Monto", "Fecha", "Usuario"}; // Marca no se muestra
+		String columnNames[] = { "ID", "Descripcion", "Ingreso", "Egreso", "Fecha", "Usuario"}; // Marca no se muestra
 
 		// Create some data
 		String dataValues[][] =
 		{
-			{ "12", "234", "67", "24/02/16", "Gianella"},
-			{ "-123", "43", "853","12/01/16", "admin" },
-			{ "93", "89.2", "109","04/06/15", "Rachel"},
-			{ "279", "9033", "3092","14/03/15", "Gianella" }
+			{ "12", "234", "67", "0", "24/02/16", "Gianella"},
+			{ "-123", "43", "0", "853", "12/01/16", "Rachel" },
 		};
 		
 		JTable tabla = new JTable(dataValues, columnNames);
@@ -216,11 +177,11 @@ public class PanelCaja extends JPanel {
 		this.btnVolver = btnVolver;
 	}
 
-	public JTextField getIdText() {
+	public JLabel getIdText() {
 		return idText;
 	}
 
-	public void setIdText(JTextField idText) {
+	public void setJLabel(JLabel idText) {
 		this.idText = idText;
 	}
 
@@ -240,11 +201,11 @@ public class PanelCaja extends JPanel {
 		this.dniText = dniText;
 	}
 
-	public JTextField getUsuarioText() {
+	public JLabel getUsuarioText() {
 		return usuarioText;
 	}
 
-	public void setUsuarioText(JTextField usuarioText) {
+	public void setUsuarioText(JLabel usuarioText) {
 		this.usuarioText = usuarioText;
 	}
 

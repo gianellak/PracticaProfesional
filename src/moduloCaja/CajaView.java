@@ -27,7 +27,6 @@ public class CajaView implements CajaInterface {
 	private PanelCaja panelCaja;
 	private CajaMenu panelCajaMenu;
 	private ListenerCajaVolver listenerCajaVolver;
-	private ListenerAltaMovimiento listenerAltaMovimiento;
 	private Usuario usuario;
 	private ListenerVerMovimientos listenerVerMovimientos;
 
@@ -53,7 +52,6 @@ public class CajaView implements CajaInterface {
 		//new listeners -> HAY QUE CREAR LAS CLASES LISTENERS
 		listenerCajaVolver= new ListenerCajaVolver(cc);
 		listenerVerMovimientos =new ListenerVerMovimientos(cc);
-		listenerAltaMovimiento =new ListenerAltaMovimiento(cc);
 		//listenerVerLog =new ListenerVerLog(cc); [ADMIN]
 		
 		
@@ -61,7 +59,6 @@ public class CajaView implements CajaInterface {
 		//OK TIA
 		panelCajaMenu.getBtnVolver().addActionListener(listenerCajaVolver);
 		panelCajaMenu.getBtnVerMovs().addActionListener(listenerVerMovimientos);
-		panelCajaMenu.getBtnAltaMov().addActionListener(listenerAltaMovimiento);
 		//panelClientesMenu.getBtnVerLog().addActionListener(listenerVerLog);
 			
 		frame.setTitle("Menu Caja");
@@ -104,7 +101,7 @@ public class CajaView implements CajaInterface {
 		
 		PantallaUtil.remove(panelCaja);
 		
-		panelCaja.onVer();
+		panelCaja.onVer(usuario, lista);
 		
 		
 //		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);

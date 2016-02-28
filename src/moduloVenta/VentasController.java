@@ -301,9 +301,9 @@ public class VentasController {
 			}
 		}
 
-		List<String> comboMarca = vhDB.getComboMarca();
-		List<String> comboModelo = vhDB.getComboModelo();
-		List<String> comboYear = vhDB.getComboYear();
+		ArrayList<String> comboMarca = vhDB.getComboMarca();
+		ArrayList<String> comboModelo = vhDB.getComboModelo();
+		ArrayList<String> comboYear = vhDB.getComboYear();
 		
 		vi.muestroStock(stockAMostrar, comboMarca, comboModelo, comboYear);
 		

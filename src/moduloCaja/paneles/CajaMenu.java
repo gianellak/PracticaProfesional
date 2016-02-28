@@ -13,7 +13,6 @@ public class CajaMenu extends JPanel {
 
 	private JButton btnVolver;
 	private JButton btnVerMovs;
-	private JButton btnAltaMov;
 	private JButton btnVerLog;
 
 
@@ -26,10 +25,6 @@ public CajaMenu() {
 		btnVerMovs.setPreferredSize(preferredSize);
 		this.add(btnVerMovs);
 		
-		btnAltaMov = new JButton("Nuevo Movimiento");
-		btnAltaMov.setPreferredSize(preferredSize);
-		this.add(btnAltaMov);
-	
 		btnVerLog = new JButton("Ver Log");
 		btnVerLog.setPreferredSize(preferredSize);
 		this.add(btnVerLog);
@@ -41,8 +36,6 @@ public CajaMenu() {
 		
 
 	}
-
-	
 
 
 	public JButton getBtnVolver() {
@@ -62,33 +55,12 @@ public CajaMenu() {
 		this.btnVerMovs = btnVerMovs;
 	}
 
-
-
-
-	public JButton getBtnAltaMov() {
-		return btnAltaMov;
-	}
-
-
-
-
-	public void setBtnAltaMov(JButton btnAltaMov) {
-		this.btnAltaMov = btnAltaMov;
-	}
-
-
-
-
 	public JButton getBtnVerLog() {
 		return btnVerLog;
 	}
 
-
-
-
 	public void setBtnVerLog(JButton btnVerLog) {
 		this.btnVerLog = btnVerLog;
 	}
-	
 
 }
