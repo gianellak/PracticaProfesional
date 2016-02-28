@@ -78,10 +78,11 @@ public class CajaDB {
 				
 				rs.getInt("Id"),
 				rs.getString("Descripcion"),
-				rs.getInt("Monto"),
+				rs.getInt("Ingreso"),
+				rs.getInt("Egreso"),
 				rs.getString("Fecha"),
 				rs.getString("Usuario"),
-				rs.getBoolean("Flag")
+				rs.getBoolean("Marca")
 				
 				);
 		
@@ -90,7 +91,7 @@ public class CajaDB {
 	}
 
 	public boolean insert(Movimiento m) throws DBException {
-		Object[] values = { m.getId(), m.getDescripcion(), m.getMonto(),
+		Object[] values = { m.getId(), m.getDescripcion(), m.getIngreso(), m.getEgreso(),
 				m.getFecha(), m.getUsuario(), m.isMarca() };
 
 		try (Connection connection = this.connectionProvider.getConnection();
@@ -146,12 +147,13 @@ public class CajaDB {
     			
         		int id = rs.getInt(1);
         		String descripcion = rs.getString(2);
-        		int monto = rs.getInt(3);
-        		String fecha = rs.getString(4);
-        		String usuario = rs.getString(5);
-        		Boolean flag = rs.getBoolean(6);
+        		int ingreso = rs.getInt(3);
+        		int egreso = rs.getInt(4);
+        		String fecha = rs.getString(5);
+        		String usuario = rs.getString(6);
+        		Boolean marca = rs.getBoolean(7);
         		
-        		Movimiento mov  =new Movimiento(id, descripcion, monto, fecha, usuario, flag);
+        		Movimiento mov  =new Movimiento(id, descripcion, ingreso, egreso, fecha, usuario, marca);
         	       		
         		movimientos.add(mov);
             }
@@ -174,7 +176,8 @@ public class CajaDB {
 				
 				mov.getId(),
 				mov.getDescripcion(),
-				mov.getMonto(),
+				mov.getIngreso(),
+				mov.getEgreso(),
 				mov.getFecha(),
 				mov.getUsuario(),
 				mov.isMarca()

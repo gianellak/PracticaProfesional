@@ -1,27 +1,29 @@
 package objetos;
 
-import java.time.LocalDate;
 
 public class Movimiento {
 	
 	int id;
 	String descripcion;
-	int monto;
+	int ingreso;
+	int egreso;
 	String fecha;
 	String usuario;
 	boolean marca;
 	
 	
-	public Movimiento(int id, String descripcion, int monto, String string,
-			String usuario, boolean marca) {
+	public Movimiento(int id, String descripcion, int ingreso, int egreso,
+			String fecha, String usuario, boolean marca) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
-		this.monto = monto;
-		this.fecha = string;
+		this.ingreso = ingreso;
+		this.egreso = egreso;
+		this.fecha = fecha;
 		this.usuario = usuario;
 		this.marca = marca;
 	}
+	
 	
 	public int getId() {
 		return id;
@@ -35,12 +37,7 @@ public class Movimiento {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getMonto() {
-		return monto;
-	}
-	public void setMonto(int monto) {
-		this.monto = monto;
-	}
+	
 	public String getFecha() {
 		return fecha;
 	}
@@ -58,6 +55,18 @@ public class Movimiento {
 	}
 	public void setMarca(boolean marca) {
 		this.marca = marca;
+	}
+	public int getIngreso() {
+		return ingreso;
+	}
+	public void setIngreso(int ingreso) {
+		this.ingreso = ingreso;
+	}
+	public int getEgreso() {
+		return egreso;
+	}
+	public void setEgreso(int egreso) {
+		this.egreso = egreso;
 	}
 	
 }

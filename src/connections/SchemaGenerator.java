@@ -68,7 +68,7 @@ public class SchemaGenerator {
 		
 		Statement statement = c.createStatement();
 		
-		String sql ="create table Vehiculo (patente VARCHAR(8) PRIMARY KEY, "
+		String sql ="create table Vehiculo (patente VARCHAR(8) PRIMARY KEY, " // LA PRIMARY ES EL MOTOR
 				+ "marca VARCHAR(10), "
 				+ "modelo VARCHAR(25), "
 				+ "year VARCHAR(4), "
