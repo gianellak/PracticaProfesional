@@ -1,18 +1,9 @@
 package moduloPrincipal;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import moduloCobranzas.ventas.VentasInterface;
 import moduloPrincipal.listener.*;
-import moduloPrincipal.paneles.PanelAux;
-import moduloPrincipal.paneles.PanelGeneral;
-import moduloPrincipal.paneles.PanelMenu;
+import moduloPrincipal.paneles.*;
 
 public class PrincipalView implements PrincipalInterface {
 	
@@ -145,25 +136,4 @@ public class PrincipalView implements PrincipalInterface {
 		
 	}
 
-
-	
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

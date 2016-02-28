@@ -4,7 +4,7 @@ package moduloLogin;
 import java.sql.SQLException;
 
 import connections.ConnectionProvider;
-import connections.DBConnection;
+import exceptions.DBException;
 import exceptions.LoginException;
 import objetos.Usuario;
 import moduloPrincipal.PrincipalController;
@@ -14,11 +14,9 @@ import moduloPrincipal.PrincipalView;
 public class LoginController {
 	
 	private LoginInterface login;
-	private PrincipalInterface principalView;
 	private LoginDB logindb;
 	private ConnectionProvider conn;
 	private Usuario unUsuario;
-	private boolean ok;
 	private int logAttemp;
 	
 	
@@ -39,7 +37,7 @@ public class LoginController {
 		
 	}
 	
-	public Usuario login(String usuario, String password) {
+	public Usuario login(String usuario, String password) throws DBException {
 		System.out.println("login");
 		
 		try {
@@ -61,7 +59,10 @@ public class LoginController {
 		}
 		
 		if(logAttemp == 2){
-			
+		
+			Usuario u = logindb.findId(usuario);
+			u.setBloqueo(true);
+			logindb.update(u);
 			login.loginOut();
 
 			System.exit(0);
@@ -72,7 +73,7 @@ public class LoginController {
 		
 	}
 	
-	public Usuario onLogin() throws LoginException, SQLException {
+	public Usuario onLogin() throws LoginException, SQLException, DBException {
 		System.out.println("On login");
 		
 		String u = login.getUsernameInput();
@@ -109,16 +110,6 @@ public class LoginController {
 		 return unUsuario;
 		
 	}
-
-
-
-
-	
-
-
-	
-
-
 
 
 }

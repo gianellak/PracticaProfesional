@@ -15,7 +15,7 @@ import utilitarios.DBUtil;
 public class LoginDB  {
 
 	private static final String SQL_UPDATE =
-			 "UPDATE Usuario SET password=?, nombre=?, apellido=? WHERE username=?";
+			 "UPDATE Usuario SET password=?, nombre=?, apellido=?, permisos=?, email=?, bloqueo =? WHERE username=?";
 
 	
 	private static final String SQL_FIND_BY_ID =
@@ -34,12 +34,6 @@ public class LoginDB  {
 	  public LoginDB(ConnectionProvider connection) {
 	    this.connectionProvider = connection;
 	  }
-
-
-	
-	
-	
-
 	
 	public void update(Usuario user) throws DBException {
 
@@ -47,8 +41,10 @@ public class LoginDB  {
         		user.getPassword(),
         		user.getNombre(),
         		user.getApellido(),
+        		user.getPermisos(),
+        		user.isBloqueo(),
+                user.getEmail(),
                 user.getUsername(),
-                user.getPermisos()
             };
     
 	
@@ -114,9 +110,10 @@ public class LoginDB  {
         		int permisos = resultSet.getInt(5);
         		String nombre = resultSet.getString(3);
         		String apellido = resultSet.getString(4);
+        		String email = resultSet.getString(6);
+        		Boolean bloqueo = resultSet.getBoolean(7);
         		
-        		
-        		Usuario unUsuario = new Usuario(name, pass, permisos, nombre, apellido);
+        		Usuario unUsuario = new Usuario(name, pass, permisos, nombre, apellido, email, bloqueo);
         		
         		users.add(unUsuario);
             }
@@ -129,7 +126,7 @@ public class LoginDB  {
 		
 	
 	private static Usuario map(ResultSet resultSet) throws SQLException {
-        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"));
+        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getString("email"), resultSet.getBoolean("bloqueo"));
         
         return user;
     }

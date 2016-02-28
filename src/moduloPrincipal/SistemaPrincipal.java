@@ -1,6 +1,5 @@
 package moduloPrincipal;
 
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -16,13 +15,12 @@ import connections.SchemaGenerator;
 
 public class SistemaPrincipal {
 
-
-	public static void main(String[] args) throws SQLException, InterruptedException {
+	public static void main(String[] args) throws SQLException,
+			InterruptedException {
 		// TODO Auto-generated method stub
-		
-		
+
 		ConnectionProvider conn = new DBConnection();
-		
+
 		try {
 			conn.getConnection();
 		} catch (SQLException e) {
@@ -30,33 +28,25 @@ public class SistemaPrincipal {
 			e.printStackTrace();
 		}
 
-//		TABLA USUARIO
-//		
-//		SchemaGenerator s = new SchemaGenerator(conn);
-//		
-//		try {
-//			s.generateSchemaUsuario();
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-
-
-
+		 //TABLA USUARIO
 		
+		 SchemaGenerator s = new SchemaGenerator(conn);
+		
+		 try {
+		 s.generateSchemaUsuario();
+		 } catch (SQLException e1) {
+		 // TODO Auto-generated catch block
+		 e1.printStackTrace();
+		 }
+
 		LoginInterface ventanaL = new LoginView();
-		
+
 		LoginDB lgDB = new LoginDB(conn);
-		
-		
-		LoginController lg= new LoginController(lgDB, ventanaL);
-		
+
+		LoginController lg = new LoginController(lgDB, ventanaL);
+
 		lg.showLogin();
-		
-		
-		
-		}
-	
-		
-	
+
+	}
+
 }

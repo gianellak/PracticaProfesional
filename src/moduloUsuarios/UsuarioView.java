@@ -152,7 +152,7 @@ public class UsuarioView implements UsuarioInterface {
 		Usuario u = new Usuario(panelUsuario.getUserText().getText(), s,
 				Integer.parseInt(panelUsuario.getPermisosText().getText()), 
 				panelUsuario.getNombreText().getText(),
-				panelUsuario.getApellidoText().getText());
+				panelUsuario.getApellidoText().getText(), panelUsuario.getEmailText().getText(), false);
 		
 		return u;
 		

@@ -1,6 +1,5 @@
 package moduloUsuarios;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import connections.DBConnection;
 import objetos.Usuario;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
-import moduloUsuarios.UsuarioView;
 
 public class UsuarioController {
 
