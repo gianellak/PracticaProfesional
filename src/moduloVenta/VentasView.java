@@ -39,6 +39,7 @@ public class VentasView implements VentasInterface {
 	private ListenerSeleccionar listenerSeleccionar;
 	private ListenerVolverVentaStock listenerVolverVenta;
 	private ListenerDetalleVehiculo listenerDetalle;
+	private ListenerComboModelo listenerComboModelo;
 
 	public VentasView(){
 		
@@ -309,11 +310,14 @@ public class VentasView implements VentasInterface {
 
 
 	@Override
-	public void muestroStock(List<Stock> lista) {
+	public void muestroStock(List<Stock> lista, List<String> comboMarca, List<String> comboModelo, List<String>comboYear) {
 		
 		panelVehiculos = new PanelVehiculos();
 		
 		panelVehiculos.muestroStock(lista);
+
+		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
+
 		
 		frame.add(panelVehiculos);
 		
@@ -323,6 +327,9 @@ public class VentasView implements VentasInterface {
 		
 		listenerDetalle = new ListenerDetalleVehiculo(ventasController);
 		listenerVolverVenta = new ListenerVolverVentaStock(ventasController);
+		
+		listenerComboModelo = new ListenerComboModelo(ventasController);
+		panelVehiculos.getComboListModelo().addActionListener(listenerComboModelo);
 		
 		panelVehiculos.getBtnVolverVenta().addActionListener(listenerVolverVenta);
 		panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);

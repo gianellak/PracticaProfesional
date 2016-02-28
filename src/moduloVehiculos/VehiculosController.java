@@ -14,7 +14,6 @@ import objetos.Usuario;
 import objetos.Vehiculo;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
-import moduloVehiculo.VehiculoDB;
 
 public class VehiculosController {
 

@@ -51,7 +51,7 @@ public interface VentasInterface {
 
 	void msjVentaIncompleta();
 
-	void muestroStock(List<Stock> stockAMostrar);
+	void muestroStock(List<Stock> stockAMostrar, List<String> comboMarca, List<String> comboModelo, List<String> comboYear);
 
 	String getVehiculoTabla();
 
@@ -60,6 +60,8 @@ public interface VentasInterface {
 	void cleanStock();
 
 	void mostrarDetalleVehiculo(Vehiculo vehiculo);
+
+
 
 
 

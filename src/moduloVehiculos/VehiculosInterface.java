@@ -3,8 +3,6 @@ package moduloVehiculos;
 import java.util.List;
 
 import javax.swing.JFrame;
-
-import moduloVehiculo.vehiculoController;
 import exceptions.DBException;
 import objetos.Persona;
 import objetos.Stock;

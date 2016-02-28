@@ -6,8 +6,8 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import moduloVehiculo.vehiculoController;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import objetos.Stock;
 import objetos.Usuario;
 
@@ -45,6 +45,8 @@ public class FormStock extends JPanel {
 		
 		};
 		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(modelo);
+		tablaStock.setRowSorter(sorter);
 		tablaStock.setModel(modelo);
 		
 		tablaStock.getTableHeader().setReorderingAllowed(false);
@@ -79,7 +81,7 @@ public class FormStock extends JPanel {
 		jp= new JScrollPane(tablaStock);
 		
 
-		jp.setBounds(150, 50, 600, 200);
+		jp.setBounds(150, 150, 800, 200);
 	}
 	
 

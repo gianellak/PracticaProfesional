@@ -25,9 +25,16 @@ public class VehiculosDB  {
 
 	private static final String SQL_FIND_BY_PATENTE = "SELECT * FROM Vehiculo WHERE patente=? OR motor=?";
 
+	private static final String SQL_SELECT_BY_COMBO = "SELECT * FROM Vehiculo WHERE marca=? OR modelo=? OR year=?";
+
+	private static final String SQL_SELECT_LIST_MODELO = "SELECT DISTINCT modelo FROM Vehiculo";
+	private static final String SQL_SELECT_LIST_YEAR = "SELECT DISTINCT year FROM Vehiculo";
+	private static final String SQL_SELECT_LIST_MARCA = "SELECT DISTINCT marca* FROM Vehiculo";
+	
+
+
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
-	@SuppressWarnings("unused")
 	private ConnectionProvider connectionProvider;
 
 	
@@ -136,6 +143,88 @@ public class VehiculosDB  {
 		}
 
 		return stock;
+	}
+	/**
+	 * getAllVehiculos by ComboList selection. devuelve una lista de todos los vehiculos en base a los filtros aplicados.
+	 * 
+	 */
+	public List<Vehiculo> getFilterVehiculos() throws DBException {
+		
+		List<Vehiculo> stock = new ArrayList<>();
+		
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement(SQL_SELECT_BY_COMBO);
+				ResultSet rs = statement.executeQuery();) {
+			while (rs.next()) {
+				
+				stock.add(map(rs));
+				
+			}
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+		
+		return stock;
+	}
+	
+	public List<String> getComboModelo() throws DBException {
+
+		List<String> comboModelo = new ArrayList<>();
+		
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement(SQL_SELECT_LIST_MODELO);
+				ResultSet rs = statement.executeQuery();) {
+			while (rs.next()) {
+				
+				comboModelo.add(rs.getString(1));
+				
+			}
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+		
+		return comboModelo;
+	}
+	
+	public List<String> getComboMarca() throws DBException {
+		
+		List<String> comboModelo = new ArrayList<>();
+		
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement(SQL_SELECT_LIST_MODELO);
+				ResultSet rs = statement.executeQuery();) {
+			while (rs.next()) {
+				
+				comboModelo.add(rs.getString(1));
+				
+			}
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+		
+		return comboModelo;
+	}
+	public List<String> getComboYear() throws DBException {
+		
+		List<String> comboModelo = new ArrayList<>();
+		
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement(SQL_SELECT_LIST_MODELO);
+				ResultSet rs = statement.executeQuery();) {
+			while (rs.next()) {
+				
+				comboModelo.add(rs.getString(1));
+				
+			}
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+		
+		return comboModelo;
 	}
 
 	/**

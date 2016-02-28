@@ -2,15 +2,18 @@ package moduloVehiculos.paneles;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import moduloVehiculo.paneles.FormStock;
+import moduloVenta.listener.ListenerComboModelo;
 import objetos.Persona;
 import objetos.Stock;
 import objetos.Vehiculo;
@@ -43,6 +46,10 @@ public class PanelVehiculos extends JPanel {
 	private JButton btnVolverVenta;
 	private JButton btnElegir;
 	private JButton btnVolverAStock;
+	private JComboBox<String> comboList;
+	private JComboBox<String> comboListModelo;
+	private JComboBox<String> comboListYear;
+	private ListenerComboModelo listenerComboModelo;
 	
 	
 	public PanelVehiculos(){
@@ -419,26 +426,78 @@ public class PanelVehiculos extends JPanel {
 
 	public void muestroStock(List<Stock> lista) {
 		
+		
+
+		
+		JLabel lblMarca = new JLabel("Marca: ");
+		lblMarca.setBounds(50, 0, 70, 25);
+		this.add(lblMarca);
+		
+		comboListModelo = new JComboBox<String>();
+		comboListModelo.setBounds(120, 0, 150, 25);
+		this.add(comboListModelo);
+
+		JLabel lblModelo = new JLabel("Modelo: ");
+		lblModelo.setBounds(50, 30, 70, 25);
+		this.add(lblModelo);
+		
+		comboListModelo = new JComboBox<String>();
+		comboListModelo.setBounds(120, 30, 250, 25);
+		this.add(comboListModelo);
+
+		JLabel lblYear = new JLabel("Modelo: ");
+		lblYear.setBounds(200, 0, 70, 25);
+		this.add(lblYear);
+		
+		comboListYear = new JComboBox<String>();
+		comboListYear.setBounds(280, 0, 250, 25);
+		this.add(comboListYear);
+		
+		
 		panelStock = new FormStock(lista);
 		
 		this.add(panelStock.getJp());
 		
 		btnDetalle = new JButton("Ver Detalle");
-		btnDetalle.setBounds(150, 320, 150, 25);
+		btnDetalle.setBounds(150, 360, 150, 25);
 		this.add(btnDetalle);
 
 		btnSeleccionar = new JButton("Elegir vehiculo");
-		btnSeleccionar.setBounds(320, 320, 150, 25);
+		btnSeleccionar.setBounds(320, 360, 150, 25);
 		this.add(btnSeleccionar);
 		
 		btnVolverVenta = new JButton("Volver");
-		btnVolverVenta.setBounds(490, 320, 150, 25);
+		btnVolverVenta.setBounds(490, 360, 150, 25);
 		this.add(btnVolverVenta);
 		
 		
 		this.validate();
 		this.repaint();
 		
+	}
+
+	public JComboBox<String> getComboListModelo() {
+		return comboListModelo;
+	}
+
+	public void setComboListModelo(JComboBox<String> comboListModelo) {
+		this.comboListModelo = comboListModelo;
+	}
+
+	public JComboBox<String> getComboListYear() {
+		return comboListYear;
+	}
+
+	public void setComboListYear(JComboBox<String> comboListYear) {
+		this.comboListYear = comboListYear;
+	}
+
+	public ListenerComboModelo getListenerComboModelo() {
+		return listenerComboModelo;
+	}
+
+	public void setListenerComboModelo(ListenerComboModelo listenerComboModelo) {
+		this.listenerComboModelo = listenerComboModelo;
 	}
 
 	public JButton getBtnDetalle() {
@@ -613,6 +672,11 @@ public class PanelVehiculos extends JPanel {
 
 		this.validate();
 		this.repaint();
+		
+	}
+
+	public void preparoFiltros(List<String> comboMarca, List<String> comboModelo, List<String> comboYear) {
+		
 		
 	}
 

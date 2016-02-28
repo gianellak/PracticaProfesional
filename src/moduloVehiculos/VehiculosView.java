@@ -12,7 +12,6 @@ import utilitarios.PantallaUtil;
 import moduloClientes.listener.ListenerAltaAceptar;
 import moduloClientes.listener.ListenerMenuClientesVolver;
 import moduloPrincipal.paneles.PanelGeneral;
-import moduloVehiculo.StockTableModel;
 import moduloVehiculo.paneles.FormStock;
 import moduloVehiculos.listener.*;
 import moduloVehiculos.paneles.PanelVehiculos;

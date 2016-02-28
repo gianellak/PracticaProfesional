@@ -8,23 +8,23 @@ import moduloVenta.VentasController;
 
 
 
-public class ListenerNuevaVenta implements ActionListener {
+public class ListenerComboModelo implements ActionListener {
 
 
 	private VentasController vc;
 
 
-	public ListenerNuevaVenta(VentasController vc){
+	public ListenerComboModelo(VentasController vc) {
 		this.vc = vc;
-		
 	}
-	
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		vc.showNuevaVenta();
-
+		vc.filtrarModelo();
+		
+		
 	}
 	
 }

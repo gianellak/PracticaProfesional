@@ -272,8 +272,9 @@ public class VentasController {
 	}
 
 	
-
-	private void muestroStock(List<Vehiculo> lista) {
+//Muestro el stock actual. 
+	
+	private void muestroStock(List<Vehiculo> lista) throws DBException {
 		
 		
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
@@ -300,7 +301,11 @@ public class VentasController {
 			}
 		}
 
-		vi.muestroStock(stockAMostrar);
+		List<String> comboMarca = vhDB.getComboMarca();
+		List<String> comboModelo = vhDB.getComboModelo();
+		List<String> comboYear = vhDB.getComboYear();
+		
+		vi.muestroStock(stockAMostrar, comboMarca, comboModelo, comboYear);
 		
 	}
 
@@ -349,6 +354,13 @@ public class VentasController {
 		vi.mostrarDetalleVehiculo(vehiculo);
 		
 	}
+
+	public void filtrarModelo() {
+		
+		System.out.println("FILTRO");
+		
+	}
+
 	
 			
 }
