@@ -229,5 +229,11 @@ public class CajaView implements CajaInterface {
 		return null;
 	}
 
+	@Override
+	public void primerMovimiento() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

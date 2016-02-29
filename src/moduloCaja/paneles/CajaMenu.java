@@ -15,15 +15,21 @@ public class CajaMenu extends JPanel {
 	private JButton btnVerMovs;
 	private JButton btnVerLog;
 
+	private JButton btnVerUnDia;
+
 
 public CajaMenu() {
 		
 
 		this.setPreferredSize(new Dimension(250, 500));
 		
-		btnVerMovs = new JButton("Ver Movimientos del Dia");
+		btnVerMovs = new JButton("Ver Caja del Dia");
 		btnVerMovs.setPreferredSize(preferredSize);
 		this.add(btnVerMovs);
+		
+		btnVerUnDia = new JButton("Ver Caja de Otro día");
+		btnVerUnDia.setPreferredSize(preferredSize);
+		this.add(btnVerUnDia);
 		
 		btnVerLog = new JButton("Ver Log");
 		btnVerLog.setPreferredSize(preferredSize);

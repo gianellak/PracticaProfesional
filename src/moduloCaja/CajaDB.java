@@ -18,6 +18,8 @@ public class CajaDB {
 	
 	private static final String SQL_FIND_ALL_MOVIMIENTOS = "SELECT * FROM Movimiento";
 
+	private static final String SQL_FIND_BY_DAY = "SELECT * FROM Movimiento WHERE fecha=?";
+
 	private static final String SQL_DELETE = null;
 	
 	private static final String SQL_UPDATE_MOVIMIENTO = "UPDATE FROM Movimiento WHERE id = ?";
@@ -135,7 +137,6 @@ public class CajaDB {
 	}
 
 	public List<Movimiento> findAll() {
-		
 		List<Movimiento> movimientos = new ArrayList<>();
 
         try (
@@ -167,6 +168,7 @@ public class CajaDB {
         }
 
         return movimientos;
+		
 	}
 	
 	
@@ -200,6 +202,44 @@ public class CajaDB {
 		}
 
 		return null;
+	}
+
+	
+	
+	public List<Movimiento> findByDay(String stringDate) {
+		
+		
+		List<Movimiento> movimientos = new ArrayList<>();
+
+        try (
+        	Connection connection = this.connectionProvider.getConnection();
+            PreparedStatement statement =  DBUtil.prepareStatement(connection, SQL_FIND_BY_DAY, false, stringDate);
+            ResultSet rs = statement.executeQuery();
+        ) {
+        	while (rs.next()){
+    			
+        		int id = rs.getInt(1);
+        		String descripcion = rs.getString(2);
+        		int ingreso = rs.getInt(3);
+        		int egreso = rs.getInt(4);
+        		String fecha = rs.getString(5);
+        		String usuario = rs.getString(6);
+        		Boolean marca = rs.getBoolean(7);
+        		
+        		Movimiento mov  =new Movimiento(id, descripcion, ingreso, egreso, fecha, usuario, marca);
+        	       		
+        		movimientos.add(mov);
+            }
+        } catch (SQLException e) {
+            try {
+				throw new DBException(e);
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        }
+
+        return movimientos;
 	}
 
 }

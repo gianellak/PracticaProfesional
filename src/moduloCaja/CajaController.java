@@ -2,6 +2,8 @@ package moduloCaja;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -31,9 +33,23 @@ public class CajaController {
 
 		System.out.println("Ver Movimientos - Controller");
 
-		List<Movimiento> lista = cDB.findAll();
+		
+		String format = new String("dd/MM/yy");
+		Date d = new Date();
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		String stringDate = df.format(d);
+		System.out.println(stringDate);
 
-		ci.onVer(lista);
+		List<Movimiento> lista = cDB.findByDay(stringDate);
+		
+		if(lista.size() == 0){
+			ci.primerMovimiento();
+		} else{
+			
+			ci.onVer(lista);
+		}
+
+		
 
 	}
 
@@ -41,20 +57,21 @@ public class CajaController {
 
 		ConnectionProvider pro = new DBConnection();
 
-		 SchemaGenerator s = new SchemaGenerator(pro);
+		SchemaGenerator s = new SchemaGenerator(pro);
 		
-		 try {
-		 s.generateSchema();
-		 } catch (SQLException e1) {
-		 // TODO Auto-generated catch block
-		 e1.printStackTrace();
-		 }
 
 		try {
 			pro.getConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		try {
+			s.generateSchema();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		cDB = new CajaDB(pro);

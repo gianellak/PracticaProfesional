@@ -54,10 +54,6 @@ public class FormStock extends JPanel {
 		tablaStock.setFocusable(false);
 		
 		
-		
-		
-		
-
 		String columnNames[] = { "Patente", "Marca", "Modelo", "Color", "Año",
 				"PVC", "Condición" };
 		

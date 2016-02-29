@@ -20,7 +20,7 @@ public class SchemaGenerator {
 				
 		Statement statement = c.createStatement();
 		
-		String sql ="create table Movimiento (ID INTEGER PRIMARY KEY, Descripcion VARCHAR(140), Ingreso Double, Egreso Double, Fecha Date, Usuario VARCHAR(8), Marca BOOLEAN)";
+		String sql ="create table Movimiento (ID INTEGER PRIMARY KEY, Descripcion VARCHAR(140), Ingreso Real, Egreso Real, Fecha VARCHAR(8), Usuario VARCHAR(8), Marca BOOLEAN)";
 
 		try {
 			
