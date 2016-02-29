@@ -42,8 +42,8 @@ public class LoginDB  {
         		user.getNombre(),
         		user.getApellido(),
         		user.getPermisos(),
+        		user.getEmail(),
         		user.isBloqueo(),
-                user.getEmail(),
                 user.getUsername(),
             };
     
