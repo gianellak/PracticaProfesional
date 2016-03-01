@@ -22,13 +22,13 @@ import moduloCaja.paneles.*;
 public class CajaView implements CajaInterface {
 	
 	private JFrame frame;
-	private PanelClientes panelClientes;
 	private CajaController cajaController;
 	private PanelCaja panelCaja;
 	private CajaMenu panelCajaMenu;
 	private ListenerCajaVolver listenerCajaVolver;
 	private Usuario usuario;
 	private ListenerVerMovimientos listenerVerMovimientos;
+	private ListenerAltaMovimiento listenerAltaMovimiento;
 
 	public CajaView(){
 	
@@ -106,6 +106,10 @@ public class CajaView implements CajaInterface {
 		
 //		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
 		
+		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
+		
+		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimiento);
+		
 		
 //		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
@@ -117,9 +121,6 @@ public class CajaView implements CajaInterface {
 	@Override
 	public void onBaja() {
 		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
 		
 	//	panelClientes.onBaja();
 		
@@ -137,11 +138,11 @@ public class CajaView implements CajaInterface {
 	@Override
 	public void insertOk() {
 		
-		JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
+		JOptionPane.showMessageDialog(null, "Movimiento agregado correctamente");
 		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();		
+		panelCaja.removeAll();
+		panelCaja.validate();
+		panelCaja.repaint();		
 	}
 
 	@Override
@@ -153,17 +154,10 @@ public class CajaView implements CajaInterface {
 	@Override
 	public int getBajaMovimiento() {
 
-		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
+		return 0;
 	}
 
 
-	@Override
-	public void cleanPanelClientes() {
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
-		
-	}
 
 // NO HAY MODIFICACIÓN DE MOVIMIENTOS
 	
@@ -212,9 +206,9 @@ public class CajaView implements CajaInterface {
 	public void deleteOk() {
 		JOptionPane.showMessageDialog(null, "Movimiento borrado correctamente");
 		
-		panelClientes.removeAll();
-		panelClientes.validate();
-		panelClientes.repaint();
+		panelCaja.removeAll();
+		panelCaja.validate();
+		panelCaja.repaint();
 		
 	}
 
@@ -225,15 +219,17 @@ public class CajaView implements CajaInterface {
 
 	@Override
 	public Movimiento getNuevoMovimiento() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return panelCaja.getNuevoMovimiento();
 	}
 
 	@Override
 	public void primerMovimiento() {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "No hay movimientos registrados al día de la fecha. Deberá realizar la apertura de la caja.");
 		
 	}
+
+
 
 
 }

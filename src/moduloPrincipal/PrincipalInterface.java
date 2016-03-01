@@ -2,7 +2,6 @@ package moduloPrincipal;
 
 import javax.swing.JFrame;
 
-import moduloCobranzas.ventas.VentasInterface;
 import moduloPrincipal.paneles.PanelGeneral;
 
 public interface PrincipalInterface {

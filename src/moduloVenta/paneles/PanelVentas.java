@@ -249,6 +249,11 @@ public class PanelVentas extends JPanel {
 		}
 	}
 
+	public void mostrarDatosPago() {
+		System.out.println("mostrar datos de pago");
+		
+	}
+
 	
 	
 	

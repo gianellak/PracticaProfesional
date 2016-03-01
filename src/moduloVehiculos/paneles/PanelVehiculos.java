@@ -52,6 +52,7 @@ public class PanelVehiculos extends JPanel {
 	private JComboBox<String> comboListYear;
 	private ListenerComboModelo listenerComboModelo;
 	private JComboBox comboListMarca;
+	private Component btnCopiar;
 	
 	
 	public PanelVehiculos(){
@@ -443,17 +444,44 @@ public class PanelVehiculos extends JPanel {
 		panelStock = new FormStock(lista);
 		
 		this.add(panelStock.getJp());
+	}
+	
+	public void menuVentaStock(){
 		
 		btnDetalle = new JButton("Ver Detalle");
-		btnDetalle.setBounds(150, 360, 150, 25);
+		btnDetalle.setBounds(150, 400, 150, 25);
 		this.add(btnDetalle);
 
 		btnSeleccionar = new JButton("Elegir vehiculo");
-		btnSeleccionar.setBounds(320, 360, 150, 25);
+		btnSeleccionar.setBounds(320, 400, 150, 25);
 		this.add(btnSeleccionar);
 		
 		btnVolverVenta = new JButton("Volver");
-		btnVolverVenta.setBounds(490, 360, 150, 25);
+		btnVolverVenta.setBounds(490, 400, 150, 25);
+		this.add(btnVolverVenta);
+		
+		
+		this.validate();
+		this.repaint();
+		
+	}
+	
+	public void menuVerStock(){
+		
+		btnDetalle = new JButton("Ver Detalle");
+		btnDetalle.setBounds(150, 400, 150, 25);
+		this.add(btnDetalle);
+		
+		btnSeleccionar = new JButton("Vender vehiculo");
+		btnSeleccionar.setBounds(320, 400, 150, 25);
+		this.add(btnSeleccionar);
+		
+		btnCopiar = new JButton("Copiar Vehiculo");
+		btnCopiar.setBounds(490, 400, 150, 25);
+		this.add(btnCopiar);
+		
+		btnVolverVenta = new JButton("Volver");
+		btnVolverVenta.setBounds(650, 400, 150, 25);
 		this.add(btnVolverVenta);
 		
 		

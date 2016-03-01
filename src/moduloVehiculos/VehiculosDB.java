@@ -21,7 +21,21 @@ public class VehiculosDB  {
 
 	private static final String SQL_SELECT_ALL_VEHICULO = "SELECT * FROM Vehiculo";
 
-	private static final String SQL_UPDATE_VEHICULO = "UPDATE FROM Usuario WHERE motor = ?";
+	private static final String SQL_UPDATE_VEHICULO = "UPDATE Vehiculo SET motor=?,"
+				+ "patente=?, " 
+				+ "marca=?, "
+				+ "modelo=?, "
+				+ "year=?, "
+				+ "color=?, "
+				+ "km=?, "
+				+ "dominio=?, "
+				+ "pvc=?, "
+				+ "fechaIngreso=?, "
+				+ "fechaVenta=?, "
+				+ "condicion=?, "
+				+ "idProveedor=?, "
+				+ "idCliente=?, "
+				+ "comentarios=? WHERE motor=? OR patente=?";
 
 	private static final String SQL_FIND_BY_PATENTE = "SELECT * FROM Vehiculo WHERE patente=? OR motor=?";
 
@@ -33,6 +47,7 @@ public class VehiculosDB  {
 	
 	private static final String SQL_SELECT_LIST_MARCA = "SELECT DISTINCT marca FROM Vehiculo";
 	
+	//private static final String SQL_UPDATE_STATE = "UPDATE usuario SET condicion=?, fechaVenta=?, idCliente=? WHERE patente=? OR motor=?";
 
 
 	private static final int MYSQL_DUPLICATE_PK = -104;
@@ -241,6 +256,8 @@ public class VehiculosDB  {
 	 */
 	public Boolean createVehiculo(Vehiculo vehiculo) throws DBException {
 		
+		
+		
 		Object[] values = {
 				
 				vehiculo.getPatente(),
@@ -283,17 +300,17 @@ public class VehiculosDB  {
 	 * updateVehiculo. Modifica datos.
 	 * @throws DBException 
 	 */
-	public Boolean updateVehiculo(String motor, Vehiculo vehiculo) throws DBException {
+	public Boolean updateVehiculo(Vehiculo vehiculo) throws DBException {
 
 		Object[] values = {
 				
+				vehiculo.getMotor(),
 				vehiculo.getPatente(),
 				vehiculo.getMarca(),
 				vehiculo.getModelo(),
 				vehiculo.getYear(),
 				vehiculo.getColor(),
 				vehiculo.getKm(),
-				vehiculo.getMotor(),
 				vehiculo.getDominio(),
 				vehiculo.getPvc(),
 				vehiculo.getFechaIngreso(),
@@ -301,7 +318,9 @@ public class VehiculosDB  {
 				vehiculo.getCondicion(),
 				vehiculo.getIdProveedor(),
 				vehiculo.getIdCliente(),
-				vehiculo.getComentarios()
+				vehiculo.getComentarios(),
+				vehiculo.getMotor(),
+				vehiculo.getPatente()
 				
 				};
 
@@ -311,7 +330,14 @@ public class VehiculosDB  {
 		PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_UPDATE_VEHICULO, false, values);)
 
 		{
-			statement.executeUpdate();
+			int affectedRows = statement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new DBException(
+						"Inserting user failed, no rows affected.");
+
+			} else {
+				return true;
+			}
 		} catch (SQLException e) {
 			if (e.getErrorCode() == MYSQL_DUPLICATE_PK) {
 				throw new DBException("Duplicated Key, cannot modify vehiculo");
@@ -320,6 +346,7 @@ public class VehiculosDB  {
 			}
 		}
 
-		return null;
+	
 	}
 }
+

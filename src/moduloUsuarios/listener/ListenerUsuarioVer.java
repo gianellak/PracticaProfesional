@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import exceptions.DBException;
-import moduloCobranzas.ventas.VentasController;
-import moduloCobranzas.ventas.VentasView;
 import moduloPrincipal.PrincipalController;
 
 import moduloUsuarios.UsuarioController;

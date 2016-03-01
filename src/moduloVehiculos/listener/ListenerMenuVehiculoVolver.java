@@ -1,4 +1,4 @@
-package moduloUsuarios.listener;
+package moduloVehiculos.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,23 +8,24 @@ import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;
+import moduloVehiculos.VehiculosController;
 
-public class ListenerUsuarioMod implements ActionListener {
-
-
-	private UsuarioController uc;
+public class ListenerMenuVehiculoVolver implements ActionListener {
 
 
-	public ListenerUsuarioMod(UsuarioController uc){
-		this.uc = uc;
+	private VehiculosController vc;
+
+
+	public ListenerMenuVehiculoVolver(VehiculosController vc){
+		this.vc = vc;
 		
 	}
 	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		uc.showMod();
+		
+		vc.cleanVehiculo();
 		
 		
 	}

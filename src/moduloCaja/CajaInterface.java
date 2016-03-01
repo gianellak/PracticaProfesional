@@ -25,7 +25,7 @@ public interface CajaInterface {
 	// PANTALLA
 	
 	void showMenuCaja(CajaController cc, JFrame f, Usuario u);
-	void cleanPanelClientes();
+
 	
 	// MENSAJES
 	

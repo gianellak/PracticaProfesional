@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 import objetos.Usuario;
 import exceptions.DBException;
-import moduloCobranzas.ventas.VentasController;
-import moduloCobranzas.ventas.VentasView;
 import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;

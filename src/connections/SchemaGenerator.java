@@ -36,6 +36,29 @@ public class SchemaGenerator {
 		}
 		
 	}
+
+	public boolean generateSchemaVenta() throws SQLException {
+		
+		Connection c = this.connection.getConnection();
+		
+		Statement statement = c.createStatement();
+		
+		String sql ="create table Venta (idVenta INTEGER PRIMARY KEY, fecha VARCHAR(8), idCliente INTEGER, idGarante INTEGER, idVendedor INTEGER)";
+		
+		try {
+			
+			
+			statement.execute(sql);
+			
+			return true;
+			
+		} catch (SQLException e) {
+			
+			
+			return false;
+		}
+		
+	}
 	
 	public boolean generateSchemaUsuario() throws SQLException{
 		

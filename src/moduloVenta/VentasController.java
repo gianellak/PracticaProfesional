@@ -1,17 +1,21 @@
 package moduloVenta;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
+import connections.SchemaGenerator;
 import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
+import objetos.Venta;
 import exceptions.DBException;
 import moduloClientes.ClientesDB;
 import moduloClientes.ClientesView;
@@ -48,6 +52,16 @@ public class VentasController {
 			e.printStackTrace();
 		}
 		
+		
+		SchemaGenerator s = new SchemaGenerator(pro);
+		
+		try {
+			s.generateSchemaVenta();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		vDB = new VentasDB(pro);
 		cDB = new ClientesDB(pro);
 		vhDB = new  VehiculosDB(pro);
@@ -69,6 +83,8 @@ public class VentasController {
 		vi.showMenuVentas(this, pc.getView(), pc.getUser());
 		
 		this.conectar();
+		
+		System.out.println(vDB.countAll());
 		
 	}
 
@@ -281,7 +297,7 @@ public class VentasController {
 
 		for (int i = 0; i < lista.size(); i++) {
 
-			if (! ( (lista.get(i).getCondicion() == "Vendido") || (lista.get(i).getCondicion() == "No disponible"))) {
+			if ( (lista.get(i).getCondicion().toUpperCase() == "VENDIDO") || (lista.get(i).getCondicion().toUpperCase() == "NO DISPONIBLE")) {
 
 				Stock s = new Stock();
 				
@@ -289,9 +305,11 @@ public class VentasController {
 
 				if (patenteActual == "000000"){
 					s.setPatente(lista.get(i).getMotor());
-				}
+				}else{
 				
-				s.setPatente(patenteActual);
+				s.setPatente(patenteActual);}
+				s.setCondicion(lista.get(i).getCondicion());
+				s.setColor(lista.get(i).getColor());
 				s.setMarca(lista.get(i).getMarca());
 				s.setModelo(lista.get(i).getModelo());
 				s.setYear(lista.get(i).getYear());
@@ -315,12 +333,38 @@ public class VentasController {
 		
 	}
 
-	public void validarVenta() {
+	public void validarVenta() throws DBException {
 		
 		Boolean botones = vi.getButtonState();
 		
 		if(ventaOk == true && cliente != null && vehiculo != null && garante != null && botones == true){
-			System.out.println("Venta Ok");
+
+			String format = new String("dd/MM/yy");
+			Date d = new Date();
+			SimpleDateFormat df = new SimpleDateFormat(format);
+			String stringDate = df.format(d);
+			
+			//falta idEmpleado
+			Venta v = new Venta(vDB.countAll(), stringDate, cliente.getDni(), garante.getDni(), 1 );
+			
+			if(vDB.insertVenta(v)){
+				
+				vehiculo.setCondicion("Vendido");
+				vehiculo.setFechaVenta(stringDate);
+				vehiculo.setIdCliente(cliente.getDni());
+				
+				if(vhDB.updateVehiculo(vehiculo)){
+					
+					vi.msjVentaOk();
+					
+				} else{
+					
+					vi.msjVentaError();
+				}
+				
+			}
+			System.out.println(vDB.countAll());
+			
 		}else{
 			vi.msjVentaIncompleta();
 		}

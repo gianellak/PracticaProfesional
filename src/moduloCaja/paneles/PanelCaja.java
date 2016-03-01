@@ -42,6 +42,7 @@ public class PanelCaja extends JPanel {
 	private JRadioButton ingresoButton;
 	private JRadioButton egresoButton;
 	private JButton btnAlta;
+	private JLabel dateField;
 	
 	public PanelCaja() {
 
@@ -91,7 +92,7 @@ public class PanelCaja extends JPanel {
 		SimpleDateFormat df = new SimpleDateFormat(format);
 		String stringDate = df.format(d);
 		    
-		JLabel dateField = new JLabel(stringDate);
+		dateField = new JLabel(stringDate);
 		dateField.setBounds(160, 350, 80, 25);
 		this.add(dateField);
 
@@ -121,14 +122,19 @@ public class PanelCaja extends JPanel {
 	    egresoButton.setSelected(false);
 	    egresoButton.setBounds(360, 430, 80, 25);
 	    
+	    
+	    ButtonGroup buttonGroup = new ButtonGroup();
+	    buttonGroup.add(ingresoButton);
+	    buttonGroup.add(egresoButton);
+
+	   
+	    
 	    this.add(ingresoButton);
 	    this.add(egresoButton);
 	    
 	    btnAlta = new JButton("Ingresar Nuevo Movimiento.");
 		btnAlta.setBounds(460, 430, 200, 25);
 		this.add(btnAlta);
-
-	    
 
 		this.validate();
 		this.repaint();
@@ -162,7 +168,15 @@ public class PanelCaja extends JPanel {
 		this.onAlta(usuario);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 200, 100, 25);
+		btnVolver.setBounds(720, 250, 80, 25);
+		this.add(btnVolver);
+		
+		btnVolver = new JButton("Modificar");
+		btnVolver.setBounds(600, 250, 100, 25);
+		this.add(btnVolver);
+		
+		btnVolver = new JButton("Eliminar");
+		btnVolver.setBounds(500, 250, 80, 25);
 		this.add(btnVolver);
 
 		this.validate();
@@ -212,6 +226,26 @@ public class PanelCaja extends JPanel {
 		return tabla;
 	}
 
+
+	public Movimiento getNuevoMovimiento() {
+		Double i ;
+		Double e;
+		if(ingresoButton.isSelected()){
+			i = new Double(montoText.getText());
+			e = new Double(0);
+		
+		} else{
+			
+			e = new Double(montoText.getText());
+			i = new Double(0);
+		}
+		
+		Movimiento m = new Movimiento(Integer.parseInt(idText.getText()), descripcionText.getText(), i, e, dateField.getText(), usuarioText.getText(),
+				true);
+		
+		return m;
+	}
+
 	public JButton getBtnVolver() {
 		return btnVolver;
 	}
@@ -224,8 +258,16 @@ public class PanelCaja extends JPanel {
 		return idText;
 	}
 
-	public void setJLabel(JLabel idText) {
+	public void setIdText(JLabel idText) {
 		this.idText = idText;
+	}
+
+	public JTextField getDescripcionText() {
+		return descripcionText;
+	}
+
+	public void setDescripcionText(JTextField descripcionText) {
+		this.descripcionText = descripcionText;
 	}
 
 	public JButton getBtnAceptar() {
@@ -260,12 +302,49 @@ public class PanelCaja extends JPanel {
 		this.montoText = montoText;
 	}
 
-	public JTextField getDescripcionText() {
-		return descripcionText;
+	public JTable getTabla() {
+		return tabla;
 	}
 
-	public void setDescripcionText(JTextField descripcionText) {
-		this.descripcionText = descripcionText;
+	public void setTabla(JTable tabla) {
+		this.tabla = tabla;
+	}
+
+	public JRadioButton getIngresoButton() {
+		return ingresoButton;
+	}
+
+	public void setIngresoButton(JRadioButton ingresoButton) {
+		this.ingresoButton = ingresoButton;
+	}
+
+	public JRadioButton getEgresoButton() {
+		return egresoButton;
+	}
+
+	public void setEgresoButton(JRadioButton egresoButton) {
+		this.egresoButton = egresoButton;
+	}
+
+	public JButton getBtnAlta() {
+		return btnAlta;
+	}
+
+	public void setBtnAlta(JButton btnAlta) {
+		this.btnAlta = btnAlta;
+	}
+
+	public JLabel getDateField() {
+		return dateField;
+	}
+
+	public void setDateField(JLabel dateField) {
+		this.dateField = dateField;
+	}
+
+	public void refreshTable() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

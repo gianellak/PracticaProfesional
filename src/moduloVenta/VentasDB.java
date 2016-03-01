@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import connections.ConnectionProvider;
 import exceptions.DBException;
+import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
 import objetos.Venta;
@@ -23,6 +24,12 @@ public class VentasDB  {
 	
 	private static final String SQL_INSERT_PERSONA =
 			 "INSERT INTO Persona VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";	
+	
+	private static final String SQL_INSERT_VENTA =
+			"INSERT INTO Venta VALUES (?, ?, ?, ?, ?)";
+	
+	private static final String SQL_COUNT_VENTA =
+			"SELECT COUNT(idVenta) AS count FROM Venta";
 	
 	private static final String SQL_FIND_BY_ID =
 			"SELECT * FROM Persona WHERE dni=?";
@@ -77,6 +84,59 @@ public class VentasDB  {
 
 	}
 
+	
+	public boolean insertVenta(Venta v) throws DBException {
+
+		Object[] values = { v.getIdCliente(),
+				v.getFecha(),
+				v.getIdCliente(),
+				v.getIdGarante(),
+				v.getIdVendedor()};
+
+		
+		try (
+			Connection connection = this.connectionProvider.getConnection();
+			PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_INSERT_VENTA, false, values);
+		){
+       	 int affectedRows = statement.executeUpdate();
+         if (affectedRows == 0) {
+             throw new DBException("Inserting user failed, no rows affected.");
+           
+         	} else {
+         		return true;
+         }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public int countAll() {
+		
+        try (
+        	Connection connection = this.connectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_COUNT_VENTA);
+            ResultSet rs = statement.executeQuery();
+        ) {
+        	rs.next();
+        	
+        	return rs.getInt("count");
+        	
+            }
+         catch (SQLException e) {
+            try {
+				throw new DBException(e);
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        }
+		return 0;
+
+      
+		
+	}
 
 	public Persona getPersona(int dni) throws DBException {
 		Persona persona = null;

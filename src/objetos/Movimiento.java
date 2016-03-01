@@ -5,20 +5,20 @@ public class Movimiento {
 	
 	int id;
 	String descripcion;
-	int ingreso;
-	int egreso;
+	Double ingreso;
+	Double egreso;
 	String fecha;
 	String usuario;
 	boolean marca;
 	
 	
-	public Movimiento(int id, String descripcion, int ingreso, int egreso,
+	public Movimiento(int id, String descripcion, Double i, Double e,
 			String fecha, String usuario, boolean marca) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
-		this.ingreso = ingreso;
-		this.egreso = egreso;
+		this.ingreso = i;
+		this.egreso = e;
 		this.fecha = fecha;
 		this.usuario = usuario;
 		this.marca = marca;
@@ -56,16 +56,24 @@ public class Movimiento {
 	public void setMarca(boolean marca) {
 		this.marca = marca;
 	}
-	public int getIngreso() {
+
+
+	public Double getIngreso() {
 		return ingreso;
 	}
-	public void setIngreso(int ingreso) {
+
+
+	public void setIngreso(Double ingreso) {
 		this.ingreso = ingreso;
 	}
-	public int getEgreso() {
+
+
+	public Double getEgreso() {
 		return egreso;
 	}
-	public void setEgreso(int egreso) {
+
+
+	public void setEgreso(Double egreso) {
 		this.egreso = egreso;
 	}
 	

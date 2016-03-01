@@ -1,6 +1,7 @@
 package moduloVehiculos;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -41,7 +42,8 @@ public class VehiculosView implements VehiculosInterface {
 	private JScrollPane jp;
 	private FormStock panelStock;
 	private JButton btnVolver;
-	private ListenerVolverAVehiculo listenerVolver;
+	private ListenerVehiculoVolver listenerVolver;
+	private ListenerMenuVehiculoVolver listenerMenuVehiculoVolver;
 
 	
 
@@ -76,16 +78,16 @@ public class VehiculosView implements VehiculosInterface {
 		frame.validate();
 		frame.repaint();
 		
-		listenerSalir = new ListenerSalirVehiculo(vc);
+		listenerVolver = new ListenerVehiculoVolver(vc);
 		listenerNuevo = new ListenerNuevoVehiculo(vc);
 		listenerBuscar = new ListenerBuscarVehiculo(vc);
 		listenerStock = new ListenerStock(vc);
 
-		panelVehiculosMenu.getBtnSalir().addActionListener(listenerSalir);
+		panelVehiculosMenu.getBtnVolver().addActionListener(listenerVolver);
 		panelVehiculosMenu.getBtnNuevo().addActionListener(listenerNuevo);
-		panelVehiculosMenu.getBtnBuscar().addActionListener(listenerBuscar);
 		panelVehiculosMenu.getBtnStock().addActionListener(listenerStock);
-
+		panelVehiculosMenu.getBtnBuscar().addActionListener(listenerBuscar);
+		
 
 	}
 
@@ -133,27 +135,23 @@ public class VehiculosView implements VehiculosInterface {
 	}
 
 	@Override
-	public void showStock(List<Stock> listaStockVehiculos) {
+	public void showStock(List<Stock> listaStockVehiculos, ArrayList<String> comboMarca,
+			ArrayList<String> comboModelo, ArrayList<String> comboYear) {
 		
+		PantallaUtil.remove(panelVehiculos);
 		
-		JFrame stock = new JFrame("Stock actual");
+		panelVehiculos.muestroStock(listaStockVehiculos);
 		
-		stock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		stock.getContentPane().setLayout(new BorderLayout());
-		stock.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		
-		panelStock = new FormStock(listaStockVehiculos);
-		
-		jp= new JScrollPane(tablaStock);
-		
-		stock.getContentPane().add(panelStock.getJp());
+		panelVehiculos.menuVerStock();
+
+		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
 
 		
+		frame.add(panelVehiculos);
 		
-		stock.validate();
-		stock.repaint();
-		stock.setVisible(true);
-		
+		PantallaUtil.refresh(frame);
+
+	
 		
 	}
 
@@ -275,5 +273,17 @@ public class VehiculosView implements VehiculosInterface {
 	public void setBtnStock(JButton btnStock) {
 		this.btnStock = btnStock;
 	}
+
+
+	@Override
+	public void cleanPanelVehiculo() {
+		panelVehiculos.removeAll();
+		panelVehiculos.validate();
+		panelVehiculos.repaint();
+		
+	}
+
+
+	
 
 }

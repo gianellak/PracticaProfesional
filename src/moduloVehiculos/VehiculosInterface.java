@@ -1,8 +1,10 @@
 package moduloVehiculos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+
 import exceptions.DBException;
 import objetos.Persona;
 import objetos.Stock;
@@ -20,7 +22,9 @@ public interface VehiculosInterface {
 		// PANTALLA
 		public void closeVehiculo();
 		public void refresh();
-		public void showStock(List<Stock> listaStockVehiculos); // Mostrar form stock, grilla - excepto vendidos y no disponible
+		void showStock(List<Stock> listaStockVehiculos,
+				ArrayList<String> comboMarca, ArrayList<String> comboModelo,
+				ArrayList<String> comboYear); // Mostrar form stock, grilla - excepto vendidos y no disponible
 //	public void showVehiculo(VehiculosController vehiculosController); // muestra form menu veh con todos los botones (nuevo, modificar, stock, buscar por patente).
 		public void showFormNuevoVehiculo(); // Mostrar form nuevo veh.
 		public void showFormModificarVehiculo();
@@ -31,6 +35,8 @@ public interface VehiculosInterface {
 		public void insertError();
 		void showVehiculo(VehiculosController vehiculosController, JFrame f,
 				Usuario u);
+		public void cleanPanelVehiculo();
+		
 		
 		
 }

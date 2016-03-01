@@ -63,6 +63,10 @@ public interface VentasInterface {
 	void muestroStock(List<Stock> lista, ArrayList<String> comboMarca,
 			ArrayList<String> comboModelo, ArrayList<String> comboYear);
 
+	void msjVentaOk();
+
+	void msjVentaError();
+
 
 
 

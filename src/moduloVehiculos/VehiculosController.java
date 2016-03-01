@@ -80,7 +80,7 @@ public void conectar() {
 		
 		Vehiculo vehiculoModificado = vi.getDatosModificarVehiculo(vehiculoAModificar);
 		
-		if (vDB.updateVehiculo(vehiculoAModificar.getMotor(), vehiculoModificado));
+		if (vDB.updateVehiculo(vehiculoModificado));
 		
 		
 	}
@@ -107,19 +107,33 @@ public void conectar() {
 				s.setPatente(patenteActual);
 				s.setMarca(stockActual.get(i).getMarca());
 				s.setModelo(stockActual.get(i).getModelo());
+				s.setColor(stockActual.get(i).getColor());
+				s.setCondicion(stockActual.get(i).getCondicion());
 				s.setYear(stockActual.get(i).getYear());
 				s.setPvc(stockActual.get(i).getPvc());
 
 				stockAMostrar.add(s);
 			}
 		}
+		
+		ArrayList<String> comboMarca = vDB.getComboMarca();
+		ArrayList<String> comboModelo = vDB.getComboModelo();
+		ArrayList<String> comboYear = vDB.getComboYear();
 
-		vi.showStock(stockAMostrar);
+		vi.showStock(stockAMostrar, comboMarca, comboModelo, comboYear);
 	}
 
 	public void onBuscarPorPatente() {
 		String patente = null;
 		vi.getVehiculoPorPatente(patente);
+	}
+	
+
+	public void getBack() {
+		
+		pc.getBack();
+		
+		
 	}
 
 	public void onVolver() {
@@ -137,6 +151,13 @@ public void conectar() {
 		vi.showVehiculo(this, pc.getView(), pc.getUser());
 		
 		this.conectar();
+		
+	}
+
+
+
+	public void cleanVehiculo() {
+		vi.cleanPanelVehiculo();
 		
 	}
 

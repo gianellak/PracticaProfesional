@@ -1,40 +1,35 @@
-package moduloUsuarios.listener;
+package moduloCaja.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import objetos.Usuario;
 import exceptions.DBException;
+import moduloCaja.CajaController;
+import moduloClientes.ClientesController;
 import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;
 
-public class ListenerBuscarUnUsuario implements ActionListener {
+public class ListenerAltaMovimiento implements ActionListener {
 
+	private CajaController cc;
 
-	private UsuarioController uc;
-	
+	public ListenerAltaMovimiento(CajaController cc) {
+		this.cc = cc;
 
-
-	public ListenerBuscarUnUsuario(UsuarioController uc){
-		
-		this.uc = uc;
-		
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		try {
-			uc.buscarUnUsuario();
+			cc.altaMovimiento();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 }

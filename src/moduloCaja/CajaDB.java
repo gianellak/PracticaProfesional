@@ -12,7 +12,7 @@ import utilitarios.DBUtil;
 
 public class CajaDB {
 
-	private static final String SQL_INSERT_MOVIMIENTO = "INSERT INTO Movimiento VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String SQL_INSERT_MOVIMIENTO = "INSERT INTO Movimiento VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String SQL_FIND_BY_ID = "SELECT * FROM Movimiento WHERE id=?";
 	
@@ -80,8 +80,8 @@ public class CajaDB {
 				
 				rs.getInt("Id"),
 				rs.getString("Descripcion"),
-				rs.getInt("Ingreso"),
-				rs.getInt("Egreso"),
+				rs.getDouble("Ingreso"),
+				rs.getDouble("Egreso"),
 				rs.getString("Fecha"),
 				rs.getString("Usuario"),
 				rs.getBoolean("Marca")
@@ -148,8 +148,8 @@ public class CajaDB {
     			
         		int id = rs.getInt(1);
         		String descripcion = rs.getString(2);
-        		int ingreso = rs.getInt(3);
-        		int egreso = rs.getInt(4);
+        		double ingreso = rs.getDouble(3);
+        		double egreso = rs.getDouble(4);
         		String fecha = rs.getString(5);
         		String usuario = rs.getString(6);
         		Boolean marca = rs.getBoolean(7);
@@ -220,8 +220,8 @@ public class CajaDB {
     			
         		int id = rs.getInt(1);
         		String descripcion = rs.getString(2);
-        		int ingreso = rs.getInt(3);
-        		int egreso = rs.getInt(4);
+        		Double ingreso = rs.getDouble(3);
+        		Double egreso = rs.getDouble(4);
         		String fecha = rs.getString(5);
         		String usuario = rs.getString(6);
         		Boolean marca = rs.getBoolean(7);

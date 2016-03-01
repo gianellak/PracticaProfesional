@@ -83,17 +83,9 @@ public class CajaController {
 		pc.getBack();
 	}
 
-	public void cleanClientes() {
 
-		ci.cleanPanelClientes();
-	}
 
-	public void showAlta() {
-
-		ci.onAlta();
-
-	}
-
+	
 	public void bajaMovimiento() throws DBException {
 
 		int u = ci.getBajaMovimiento();
@@ -138,6 +130,7 @@ public class CajaController {
 		if (cDB.insert(movimiento)) {
 
 			ci.insertOk();
+			this.verMovimientos();
 		} else {
 			ci.insertError();
 		}

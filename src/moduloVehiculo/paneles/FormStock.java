@@ -77,7 +77,7 @@ public class FormStock extends JPanel {
 		jp= new JScrollPane(tablaStock);
 		
 
-		jp.setBounds(150, 150, 800, 200);
+		jp.setBounds(0, 80, 1000, 300);
 	}
 	
 

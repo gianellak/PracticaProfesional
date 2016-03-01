@@ -316,6 +316,7 @@ public class VentasView implements VentasInterface {
 		panelVehiculos = new PanelVehiculos();
 		
 		panelVehiculos.muestroStock(lista);
+		panelVehiculos.menuVentaStock();
 
 		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
 
@@ -385,6 +386,32 @@ public class VentasView implements VentasInterface {
 		panelVehiculos.mostrarDetalleVehiculo(vehiculo);
 		
 		PantallaUtil.refresh(frame);
+		
+	}
+
+
+
+
+	@Override
+	public void msjVentaOk() {
+
+		JOptionPane.showMessageDialog(null, "Venta generada con éxito. Por favor, complete los datos de pago.");
+		
+		PantallaUtil.remove(panelVentas);
+		
+		PantallaUtil.refresh(frame);
+		
+		panelVentas.mostrarDatosPago();
+		
+	}
+
+
+
+
+	@Override
+	public void msjVentaError() {
+		
+		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al actualizar el vehiculo. Por favor, realice la baja de stock manualmente.");
 		
 	}
 
