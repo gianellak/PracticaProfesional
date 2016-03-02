@@ -58,8 +58,12 @@ public interface UsuarioInterface {
 	public void onMod();
 
 	public int showToUpdate(Usuario user);
+	
+	public int showToReset(Usuario user);
 
 	public Usuario getModUsuario();
+	
+	public String getResetUsuario();
 
 	public void updateOk();
 

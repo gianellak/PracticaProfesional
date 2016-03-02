@@ -3,6 +3,7 @@ package moduloUsuarios.paneles;
 
 import java.awt.Dimension;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
 import objetos.Usuario;
 
 public class PanelUsuario extends JPanel {
@@ -458,6 +460,14 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		Usuario u = new Usuario(userText.getText(), s, Integer.parseInt(permisosText.getText()), nombreText.getText(), apellidoText.getText(), emailText.getText(), false);
 		
 		return u;
+	}
+	
+	public String getResetUsuario(){
+		
+		String username = (String) tabla.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn());
+			
+		return username;
+	
 	}
 
 	public JButton getBtnAceptarMod() {
