@@ -93,6 +93,13 @@ public class PanelUsuario extends JPanel {
 		apellidoText.setBounds(300, 150, 160, 25);
 		this.add(apellidoText);
 		
+		JLabel emailLabel = new JLabel("Email: ");
+		emailLabel.setBounds(150, 180, 160, 25);
+		this.add(emailLabel);
+
+		emailText = new JTextField(70);
+		emailText.setBounds(300, 180, 160, 25);
+		this.add(emailText);
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(500, 150, 100, 25);
@@ -101,9 +108,7 @@ public class PanelUsuario extends JPanel {
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(500, 180, 100, 25);
 		this.add(btnVolver);
-		
-		
-	
+
 		
 		this.validate();
 		this.repaint();
