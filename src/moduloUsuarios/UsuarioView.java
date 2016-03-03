@@ -172,6 +172,7 @@ public class UsuarioView implements UsuarioInterface {
 				panelUsuario.getNombreText().getText(),
 				panelUsuario.getApellidoText().getText(), false);
 		
+		System.out.println(u.getUsername()+" "+u.getEmail()+" "+u.isBloqueo()+" "); // HASTA ACA OK.
 		return u;
 		
 	}
@@ -312,6 +313,14 @@ public class UsuarioView implements UsuarioInterface {
 		return codigo;
 	}
 
+	@Override
+	public int showToReset(Usuario user) {
+		String s = new String("¿Esta seguro que desea resetear el bloqueo del usuario: " + user.getUsername() + "?");
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Resetear usuario", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+	}
+
 
 
 
@@ -321,7 +330,9 @@ public class UsuarioView implements UsuarioInterface {
 	}
 
 
-
+	public String getResetUsuario(){
+		return panelUsuario.getResetUsuario();
+	}
 
 	@Override
 	public void updateOk() {

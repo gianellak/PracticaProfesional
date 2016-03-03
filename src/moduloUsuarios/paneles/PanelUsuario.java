@@ -15,7 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+
 import objetos.Empleado;
+
 import objetos.Usuario;
 
 public class PanelUsuario extends JPanel {
@@ -113,6 +115,7 @@ public class PanelUsuario extends JPanel {
 		apellidoText.setBounds(300, 150, 160, 25);
 		this.add(apellidoText);
 		
+<<<<<<< HEAD
 		nombreText.setEditable(false);
 		apellidoText.setEditable(false);
 
@@ -129,6 +132,15 @@ public class PanelUsuario extends JPanel {
 		btnValidarE = new JButton("Validar");
 		btnValidarE.setBounds(500, 180, 100, 25);
 		this.add(btnValidarE);
+=======
+		JLabel emailLabel = new JLabel("Email: ");
+		emailLabel.setBounds(150, 180, 160, 25);
+		this.add(emailLabel);
+
+		emailText = new JTextField(70);
+		emailText.setBounds(300, 180, 160, 25);
+		this.add(emailText);
+>>>>>>> origin/master
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(500, 210, 100, 25);
@@ -137,9 +149,7 @@ public class PanelUsuario extends JPanel {
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(500, 240, 100, 25);
 		this.add(btnVolver);
-		
-		
-	
+
 		
 		this.validate();
 		this.repaint();
@@ -729,6 +739,14 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		Usuario u = new Usuario(userText.getText(), s, Integer.parseInt(dniText.getText()), Integer.parseInt(permisosText.getText()), nombreText.getText(), apellidoText.getText(),  false);
 		
 		return u;
+	}
+	
+	public String getResetUsuario(){
+		
+		String username = (String) tabla.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn());
+			
+		return username;
+	
 	}
 
 	public JButton getBtnAceptarMod() {

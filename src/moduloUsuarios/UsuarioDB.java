@@ -26,10 +26,11 @@ public class UsuarioDB  {
 	
 	private static final String SQL_INSERT =
 			 "INSERT INTO Usuario VALUES (?, ?, ?, ?, ?, ?, ?)";
+
 	
 	private static final String SQL_INSERT_EMP =
 			"INSERT INTO Empleado VALUES (?, ?, ?, ?, ?, ?, ?)";
-	
+
 	private static final String SQL_DELETE =
 	        "DELETE FROM Usuario WHERE username = ?";
 	
