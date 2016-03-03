@@ -267,7 +267,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		this.removeAll();
 		System.out.println("ONBuscar");
 		
-		JLabel buscarLabel = new JLabel("Ingrese el usuario a consultar: ");
+		JLabel buscarLabel = new JLabel("Ingrese el nombre de usuario a consultar: ");
 		buscarLabel.setBounds(100, 0, 280, 25);
 		this.add(buscarLabel);
 
@@ -275,7 +275,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		userText.setBounds(300, 30, 160, 25);
 		this.add(userText);
 		
-		JLabel buscarELabel = new JLabel("Ingrese el empleado a consultar: ");
+		JLabel buscarELabel = new JLabel("Ingrese el DNI del empleado a consultar: ");
 		buscarELabel.setBounds(100, 70, 280, 25);
 		this.add(buscarELabel);
 		
