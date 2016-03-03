@@ -24,7 +24,7 @@ public class UsuarioDB  {
 	        "SELECT * FROM Usuario";
 	
 	private static final String SQL_INSERT =
-			 "INSERT INTO Usuario VALUES (?, ?, ?, ?, ?)";
+			 "INSERT INTO Usuario VALUES (?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SQL_DELETE =
 	        "DELETE FROM Usuario WHERE username = ?";
