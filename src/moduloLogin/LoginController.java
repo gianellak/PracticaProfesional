@@ -42,7 +42,7 @@ public class LoginController {
 			Usuario u = logindb.findId(usuario);
 			System.out.println(password + "-" + u.getPassword());
 			
-			if (u.isBloqueo()){
+			if (u.getBloqueo()){
 				System.out.println("Usuario bloqueado");
 				login.loginOut();
 				System.exit(0);

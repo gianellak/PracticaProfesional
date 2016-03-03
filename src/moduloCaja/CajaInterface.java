@@ -38,4 +38,5 @@ public interface CajaInterface {
 	public void showNotFound();
 	public void dispose();
 	void primerMovimiento();
+	void verOtrosMovimientos();
 }

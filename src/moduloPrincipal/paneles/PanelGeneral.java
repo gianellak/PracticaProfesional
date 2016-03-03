@@ -3,6 +3,9 @@ package moduloPrincipal.paneles;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,15 +27,31 @@ public class PanelGeneral extends JPanel {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		
+		JLabel logoLabel = new JLabel("Gitanes Automotores S.R.L");
+		logoLabel.setFont(new Font("Serif", Font.PLAIN, 24));
+		logoLabel.setBounds(30, 0, 450, 90);
+
 		JLabel usuarioLabel = new JLabel("Usuario: " + user.getNombre() + " " + user.getApellido());
-		usuarioLabel.setBounds(30, 20, 250, 20);
-	
-		JLabel editarLabel = new JLabel("Editar Perfil");
-		editarLabel.setBounds(30, 40, 250, 20);
+		usuarioLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+		usuarioLabel.setBounds(30, 90, 250, 20);
+		
+		
+		String format = new String("dd/MM/yyyy");
+		Date d = new Date();
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		String stringDate = df.format(d);
+		
+		
+		JLabel fechaLabel = new JLabel("Fecha: " + stringDate);
+		fechaLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+		fechaLabel.setBounds(1200, 30, 300, 20);;
+		
+		
+		
 		
 		this.add(usuarioLabel);
-		
-		this.add(editarLabel);
+		this.add(logoLabel);
+		this.add(fechaLabel);
 		
 		this.revalidate();
 		this.repaint();

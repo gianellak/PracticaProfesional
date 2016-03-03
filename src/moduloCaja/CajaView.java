@@ -1,20 +1,13 @@
 package moduloCaja;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.*;
 
-import exceptions.DBException;
 import objetos.*;
 import utilitarios.PantallaUtil;
-import moduloClientes.listener.ListenerClientesVolver;
-import moduloClientes.paneles.*;
-import moduloPrincipal.*;
 import moduloPrincipal.paneles.PanelGeneral;
-import moduloUsuarios.*;
 import moduloCaja.listener.*;
 import moduloCaja.paneles.*;
 
@@ -29,6 +22,8 @@ public class CajaView implements CajaInterface {
 	private Usuario usuario;
 	private ListenerVerMovimientos listenerVerMovimientos;
 	private ListenerAltaMovimiento listenerAltaMovimiento;
+	private ListenerVerOtrosMovimientos listenerVerOtrosMovimientos;
+	private Object pantallaCaja;
 
 	public CajaView(){
 	
@@ -52,6 +47,7 @@ public class CajaView implements CajaInterface {
 		//new listeners -> HAY QUE CREAR LAS CLASES LISTENERS
 		listenerCajaVolver= new ListenerCajaVolver(cc);
 		listenerVerMovimientos =new ListenerVerMovimientos(cc);
+		listenerVerOtrosMovimientos =new ListenerVerOtrosMovimientos(cc);
 		//listenerVerLog =new ListenerVerLog(cc); [ADMIN]
 		
 		
@@ -59,6 +55,7 @@ public class CajaView implements CajaInterface {
 		//OK TIA
 		panelCajaMenu.getBtnVolver().addActionListener(listenerCajaVolver);
 		panelCajaMenu.getBtnVerMovs().addActionListener(listenerVerMovimientos);
+		panelCajaMenu.getBtnVerUnDia().addActionListener(listenerVerOtrosMovimientos);
 		//panelClientesMenu.getBtnVerLog().addActionListener(listenerVerLog);
 			
 		frame.setTitle("Menu Caja");
@@ -140,9 +137,7 @@ public class CajaView implements CajaInterface {
 		
 		JOptionPane.showMessageDialog(null, "Movimiento agregado correctamente");
 		
-		panelCaja.removeAll();
-		panelCaja.validate();
-		panelCaja.repaint();		
+		PantallaUtil.remove(panelCaja);		
 	}
 
 	@Override
@@ -226,6 +221,17 @@ public class CajaView implements CajaInterface {
 	@Override
 	public void primerMovimiento() {
 		JOptionPane.showMessageDialog(null, "No hay movimientos registrados al día de la fecha. Deberá realizar la apertura de la caja.");
+		
+	}
+
+	@Override
+	public void verOtrosMovimientos() {
+	
+		PantallaUtil.remove(panelCaja);
+		
+		
+		
+		PantallaUtil.refresh(frame);
 		
 	}
 

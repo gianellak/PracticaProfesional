@@ -15,7 +15,7 @@ import utilitarios.DBUtil;
 public class LoginDB  {
 
 	private static final String SQL_UPDATE =
-			 "UPDATE Usuario SET password=?, nombre=?, apellido=?, permisos=?, email=?, bloqueo =? WHERE username=?";
+			 "UPDATE Usuario SET password=?, dniUsuario=?, nombre=?, apellido=?, permisos=?, bloqueo =? WHERE username=?";
 
 	
 	private static final String SQL_FIND_BY_ID =
@@ -39,11 +39,11 @@ public class LoginDB  {
 
         Object[] values = {
         		user.getPassword(),
+        		user.getDniUsuario(),
         		user.getNombre(),
         		user.getApellido(),
         		user.getPermisos(),
-        		user.getEmail(),
-        		user.isBloqueo(),
+        		user.getBloqueo(),
                 user.getUsername(),
             };
     
@@ -107,13 +107,13 @@ public class LoginDB  {
     			
         		String name = resultSet.getString(1);
         		String pass = resultSet.getString(2);
-        		int permisos = resultSet.getInt(5);
-        		String nombre = resultSet.getString(3);
-        		String apellido = resultSet.getString(4);
-        		String email = resultSet.getString(6);
+        		int dni = resultSet.getInt(3);
+        		String nombre = resultSet.getString(5);
+        		int permisos = resultSet.getInt(4);
+        		String apellido = resultSet.getString(6);
         		Boolean bloqueo = resultSet.getBoolean(7);
         		
-        		Usuario unUsuario = new Usuario(name, pass, permisos, nombre, apellido, email, bloqueo);
+        		Usuario unUsuario = new Usuario(name, pass, dni, permisos, nombre, apellido, bloqueo);
         		
         		users.add(unUsuario);
             }
@@ -126,7 +126,7 @@ public class LoginDB  {
 		
 	
 	private static Usuario map(ResultSet resultSet) throws SQLException {
-        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getString("email"), resultSet.getBoolean("bloqueo"));
+        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("dniUsuario"), resultSet.getInt("permisos"),  resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getBoolean("bloqueo"));
         
         return user;
     }

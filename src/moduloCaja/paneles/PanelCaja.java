@@ -150,7 +150,7 @@ public class PanelCaja extends JPanel {
 		this.removeAll();
 		System.out.println("ONVER");
 
-		JLabel idLabel = new JLabel("Movimientos del día: ");
+		JLabel idLabel = new JLabel("Movimientos del día: " );
 		idLabel.setBounds(150, 0, 280, 25);
 		this.add(idLabel);
 

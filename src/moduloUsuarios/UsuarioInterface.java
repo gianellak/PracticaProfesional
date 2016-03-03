@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import exceptions.DBException;
+import objetos.Empleado;
 import objetos.Usuario;
 
 public interface UsuarioInterface {
@@ -64,6 +65,32 @@ public interface UsuarioInterface {
 	public void updateOk();
 
 	public void updateBad();
+
+	public int getEmpleadoABuscar();
+
+	public void verEmpleado(Empleado e);
+
+	public void msjNoIngresoBusqueda();
+
+	public void onModE();
+
+	public int getBajaEmpleado();
+
+	public int showToDelete(Empleado e);
+
+	public int getEmpNuevoUsuario();
+
+	public void lockDni(String string, String string2);
+
+	public Empleado getModEmpleado();
+
+	public int showToUpdateE(Empleado e);
+
+	public void onAltaE();
+
+	public void insertOkE();
+
+	public void insertBadE();
 
 
 

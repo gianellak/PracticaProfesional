@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import connections.ConnectionProvider;
 import exceptions.DBException;
+import objetos.Empleado;
 import objetos.Usuario;
 import objetos.Venta;
 import utilitarios.DBUtil;
@@ -24,16 +25,31 @@ public class UsuarioDB  {
 	        "SELECT * FROM Usuario";
 	
 	private static final String SQL_INSERT =
-			 "INSERT INTO Usuario VALUES (?, ?, ?, ?, ?)";
+			 "INSERT INTO Usuario VALUES (?, ?, ?, ?, ?, ?, ?)";
+	
+	private static final String SQL_INSERT_EMP =
+			"INSERT INTO Empleado VALUES (?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SQL_DELETE =
 	        "DELETE FROM Usuario WHERE username = ?";
 	
+	private static final String SQL_DELETE_EMP =
+			"DELETE FROM Empleado WHERE idEmpleado = ?";
+	
 	private static final String SQL_FIND_BY_ID =
 	        "SELECT * FROM Usuario WHERE username=?";
 	
+	private static final String SQL_FIND_BY_DNI =
+			"SELECT * FROM Usuario WHERE dniUsuario=?";
+	
+	private static final String SQL_FIND_EMP_BY_ID =
+			"SELECT * FROM Empleado WHERE idEmpleado=?";
+	
 	private static final String SQL_UPDATE =
-			 "UPDATE Usuario SET password=?, permisos=?, nombre=?, apellido=?, email=?, bloqueo=? WHERE username=?";
+			 "UPDATE Usuario SET username=?, password=?, permisos=?, nombre=?, apellido=?, bloqueo=? WHERE dniusuario=?";
+	
+	private static final String SQL_UPDATE_EMP =
+			"UPDATE Empleado SET nombre=?, apellido=?, idCargo=?, direccion=?, telefono=?, email=? WHERE idEmpleado=?";
 	
 	
 	private static final int MYSQL_DUPLICATE_PK = -104;
@@ -51,13 +67,13 @@ public class UsuarioDB  {
 	  public boolean update(Usuario user) throws DBException {
 
 	        Object[] values = {
+	        		user.getUsername(),
 	        		user.getPassword(),
 	        		user.getPermisos(),
 	        		user.getNombre(),
 	        		user.getApellido(),
-	        		user.getEmail(),
-	        		user.isBloqueo(),
-	                user.getUsername(),
+	        		user.getBloqueo(),
+	                user.getDniUsuario()
 	            };
 	    
 		
@@ -82,6 +98,41 @@ public class UsuarioDB  {
 	            throw new DBException(e);
 	        }
 	    }
+	  
+	  public boolean updateEmpleado(Empleado e) throws DBException {
+		  
+		  Object[] values = {
+				 e.getNombre(),
+				 e.getApellido(),
+				 e.getIdCargo(),
+				 e.getDireccion(),
+				 e.getTelefono(),
+				 e.getEmail(),
+				 e.getIdEmpleado()
+		  };
+		  
+		  
+		  try (
+				  
+				  Connection connection = this.connectionProvider.getConnection();
+				  
+				  PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_UPDATE_EMP, false, values);
+				  ) {
+			  
+			  int affectedRows = statement.executeUpdate();
+			  
+			  if (affectedRows == 0) {
+				  
+				  throw new DBException("Updating user failed, no rows affected.");
+			  } else{
+				  return true;
+			  }
+			  
+		  } catch (SQLException i) {
+			  throw new DBException(i);
+		  }
+	  }
+
 	  
 	  
 	public boolean delete(String u) throws DBException {
@@ -109,6 +160,32 @@ public class UsuarioDB  {
 	
 
 	}
+	
+	public boolean deleteEmpleado(int dni) throws DBException {
+		
+		Object[] values = { 
+				dni
+		};
+		
+		try (
+				Connection connection = this.connectionProvider.getConnection();
+				
+				PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_DELETE_EMP, false, values);
+				) {
+			int affectedRows = statement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new DBException("Deleting empleado failed, no rows affected.");
+				
+			}else{
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+		
+		
+	}
 
 
 	public List<Usuario> findAll() throws DBException {
@@ -122,18 +199,7 @@ public class UsuarioDB  {
         ) {
         	while (resultSet.next()){
     			
-        		String name = resultSet.getString(1);
-        		String pass = resultSet.getString(2);
-        		int permisos = resultSet.getInt(3);
-        		String nombre = resultSet.getString(4);
-        		String apellido = resultSet.getString(5);
-        		String email = resultSet.getString(6);
-        		Boolean bloqueo = resultSet.getBoolean(7);
-        		
-        		System.out.println(name);
-        		Usuario unUsuario = new Usuario(name, pass, permisos, nombre, apellido, email, bloqueo);
-        		
-        		users.add(unUsuario);
+        		users.add(map(resultSet));
             }
         } catch (SQLException e) {
             throw new DBException(e);
@@ -152,11 +218,11 @@ public class UsuarioDB  {
         Object[] values = {
             user.getUsername(),
             user.getPassword(),
+            user.getDniUsuario(),
             user.getPermisos(),
             user.getNombre(),
             user.getApellido(),
-            user.getEmail(),
-            user.isBloqueo()
+            user.getBloqueo()
             };
            
         
@@ -213,11 +279,119 @@ public class UsuarioDB  {
         return user;
 	}
 	
+	public Usuario findDNIu(int idUser) throws DBException {
+		
+		Usuario user = null;
+		
+		Object[] values = {
+				idUser
+		};
+		
+		try (
+				Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_FIND_BY_DNI, false, values);
+				ResultSet resultSet = statement.executeQuery();
+				) {
+			if (resultSet.next()) {
+				user = map(resultSet);
+			}
+			
+		} catch (SQLException e) {
+			throw new DBException(e);
+		} 
+		
+		
+		
+		return user;
+	}
+	
 	private static Usuario map(ResultSet resultSet) throws SQLException {
-        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getString("email"), resultSet.getBoolean("bloqueo"));
+        Usuario user = new Usuario(resultSet.getString("username"),resultSet.getString("password"), resultSet.getInt("dniUsuario"), resultSet.getInt("permisos"), resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getBoolean("bloqueo"));
         
         return user;
     }
+
+
+
+	public Empleado findIdEmpleado(int dni) throws DBException {
+
+		Empleado empleado = null;
+		
+		Object[] values = {
+                dni
+            };
+
+        try (
+            Connection connection = this.connectionProvider.getConnection();
+            PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_FIND_EMP_BY_ID, false, values);
+            ResultSet resultSet = statement.executeQuery();
+        		) {
+        	if (resultSet.next()) {
+        		empleado = mapE(resultSet);
+        	}
+    		
+        } catch (SQLException e) {
+            throw new DBException(e);
+        } 
+
+      
+       
+        return empleado;
+	}
+
+
+
+	private Empleado mapE(ResultSet rs) throws SQLException {
+		Empleado e= new Empleado(rs.getInt("idEmpleado"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"),
+				rs.getString("idCargo"), rs.getInt("telefono"), rs.getString("email"));
+		
+		return e;
+	}
+
+
+
+	public boolean inserE(Empleado e) throws DBException {
+		
+		Object[] values = {
+	            e.getIdEmpleado(),
+	            e.getNombre(),
+	            e.getApellido(),
+	            e.getDireccion(),
+	            e.getIdCargo(),
+	            e.getTelefono(),
+	            e.getEmail()
+	            
+	            };
+	           
+	        
+
+	        		
+	        		System.out.println(this.connectionProvider);
+					
+	        		try (
+						Connection connection = this.connectionProvider.getConnection();
+						PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_INSERT_EMP, false, values);
+					) {
+			        	 int affectedRows = statement.executeUpdate();
+			             if (affectedRows == 0) {
+			                 throw new DBException("Inserting emp failed, no rows affected.");
+			               
+			             } else {
+			            	 return true;
+			             }
+					}
+					catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					return false;
+	        		
+	         
+	}
+
+
+
+
 	
 	
 }

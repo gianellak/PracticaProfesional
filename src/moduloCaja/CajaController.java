@@ -150,6 +150,11 @@ public class CajaController {
 		ci.showMenuCaja(this, pc.getView(), pc.getUser());
 		this.conectar();
 	}
+
+	public void verOtrosMovimientos() {
+		ci.verOtrosMovimientos();
+		
+	}
 	
 	
 	// LOG . NO TOCAR.

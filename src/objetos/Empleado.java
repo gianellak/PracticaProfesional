@@ -52,5 +52,17 @@ public class Empleado {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public Empleado(int idEmpleado, String nombre, String apellido,
+			String direccion, String idCargo, int telefono, String email) {
+		super();
+		this.idEmpleado = idEmpleado;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.direccion = direccion;
+		this.idCargo = idCargo;
+		this.telefono = telefono;
+		this.email = email;
+	}
 
 }

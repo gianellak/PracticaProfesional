@@ -34,11 +34,12 @@ public class SistemaPrincipal {
 		
 		 try {
 		 s.generateSchemaUsuario();
+		 s.generateSchemaEmpleado();
 		 } catch (SQLException e1) {
 		 // TODO Auto-generated catch block
 		 e1.printStackTrace();
 		 }
-
+		
 		LoginInterface ventanaL = new LoginView();
 
 		LoginDB lgDB = new LoginDB(conn);

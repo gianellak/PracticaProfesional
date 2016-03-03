@@ -36,6 +36,35 @@ public class SchemaGenerator {
 		}
 		
 	}
+	
+	public boolean generateSchemaEmpleado() throws SQLException {
+		
+		Connection c = this.connection.getConnection();
+		
+		Statement statement = c.createStatement();
+		
+		String sql ="create table Empleado (idEmpleado INTEGER PRIMARY KEY,"
+				+ " nombre VARCHAR(15),"
+				+ " apellido VARCHAR(15),"
+				+ " direccion VARCHAR(20),"
+				+ " idCargo VARCHAR(8),"
+				+ " telefono INTEGER,"
+				+ " email VARCHAR(70))";
+		
+		try {
+			
+			
+			statement.execute(sql);
+			
+			return true;
+			
+		} catch (SQLException e) {
+			
+			
+			return false;
+		}
+		
+	}
 
 	public boolean generateSchemaVenta() throws SQLException {
 		
@@ -43,7 +72,11 @@ public class SchemaGenerator {
 		
 		Statement statement = c.createStatement();
 		
-		String sql ="create table Venta (idVenta INTEGER PRIMARY KEY, fecha VARCHAR(8), idCliente INTEGER, idGarante INTEGER, idVendedor INTEGER)";
+		String sql ="create table Venta (idVenta INTEGER PRIMARY KEY, "
+				+ "fecha VARCHAR(8), "
+				+ "idCliente INTEGER, "
+				+ "idGarante INTEGER, "
+				+ "idVendedor INTEGER)";
 		
 		try {
 			
@@ -66,8 +99,13 @@ public class SchemaGenerator {
 		
 		Statement statement = c.createStatement();
 		
-		String sql ="create table Usuario (Username VARCHAR(8) PRIMARY KEY, Password VARCHAR(8), Permisos INTEGER, Nombre VARCHAR(15), Apellido VARCHAR(15))";
-
+		String sql ="create table Usuario (Username VARCHAR(8) PRIMARY KEY, "
+				+ "Password VARCHAR(8), "
+				+  "dniUsuario INTEGER REFERENCES Empleado(idEmpleado), "
+				+ "Permisos INTEGER, "
+				+ "Nombre VARCHAR(15), "
+				+ "Apellido VARCHAR(15),"
+				+ "bloqueo BOOLEAN)";
 		try {
 			
 	    	

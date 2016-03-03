@@ -1,10 +1,15 @@
 package moduloUsuarios;
 
 import java.awt.BorderLayout;
+
 import utilitarios.PantallaUtil;
+
 import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import objetos.Empleado;
 import objetos.Usuario;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioInterface;
@@ -31,6 +36,12 @@ public class UsuarioView implements UsuarioInterface {
 	private ListenerUsuarioMod listenerMod;
 	private ListenerBuscarUsuario listenerBuscar;
 	private ListenerAltaAceptar listenerAltaAceptar;
+	private ListenerEmpleadoMod listenerModE;
+	private ListenerEmpleadoBaja listenerBajaE;
+	private ListenerValidarE listenerValidarE;
+	private ListenerModAceptarE listenerModAceptarE;
+	private ListenerAltaAceptarE listenerAltaAceptarE;
+	private ListenerEmpleadoAlta listenerAltaE;
 
 	public UsuarioView(){
 	
@@ -60,11 +71,15 @@ public class UsuarioView implements UsuarioInterface {
 		listenerVer = new ListenerUsuarioVer(uc);
 		listenerAlta = new ListenerUsuarioAlta(uc);
 		listenerBuscar = new ListenerBuscarUsuario(uc);
+		listenerAltaE = new ListenerEmpleadoAlta(uc);
+		
+		
 		
 		panelUsuarioMenu.getBtnVolver().addActionListener(listenerVolver);
 		panelUsuarioMenu.getBtnAltaU().addActionListener(listenerAlta);
 		panelUsuarioMenu.getBtnListaU().addActionListener(listenerVer);
 		panelUsuarioMenu.getBtnVerU().addActionListener(listenerBuscar);
+		panelUsuarioMenu.getBtnAltaE().addActionListener(listenerAltaE);
 		
 		
 		//frame.setVisible(false);
@@ -94,6 +109,9 @@ public class UsuarioView implements UsuarioInterface {
 		
 		listenerAltaAceptar = new ListenerAltaAceptar(userController);
 		listenerAltaVolver = new ListenerMenuUsuarioVolver(userController);
+		listenerValidarE = new ListenerValidarE(userController);
+		
+		panelUsuario.getBtnValidarE().addActionListener(listenerValidarE);
 		
 		panelUsuario.getBtnAceptar().addActionListener(listenerAltaAceptar);
 		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
@@ -149,10 +167,10 @@ public class UsuarioView implements UsuarioInterface {
 		
 		String s = new String(panelUsuario.getPasswordText().getPassword());
 		
-		Usuario u = new Usuario(panelUsuario.getUserText().getText(), s,
+		Usuario u = new Usuario(panelUsuario.getUserText().getText(), s, Integer.parseInt(panelUsuario.getDniText().getText()),
 				Integer.parseInt(panelUsuario.getPermisosText().getText()), 
 				panelUsuario.getNombreText().getText(),
-				panelUsuario.getApellidoText().getText(), panelUsuario.getEmailText().getText(), false);
+				panelUsuario.getApellidoText().getText(), false);
 		
 		return u;
 		
@@ -177,9 +195,7 @@ public class UsuarioView implements UsuarioInterface {
 
 	@Override
 	public void cleanPanelUsuario() {
-		panelUsuario.removeAll();
-		panelUsuario.validate();
-		panelUsuario.repaint();
+		PantallaUtil.remove(panelUsuario);
 		
 	}
 	
@@ -325,7 +341,131 @@ public class UsuarioView implements UsuarioInterface {
 		JOptionPane.showMessageDialog(null, "Error al borrar usuario. Revise los datos ingresados");
 		
 	}
+
+	@Override
+	public int getEmpleadoABuscar() {
+		
+		return Integer.parseInt(panelUsuario.getEmpText().getText());
+	}
+
+	@Override
+	public void verEmpleado(Empleado e) {
+		
+		PantallaUtil.remove(panelUsuario);
+		
+		panelUsuario.verUnEmpleado(e);
+		
+		listenerAltaVolver = new ListenerMenuUsuarioVolver(userController);
+		listenerModE = new ListenerEmpleadoMod(userController);
+		listenerBajaE = new ListenerEmpleadoBaja(userController);
+		
+		
+		panelUsuario.getBtnModificar().addActionListener(listenerModE);
+		panelUsuario.getBtnEliminar().addActionListener(listenerBajaE);
+		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
+		
+		PantallaUtil.refresh(frame);
+		
+		
+	}
+
+	@Override
+	public void msjNoIngresoBusqueda() {
+		JOptionPane.showMessageDialog(null, "No se ha detectado un valor valido. Por favor, revise los datos ingresados");
+		
+	}
+
+	@Override
+	public void onModE() {
+		
+		panelUsuario.onModE();
+		
+		listenerModAceptarE = new ListenerModAceptarE(userController);
+		listenerModVolver = new ListenerMenuUsuarioVolver(userController);
+		
+		panelUsuario.getBtnAceptarModE().addActionListener(listenerModAceptarE);
+		panelUsuario.getBtnVolver().addActionListener(listenerModVolver);
+		
+		
+	}
+
+	@Override
+	public int getBajaEmpleado() {
+		return Integer.parseInt(panelUsuario.getDniText().getText());
+	}
+
+	@Override
+	public int showToDelete(Empleado e) {
+		String s = new String("¿Esta seguro que desea eliminar el Empleado:  " + e.getApellido() + " " + e.getNombre() + "?");
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar empleado", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+	}
+
+	@Override
+	public int getEmpNuevoUsuario() {
+		return Integer.parseInt(panelUsuario.getDniText().getText());
+	}
+
+	@Override
+	public void lockDni(String nombre, String apellido) {
+		panelUsuario.getDniText().setEditable(false);
+		panelUsuario.getBtnValidarE().setEnabled(false);
+		panelUsuario.getApellidoText().setText(apellido);
+		panelUsuario.getNombreText().setText(nombre);
+		panelUsuario.getNombreText().setEditable(false);
+		panelUsuario.getApellidoText().setEditable(false);
+
+
+		
+	}
+
+	@Override
+	public Empleado getModEmpleado() {
+		return panelUsuario.getModEmpleado();
+	}
+
+	@Override
+	public int showToUpdateE(Empleado e) {
+		String s = new String("¿Esta seguro que desea modificar los datos del Empleado: " + e.getApellido() + " " + e.getNombre() + "?");
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Modificar empleado", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+	}
+
+	@Override
+	public void onAltaE() {
+
+		PantallaUtil.remove(panelUsuario);
+		
+		panelUsuario.onAltaE();
+		
+		listenerAltaAceptarE = new ListenerAltaAceptarE(userController);
+		listenerAltaVolver = new ListenerMenuUsuarioVolver(userController);
+		
+		
+		panelUsuario.getBtnAceptarE().addActionListener(listenerAltaAceptarE);
+		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
+		
+		
+		PantallaUtil.refresh(frame);
+		
+	}
 	
+	
+	@Override
+	public void insertOkE() {
+		
+		JOptionPane.showMessageDialog(null, "Empleado agregado correctamente");
+		
+		PantallaUtil.remove(panelUsuario);
+		
+	}
+
+	@Override
+	public void insertBadE() {
+		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el empleado. Por favor reintente");
+	}
 
 
 }

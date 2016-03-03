@@ -14,12 +14,17 @@ public class UsuarioMenu extends JPanel {
 	private JButton btnVerU;
 	private JButton btnVolver;
 	private JButton btnListaU;
+	private JButton btnAltaE;
 
 
 public UsuarioMenu() {
 		
 
 		this.setPreferredSize(new Dimension(250, 300));
+		
+		btnAltaE = new JButton("Alta Empleado");
+		btnAltaE.setPreferredSize(preferredSize);
+		this.add(btnAltaE);
 		
 		btnAltaU = new JButton("Alta Usuario");
 		btnAltaU.setPreferredSize(preferredSize);
@@ -29,9 +34,10 @@ public UsuarioMenu() {
 		btnListaU.setPreferredSize(preferredSize);
 		this.add(btnListaU);
 		
-		btnVerU = new JButton("Buscar Usuario");
+		btnVerU = new JButton("Buscar");
 		btnVerU.setPreferredSize(preferredSize);
 		this.add(btnVerU);
+		
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setPreferredSize(preferredSize);
@@ -72,6 +78,16 @@ public UsuarioMenu() {
 
 	public void setBtnListaU(JButton btnListaU) {
 		this.btnListaU = btnListaU;
+	}
+
+
+	public JButton getBtnAltaE() {
+		return btnAltaE;
+	}
+
+
+	public void setBtnAltaE(JButton btnAltaE) {
+		this.btnAltaE = btnAltaE;
 	}
 
 

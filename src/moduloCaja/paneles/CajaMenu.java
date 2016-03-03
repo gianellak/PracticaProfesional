@@ -31,7 +31,7 @@ public CajaMenu() {
 		btnVerUnDia.setPreferredSize(preferredSize);
 		this.add(btnVerUnDia);
 		
-		btnVerLog = new JButton("Ver Log");
+		btnVerLog = new JButton("Descargar Log");
 		btnVerLog.setPreferredSize(preferredSize);
 		this.add(btnVerLog);
 		
@@ -67,6 +67,16 @@ public CajaMenu() {
 
 	public void setBtnVerLog(JButton btnVerLog) {
 		this.btnVerLog = btnVerLog;
+	}
+
+
+	public JButton getBtnVerUnDia() {
+		return btnVerUnDia;
+	}
+
+
+	public void setBtnVerUnDia(JButton btnVerUnDia) {
+		this.btnVerUnDia = btnVerUnDia;
 	}
 
 }

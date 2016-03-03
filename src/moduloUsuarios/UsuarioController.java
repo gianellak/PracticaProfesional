@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
+import objetos.Empleado;
 import objetos.Usuario;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
@@ -120,18 +121,49 @@ public class UsuarioController {
 //	ON OPCION BUSCAR UN USUARIO [LISTENER]
 	
 	public void buscarUnUsuario() throws DBException {
-		System.out.println("BUCOEN LA DB AL USUARIO");
 		
 		
-		Usuario u  = uDB.findId(ui.getUsuarioABuscar());
-		
-		if(u != null){
+		if (!ui.getUsuarioABuscar().isEmpty()){
 			
-			ui.verUsuario(u);
-		}else
-		{
-			ui.showNotFound();
+			System.out.println("BUSCO EN LA DB AL USUARIO");
+			
+			Usuario u  = uDB.findId(ui.getUsuarioABuscar());
+			
+			if(u != null){
+				
+				ui.verUsuario(u);
+			}else
+			{
+				ui.showNotFound();
+			}
+			
+		}else {
+		
+			String g = String.valueOf(ui.getEmpleadoABuscar());
+		
+			if(!g.isEmpty()){
+				
+			
+				System.out.println("BUSCO EN LA DB AL EMP");
+			
+			
+				Empleado e = uDB.findIdEmpleado(ui.getEmpleadoABuscar());
+			
+			
+				if(e != null){
+				
+					ui.verEmpleado(e);
+			
+				}else{
+					
+				ui.showNotFound();
+			}
+		}else{
+			ui.msjNoIngresoBusqueda();
+			}
 		}
+		
+		
 		
 	}
 	
@@ -181,12 +213,18 @@ public class UsuarioController {
 		
 		Usuario user = ui.getModUsuario();
 		
+		
 		if(user != null){
-			
-			int codigo = ui.showToUpdate(user);
-			
-			 if (codigo==JOptionPane.YES_OPTION){
-				 if(uDB.update(user)){
+		
+			Usuario userDB = uDB.findDNIu(user.getDniUsuario());
+
+			if(userDB!= null){
+				
+				int codigo = ui.showToUpdate(userDB);
+			 
+				if (codigo==JOptionPane.YES_OPTION){
+				
+					if(uDB.update(user)){
 						
 						ui.updateOk();
 					}else
@@ -197,11 +235,109 @@ public class UsuarioController {
 		            ui.onMod();
 		        }
 			
+			} else{
+				//USUARIO NO EXISTENTE
+			}
+		}
+		
+	}
+
+	public void showModE() {
+		ui.onModE();
+		
+	}
+
+	public void bajaEmpleado() throws DBException {
+
+		int dni = ui.getBajaEmpleado();
+		
+		
+		Empleado e = uDB.findIdEmpleado(dni);
+		
+		
+		if(e != null){
+		
+		int codigo = ui.showToDelete(e);
+		
+		 if (codigo==JOptionPane.YES_OPTION){
+			 if(uDB.deleteEmpleado(e.getIdEmpleado())){
+					
+					ui.deleteOk();
+				}else
+				{
+					ui.deleteBad();
+				}
+	        }else if(codigo==JOptionPane.NO_OPTION){
+	            ui.onBaja();
+	        }
+		
+		}else{
+			ui.showNotFound();
+		}
+		
+
+	}
+
+	public void validarE() throws DBException {
+		
+		Empleado e = uDB.findIdEmpleado(ui.getEmpNuevoUsuario());
+		
+		if(e!= null){
+			ui.lockDni(e.getNombre(), e.getApellido());
+		} else{
+			ui.showNotFound();
+		}
+		
+	}
+
+	public void modEmpleado() throws DBException {
+	
+		Empleado e = ui.getModEmpleado();
+		
+		if(e != null){
+			
+			int codigo = ui.showToUpdateE(e);
+			
+			 if (codigo==JOptionPane.YES_OPTION){
+				 if(uDB.updateEmpleado(e)){
+						
+						ui.updateOk();
+					}else
+					{
+						ui.updateBad();
+					}
+		        }else if(codigo==JOptionPane.NO_OPTION){
+		            ui.onModE();
+		        }
+			
 			}
 		
 		
 	}
 
+	public void showAltaE() {
+		ui.onAltaE();
+		
+	}
+
+	public void altaEmpleado() throws DBException {
+		System.out.println("Alta Em");
+		
+		Empleado e = ui.getModEmpleado();
+
+		if (uDB.inserE(e)) {
+
+			ui.insertOkE();
+			
+		} else {
+			
+			ui.insertBadE();
+		}
+
+		
+	}
+
+	
 	
 
 }
