@@ -42,6 +42,7 @@ public class UsuarioView implements UsuarioInterface {
 	private ListenerModAceptarE listenerModAceptarE;
 	private ListenerAltaAceptarE listenerAltaAceptarE;
 	private ListenerEmpleadoAlta listenerAltaE;
+	private ListenerResetearUsuario listenerReset;
 
 	public UsuarioView(){
 	
@@ -172,7 +173,6 @@ public class UsuarioView implements UsuarioInterface {
 				panelUsuario.getNombreText().getText(),
 				panelUsuario.getApellidoText().getText(), false);
 		
-		System.out.println(u.getUsername()+" "+u.getEmail()+" "+u.isBloqueo()+" "); // HASTA ACA OK.
 		return u;
 		
 	}
@@ -215,9 +215,10 @@ public class UsuarioView implements UsuarioInterface {
 		listenerAltaVolver = new ListenerMenuUsuarioVolver(userController);
 		listenerMod = new ListenerUsuarioMod(userController);
 		listenerBaja = new ListenerUsuarioBaja(userController);
-		
+		listenerReset = new ListenerResetearUsuario(userController);
 		
 		panelUsuario.getBtnModificar().addActionListener(listenerMod);
+		panelUsuario.getBtnResetear().addActionListener(listenerReset);
 		panelUsuario.getBtnEliminar().addActionListener(listenerBaja);
 		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
 		

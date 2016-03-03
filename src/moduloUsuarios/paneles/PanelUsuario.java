@@ -2,22 +2,12 @@
 package moduloUsuarios.paneles;
 
 import java.awt.Dimension;
-import java.awt.dnd.DnDConstants;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-
 import objetos.Empleado;
-
 import objetos.Usuario;
 
 public class PanelUsuario extends JPanel {
@@ -115,7 +105,6 @@ public class PanelUsuario extends JPanel {
 		apellidoText.setBounds(300, 150, 160, 25);
 		this.add(apellidoText);
 		
-<<<<<<< HEAD
 		nombreText.setEditable(false);
 		apellidoText.setEditable(false);
 
@@ -132,15 +121,6 @@ public class PanelUsuario extends JPanel {
 		btnValidarE = new JButton("Validar");
 		btnValidarE.setBounds(500, 180, 100, 25);
 		this.add(btnValidarE);
-=======
-		JLabel emailLabel = new JLabel("Email: ");
-		emailLabel.setBounds(150, 180, 160, 25);
-		this.add(emailLabel);
-
-		emailText = new JTextField(70);
-		emailText.setBounds(300, 180, 160, 25);
-		this.add(emailText);
->>>>>>> origin/master
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(500, 210, 100, 25);
@@ -743,9 +723,9 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	
 	public String getResetUsuario(){
 		
-		String username = (String) tabla.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn());
-			
-		return username;
+		String s = new String (passwordText.getPassword());
+		Usuario u = new Usuario(userText.getText(), s, Integer.parseInt(dniText.getText()), Integer.parseInt(permisosText.getText()), nombreText.getText(), apellidoText.getText(),  false);
+		return "";
 	
 	}
 

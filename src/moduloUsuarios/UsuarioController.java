@@ -303,36 +303,25 @@ public class UsuarioController {
 
 	public void resetUsuario() throws DBException {
 
-		String username = ui.getResetUsuario();
+		Usuario user = ui.getModUsuario();
 		
-		Usuario u = uDB.findId(username);
+		System.out.println("Rachel. Usuario " +user.getNombre());
 		
-		if (u != null) {
-
-			int codigo = ui.showToReset(u);
-
+		if (user != null) {
+			int codigo = ui.showToReset(user);
+			
 			if (codigo == JOptionPane.YES_OPTION) {
+				user.setBloqueo(false);
 				
-				u.setBloqueo(false);
-				
-				if (uDB.update(u)) {
+				if (uDB.update(user)) {
 					ui.updateOk();
 				} else {
-				
 					ui.updateBad();
-					
 				}
-				
 			} else if (codigo == JOptionPane.NO_OPTION) {
-			
 				ui.onMod();
-				
 			}
-
-			
 		}
-
-		
 	}
 				
 
