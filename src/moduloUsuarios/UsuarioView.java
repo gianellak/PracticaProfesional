@@ -172,7 +172,6 @@ public class UsuarioView implements UsuarioInterface {
 				panelUsuario.getNombreText().getText(),
 				panelUsuario.getApellidoText().getText(), false);
 		
-		System.out.println(u.getUsername()+" "+u.getEmail()+" "+u.isBloqueo()+" "); // HASTA ACA OK.
 		return u;
 		
 	}

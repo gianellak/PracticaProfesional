@@ -2,11 +2,15 @@ package moduloClientes;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.swing.JOptionPane;
+
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Persona;
 import objetos.Usuario;
+import utilitarios.Mensajes;
+import utilitarios.PantallaUtil;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -19,11 +23,6 @@ public class ClientesController {
 	public ClientesController(ClientesView ci, PrincipalController pc) {
 		this.ci = ci;
 		this.pc = pc;
-	}
-
-	public void dispose() {
-		ci.dispose();
-		
 	}
 
 	public void verClientes() throws DBException {
@@ -82,22 +81,22 @@ public class ClientesController {
 		
 		if(persona != null){
 		
-		int codigo = ci.showToDelete(persona);
+		int codigo = Mensajes.showToDelete(persona);
 		
 		 if (codigo==JOptionPane.YES_OPTION){
 			 if(cDB.delete(u)){
 					
-					ci.deleteOk();
+					Mensajes.deleteOk(ci.getPanelClientes());
 				}else
 				{
-					ci.deleteBad();
+					Mensajes.deleteBad();
 				}
 	        }else if(codigo==JOptionPane.NO_OPTION){
 	            ci.verCliente(persona);
 	        }
 		
 		}else{
-			ci.showNotFound();
+			Mensajes.showNotFound();
 		}
 		
 
@@ -110,10 +109,10 @@ public class ClientesController {
 		
 		if(cDB.insert(persona)){
 			
-			ci.insertOk();
+			Mensajes.insertOk(ci.getPanelClientes());
 		}else
 		{
-			ci.insertBad();
+			Mensajes.insertBad();
 		}
 		
 	}
@@ -149,7 +148,7 @@ public class ClientesController {
 			ci.verCliente(p);
 		}else
 		{
-			ci.showNotFound();
+			Mensajes.showNotFound();
 		}
 		
 		
@@ -160,15 +159,15 @@ public class ClientesController {
 		
 		if(cliente != null){
 			
-			int codigo = ci.showToUpdate(cliente);
+			int codigo = Mensajes.showToUpdate(cliente);
 			
 			 if (codigo==JOptionPane.YES_OPTION){
 				 if(cDB.updatePersona(cliente)){
 						
-						ci.updateOk();
+						Mensajes.updateOk(ci.getPanelClientes());
 					}else
 					{
-						ci.updateBad();
+						Mensajes.updateBad();
 					}
 		        }else if(codigo==JOptionPane.NO_OPTION){
 		            ci.onMod();

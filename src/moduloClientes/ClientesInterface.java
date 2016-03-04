@@ -4,32 +4,16 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import exceptions.DBException;
+import moduloClientes.paneles.PanelClientes;
 import objetos.Persona;
 import objetos.Usuario;
 
 public interface ClientesInterface {
 
-	public void dispose();
-
-	public List<Usuario> findAll() throws DBException;
-
 	public void onAlta();
 	
-	public void insertOk();
-
-	public void insertBad();
-
 	public void onMod();
-
-	public void showNotFound();
-
-	public int showToDelete(Persona persona);
-
-	public void deleteOk();
-
-	public void deleteBad();
-
+	
 	void onVer(List<Usuario> lista);
 
 	public Persona getNuevoCliente();
@@ -47,12 +31,8 @@ public interface ClientesInterface {
 
 	public void verCliente(Persona p);
 
-	public void updateOk();
-
-	public void updateBad();
-
-	public int showToUpdate(Persona cliente);
-
 	public Persona getUpdatePersona();
+
+	public PanelClientes getPanelClientes();
 
 }

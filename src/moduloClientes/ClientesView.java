@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import exceptions.DBException;
 import objetos.Persona;
 import objetos.Usuario;
 import utilitarios.PantallaUtil;
@@ -33,8 +32,6 @@ public class ClientesView implements ClientesInterface {
 	private ListenerClientesCompra listenerClientesCompra;
 
 	public ClientesView(){
-		
-		
 	
 		panelClientesMenu= new ClientesMenu();
 		panelClientes = new PanelClientes();
@@ -42,15 +39,6 @@ public class ClientesView implements ClientesInterface {
 	}
 
 	
-
-	
-
-	@Override
-	public List<Usuario> findAll() throws DBException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void showMenuClientes(ClientesController cc,
 			JFrame f, Usuario u) {
@@ -72,7 +60,7 @@ public class ClientesView implements ClientesInterface {
 		
 		
 		//frame.setVisible(false);
-		frame.setTitle("Menu Usuarios");
+		frame.setTitle("Menu Clientes");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panelGeneral, BorderLayout.PAGE_START);
@@ -82,13 +70,6 @@ public class ClientesView implements ClientesInterface {
 		frame.repaint();
 		//frame.setVisible(true);
 		
-		
-	}
-
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -122,8 +103,6 @@ public class ClientesView implements ClientesInterface {
 		
 		
 		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
-		
-		
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		
 		
@@ -141,9 +120,6 @@ public class ClientesView implements ClientesInterface {
 	}
 
 
-
-
-
 	@Override
 	public void cleanPanelClientes() {
 		panelClientes.removeAll();
@@ -151,9 +127,6 @@ public class ClientesView implements ClientesInterface {
 		panelClientes.repaint();
 		
 	}
-
-
-
 
 
 	@Override
@@ -171,7 +144,6 @@ public class ClientesView implements ClientesInterface {
 		PantallaUtil.refresh(frame);
 		
 	}
-
 
 
 	@Override
@@ -223,21 +195,11 @@ public class ClientesView implements ClientesInterface {
 	}
 
 
-
-
-
 	@Override
 	public int getModPersona() {
 		
 		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
 	}
-
-
-
-
-	
-	
-
 
 
 	@Override
@@ -247,83 +209,18 @@ public class ClientesView implements ClientesInterface {
 		
 	}
 
+
+
+
+
+	@Override
+	public PanelClientes getPanelClientes() {
+		return panelClientes;
+	}
+
 	
-//	MENSAJES DE CONFIRMACION/ERROR ~ ----------------------------
-
-	@Override
-	public int showToUpdate(Persona cliente) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void showNotFound() {
-		
-		JOptionPane.showMessageDialog(null, "El cliente nos e encuentra en la base de datos. Por favor reintente");
-
-	}
-
-	@Override
-	public int showToDelete(Persona p) {
-		
-		String s = new String("¿Esta seguro que desea eliminar el usuario: " + p.getApellido() + " " + p.getNombre() + "?");
-		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar Persona", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-       
-		return codigo;	
-		
-	}
-
-	@Override
-	public void deleteOk() {
-		JOptionPane.showMessageDialog(null, "Cliente borrado correctamente");
-		
-		PantallaUtil.remove(panelClientes);
-		
-	}
-
-
-	@Override
-	public void deleteBad() {
-		
-		JOptionPane.showMessageDialog(null, "Error al borrar cliente. Revise los datos ingresados");
-		
-	}
-	
-	@Override
-	public void updateOk() {
-
-		JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
-		
-		PantallaUtil.remove(panelClientes);
-		
-	}
-
-
-	@Override
-	public void updateBad() {
-		
-		JOptionPane.showMessageDialog(null, "Error al modificar el cliente. Revise los datos ingresados");
-		
-	}
-
-	@Override
-	public void insertOk() {
-		
-		JOptionPane.showMessageDialog(null, "Cliente agregado correctamente");
-		
-		PantallaUtil.remove(panelClientes);
-		
-	}
-
-
-	@Override
-	public void insertBad() {
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta el cliente. Por favor reintente");
-		
-	}
 	
 
-//--------------------------------------------------------------------
 
 
 }

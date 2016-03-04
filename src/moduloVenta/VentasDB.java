@@ -165,9 +165,9 @@ public class VentasDB  {
 	private Persona mapPersona(ResultSet resultSet) throws SQLException {
 		Persona persona = new Persona(
 				resultSet.getInt("dni"),
-				resultSet.getInt("telefono_p"), 
-				resultSet.getInt("telefono_c"), 
-				resultSet.getInt("telefono_l"), 
+				resultSet.getString("telefono_p"), 
+				resultSet.getString("telefono_c"), 
+				resultSet.getString("telefono_l"), 
 				resultSet.getString("nombre"), 
 				resultSet.getString("apellido"),
 				resultSet.getString("domicilio"),

@@ -2,9 +2,7 @@ package moduloPrincipal.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import moduloPrincipal.PrincipalController;
-import moduloVehiculo.*;
 import moduloVehiculos.VehiculosController;
 import moduloVehiculos.VehiculosView;
 

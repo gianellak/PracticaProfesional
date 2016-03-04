@@ -16,6 +16,7 @@ import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
 import objetos.Venta;
+import utilitarios.Mensajes;
 import exceptions.DBException;
 import moduloClientes.ClientesDB;
 import moduloClientes.ClientesView;
@@ -261,7 +262,7 @@ public class VentasController {
 				
 			} else{
 				
-				int codigo = vi.msjSinPatente();
+				int codigo = Mensajes.msjSinPatente();
 				
 				if (codigo ==JOptionPane.YES_OPTION){
 
@@ -273,7 +274,7 @@ public class VentasController {
 				else{
 					if(codigo==JOptionPane.NO_OPTION){
 						
-						ventaOk = false;
+					
 					}
 				
 				}
@@ -317,6 +318,7 @@ public class VentasController {
 
 				stockAMostrar.add(s);
 			}
+			
 		}
 
 		ArrayList<String> comboMarca = vhDB.getComboMarca();

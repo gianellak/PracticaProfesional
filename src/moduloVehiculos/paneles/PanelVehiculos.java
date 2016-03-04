@@ -2,26 +2,25 @@ package moduloVehiculos.paneles;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import moduloVehiculo.paneles.FormStock;
 import moduloVenta.listener.ListenerComboModelo;
-import objetos.Persona;
 import objetos.Stock;
 import objetos.Vehiculo;
 
 public class PanelVehiculos extends JPanel {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton btnVolver;
 	private JButton btnAceptar;
 
@@ -53,6 +52,8 @@ public class PanelVehiculos extends JPanel {
 	private ListenerComboModelo listenerComboModelo;
 	private JComboBox comboListMarca;
 	private Component btnCopiar;
+	private JTextField patenteText;
+	private JButton btnBuscar;
 	
 	
 	public PanelVehiculos(){
@@ -72,7 +73,7 @@ public class PanelVehiculos extends JPanel {
 	public void onNuevoVehiculo() {
 
 		this.removeAll();
-		System.out.println("ONALTAVEHICULO");
+		System.out.println("onNuevoVehiculo()");
 
 		JLabel lblPatente = new JLabel("Patente: ");
 		lblPatente.setBounds(150, 30, 160, 25);
@@ -204,6 +205,10 @@ public class PanelVehiculos extends JPanel {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(700, 250, 100, 25);
 		this.add(btnCancelar);
+		
+		
+		this.validate();
+		this.repaint();
 
 	}
 	
@@ -691,19 +696,178 @@ public class PanelVehiculos extends JPanel {
 
 	public void preparoFiltros(ArrayList<String> comboMarca, ArrayList<String> comboModelo, ArrayList<String> comboYear) {
 		
-		comboListModelo = new JComboBox(comboModelo.toArray());
+		comboListModelo = extracted(comboModelo);
 		comboListModelo.setBounds(120, 0, 150, 25);
 		this.add(comboListModelo);
 		
-		comboListMarca = new JComboBox(comboMarca.toArray());
+		comboListMarca = extracted(comboMarca);
 		comboListMarca.setBounds(120, 30, 250, 25);
 		this.add(comboListMarca);
 		
-		comboListYear = new JComboBox(comboYear.toArray());
+		comboListYear = extracted(comboYear);
 		comboListYear.setBounds(340, 0, 250, 25);
 		this.add(comboListYear);
 
 		
+	}
+
+	private JComboBox extracted(ArrayList<String> comboModelo) {
+		return new JComboBox(comboModelo.toArray());
+	}
+
+	public void onBuscarVehiculo() {
+		this.removeAll();
+		System.out.println("ONMOD");
+		
+		JLabel dniCompradorLabel = new JLabel("Ingrese patente o motor a buscar: ");
+		dniCompradorLabel.setBounds(150, 0, 260, 25);
+		this.add(dniCompradorLabel);
+
+		patenteText = new JTextField(9);
+		patenteText.setBounds(380, 0, 160, 25);
+		this.add(patenteText);
+		
+
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(700, 270, 160, 25);
+		this.add(btnBuscar);
+
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(700, 300, 160, 25);
+		this.add(btnVolver);
+		
+		
+		this.validate();
+		this.repaint();
+		
+	}
+
+	public JButton getBtnElegir() {
+		return btnElegir;
+	}
+
+	public void setBtnElegir(JButton btnElegir) {
+		this.btnElegir = btnElegir;
+	}
+
+	public JButton getBtnVolverAStock() {
+		return btnVolverAStock;
+	}
+
+	public void setBtnVolverAStock(JButton btnVolverAStock) {
+		this.btnVolverAStock = btnVolverAStock;
+	}
+
+	public Component getBtnCopiar() {
+		return btnCopiar;
+	}
+
+	public void setBtnCopiar(Component btnCopiar) {
+		this.btnCopiar = btnCopiar;
+	}
+
+	public JButton getBtnBuscar() {
+		return btnBuscar;
+	}
+
+	public void setBtnBuscar(JButton btnBuscar) {
+		this.btnBuscar = btnBuscar;
+	}
+
+	public JTextField getPatenteText() {
+		return patenteText;
+	}
+
+	public void setPatenteText(JTextField patenteText) {
+		this.patenteText = patenteText;
+	}
+
+	public JTextField getTxtProveedor() {
+		return txtProveedor;
+	}
+
+	public void setTxtProveedor(JTextField txtProveedor) {
+		this.txtProveedor = txtProveedor;
+	}
+
+	public JTextField getTxtFechaIngreso() {
+		return txtFechaIngreso;
+	}
+
+	public void setTxtFechaIngreso(JTextField txtFechaIngreso) {
+		this.txtFechaIngreso = txtFechaIngreso;
+	}
+
+	public JTextField getTxtDominio() {
+		return txtDominio;
+	}
+
+	public void setTxtDominio(JTextField txtDominio) {
+		this.txtDominio = txtDominio;
+	}
+
+	public JTextField getTxtMotor() {
+		return txtMotor;
+	}
+
+	public void setTxtMotor(JTextField txtMotor) {
+		this.txtMotor = txtMotor;
+	}
+
+	public JTextField getTxtYear() {
+		return txtYear;
+	}
+
+	public void setTxtYear(JTextField txtYear) {
+		this.txtYear = txtYear;
+	}
+
+	public JTextField getTxtColor() {
+		return txtColor;
+	}
+
+	public void setTxtColor(JTextField txtColor) {
+		this.txtColor = txtColor;
+	}
+
+	public JTextField getTxtMarca() {
+		return txtMarca;
+	}
+
+	public void setTxtMarca(JTextField txtMarca) {
+		this.txtMarca = txtMarca;
+	}
+
+	public JTextField getTxtModelo() {
+		return txtModelo;
+	}
+
+	public void setTxtModelo(JTextField txtModelo) {
+		this.txtModelo = txtModelo;
+	}
+
+	public FormStock getPanelStock() {
+		return panelStock;
+	}
+
+	public void setPanelStock(FormStock panelStock) {
+		this.panelStock = panelStock;
+	}
+
+	public JComboBox<String> getComboList() {
+		return comboList;
+	}
+
+	public void setComboList(JComboBox<String> comboList) {
+		this.comboList = comboList;
+	}
+
+	public JComboBox getComboListMarca() {
+		return comboListMarca;
+	}
+
+	public void setComboListMarca(JComboBox comboListMarca) {
+		this.comboListMarca = comboListMarca;
 	}
 
 

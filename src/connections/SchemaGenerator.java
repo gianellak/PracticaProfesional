@@ -20,7 +20,9 @@ public class SchemaGenerator {
 				
 		Statement statement = c.createStatement();
 		
-		String sql ="create table Movimiento (ID INTEGER PRIMARY KEY, Descripcion VARCHAR(140), Ingreso Real, Egreso Real, Fecha VARCHAR(8), Usuario VARCHAR(8), Marca BOOLEAN)";
+		String sql ="create table Movimiento (ID INTEGER PRIMARY KEY, Descripcion VARCHAR(140), "
+				+ "Ingreso Real, Egreso Real, Fecha VARCHAR(8), "
+				+ "Usuario VARCHAR(8), Marca BOOLEAN)";
 
 		try {
 			
@@ -37,6 +39,39 @@ public class SchemaGenerator {
 		
 	}
 	
+
+	public boolean generateSchemaPersona() throws SQLException {
+		
+		Connection c = this.connection.getConnection();
+				
+		Statement statement = c.createStatement();
+		
+		String sql ="create table Persona (dni INTEGER PRIMARY KEY,"
+				+ " telefono_p VARCHAR(20),"
+				+ " telefono_c VARCHAR(20),"
+				+ " telefono_l VARCHAR(20),"
+				+ " nombre VARCHAR(15),"
+				+ " apellido VARCHAR(15),"
+				+ " domicilio VARCHAR(20),"
+				+ " ciudad VARCHAR(15),"
+				+ " provincia VARCHAR(15),"
+				+ " domicilio_l VARCHAR(20),"
+				+ " empresa VARCHAR(15))";
+
+		try {
+			
+	    	
+	    	statement.execute(sql);
+	    	
+	    	return true;
+			
+		} catch (SQLException e) {
+			
+		
+			return false;
+		}
+		
+	}
 	public boolean generateSchemaEmpleado() throws SQLException {
 		
 		Connection c = this.connection.getConnection();

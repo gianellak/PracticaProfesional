@@ -115,7 +115,7 @@ public class PanelUsuario extends JPanel {
 		apellidoText.setBounds(300, 150, 160, 25);
 		this.add(apellidoText);
 		
-<<<<<<< HEAD
+
 		nombreText.setEditable(false);
 		apellidoText.setEditable(false);
 
@@ -132,7 +132,7 @@ public class PanelUsuario extends JPanel {
 		btnValidarE = new JButton("Validar");
 		btnValidarE.setBounds(500, 180, 100, 25);
 		this.add(btnValidarE);
-=======
+
 		JLabel emailLabel = new JLabel("Email: ");
 		emailLabel.setBounds(150, 180, 160, 25);
 		this.add(emailLabel);
@@ -140,7 +140,6 @@ public class PanelUsuario extends JPanel {
 		emailText = new JTextField(70);
 		emailText.setBounds(300, 180, 160, 25);
 		this.add(emailText);
->>>>>>> origin/master
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(500, 210, 100, 25);

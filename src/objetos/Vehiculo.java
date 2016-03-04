@@ -21,12 +21,10 @@ public class Vehiculo {
 	
 	
 
-	public Vehiculo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
-	public Vehiculo(String patente, String marca, String modelo, String year2,
+	
+	public Vehiculo(String patente, String marca, String modelo, String year,
 			String color, Integer km, String motor, String dominio,
 			Integer pvc, String fechaIngreso, String fechaVenta,
 			String condicion, Integer idProveedor, Integer idCliente,
@@ -35,7 +33,7 @@ public class Vehiculo {
 		this.patente = patente;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.year = year2;
+		this.year = year;
 		this.color = color;
 		this.km = km;
 		this.motor = motor;

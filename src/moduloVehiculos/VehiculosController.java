@@ -12,6 +12,7 @@ import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
+import utilitarios.Mensajes;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -20,6 +21,7 @@ public class VehiculosController {
 	private VehiculosInterface vi;
 	private PrincipalController pc;
 	private VehiculosDB vDB;
+	private Vehiculo vehiculo;
 	
 	public VehiculosController(VehiculosView ci, PrincipalController pc) {
 		this.vi = ci;
@@ -41,16 +43,6 @@ public void conectar() {
 		
 		vDB = new VehiculosDB(pro);
 		
-//		TABLAVEHICULO
-//		SchemaGenerator v = new SchemaGenerator(conn);
-//		
-//		try {
-//			v.generateSchemaVehiculo();
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-
 		
 	}
 
@@ -64,16 +56,7 @@ public void conectar() {
 		
 		vi.showFormNuevoVehiculo();
 
-		Vehiculo newVehiculoAInsertar = vi.getDatosNuevoVehiculo();
-
-		if (vDB.createVehiculo(newVehiculoAInsertar)) {
-
-			vi.insertOk();
-//hh
-		} else {
-			vi.insertError();
-		}
-
+		
 	}
 	
 	public void onUpdateVehiculo(Vehiculo vehiculoAModificar) throws DBException{
@@ -123,10 +106,40 @@ public void conectar() {
 		vi.showStock(stockAMostrar, comboMarca, comboModelo, comboYear);
 	}
 
-	public void onBuscarPorPatente() {
-		String patente = null;
-		vi.getVehiculoPorPatente(patente);
+	public void onBuscarPorPatente() throws DBException {
+		
+		String patente = vi.getPatenteABuscar().toUpperCase();
+		
+		Vehiculo vehiculo = vDB.getVehiculo(patente);
+		
+		if (vehiculo != null){
+		
+			vi.mostrarDetalleVehiculo(vehiculo);
+			
+			
+		} else{
+			
+			int codigo = Mensajes.msjSinPatente();
+			
+			if (codigo ==JOptionPane.YES_OPTION){
+
+				List<Vehiculo> lista = vDB.getAllVehiculos();
+				
+				muestroStock(lista);
+				
+			}
+			else{
+				if(codigo==JOptionPane.NO_OPTION){
+			
+				}
+			
+			}
+
+			
+		}
+		
 	}
+		
 	
 
 	public void getBack() {
@@ -140,7 +153,18 @@ public void conectar() {
 		vi.refresh();
 	}
 
-	public void onAceptarNuevoVehiculo() {
+	public void onAceptarNuevoVehiculo() throws DBException {
+		
+		Vehiculo newVehiculoAInsertar = vi.getDatosNuevoVehiculo();
+
+		if (vDB.createVehiculo(newVehiculoAInsertar)) {
+
+			vi.insertOk();
+
+		} else {
+			vi.insertError();
+		}
+
 		
 	}
 
@@ -161,6 +185,76 @@ public void conectar() {
 		
 	}
 
-	
+
+
+	public void onBuscarVehiculo() {
+		vi.onBuscarVehiculo();
+		
+	}
+
+
+	private void muestroStock(List<Vehiculo> lista) throws DBException {
+		
+		
+		List<Stock> stockAMostrar = new ArrayList<Stock>();
+
+		for (int i = 0; i < lista.size(); i++) {
+
+			if ( (lista.get(i).getCondicion().toUpperCase() == "VENDIDO") || (lista.get(i).getCondicion().toUpperCase() == "NO DISPONIBLE")) {
+
+				Stock s = new Stock();
+				
+				String patenteActual = lista.get(i).getPatente();
+
+				if (patenteActual == "000000"){
+					s.setPatente(lista.get(i).getMotor());
+				}else{
+				
+				s.setPatente(patenteActual);}
+				s.setCondicion(lista.get(i).getCondicion());
+				s.setColor(lista.get(i).getColor());
+				s.setMarca(lista.get(i).getMarca());
+				s.setModelo(lista.get(i).getModelo());
+				s.setYear(lista.get(i).getYear());
+				s.setPvc(lista.get(i).getPvc());
+
+				stockAMostrar.add(s);
+			}
+		}
+
+		ArrayList<String> comboMarca = vDB.getComboMarca();
+		ArrayList<String> comboModelo = vDB.getComboModelo();
+		ArrayList<String> comboYear = vDB.getComboYear();
+		
+		vi.muestroStock(stockAMostrar, comboMarca, comboModelo, comboYear);
+		
+	}
+
+
+
+	public void seleccionaVehiculo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void filtrarModelo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void mostrarDetalle() {
+
+		String p = vi.getVehiculoTabla();
+		
+		vehiculo =vDB.getVehiculo(p);
+		
+		vi.mostrarDetalleVehiculo(vehiculo);
+		
+		
+	}
 
 }

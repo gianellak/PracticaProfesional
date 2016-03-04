@@ -13,12 +13,7 @@ import objetos.Vehiculo;
 
 public interface VehiculosInterface {
 
-	// CONSULTAS
-
-		public Vehiculo getVehiculoPorPatente(String patente);  // Busca un veh por esa patente.
-		public Vehiculo getDatosModificarVehiculo(Vehiculo vehiculo); //Patente, precio, estado (baja vehiculo = no disponible).
-		public Vehiculo getDatosNuevoVehiculo(); // trae los datos del form nuevo veh y se los da al controller para que haga la consulta en veh DB.
-
+	
 		// PANTALLA
 		public void closeVehiculo();
 		public void refresh();
@@ -36,6 +31,17 @@ public interface VehiculosInterface {
 		void showVehiculo(VehiculosController vehiculosController, JFrame f,
 				Usuario u);
 		public void cleanPanelVehiculo();
+		public void onBuscarVehiculo();
+		public String getPatenteABuscar();
+		Vehiculo getVehiculoPorPatente(String patente);
+		Vehiculo getDatosModificarVehiculo(Vehiculo vehiculo);
+		public Vehiculo getDatosNuevoVehiculo();
+		public void muestroStock(List<Stock> stockAMostrar,
+				ArrayList<String> comboMarca, ArrayList<String> comboModelo,
+				ArrayList<String> comboYear);
+		public String getVehiculoTabla();
+		public void mostrarDetalleVehiculo(Vehiculo vehiculo);
+	
 		
 		
 		

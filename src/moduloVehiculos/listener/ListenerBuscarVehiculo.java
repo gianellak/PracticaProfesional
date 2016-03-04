@@ -17,7 +17,7 @@ public class ListenerBuscarVehiculo implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		vc.onBuscarPorPatente();
+		vc.onBuscarVehiculo();
 
 	}
 

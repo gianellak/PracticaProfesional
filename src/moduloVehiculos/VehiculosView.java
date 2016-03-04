@@ -10,23 +10,19 @@ import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
 import utilitarios.PantallaUtil;
-import moduloClientes.listener.ListenerAltaAceptar;
-import moduloClientes.listener.ListenerMenuClientesVolver;
 import moduloPrincipal.paneles.PanelGeneral;
-import moduloVehiculo.paneles.FormStock;
 import moduloVehiculos.listener.*;
 import moduloVehiculos.paneles.PanelVehiculos;
 import moduloVehiculos.paneles.VehiculosMenu;
 
+
 public class VehiculosView implements VehiculosInterface {
 
-	private JPanel panel;
 	private JFrame frmVehiculo;
 	private VehiculosController vc;
 
 	// LISTENERS
 
-	private ListenerSalirVehiculo listenerSalir;
 	private ListenerNuevoVehiculo listenerNuevo;
 	private ListenerBuscarVehiculo listenerBuscar;
 	private ListenerStock listenerStock;
@@ -38,12 +34,12 @@ public class VehiculosView implements VehiculosInterface {
 	private PanelVehiculos panelVehiculos;
 	private VehiculosController cc;
 	private JFrame frame;
-	private JTable tablaStock;
-	private JScrollPane jp;
-	private FormStock panelStock;
-	private JButton btnVolver;
 	private ListenerVehiculoVolver listenerVolver;
-	private ListenerMenuVehiculoVolver listenerMenuVehiculoVolver;
+	private ListenerBuscarPatente listenerBuscarPatente;
+	private ListenerSeleccionar listenerSeleccionar;
+	private ListenerDetalleVehiculo listenerDetalle;
+	private ListenerAceptarAltaVehiculo listenerAceptarAlta;
+	private ListenerVehiculoVolver listenerVolverAlta;
 
 	
 
@@ -52,7 +48,6 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculosMenu= new VehiculosMenu();
 		panelVehiculos = new PanelVehiculos();
 
-		System.out.println("DESDE VEHICULOS CON S");
 		
 	}
 
@@ -100,17 +95,18 @@ public class VehiculosView implements VehiculosInterface {
 	@Override
 	public void showFormNuevoVehiculo() {
 
-		panelVehiculos.removeAll();
-		panelVehiculos.validate();
-		panelVehiculos.repaint();
+		PantallaUtil.remove(panelVehiculos);
 		
 		panelVehiculos.onNuevoVehiculo();
 		
+		listenerAceptarAlta =new ListenerAceptarAltaVehiculo(vc);
+		listenerVolverAlta =new ListenerVehiculoVolver(vc);
+		
+		panelVehiculos.getBtnAceptar().addActionListener(listenerAceptarAlta);
+		panelVehiculos.getBtnCancelar().addActionListener(listenerVolver);
 		
 		
-		frame.validate();
-		frame.repaint();
-
+		PantallaUtil.refresh(frame);
 		
 
 	}
@@ -157,9 +153,9 @@ public class VehiculosView implements VehiculosInterface {
 
 	@Override
 	public void refresh() {
-	//	frmVehiculo.remove(panelNuevoVehiculo);
+	//	frmVehiculo.remove(panelVehiculo);
 		// frmVehiculo.remove(panelStock);
-	//	panelNuevoVehiculo = null;
+	//	panelVehiculo = null;
 	//	panelStock = null;
 	//	panel.setVisible(true);
 
@@ -170,27 +166,28 @@ public class VehiculosView implements VehiculosInterface {
 	}
 
 	public Vehiculo getDatosNuevoVehiculo() {
-		return null;
+		
 
-//		Vehiculo v = new Vehiculo(
-//				panelNuevoVehiculo.getTxtPatente().getText(),
-//				panelNuevoVehiculo.getTxtMarca().getText(),
-//				panelNuevoVehiculo.getTxtModelo().getText(),
-//				Integer.parseInt(panelNuevoVehiculo.getTxtYear().getText()),
-//				panelNuevoVehiculo.getTxtColor().getText(),
-//				Integer.parseInt(panelNuevoVehiculo.getTxtKm().getText()),
-//				panelNuevoVehiculo.getTxtMotor().getText(),
-//				panelNuevoVehiculo.getTxtDominio().getText(),
-//				Integer.parseInt(panelNuevoVehiculo.getTxtPvc().getText()),
-//				panelNuevoVehiculo.getTxtFechaIngreso().getText(),
-//				panelNuevoVehiculo.getTxtFechaVenta().getText(), 
-//				panelNuevoVehiculo.getTxtCondicion().getText(), // combo box u option button
-//				Integer.parseInt(panelNuevoVehiculo.getTxtProveedor().getText()),
-//				Integer.parseInt(panelNuevoVehiculo.getTxtCliente().getText()),
-//				panelNuevoVehiculo.getTxtComentarios().getText());
-//
-//		return v;
+		
+		Vehiculo v = new Vehiculo(
+				
+				panelVehiculos.getTxtPatente().getText(),
+				panelVehiculos.getTxtMarca().getText(),
+				panelVehiculos.getTxtModelo().getText(),
+				panelVehiculos.getTxtYear().getText(),
+				panelVehiculos.getTxtColor().getText(),
+				Integer.parseInt(panelVehiculos.getTxtKm().getText()),
+				panelVehiculos.getTxtMotor().getText(),
+				panelVehiculos.getTxtDominio().getText(),
+				Integer.parseInt(panelVehiculos.getTxtPvc().getText()),
+				panelVehiculos.getTxtFechaIngreso().getText(),
+				panelVehiculos.getTxtFechaVenta().getText(), 
+				panelVehiculos.getTxtCondicion().getText(), 
+				Integer.parseInt(panelVehiculos.getTxtProveedor().getText()),
+				Integer.parseInt(panelVehiculos.getTxtCliente().getText()),
+				panelVehiculos.getTxtComentarios().getText());
 
+		return v;
 	}
 	
 	@Override
@@ -283,6 +280,69 @@ public class VehiculosView implements VehiculosInterface {
 		
 	}
 
+
+	@Override
+	public void onBuscarVehiculo() {
+		
+		panelVehiculos.onBuscarVehiculo();
+		
+		listenerBuscarPatente = new ListenerBuscarPatente(vc);
+		
+		panelVehiculos.getBtnBuscar().addActionListener(listenerBuscarPatente);
+		
+		PantallaUtil.refresh(frame);
+		
+	}
+
+
+	@Override
+	public String getPatenteABuscar() {
+		// TODO Auto-generated method stub
+		return panelVehiculos.getPatenteText().getText();
+	}
+
+
+	@Override
+	public void muestroStock(List<Stock> stockAMostrar,
+			ArrayList<String> comboMarca, ArrayList<String> comboModelo,
+			ArrayList<String> comboYear) {
+	
+			panelVehiculos = new PanelVehiculos();
+			
+			panelVehiculos.muestroStock(stockAMostrar);
+			panelVehiculos.menuVentaStock();
+
+			panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
+
+			
+			frame.add(panelVehiculos);
+			
+			listenerSeleccionar = new ListenerSeleccionar(vc);
+			
+			listenerDetalle = new ListenerDetalleVehiculo(vc);
+			
+			
+			panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
+			panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
+			
+			PantallaUtil.refresh(frame);
+					
+		}
+
+
+	@Override
+	public String getVehiculoTabla() {
+		return panelVehiculos.getVehiculoTabla();
+	}
+
+
+	@Override
+	public void mostrarDetalleVehiculo(Vehiculo vehiculo) {
+
+		panelVehiculos.mostrarDetalleVehiculo(vehiculo);
+		
+		PantallaUtil.refresh(frame);
+	}
 
 	
 

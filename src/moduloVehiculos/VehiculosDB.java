@@ -284,7 +284,14 @@ public class VehiculosDB  {
 						connection, SQL_INSERT_VEHICULO, false, values);)
 
 		{
-			statement.executeUpdate();
+			int affectedRows = statement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new DBException(
+						"Inserting user failed, no rows affected.");
+
+			} else {
+				return true;
+			}
 		} catch (SQLException e) {
 			if (e.getErrorCode() == MYSQL_DUPLICATE_PK) {
 				throw new DBException("Duplicated Key, cannot insert vehiculo");
@@ -292,8 +299,6 @@ public class VehiculosDB  {
 				throw new DBException(e);
 			}
 		}
-
-		return null;
 	}
 
 	/**

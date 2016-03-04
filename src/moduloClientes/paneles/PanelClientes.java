@@ -22,7 +22,6 @@ public class PanelClientes extends JPanel {
 	private JTextField nombreCompradorText;
 	private JTextField apellidoCompradorText;
 	private JTextField dniCompradorText;
-	private JTextField fechaNacText;
 	private JTextField domicilioPartText;
 	private JTextField domicilioLabText;
 	private JTextField telPartText;
@@ -81,76 +80,69 @@ public class PanelClientes extends JPanel {
 		apellidoCompradorText.setBounds(300, 60, 160, 25);
 		this.add(apellidoCompradorText);
 		
-		JLabel fechaNacLabel = new JLabel("Fecha nacimiento: ");
-		fechaNacLabel.setBounds(150, 90, 160, 25);
-		this.add(fechaNacLabel);
-		
-		fechaNacText = new JTextField(6);
-		fechaNacText.setBounds(300, 90, 160, 25);
-		this.add(fechaNacText);
 		
 		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
-		domicilioPartLabel.setBounds(150, 120, 160, 25);
+		domicilioPartLabel.setBounds(150, 90, 160, 25);
 		this.add(domicilioPartLabel);
 		
 		domicilioPartText = new JTextField(25);
-		domicilioPartText.setBounds(300, 120, 160, 25);
+		domicilioPartText.setBounds(300, 90, 160, 25);
 		this.add(domicilioPartText);
 		
 		JLabel ciudadLabel = new JLabel("Ciudad: ");
-		ciudadLabel.setBounds(150, 150, 160, 25);
+		ciudadLabel.setBounds(150, 120, 160, 25);
 		this.add(ciudadLabel);
 		
 		ciudadText = new JTextField(25);
-		ciudadText.setBounds(300, 150, 160, 25);
+		ciudadText.setBounds(300, 120, 160, 25);
 		this.add(ciudadText);
 		
 		JLabel provinciaLabel = new JLabel("Provincia: ");
-		provinciaLabel.setBounds(150, 180, 160, 25);
+		provinciaLabel.setBounds(150, 150, 160, 25);
 		this.add(provinciaLabel);
 		
 		provinciaText = new JTextField(25);
-		provinciaText.setBounds(300, 180, 160, 25);
+		provinciaText.setBounds(300, 150, 160, 25);
 		this.add(provinciaText);
 		
 		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
-		domicilioLabLabel.setBounds(150, 210, 160, 25);
+		domicilioLabLabel.setBounds(150, 180, 160, 25);
 		this.add(domicilioLabLabel);
 		
 		domicilioLabText = new JTextField(25);
-		domicilioLabText.setBounds(300, 210, 260, 25);
+		domicilioLabText.setBounds(300, 180, 260, 25);
 		this.add(domicilioLabText);
 		
 		JLabel telPartLabel = new JLabel("Tel. Particular: ");
-		telPartLabel.setBounds(150, 240, 160, 25);
+		telPartLabel.setBounds(150, 210, 160, 25);
 		this.add(telPartLabel);
 		
 		telPartText = new JTextField(25);
-		telPartText.setBounds(300,240, 260, 25);
+		telPartText.setBounds(300, 210, 260, 25);
 		this.add(telPartText);
 		
 		JLabel telCelLabel = new JLabel("Tel. Celular: ");
-		telCelLabel.setBounds(150, 270, 160, 25);
+		telCelLabel.setBounds(150, 240, 160, 25);
 		this.add(telCelLabel);
 		
 		telCelText = new JTextField(25);
-		telCelText.setBounds(300, 270, 260, 25);
+		telCelText.setBounds(300, 240, 260, 25);
 		this.add(telCelText);
 		
 		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
-		telLabLabel.setBounds(150, 300, 160, 25);
+		telLabLabel.setBounds(150, 270, 160, 25);
 		this.add(telLabLabel);
 		
 		telLabText = new JTextField(25);
-		telLabText.setBounds(300, 300, 260, 25);
+		telLabText.setBounds(300, 270, 260, 25);
 		this.add(telLabText);
 		
 		JLabel empresaLabel = new JLabel("Tel. Laboral: ");
-		empresaLabel.setBounds(150, 330, 160, 25);
+		empresaLabel.setBounds(150, 300, 160, 25);
 		this.add(empresaLabel);
 		
 		empresaText = new JTextField();
-		empresaText.setBounds(300, 330, 260, 25);
+		empresaText.setBounds(300, 300, 260, 25);
 		this.add(empresaText);
 		
 		
@@ -234,85 +226,76 @@ public class PanelClientes extends JPanel {
 		apellidoCompradorText.setEditable(false);
 		this.add(apellidoCompradorText);
 		
-		JLabel fechaNacLabel = new JLabel("Fecha nacimiento: ");
-		fechaNacLabel.setBounds(150, 90, 160, 25);
-		this.add(fechaNacLabel);
-		
-		fechaNacText = new JTextField(6);
-		fechaNacText.setBounds(300, 90, 160, 25);
-		fechaNacText.setEditable(false);
-		this.add(fechaNacText);
-		
 		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
-		domicilioPartLabel.setBounds(150, 120, 160, 25);
+		domicilioPartLabel.setBounds(150, 90, 160, 25);
 		this.add(domicilioPartLabel);
 		
 		domicilioPartText = new JTextField(p.getDomicilio());
-		domicilioPartText.setBounds(300, 120, 160, 25);
+		domicilioPartText.setBounds(300, 90, 160, 25);
 		domicilioPartText.setEditable(false);
 		this.add(domicilioPartText);
 		
 		JLabel ciudadLabel = new JLabel("Ciudad: ");
-		ciudadLabel.setBounds(150, 150, 160, 25);
+		ciudadLabel.setBounds(150, 120, 160, 25);
 		this.add(ciudadLabel);
 		
-		ciudadText = new JTextField(25);
-		ciudadText.setBounds(300, 150, 160, 25);
+		ciudadText = new JTextField(p.getCiudad());
+		ciudadText.setBounds(300, 120, 160, 25);
 		ciudadText.setEditable(false);
 		this.add(ciudadText);
 		
 		JLabel provinciaLabel = new JLabel("Provincia: ");
-		provinciaLabel.setBounds(150, 180, 160, 25);
+		provinciaLabel.setBounds(150, 150, 160, 25);
 		this.add(provinciaLabel);
 		
-		provinciaText = new JTextField(25);
-		provinciaText.setBounds(300, 180, 160, 25);
+		provinciaText = new JTextField(p.getProvincia());
+		provinciaText.setBounds(300, 150, 160, 25);
 		provinciaText.setEditable(false);
 		this.add(provinciaText);
 		
 		
 		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
-		domicilioLabLabel.setBounds(150, 210, 160, 25);
+		domicilioLabLabel.setBounds(150, 180, 160, 25);
 		this.add(domicilioLabLabel);
 		
 		domicilioLabText = new JTextField(p.getDomicilioL());
-		domicilioLabText.setBounds(300, 210, 260, 25);
+		domicilioLabText.setBounds(300, 180, 260, 25);
 		domicilioLabText.setEditable(false);
 		this.add(domicilioLabText);
 		
 		JLabel telPartLabel = new JLabel("Tel. Particular: ");
-		telPartLabel.setBounds(150, 240, 160, 25);
+		telPartLabel.setBounds(150, 210, 160, 25);
 		this.add(telPartLabel);
 		
 		telPartText = new JTextField(p.getTelefonoP());
-		telPartText.setBounds(300, 240, 260, 25);
+		telPartText.setBounds(300, 210, 260, 25);
 		telPartText.setEditable(false);
 		this.add(telPartText);
 		
 		JLabel telCelLabel = new JLabel("Tel. Celular: ");
-		telCelLabel.setBounds(150, 270, 160, 25);
+		telCelLabel.setBounds(150, 240, 160, 25);
 		this.add(telCelLabel);
 		
 		telCelText = new JTextField(p.getTelefonoC());
-		telCelText.setBounds(300, 270, 260, 25);
+		telCelText.setBounds(300, 240, 260, 25);
 		telCelText.setEditable(false);
 		this.add(telCelText);
 		
 		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
-		telLabLabel.setBounds(150, 300, 160, 25);
+		telLabLabel.setBounds(150, 270, 160, 25);
 		this.add(telLabLabel);
 		
 		telLabText = new JTextField(p.getTelefonoL());
-		telLabText.setBounds(300, 300, 260, 25);
+		telLabText.setBounds(300, 270, 260, 25);
 		telLabText.setEditable(false);
 		this.add(telLabText);
 		
 		JLabel empresaLabel = new JLabel("Tel. Laboral: ");
-		empresaLabel.setBounds(150, 330, 160, 25);
+		empresaLabel.setBounds(150, 300, 160, 25);
 		this.add(empresaLabel);
 		
 		empresaText = new JTextField(p.getTelefonoL());
-		empresaText.setBounds(300, 330, 260, 25);
+		empresaText.setBounds(300, 300, 260, 25);
 		empresaText.setEditable(false);
 		this.add(empresaText);
 		
@@ -378,7 +361,6 @@ public class PanelClientes extends JPanel {
 		dniCompradorText.setEditable(false);
 		nombreCompradorText.setEditable(true);
 		apellidoCompradorText.setEditable(true);
-		fechaNacText.setEditable(true);
 		domicilioPartText.setEditable(true);
 		ciudadText.setEditable(true);
 		provinciaText.setEditable(true);
@@ -456,13 +438,6 @@ public class PanelClientes extends JPanel {
 		this.dniCompradorText = dniCompradorText;
 	}
 
-	public JTextField getFechaNacText() {
-		return fechaNacText;
-	}
-
-	public void setFechaNacText(JTextField fechaNacText) {
-		this.fechaNacText = fechaNacText;
-	}
 
 	public JTextField getDomicilioPartText() {
 		return domicilioPartText;
@@ -541,9 +516,9 @@ public class PanelClientes extends JPanel {
 		
 		Persona cliente = new Persona(
 				Integer.parseInt(dniCompradorText.getText()),
-				Integer.parseInt(telPartText.getText()),
-				Integer.parseInt(telCelText.getText()),
-				Integer.parseInt(telLabText.getText()),
+				telPartText.getText(),
+				telCelText.getText(),
+				telLabText.getText(),
 				nombreCompradorText.getText(),
 				apellidoCompradorText.getText(),
 				domicilioPartText.getText(),
@@ -586,76 +561,69 @@ public class PanelClientes extends JPanel {
 		apellidoCompradorText.setBounds(300, 60, 160, 25);
 		this.add(apellidoCompradorText);
 		
-		JLabel fechaNacLabel = new JLabel("Fecha nacimiento: ");
-		fechaNacLabel.setBounds(150, 90, 160, 25);
-		this.add(fechaNacLabel);
-		
-		fechaNacText = new JTextField(6);
-		fechaNacText.setBounds(300, 90, 160, 25);
-		this.add(fechaNacText);
 		
 		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
-		domicilioPartLabel.setBounds(150, 120, 160, 25);
+		domicilioPartLabel.setBounds(150,90, 160, 25);
 		this.add(domicilioPartLabel);
 		
 		domicilioPartText = new JTextField(25);
-		domicilioPartText.setBounds(300, 120, 160, 25);
+		domicilioPartText.setBounds(300, 90, 160, 25);
 		this.add(domicilioPartText);
 		
 		JLabel ciudadLabel = new JLabel("Ciudad: ");
-		ciudadLabel.setBounds(150, 150, 160, 25);
+		ciudadLabel.setBounds(150, 120, 160, 25);
 		this.add(ciudadLabel);
 		
 		ciudadText = new JTextField(25);
-		ciudadText.setBounds(300, 150, 160, 25);
+		ciudadText.setBounds(300, 120, 160, 25);
 		this.add(ciudadText);
 		
 		JLabel provinciaLabel = new JLabel("Provincia: ");
-		provinciaLabel.setBounds(150, 180, 160, 25);
+		provinciaLabel.setBounds(150, 150, 160, 25);
 		this.add(provinciaLabel);
 		
 		provinciaText = new JTextField(25);
-		provinciaText.setBounds(300, 180, 160, 25);
+		provinciaText.setBounds(300, 150, 160, 25);
 		this.add(provinciaText);
 		
 		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
-		domicilioLabLabel.setBounds(150, 210, 160, 25);
+		domicilioLabLabel.setBounds(150, 180, 160, 25);
 		this.add(domicilioLabLabel);
 		
 		domicilioLabText = new JTextField(25);
-		domicilioLabText.setBounds(300, 210, 260, 25);
+		domicilioLabText.setBounds(300, 180, 260, 25);
 		this.add(domicilioLabText);
 		
 		JLabel telPartLabel = new JLabel("Tel. Particular: ");
-		telPartLabel.setBounds(150, 240, 160, 25);
+		telPartLabel.setBounds(150, 210, 160, 25);
 		this.add(telPartLabel);
 		
 		telPartText = new JTextField(25);
-		telPartText.setBounds(300,240, 260, 25);
+		telPartText.setBounds(300, 210, 260, 25);
 		this.add(telPartText);
 		
 		JLabel telCelLabel = new JLabel("Tel. Celular: ");
-		telCelLabel.setBounds(150, 270, 160, 25);
+		telCelLabel.setBounds(150, 240, 160, 25);
 		this.add(telCelLabel);
 		
 		telCelText = new JTextField(25);
-		telCelText.setBounds(300, 270, 260, 25);
+		telCelText.setBounds(300, 240, 260, 25);
 		this.add(telCelText);
 		
 		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
-		telLabLabel.setBounds(150, 300, 160, 25);
+		telLabLabel.setBounds(150, 270, 160, 25);
 		this.add(telLabLabel);
 		
 		telLabText = new JTextField(25);
-		telLabText.setBounds(300, 300, 260, 25);
+		telLabText.setBounds(300, 270, 260, 25);
 		this.add(telLabText);
 		
 		JLabel empresaLabel = new JLabel("Tel. Laboral: ");
-		empresaLabel.setBounds(150, 330, 160, 25);
+		empresaLabel.setBounds(150, 300, 160, 25);
 		this.add(empresaLabel);
 		
 		empresaText = new JTextField();
-		empresaText.setBounds(300, 330, 260, 25);
+		empresaText.setBounds(300, 300, 260, 25);
 		this.add(empresaText);
 		
 		

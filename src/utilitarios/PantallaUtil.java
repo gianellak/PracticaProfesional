@@ -3,6 +3,8 @@ package utilitarios;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import objetos.Persona;
+
 public class PantallaUtil {
 	
 	public static void remove(JPanel p){
@@ -20,4 +22,5 @@ public class PantallaUtil {
 		
 	}
 
+	
 }

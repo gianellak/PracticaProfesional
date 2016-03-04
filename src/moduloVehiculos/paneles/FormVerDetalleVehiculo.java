@@ -1,4 +1,4 @@
-package moduloVehiculo.paneles;
+package moduloVehiculos.paneles;
 
 import javax.swing.*;
 

@@ -33,12 +33,17 @@ public class SistemaPrincipal {
 		 SchemaGenerator s = new SchemaGenerator(conn);
 		
 		 try {
-		 s.generateSchemaUsuario();
-		 s.generateSchemaEmpleado();
+			 s.generateSchemaEmpleado();
+			 s.generateSchema();
+			 s.generateSchemaPersona();
+			 s.generateSchemaUsuario();
+			 s.generateSchemaVehiculo();
+			 s.generateSchemaVenta();
 		 } catch (SQLException e1) {
 		 // TODO Auto-generated catch block
 		 e1.printStackTrace();
 		 }
+		
 		
 		LoginInterface ventanaL = new LoginView();
 
