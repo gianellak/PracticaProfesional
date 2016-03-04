@@ -2,22 +2,12 @@
 package moduloUsuarios.paneles;
 
 import java.awt.Dimension;
-import java.awt.dnd.DnDConstants;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-
 import objetos.Empleado;
-
 import objetos.Usuario;
 
 public class PanelUsuario extends JPanel {
@@ -133,14 +123,6 @@ public class PanelUsuario extends JPanel {
 		btnValidarE.setBounds(500, 180, 100, 25);
 		this.add(btnValidarE);
 
-		JLabel emailLabel = new JLabel("Email: ");
-		emailLabel.setBounds(150, 180, 160, 25);
-		this.add(emailLabel);
-
-		emailText = new JTextField(70);
-		emailText.setBounds(300, 180, 160, 25);
-		this.add(emailText);
-
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(500, 210, 100, 25);
 		this.add(btnAceptar);
@@ -245,7 +227,7 @@ public class PanelUsuario extends JPanel {
 public void createTablaUsuarios(List<Usuario> lista) {
 		
 		// Create columns names
-		String columnNames[] = { "Usuario", "Contrasena", "Nombre", "Apellido", "Permisos", "Dni", "Bloqueo"};
+		String columnNames[] = { "Usuario", "Contrasena", "DNI", "Nombre", "Apellido", "Permisos", "Bloqueo"};
 
 		DefaultTableModel model = new DefaultTableModel();
 		
@@ -286,7 +268,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		this.removeAll();
 		System.out.println("ONBuscar");
 		
-		JLabel buscarLabel = new JLabel("Ingrese el usuario a consultar: ");
+		JLabel buscarLabel = new JLabel("Ingrese el nombre de usuario a consultar: ");
 		buscarLabel.setBounds(100, 0, 280, 25);
 		this.add(buscarLabel);
 
@@ -294,7 +276,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		userText.setBounds(300, 30, 160, 25);
 		this.add(userText);
 		
-		JLabel buscarELabel = new JLabel("Ingrese el empleado a consultar: ");
+		JLabel buscarELabel = new JLabel("Ingrese el DNI del empleado a consultar: ");
 		buscarELabel.setBounds(100, 70, 280, 25);
 		this.add(buscarELabel);
 		
@@ -742,9 +724,9 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	
 	public String getResetUsuario(){
 		
-		String username = (String) tabla.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn());
-			
-		return username;
+		String s = new String (passwordText.getPassword());
+		Usuario u = new Usuario(userText.getText(), s, Integer.parseInt(dniText.getText()), Integer.parseInt(permisosText.getText()), nombreText.getText(), apellidoText.getText(),  false);
+		return "";
 	
 	}
 
