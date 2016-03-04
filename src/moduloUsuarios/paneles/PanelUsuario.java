@@ -226,7 +226,7 @@ public class PanelUsuario extends JPanel {
 public void createTablaUsuarios(List<Usuario> lista) {
 		
 		// Create columns names
-		String columnNames[] = { "Usuario", "Contrasena", "Nombre", "Apellido", "Permisos", "Dni", "Bloqueo"};
+		String columnNames[] = { "Usuario", "Contrasena", "DNI", "Nombre", "Apellido", "Permisos", "Bloqueo"};
 
 		DefaultTableModel model = new DefaultTableModel();
 		

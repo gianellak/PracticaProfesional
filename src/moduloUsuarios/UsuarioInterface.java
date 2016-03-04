@@ -32,6 +32,7 @@ public interface UsuarioInterface {
 	public String getUsuarioABuscar();	
 	public void verUsuario(Usuario u);
 	public void showNotFound();
+	public void showMensaje (String mensaje);
 
 //	onVerLista
 	

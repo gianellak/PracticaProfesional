@@ -89,16 +89,37 @@ public class UsuarioController {
 	public void altaUsuario() throws DBException {
 
 		Usuario usuario = ui.getNuevoUsuario();
+			
+		if ((uDB.findIdEmpleado(usuario.getDniUsuario()) != null)){ // SI ES EMPLEADO
+	
+			if ((uDB.findDNIu(usuario.getDniUsuario()) == null)){ // SI NO EXISTE ESE DNI EN TABLA USUARIOS
+				
+				if (uDB.findId(usuario.getUsername()) == null){ // SI NO EXISTE ESE USERNAME EN TABLA USUARIOS
+					
+					
+					if (uDB.insert(usuario)) { // QUE HAGA EL INSERT
+						
+						ui.insertOk();
+						
+					} else {
+						
+						ui.insertBad();
+					}
+					
+				} else{
+					// QUE MUESTRE CARTEL INFORMANDO QUE YA EXISTE UN USUARIO CON ESE USERNAME.
+					ui.showMensaje("Ya existe un usuario registrado con ese nombre de usuario. Elija otro y vuelva a intentar.");
+				}
 
-		if (uDB.insert(usuario)) {
-
-			ui.insertOk();
-
-		} else {
-
-			ui.insertBad();
+			} else{
+					// QUE MUESTRE CARTEL INFORMANDO QUE YA EXISTE UN USUARIO CON ESE DNI.
+				ui.showMensaje("Ya existe un usuario registrado con ese DNI.");
+			}
+		} else{
+			// QUE MUESTRE CARTEL INFORMANDO QUE NO ES EMPLEADO.
+			ui.showMensaje("La persona no está registrada como empleado en el sistema. Por favor, ingreselo y vuelva a intentar."); 
 		}
-
+		
 	}
 
 	public void cleanUsuario() {
@@ -271,7 +292,7 @@ public class UsuarioController {
 		if(e!= null){
 			ui.lockDni(e.getNombre(), e.getApellido());
 		} else{
-			ui.showNotFound();
+			ui.showMensaje("La persona no está registrada como empleado en el sistema. Por favor, ingreselo y vuelva a intentar.");
 		}
 		
 	}

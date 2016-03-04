@@ -234,6 +234,11 @@ public class UsuarioView implements UsuarioInterface {
 
 	}
 	
+	public void showMensaje(String mensaje){
+		JOptionPane.showMessageDialog(null, mensaje);
+
+	}
+	
 //*************
 //	OPCION BUSCAR USUARIO MENU
 //	BAJA
