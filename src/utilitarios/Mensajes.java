@@ -2,17 +2,23 @@ package utilitarios;
 
 import javax.swing.JOptionPane;
 
-import moduloClientes.paneles.PanelClientes;
 import objetos.Persona;
 
 public class Mensajes {
 
 	//CLIENTES
 
-	public static void showNotFound() {
+	public static void mensajeInfo(String m) {
 		
-		JOptionPane.showMessageDialog(null, "El cliente no se encuentra en la base de datos. Por favor reintente");
+		JOptionPane.showMessageDialog(null, m);
 
+	}
+	
+	public static void mensajeWarning(String m) {
+		
+		JOptionPane.showMessageDialog(null, m, "Error",
+			    JOptionPane.WARNING_MESSAGE);
+		
 	}
 	
 
@@ -25,50 +31,7 @@ public class Mensajes {
 		
 	}
 	
-	public static void deleteOk(PanelClientes panelClientes) {
-		JOptionPane.showMessageDialog(null, "Cliente borrado correctamente.");
-		
-		PantallaUtil.remove(panelClientes);
-		
-	}
 
-	public static void deleteBad() {
-		
-		JOptionPane.showMessageDialog(null, "Error al borrar cliente. Revise los datos ingresados.");
-		
-	}
-	
-
-	public static void updateOk(PanelClientes p) {
-
-		JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
-		
-		PantallaUtil.remove(p);
-		
-	}
-
-
-
-	public static void updateBad() {
-		
-		JOptionPane.showMessageDialog(null, "Error al modificar el cliente. Revise los datos ingresados");
-		
-	}
-
-
-	public static void insertOk(PanelClientes p) {
-		
-		JOptionPane.showMessageDialog(null, "Cliente agregado correctamente");
-		
-		PantallaUtil.remove(p);
-		
-	}
-
-	public static void insertBad() {
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta el cliente. Por favor reintente");
-		
-	}
-	
 	public static int showToUpdate(Persona cliente) {
 		String s = new String("¿Esta seguro que desea modificar los datos del cliente: " + cliente.getApellido() + " " +cliente.getNombre()+ "?");
 		int codigo=JOptionPane.showConfirmDialog(null, s , "Modificar Cliente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);

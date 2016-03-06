@@ -17,5 +17,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/PPS/postgresql-9.4-1204.jdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/PPS/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/PPS/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/PPS/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/PPS/junit-4.6.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

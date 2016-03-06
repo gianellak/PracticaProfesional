@@ -3,31 +3,28 @@ package moduloCaja.paneles;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DateFormatter;
+
+import com.toedter.calendar.JDateChooser;
 
 import objetos.Movimiento;
-import objetos.Stock;
 import objetos.Usuario;
+import utilitarios.Mensajes;
 
 public class PanelCaja extends JPanel {
 
@@ -43,6 +40,11 @@ public class PanelCaja extends JPanel {
 	private JRadioButton egresoButton;
 	private JButton btnAlta;
 	private JLabel dateField;
+	private JButton btnAbrir;
+	private JButton btnMod;
+	private JButton btnEliminar;
+	private JDateChooser dateChooser;
+	private JLabel idLabel;
 	
 	public PanelCaja() {
 
@@ -140,6 +142,84 @@ public class PanelCaja extends JPanel {
 		this.repaint();
 
 	}
+	
+	public void abroCaja(Usuario usuario) {
+		
+		this.removeAll();
+		System.out.println("abroCaja()");
+		
+		
+		String format = new String("dd/MM/yy");
+		String format2 = new String("dd/MM/yy - HH:mm"  );
+		Date d = new Date();
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		SimpleDateFormat df2 = new SimpleDateFormat(format2);
+		String stringDate = df.format(d);
+		String stringDate2 = df2.format(d);
+		
+		
+		JLabel idLabel = new JLabel("ID: ");
+		idLabel.setBounds(0, 350, 30, 25);
+		this.add(idLabel);
+		
+		idText = new JLabel(String.valueOf(1));
+		idText.setBounds(30, 350, 40, 25);
+		this.add(idText);
+		
+		JLabel passLabel = new JLabel("Descripcion: ");
+		passLabel.setBounds(0, 390, 80, 25);
+		this.add(passLabel);
+		
+		String openText = new String("Apertura de caja - "+ stringDate2 );
+		descripcionText = new JTextField(openText);
+		descripcionText.setBounds(100, 390, 700, 25);
+		this.add(descripcionText);
+		
+		JLabel nombreLabel = new JLabel("Fecha: ");
+		nombreLabel.setBounds(100, 350, 50, 25);
+		this.add(nombreLabel);
+		
+		
+		dateField = new JLabel(stringDate);
+		dateField.setBounds(160, 350, 80, 25);
+		this.add(dateField);
+		
+		JLabel usuarioLabel = new JLabel("Usuario: ");
+		usuarioLabel.setBounds(280, 350, 50, 25);
+		this.add(usuarioLabel);
+		
+		usuarioText = new JLabel(usuario.getUsername());
+		usuarioText.setBounds(340, 350, 80, 25);
+		this.add(usuarioText);
+		
+		JLabel montoLabel = new JLabel("Monto: ");
+		montoLabel.setBounds(0, 430, 80, 25);
+		this.add(montoLabel);
+		
+		montoText = new JTextField(10);
+		montoText.setBounds(100, 430, 160, 25);
+		this.add(montoText);
+		
+		ingresoButton = new JRadioButton("Ingreso");
+		ingresoButton.setSelected(true);
+		ingresoButton.setBounds(270, 430, 80, 25);
+		
+		egresoButton = new JRadioButton("Egreso");
+		egresoButton.setEnabled(false);
+		egresoButton.setBounds(360, 430, 80, 25);
+		
+		
+		this.add(ingresoButton);
+		this.add(egresoButton);
+		
+		btnAbrir = new JButton("Abrir Caja");
+		btnAbrir.setBounds(460, 430, 200, 25);
+		this.add(btnAbrir);
+		
+		this.validate();
+		this.repaint();
+		
+	}
 
 	
 	
@@ -148,48 +228,113 @@ public class PanelCaja extends JPanel {
 	public void onVer(Usuario usuario, List<Movimiento> lista) {
 
 		this.removeAll();
-		System.out.println("ONVER");
+		System.out.println("OnVer()");
 
-		JLabel idLabel = new JLabel("Movimientos del día: " );
-		idLabel.setBounds(150, 0, 280, 25);
+		JLabel idLabel = new JLabel("Movimientos de hoy: " );
+		idLabel.setBounds(10, 60, 280, 25);
 		this.add(idLabel);
 
-		
 		tabla = this.createTablaMovimientos();
+		
 		
 		this.cargarTabla(lista);
 		
 		JScrollPane jp= new JScrollPane(tabla);
 		
-		jp.setBounds(10, 30, 800, 200);
+		jp.setBounds(10, 90, 800, 200);
 		
 		this.add(jp);
 		
-		this.onAlta(usuario);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(720, 250, 80, 25);
+		btnVolver.setBounds(720, 300, 80, 25);
 		this.add(btnVolver);
 		
-		btnVolver = new JButton("Modificar");
-		btnVolver.setBounds(600, 250, 100, 25);
-		this.add(btnVolver);
+		btnMod = new JButton("Modificar");
+		btnMod.setBounds(600, 300, 100, 25);
+		this.add(btnMod);
 		
-		btnVolver = new JButton("Eliminar");
-		btnVolver.setBounds(500, 250, 80, 25);
-		this.add(btnVolver);
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(500, 300, 80, 25);
+		this.add(btnEliminar);
 
+		this.validate();
+		this.repaint();
+
+	}
+	
+	public void calendar(){
+		
+		JLabel calendario = new JLabel("Seleccione la fecha que desea ver: ");
+		calendario.setBounds(10,0,200,20);
+		
+		
+		this.add(calendario);
+		
+		dateChooser = new JDateChooser();
+		dateChooser.setBounds(10, 20, 200, 20);
+		
+		
+		this.add(dateChooser);
+		    
+		
+	}
+	
+	public void onVerOtro(Usuario usuario) {
+		
+		this.removeAll();
+		System.out.println("OnVerOtro()");
+		
+		calendar();
+		
+		idLabel = new JLabel("Movimientos del día: --/--/-- " );
+		idLabel.setBounds(10, 60, 280, 25);
+		this.add(idLabel);
+		
+		
+		tabla = this.createTablaMovimientos();
+		
+		
+		
+		JScrollPane jp= new JScrollPane(tabla);
+		
+		jp.setBounds(10, 90, 800, 200);
+		
+		this.add(jp);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(720, 300, 80, 25);
+		this.add(btnVolver);
+		
+		
+		this.validate();
+		this.repaint();
+		
+	}
+	
+	public void verDia(List<Movimiento> lista, String date){
+		
+		
+		idLabel.setText("Movimientos del día: " + date );
+		
+		((DefaultTableModel) tabla.getModel()).setRowCount(0);
+		
+		this.cargarTabla(lista);
+		
 		this.validate();
 		this.repaint();
 
 	}
 
 	private void cargarTabla(List<Movimiento> lista) {
+		int i = 0;
 
 		for (Movimiento m : lista) {
 			
+			i++;
+			
 			Object[] o = new Object[6];
-			o[0] = m.getId();
+			o[0] = i;
 			o[1] = m.getDescripcion();
 			o[2] = m.getIngreso();
 			o[3] = m.getEgreso();
@@ -215,13 +360,24 @@ public class PanelCaja extends JPanel {
 			public boolean isCellEditable(int row, int column){
 		      return false;
 		    }
+			
 		
 		};
 		
-		modelo.setColumnIdentifiers(columnNames);
-		
+		tabla.getTableHeader().setReorderingAllowed(false);
+	
 		tabla.setModel(modelo);
 			
+		modelo.setColumnIdentifiers(columnNames);
+		
+		tabla.getColumn("ID").setPreferredWidth(100);
+		tabla.getColumn("Descripcion").setPreferredWidth(200);
+		tabla.getColumn("Ingreso").setPreferredWidth(100);
+		tabla.getColumn("Egreso").setPreferredWidth(100);
+		tabla.getColumn("Fecha").setPreferredWidth(100);
+		tabla.getColumn("Usuario").setPreferredWidth(100);
+		
+		
 		
 		return tabla;
 	}
@@ -239,9 +395,19 @@ public class PanelCaja extends JPanel {
 			e = new Double(montoText.getText());
 			i = new Double(0);
 		}
+	
+		String format = new String("ddMMYY");
+	
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		Date d = new Date();
+		String stringDate = df.format(d);
+		    
 		
-		Movimiento m = new Movimiento(Integer.parseInt(idText.getText()), descripcionText.getText(), i, e, dateField.getText(), usuarioText.getText(),
-				true);
+		String s = idText.getText() + stringDate;
+	
+		System.out.println(s);
+		
+		Movimiento m = new Movimiento(Integer.parseInt(s), descripcionText.getText(), i, e, dateField.getText(), usuarioText.getText(), true);
 		
 		return m;
 	}
@@ -345,6 +511,38 @@ public class PanelCaja extends JPanel {
 	public void refreshTable() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public JButton getBtnAbrir() {
+		return btnAbrir;
+	}
+
+	public void setBtnAbrir(JButton btnAbrir) {
+		this.btnAbrir = btnAbrir;
+	}
+
+	public JButton getBtnMod() {
+		return btnMod;
+	}
+
+	public void setBtnMod(JButton btnMod) {
+		this.btnMod = btnMod;
+	}
+
+	public JButton getBtnEliminar() {
+		return btnEliminar;
+	}
+
+	public void setBtnEliminar(JButton btnEliminar) {
+		this.btnEliminar = btnEliminar;
+	}
+
+	public JDateChooser getDateChooser() {
+		return dateChooser;
+	}
+
+	public void setDateChooser(JDateChooser dateChooser) {
+		this.dateChooser = dateChooser;
 	}
 
 

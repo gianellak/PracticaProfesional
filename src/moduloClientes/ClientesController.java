@@ -2,20 +2,19 @@ package moduloClientes;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Persona;
 import objetos.Usuario;
-import utilitarios.Mensajes;
-import utilitarios.PantallaUtil;
+import utilitarios.*;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
 public class ClientesController {
 
+	
+	
 	private ClientesInterface ci;
 	private PrincipalController pc;
 	private ClientesDB cDB;
@@ -26,10 +25,6 @@ public class ClientesController {
 	}
 
 	public void verClientes() throws DBException {
-		
-		System.out.println("Ver Usuarios - Controller");
-		
-		
 		
 		List<Usuario> lista= cDB.findAll();
 		
@@ -86,17 +81,19 @@ public class ClientesController {
 		 if (codigo==JOptionPane.YES_OPTION){
 			 if(cDB.delete(u)){
 					
-					Mensajes.deleteOk(ci.getPanelClientes());
+					Mensajes.mensajeInfo(StringMsj.MSG_CLI_DEL_OK);
+					PantallaUtil.remove(ci.getPanelClientes());
+					
 				}else
 				{
-					Mensajes.deleteBad();
+					Mensajes.mensajeWarning(StringMsj.MSG_CLI_DEL_BAD);
 				}
 	        }else if(codigo==JOptionPane.NO_OPTION){
 	            ci.verCliente(persona);
 	        }
 		
 		}else{
-			Mensajes.showNotFound();
+			Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_FOUND);
 		}
 		
 
@@ -109,10 +106,12 @@ public class ClientesController {
 		
 		if(cDB.insert(persona)){
 			
-			Mensajes.insertOk(ci.getPanelClientes());
+			Mensajes.mensajeInfo(StringMsj.MSG_CLI_INS_OK);;
+			
+			PantallaUtil.remove(ci.getPanelClientes());
 		}else
 		{
-			Mensajes.insertBad();
+			Mensajes.mensajeWarning(StringMsj.MSG_CLI_INS_BAD);
 		}
 		
 	}
@@ -148,7 +147,7 @@ public class ClientesController {
 			ci.verCliente(p);
 		}else
 		{
-			Mensajes.showNotFound();
+			Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_FOUND);
 		}
 		
 		
@@ -164,10 +163,11 @@ public class ClientesController {
 			 if (codigo==JOptionPane.YES_OPTION){
 				 if(cDB.updatePersona(cliente)){
 						
-						Mensajes.updateOk(ci.getPanelClientes());
+						Mensajes.mensajeInfo(StringMsj.MSG_CLI_MOD_OK);;
+						PantallaUtil.remove(ci.getPanelClientes());
 					}else
 					{
-						Mensajes.updateBad();
+						Mensajes.mensajeWarning(StringMsj.MSG_CLI_MOD_BAD);
 					}
 		        }else if(codigo==JOptionPane.NO_OPTION){
 		            ci.onMod();

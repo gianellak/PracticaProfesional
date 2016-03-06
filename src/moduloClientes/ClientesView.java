@@ -2,10 +2,7 @@ package moduloClientes;
 
 import java.awt.BorderLayout;
 import java.util.List;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import objetos.Persona;
 import objetos.Usuario;
 import utilitarios.PantallaUtil;
@@ -203,7 +200,7 @@ public class ClientesView implements ClientesInterface {
 
 
 	@Override
-	public Persona getUpdatePersona() {
+	public Persona getUpdatePersona(){
 		
 		return panelClientes.getUpdatePersona();
 		

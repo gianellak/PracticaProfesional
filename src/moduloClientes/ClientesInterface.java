@@ -3,7 +3,6 @@ package moduloClientes;
 import java.util.List;
 
 import javax.swing.JFrame;
-
 import moduloClientes.paneles.PanelClientes;
 import objetos.Persona;
 import objetos.Usuario;

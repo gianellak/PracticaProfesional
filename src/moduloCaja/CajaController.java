@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import connections.*;
 import objetos.*;
+import utilitarios.Mensajes;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -24,10 +25,7 @@ public class CajaController {
 		this.pc = pc;
 	}
 
-	public void dispose() {
-		ci.dispose();
-
-	}
+	
 
 	public void verMovimientos() throws DBException {
 
@@ -44,6 +42,7 @@ public class CajaController {
 		
 		if(lista.size() == 0){
 			ci.primerMovimiento();
+			ci.abroCaja();
 		} else{
 			
 			ci.onVer(lista);
@@ -152,7 +151,39 @@ public class CajaController {
 	}
 
 	public void verOtrosMovimientos() {
+		
 		ci.verOtrosMovimientos();
+		
+		
+	}
+
+
+
+	public void veoFecha(Date fecha) {
+		
+		String format = new String("dd/MM/yy");
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		String stringDate = df.format(fecha);
+		
+		System.out.println(stringDate);
+
+		List<Movimiento> lista = cDB.findByDay(stringDate);
+		
+		if(lista.size() == 0){
+			
+			Mensajes.mensajeInfo("No hay movimientos registrados para el día seleccionado. Intente con otra fecha.");
+		} else{
+			
+			ci.onVerOtro(lista, stringDate);
+		}
+		
+		
+	}
+
+
+
+	public void cleanCaja() {
+		ci.cleanPanelCaja();
 		
 	}
 	

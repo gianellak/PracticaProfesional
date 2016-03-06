@@ -1,6 +1,9 @@
 package moduloCaja;
 
 import java.awt.BorderLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.*;
@@ -24,6 +27,8 @@ public class CajaView implements CajaInterface {
 	private ListenerAltaMovimiento listenerAltaMovimiento;
 	private ListenerVerOtrosMovimientos listenerVerOtrosMovimientos;
 	private Object pantallaCaja;
+	private ListenerDate listenerDate;
+	private ListenerCajaVolver listenerVolver;
 
 	public CajaView(){
 	
@@ -71,28 +76,8 @@ public class CajaView implements CajaInterface {
 	}
 
 
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void onAlta() {
-
-		//PantallaUtil.remove(panelCaja);
-		
-		panelCaja.onAlta(usuario);
-		
-	//	listenerAltaAceptar = new ListenerAltaAceptar(clientesController);
-		//listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
-		
-	//	panelClientes.getBtnAceptar().addActionListener(listenerAltaAceptar);
-		//panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
-		
-		//PantallaUtil.refresh(frame);	
-	}
-
+	
 	@Override
 	public void onVer(List<Movimiento> lista) {
 		
@@ -100,15 +85,17 @@ public class CajaView implements CajaInterface {
 		
 		panelCaja.onVer(usuario, lista);
 		
+		panelCaja.onAlta(usuario);
 		
-//		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
+		
+		listenerVolver = new ListenerCajaVolver(cajaController);
 		
 		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
 		
 		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimiento);
 		
 		
-//		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
+		panelCaja.getBtnVolver().addActionListener(listenerCajaVolver);
 		
 		
 		PantallaUtil.refresh(frame);
@@ -201,9 +188,7 @@ public class CajaView implements CajaInterface {
 	public void deleteOk() {
 		JOptionPane.showMessageDialog(null, "Movimiento borrado correctamente");
 		
-		panelCaja.removeAll();
-		panelCaja.validate();
-		panelCaja.repaint();
+		PantallaUtil.remove(panelCaja);
 		
 	}
 
@@ -229,11 +214,53 @@ public class CajaView implements CajaInterface {
 	
 		PantallaUtil.remove(panelCaja);
 		
+		panelCaja.onVerOtro(usuario);
+		
+		listenerDate = new ListenerDate(cajaController); 
+		
+		panelCaja.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
+		
+		listenerVolver = new ListenerCajaVolver(cajaController);
+		
+		panelCaja.getBtnVolver().addActionListener(listenerCajaVolver);
 		
 		
 		PantallaUtil.refresh(frame);
 		
 	}
+
+	
+	@Override
+	public void abroCaja() {
+
+		PantallaUtil.remove(panelCaja);
+		
+		panelCaja.abroCaja(usuario);
+		
+
+		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
+		
+		panelCaja.getBtnAbrir().addActionListener(listenerAltaMovimiento);
+		
+		PantallaUtil.refresh(frame);
+		
+		
+	}
+
+	@Override
+	public void onVerOtro(List<Movimiento> lista, String date) {
+
+		panelCaja.verDia(lista, date);
+		
+	}
+
+	@Override
+	public void cleanPanelCaja() {
+		PantallaUtil.remove(panelCaja);
+		
+	}
+
+
 
 
 
