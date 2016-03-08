@@ -1,12 +1,14 @@
 package moduloVenta;
 
 import java.awt.BorderLayout;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import objetos.Cuota;
 import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
@@ -41,6 +43,8 @@ public class VentasView implements VentasInterface {
 	private ListenerVolverVentaStock listenerVolverVenta;
 	private ListenerDetalleVehiculo listenerDetalle;
 	private ListenerComboModelo listenerComboModelo;
+	private ListenerReiniciarVenta listenerReiniciar;
+	private ListenerDate listenerDate;
 
 	public VentasView(){
 		
@@ -99,56 +103,49 @@ public class VentasView implements VentasInterface {
 		listenerValidarG = new ListenerValidarG(ventasController);
 		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
 		listenerAceptarV = new ListenerValidarVenta(ventasController);
+		listenerReiniciar = new ListenerReiniciarVenta(ventasController);
 		
 		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
 		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
 		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
 		panelVentas.getBtnVolverNuevaV().addActionListener(listenerVolverAVentas);
 		panelVentas.getBtnAceptarNuevaV().addActionListener(listenerAceptarV);
+		panelVentas.getBtnReset().addActionListener(listenerReiniciar);
 		
+		PantallaUtil.refresh(frame);
 	}
 
 //Busco DNI Comprador. Viene de Botón "Validar DNI" del Comprador en Nueva Venta.
 	@Override
 	public int getDniBuscarC() {
+		int dni;
 		try {
-		return Integer.parseInt(panelVentas.getDniCompradorText().getText());
-	    }
-	    catch (NumberFormatException e) {
-	        return 0;
-	    }
+			 dni = Integer.parseInt(panelVentas.getDniCompradorText().getText());
+		    }
+		    catch (NumberFormatException e) {
+		     dni = 0;
+		    }
+		return dni;
 	}
 	
 //Busco DNI Garante. Viene de Botón "Validar DNI" del garante en Nueva Venta.
+	
 	@Override
 	public int getDniBuscarG() {
+		int dni;
 		try {
-			return Integer.parseInt(panelVentas.getDniGaranteText().getText());
-		}
-		catch (NumberFormatException e) {
-			return 0;
-		}
+			 dni = Integer.parseInt(panelVentas.getDniGaranteText().getText());
+		    }
+		    catch (NumberFormatException e) {
+		     dni = 0;
+		    }
+		return dni;
 	}
 
-	@Override
-	public void msjErrorDNI() {
-		JOptionPane.showMessageDialog(null, "No ha ingresado un valor valido para el DNI . Por favor reintente");
-		
-	}
-
-	@Override
-	public int msjClienteNotFound() {
-		
-		String s = new String("Dni no registrado en el Sistema. Debera ingresar los datos para continuar con la venta.");
-		int codigo=JOptionPane.showConfirmDialog(null, s , "Not Found", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-       
-		return codigo;
-		
-	}
 
 //Muestro Alta Cliente. Viene de Validar cliente -> Cliente no encontrado -> Acepto registrarlo.
 	@Override
-	public void altaCliente() {
+	public void altaCliente(int dni) {
 		
 		panelClientes = new PanelClientes();
 		
@@ -156,7 +153,7 @@ public class VentasView implements VentasInterface {
 		
 		PantallaUtil.refresh(frame);
 		
-		panelClientes.onAltaFromVenta(panelVentas.getDniCompradorText().getText());
+		panelClientes.onAltaFromVenta(dni);
 		
 		frame.add(panelClientes);
 		
@@ -178,7 +175,7 @@ public class VentasView implements VentasInterface {
 
 //Muestro Alta Garante. Viene de Validar Garante -> Garante no encontrado -> Acepto registrarlo.
 	@Override
-	public void altaGarante() {
+	public void altaGarante(int dni){
 		
 		panelClientes = new PanelClientes();
 		
@@ -186,7 +183,7 @@ public class VentasView implements VentasInterface {
 		
 		PantallaUtil.refresh(frame);
 		
-		panelClientes.onAltaFromVenta(panelVentas.getDniGaranteText().getText());
+		panelClientes.onAltaFromVenta(dni);
 		
 		frame.add(panelClientes);
 		
@@ -200,50 +197,18 @@ public class VentasView implements VentasInterface {
 	
 	
 	
-
-
-
-
-	@Override
-	public void insertOk() {
-		
-		JOptionPane.showMessageDialog(null, "Cliente agregado correctamente");
-		
-		panelClientes.setVisible(false);
-		
-		panelVentas.setVisible(true);
-		
-		PantallaUtil.refresh(frame);
-		
-	}
 	
-	@Override
-	public void insertGaranteOk() {
-		
-		JOptionPane.showMessageDialog(null, "Garante agregado correctamente");
-		
-		panelClientes.setVisible(false);
-		
-		panelVentas.setVisible(true);
-		
-		PantallaUtil.refresh(frame);
-		
-	}
-
-
-	@Override
-	public void insertBad() {
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al dar de alta a la persona. Por favor reintente");
-		
-	}
-
 
 
 //Muestro Cliente encontrado. Viene de Validar cliente -> Garante Encontrado.
 	@Override
 	public void mostrarCliente(Persona cliente) {
-		
+
+		if (panelClientes != null){
+		panelClientes.setVisible(false);}
+	
 		panelVentas.mostrarCliente(cliente);
+		panelVentas.setVisible(true);
 		
 		PantallaUtil.refresh(frame);
 		
@@ -268,8 +233,12 @@ public class VentasView implements VentasInterface {
 //Muestro Garante encontrado. Viene de Validar Garante -> Garante encontrado.
 	@Override
 	public void mostrarGarante(Persona garante) {
-		
+
+		if (panelClientes != null){
+			panelClientes.setVisible(false);}
+			
 		panelVentas.mostrarGarante(garante);
+		panelVentas.setVisible(true);
 		
 		PantallaUtil.refresh(frame);
 		
@@ -392,16 +361,19 @@ public class VentasView implements VentasInterface {
 
 
 
+	
 	@Override
-	public void msjVentaOk() {
-
-		JOptionPane.showMessageDialog(null, "Venta generada con éxito. Por favor, complete los datos de pago.");
+	public void ingresarDetalleVenta(int idVenta, String cliente, String garante, String vehiculo, int precio){
 		
 		PantallaUtil.remove(panelVentas);
 		
 		PantallaUtil.refresh(frame);
 		
-		panelVentas.mostrarDatosPago();
+		panelVentas.ingresarDetalleVenta(idVenta, cliente, garante, vehiculo,precio);
+		
+		listenerDate= new ListenerDate(ventasController);
+		
+		panelVentas.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
 		
 	}
 
@@ -414,6 +386,38 @@ public class VentasView implements VentasInterface {
 		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al actualizar el vehiculo. Por favor, realice la baja de stock manualmente.");
 		
 	}
+
+
+
+
+	@Override
+	public int getCuotas() {
+		
+		return Integer.valueOf(panelVentas.getCuotasText().getText());
+	}
+
+
+
+
+	@Override
+	public void cargarTabla(List<Cuota> lista) {
+		
+		panelVentas.cargarTabla(lista);
+		
+		
+	}
+
+
+
+
+	@Override
+	public Double getSaldo() {
+		return Double.valueOf(panelVentas.getSaldoText().getText());
+	}
+
+
+
+
 
 
 

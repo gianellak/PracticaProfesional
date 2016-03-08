@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import connections.*;
 import objetos.*;
 import utilitarios.Mensajes;
+import utilitarios.StringMsj;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -171,7 +172,8 @@ public class CajaController {
 		
 		if(lista.size() == 0){
 			
-			Mensajes.mensajeInfo("No hay movimientos registrados para el día seleccionado. Intente con otra fecha.");
+			Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_MOV);
+			
 		} else{
 			
 			ci.onVerOtro(lista, stringDate);

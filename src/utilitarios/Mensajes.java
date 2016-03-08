@@ -39,6 +39,15 @@ public class Mensajes {
 		return codigo;
 	}
 	
+
+	public static int msjOkCancel(String s, String titulo) {
+		
+		int codigo=JOptionPane.showConfirmDialog(null, s , titulo, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+		
+	}
+	
 	//VEHICULOS
 
 	public static int msjSinPatente() {

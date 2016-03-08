@@ -21,7 +21,7 @@ public class VehiculosDB  {
 
 	private static final String SQL_SELECT_ALL_VEHICULO = "SELECT * FROM Vehiculo";
 
-	private static final String SQL_UPDATE_VEHICULO = "UPDATE Vehiculo SET motor=?,"
+	private static final String SQL_UPDATE_VEHICULO = "UPDATE Vehiculo SET "
 				+ "patente=?, " 
 				+ "marca=?, "
 				+ "modelo=?, "
@@ -47,8 +47,7 @@ public class VehiculosDB  {
 	
 	private static final String SQL_SELECT_LIST_MARCA = "SELECT DISTINCT marca FROM Vehiculo";
 	
-	//private static final String SQL_UPDATE_STATE = "UPDATE usuario SET condicion=?, fechaVenta=?, idCliente=? WHERE patente=? OR motor=?";
-
+	
 
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
@@ -309,7 +308,6 @@ public class VehiculosDB  {
 
 		Object[] values = {
 				
-				vehiculo.getMotor(),
 				vehiculo.getPatente(),
 				vehiculo.getMarca(),
 				vehiculo.getModelo(),
@@ -336,22 +334,16 @@ public class VehiculosDB  {
 
 		{
 			int affectedRows = statement.executeUpdate();
-			if (affectedRows == 0) {
-				throw new DBException(
-						"Inserting user failed, no rows affected.");
-
-			} else {
-				return true;
-			}
+			
+			  if (affectedRows == 0) {
+	            	
+	                throw new DBException("Updating user failed, no rows affected.");
+	            } else{
+	            	return true;
+	            }
 		} catch (SQLException e) {
-			if (e.getErrorCode() == MYSQL_DUPLICATE_PK) {
-				throw new DBException("Duplicated Key, cannot modify vehiculo");
-			} else {
-				throw new DBException(e);
-			}
+            throw new DBException(e);
+        }
 		}
-
-	
 	}
-}
 

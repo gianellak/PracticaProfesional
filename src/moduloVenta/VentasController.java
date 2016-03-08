@@ -1,9 +1,12 @@
 package moduloVenta;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -11,13 +14,19 @@ import javax.swing.JOptionPane;
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import connections.SchemaGenerator;
+import objetos.Cuota;
+import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
 import objetos.Venta;
 import utilitarios.Mensajes;
+import utilitarios.PantallaUtil;
+import utilitarios.Sintaxis;
+import utilitarios.StringMsj;
 import exceptions.DBException;
+import exceptions.LexicalException;
 import moduloClientes.ClientesDB;
 import moduloClientes.ClientesView;
 import moduloPrincipal.PrincipalController;
@@ -34,7 +43,8 @@ public class VentasController {
 	private Persona cliente;
 	private Persona garante;
 	private Vehiculo vehiculo;
-	private Boolean ventaOk = true;
+	
+	
 	
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -99,101 +109,97 @@ public class VentasController {
 
 		int dni = vi.getDniBuscarC();
 		 
-		System.out.println(dni);
-		
-		if (dni == 0 ){
-			
-			vi.msjErrorDNI();
-			
-			ventaOk = false;
-			
-		} else{
-			
-			cliente = cDB.findId(dni);
-			
-			if(cliente != null){
+		try {
+			if(Sintaxis.analizoDNI(String.valueOf(dni)))
+			{
+				Persona p = cDB.findId(dni);
 				
-				vi.mostrarCliente(cliente);
+				if(p != null){
+					
+					vi.mostrarCliente(p);
+					cliente = p;
+					
+				}else{
 				
-				
-				
+					int codigo = Mensajes.msjOkCancel(StringMsj.MSG_NEW_CLIENT, "Not Found");
+					
+					if (codigo ==JOptionPane.YES_OPTION){
+						
+						vi.altaCliente(dni);
+						
+					}
+				}
 			}else{
-			
-				int codigo = vi.msjClienteNotFound();
-				
-				if (codigo ==JOptionPane.YES_OPTION){
-					
-					vi.altaCliente();
-					
-				}
-				else{
-					if(codigo==JOptionPane.NO_OPTION){
-						ventaOk = false;
-				}
-			        
-				
-				}
+				Mensajes.mensajeInfo(StringMsj.MSG_DNI_NOT_VALID);
 			}
+		} catch (LexicalException e) {
+			e.printStackTrace();
 		}
+		
+		
 	}
 
-	public void validarGarante() throws DBException {
+	public void validarGarante() throws DBException, NumberFormatException, ParseException {
 		
 		int dni = vi.getDniBuscarG();
-		
-		System.out.println(dni);
-		
-		if (dni == 0 ){
-			
-			vi.msjErrorDNI();
-			ventaOk = false;
-			
-		} else{
-			
-			garante = cDB.findId(dni);
-			
-			if(garante != null){
+		 
+		try {
+			if(Sintaxis.analizoDNI(String.valueOf(dni)))
+			{
+				Persona p = cDB.findId(dni);
 				
-				vi.mostrarGarante(garante);
-
-			}else{
-				
-				int codigo = vi.msjClienteNotFound();
-				
-				if (codigo ==JOptionPane.YES_OPTION){
+				if(p != null){
 					
-					vi.altaGarante();
+					vi.mostrarGarante(p);
+					garante = p;
 					
-				}
-				else{
-					if(codigo==JOptionPane.CANCEL_OPTION){
-						ventaOk = false;
+				}else{
+				
+					int codigo = Mensajes.msjOkCancel(StringMsj.MSG_NEW_CLIENT, "Not Found");
+					
+					if (codigo ==JOptionPane.YES_OPTION){
+						
+						vi.altaGarante(dni);
+						
 					}
-					
-					
 				}
+			}else{
+				Mensajes.mensajeInfo(StringMsj.MSG_DNI_NOT_VALID);
 			}
+		} catch (LexicalException e) {
+			e.printStackTrace();
 		}
 	}
 
 //Doy de alta en un cliente. Vengo de la pantalla de Venta -> Nueva Venta -> Validar Cliente -> Cliente no encontrado -> Alta
 	public void altaClienteV() throws DBException {
 		
-		Persona p = vi.getPersonaAlta();
+		Persona persona = vi.getPersonaAlta();
 
-		if(cDB.insert(p)){
-			
-			vi.insertOk();
-			
-			ventaOk = true;
-			
-			vi.mostrarCliente(p);
-			
-		}else
-		{
-			ventaOk = false;
-			vi.insertBad();
-			
+		try {
+			if(persona.getDni() != 0 && 
+					Sintaxis.analizoDNI(String.valueOf(persona.getDni())) &&
+					Sintaxis.analizoTexto(persona.getNombre()) &&
+					Sintaxis.analizoTexto(persona.getApellido()) &&
+					Sintaxis.analizoTelefono(persona.getTelefonoP())
+					){
+				
+				if(cDB.insert(persona)){
+					
+					Mensajes.mensajeInfo(StringMsj.MSG_CLI_INS_OK);
+					
+					vi.mostrarCliente(persona);
+					cliente = persona;
+					
+				}else{
+					Mensajes.mensajeWarning(StringMsj.MSG_CLI_INS_BAD);
+				}
+			}else{
+				Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_OBLI);
+			}
+		} catch (LexicalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
@@ -201,20 +207,31 @@ public class VentasController {
 //Doy de alta en un Garante. Vengo de la pantalla de Venta -> Nueva Venta -> Validar Garante -> Garante no encontrado -> Alta
 	public void altaGaranteV() throws DBException {
 		
-		Persona p = vi.getPersonaAlta();
+		Persona persona = vi.getPersonaAlta();
 		
-		if(cDB.insert(p)){
-			
-			vi.insertGaranteOk();
-			ventaOk = true;
-			vi.mostrarGarante(p);
-			
-		}else
-		{
-			vi.insertBad();
-			
-			ventaOk = false;
-			
+		try {
+			if(persona.getDni() != 0 && 
+					Sintaxis.analizoDNI(String.valueOf(persona.getDni())) &&
+					Sintaxis.analizoTexto(persona.getNombre()) &&
+					Sintaxis.analizoTexto(persona.getApellido()) &&
+					Sintaxis.analizoTelefono(persona.getTelefonoP())
+					){
+				
+				if(cDB.insert(persona)){
+					
+					Mensajes.mensajeInfo(StringMsj.MSG_GTE_INS_OK);
+					garante = persona;
+					vi.mostrarGarante(persona);
+					
+				}else{
+					Mensajes.mensajeWarning(StringMsj.MSG_GTE_INS_BAD);
+				}
+			}else{
+				Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_OBLI);
+			}
+		} catch (LexicalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
@@ -242,12 +259,7 @@ public class VentasController {
 				
 
 			}
-			else{
-				if(codigo==JOptionPane.NO_OPTION){
-					ventaOk = false;
-			}
 			
-			}
 				
 		}else{
 
@@ -258,7 +270,6 @@ public class VentasController {
 				
 				vi.mostrarPatente(vehiculo);
 				
-				ventaOk = true;
 				
 			} else{
 				
@@ -298,7 +309,7 @@ public class VentasController {
 
 		for (int i = 0; i < lista.size(); i++) {
 
-			if ( (lista.get(i).getCondicion().toUpperCase() == "VENDIDO") || (lista.get(i).getCondicion().toUpperCase() == "NO DISPONIBLE")) {
+			if ( (lista.get(i).getCondicion().toUpperCase() != "VENDIDO") && (lista.get(i).getCondicion().toUpperCase() != "NO DISPONIBLE")) {
 
 				Stock s = new Stock();
 				
@@ -339,15 +350,18 @@ public class VentasController {
 		
 		Boolean botones = vi.getButtonState();
 		
-		if(ventaOk == true && cliente != null && vehiculo != null && garante != null && botones == true){
+		if(botones == true){
 
 			String format = new String("dd/MM/yy");
 			Date d = new Date();
 			SimpleDateFormat df = new SimpleDateFormat(format);
 			String stringDate = df.format(d);
 			
+			int idVenta = vDB.countAll();
+			System.out.println(idVenta);
 			//falta idEmpleado
-			Venta v = new Venta(vDB.countAll(), stringDate, cliente.getDni(), garante.getDni(), 1 );
+			
+			Venta v = new Venta(idVenta, stringDate, cliente.getDni(), garante.getDni(), 1 );
 			
 			if(vDB.insertVenta(v)){
 				
@@ -357,7 +371,14 @@ public class VentasController {
 				
 				if(vhDB.updateVehiculo(vehiculo)){
 					
-					vi.msjVentaOk();
+					Mensajes.mensajeInfo(StringMsj.MSG_VTA_OK);
+					
+					String c = new String(cliente.getNombre() + " " + cliente.getApellido());
+					String g = new String(garante.getNombre() + " " + garante.getApellido());
+					String vh = new String(vehiculo.getMarca() + " - " + vehiculo.getModelo());
+					
+					
+					vi.ingresarDetalleVenta(idVenta, c, g, vh, vehiculo.getPvc());
 					
 				} else{
 					
@@ -378,9 +399,6 @@ public class VentasController {
 		String p = vi.getVehiculoTabla();
 		
 		vehiculo =vhDB.getVehiculo(p);
-		
-		ventaOk = true; 
-		
 		vi.mostrarPatente(vehiculo);
 		
 		
@@ -406,6 +424,61 @@ public class VentasController {
 		System.out.println("FILTRO");
 		
 	}
+
+	public void veoFecha(Date fecha) {
+		
+		int cant = vi.getCuotas();
+		
+		Double saldo = new Double(vi.getSaldo());
+		
+		List<Cuota> lista = cargarLista(fecha, cant, saldo);
+		
+		vi.cargarTabla(lista);
+
+		
+		
+	}
+
+	private List<Cuota> cargarLista(Date fecha, int cant, Double saldo) {
+	
+		List<Cuota> lista = new ArrayList<Cuota>();
+		
+		Calendar c1 = GregorianCalendar.getInstance();
+
+		String format = new String("yyyy-MM-dd");
+		
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		
+		String stringDate = df.format(fecha);
+		
+		System.out.println(stringDate);
+		
+		String[] partes = stringDate.split("-");
+		
+		c1.set(Integer.valueOf(partes[0]), Integer.valueOf(partes[1]),Integer.valueOf(partes[2]));
+		
+		Double valorCuota = new Double(saldo/cant);
+		
+		Cuota c = new Cuota(1 , stringDate, valorCuota, new Double(0));
+		
+		lista.add(c);
+		
+		
+		
+		
+		for(int i = 0; i < cant - 1; i++){
+		
+			c = new Cuota(i+2, df.format(c1.getTime()), valorCuota, new Double(0));
+			c1.add(Calendar.MONTH, 1);
+			lista.add(c);
+			
+		
+		}
+		
+		return lista;
+				       
+	}
+
 
 	
 			

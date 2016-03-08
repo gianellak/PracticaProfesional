@@ -1,8 +1,11 @@
 package moduloClientes;
 
 import java.awt.BorderLayout;
+import java.text.ParseException;
 import java.util.List;
+
 import javax.swing.JFrame;
+
 import objetos.Persona;
 import objetos.Usuario;
 import utilitarios.PantallaUtil;
@@ -71,11 +74,18 @@ public class ClientesView implements ClientesInterface {
 	}
 
 	@Override
-	public void onAlta() {
+	public void onAlta(int dni) throws ParseException {
 		
 		PantallaUtil.remove(panelClientes);
 		
-		panelClientes.onAlta();
+		if(dni == 0)
+		{
+			panelClientes.onAlta();
+		}else{
+			
+			panelClientes.onAltaFromVenta(dni);
+			
+		}
 		
 		listenerAltaAceptar = new ListenerAltaAceptar(clientesController);
 		listenerMenuClientesVolver = new ListenerMenuClientesVolver(clientesController);
@@ -194,8 +204,13 @@ public class ClientesView implements ClientesInterface {
 
 	@Override
 	public int getModPersona() {
-		
-		return Integer.parseInt(panelClientes.getDniCompradorText().getText());
+		try {
+			return Integer.parseInt(panelClientes.getDniCompradorText().getText());
+		    }
+		    catch (NumberFormatException e) {
+		        return 0;
+		    }
+	
 	}
 
 

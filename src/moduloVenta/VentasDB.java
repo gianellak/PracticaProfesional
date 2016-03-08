@@ -87,7 +87,7 @@ public class VentasDB  {
 	
 	public boolean insertVenta(Venta v) throws DBException {
 
-		Object[] values = { v.getIdCliente(),
+		Object[] values = { v.getIdVenta(),
 				v.getFecha(),
 				v.getIdCliente(),
 				v.getIdGarante(),

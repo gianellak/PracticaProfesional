@@ -1,14 +1,18 @@
 package moduloClientes;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
+
 import javax.swing.JOptionPane;
+
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Persona;
 import objetos.Usuario;
 import utilitarios.*;
 import exceptions.DBException;
+import exceptions.LexicalException;
 import moduloPrincipal.PrincipalController;
 
 public class ClientesController {
@@ -62,7 +66,12 @@ public class ClientesController {
 
 	public void showAlta() {
 		
-		ci.onAlta();
+		try {
+			ci.onAlta(0);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -100,21 +109,38 @@ public class ClientesController {
 	}
 
 	
-	public void altaPersona() throws DBException {
+	public void altaPersona() throws DBException{
 		
 		Persona persona = ci.getUpdatePersona();
 		
-		if(cDB.insert(persona)){
-			
-			Mensajes.mensajeInfo(StringMsj.MSG_CLI_INS_OK);;
-			
-			PantallaUtil.remove(ci.getPanelClientes());
-		}else
-		{
-			Mensajes.mensajeWarning(StringMsj.MSG_CLI_INS_BAD);
+
+
+		try {
+			if(persona.getDni() != 0 && 
+							Sintaxis.analizoDNI(String.valueOf(persona.getDni())) &&
+							Sintaxis.analizoTexto(persona.getNombre()) &&
+							Sintaxis.analizoTexto(persona.getApellido()) &&
+							Sintaxis.analizoTelefono(persona.getTelefonoP())
+									){
+					
+						if(cDB.insert(persona)){
+						
+							Mensajes.mensajeInfo(StringMsj.MSG_CLI_INS_OK);;			
+							PantallaUtil.remove(ci.getPanelClientes());
+					
+						}else{
+							Mensajes.mensajeWarning(StringMsj.MSG_CLI_INS_BAD);
+							}
+					}else{
+						Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_OBLI);
+					}
+		} catch (LexicalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
 	}
+	
+
 
 
 	public void showMod() {
@@ -140,39 +166,65 @@ public class ClientesController {
 		
 		int dni = ci.getModPersona();
 		
-		Persona p = cDB.findId(dni);
-		
-		if(p != null){
-			
-			ci.verCliente(p);
-		}else
-		{
-			Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_FOUND);
+		try {
+			if(Sintaxis.analizoDNI(String.valueOf(dni)))
+			{
+				Persona p = cDB.findId(dni);
+				
+				if(p != null){
+					
+					ci.verCliente(p);
+					
+				}else{
+				
+					int codigo = Mensajes.msjOkCancel(StringMsj.MSG_NEW_CLIENT, "Not Found");
+					
+					if (codigo ==JOptionPane.YES_OPTION){
+						
+						ci.onAlta(dni);
+						
+					}
+				}
+			}else{
+				Mensajes.mensajeInfo(StringMsj.MSG_DNI_NOT_VALID);
+			}
+		} catch (LexicalException | ParseException e) {
+			e.printStackTrace();
 		}
-		
-		
 	}
 
+	
 	public void update() throws DBException {
-		Persona cliente = ci.getUpdatePersona();
 		
-		if(cliente != null){
-			
-			int codigo = Mensajes.showToUpdate(cliente);
-			
-			 if (codigo==JOptionPane.YES_OPTION){
-				 if(cDB.updatePersona(cliente)){
-						
-						Mensajes.mensajeInfo(StringMsj.MSG_CLI_MOD_OK);;
-						PantallaUtil.remove(ci.getPanelClientes());
-					}else
-					{
-						Mensajes.mensajeWarning(StringMsj.MSG_CLI_MOD_BAD);
-					}
-		        }else if(codigo==JOptionPane.NO_OPTION){
-		            ci.onMod();
-		        }
-			
+		Persona persona = ci.getUpdatePersona();
+		
+		
+			try {
+				if(persona.getDni() != 0 && 
+					Sintaxis.analizoDNI(String.valueOf(persona.getDni())) &&
+					Sintaxis.analizoTexto(persona.getNombre()) &&
+					Sintaxis.analizoTexto(persona.getApellido()) &&
+					Sintaxis.analizoTelefono(persona.getTelefonoP())){
+					
+						int codigo = Mensajes.showToUpdate(persona);
+				
+						if (codigo==JOptionPane.YES_OPTION){
+							if(cDB.updatePersona(persona)){
+							
+								Mensajes.mensajeInfo(StringMsj.MSG_CLI_MOD_OK);;
+								PantallaUtil.remove(ci.getPanelClientes());
+							}else{
+								Mensajes.mensajeWarning(StringMsj.MSG_CLI_MOD_BAD);
+							}
+						}else if(codigo==JOptionPane.NO_OPTION){
+							ci.onMod();
+						}
+				}else{
+					Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_OBLI);
+				}
+			} catch (LexicalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		
 	}
