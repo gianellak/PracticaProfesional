@@ -77,7 +77,8 @@ public void conectar() {
 
 		for (int i = 0; i < stockActual.size(); i++) {
 
-			if (! ( (stockActual.get(i).getCondicion() == "Vendido") || (stockActual.get(i).getCondicion() == "No disponible"))) {
+			if (!(stockActual.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
+					&& !(stockActual.get(i).getCondicion().toUpperCase().equals("NO DISPONIBLE"))) {
 
 				Stock s = new Stock();
 				
@@ -198,10 +199,13 @@ public void conectar() {
 		
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
 
+		
 		for (int i = 0; i < lista.size(); i++) {
 
-			if ( (lista.get(i).getCondicion().toUpperCase() == "VENDIDO") || (lista.get(i).getCondicion().toUpperCase() == "NO DISPONIBLE")) {
-
+			if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
+					&& !(lista.get(i).getCondicion().toUpperCase().equals("NO DISPONIBLE"))) {
+	
+				
 				Stock s = new Stock();
 				
 				String patenteActual = lista.get(i).getPatente();

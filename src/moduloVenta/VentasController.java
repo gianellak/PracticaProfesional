@@ -8,7 +8,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import javax.swing.JOptionPane;
+
 import connections.*;
 import objetos.*;
 import utilitarios.*;
@@ -262,10 +264,12 @@ public class VentasController {
 
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
 
+		
 		for (int i = 0; i < lista.size(); i++) {
+			System.out.println("Condicion: " +lista.get(i).getCondicion().toUpperCase());
 
-			if ((lista.get(i).getCondicion().toUpperCase() != "VENDIDO")
-					&& (lista.get(i).getCondicion().toUpperCase() != "NO DISPONIBLE")) {
+			if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
+					&& !(lista.get(i).getCondicion().toUpperCase().equals("NO DISPONIBLE"))) {
 
 				Stock s = new Stock();
 
