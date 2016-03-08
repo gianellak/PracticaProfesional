@@ -46,8 +46,8 @@ public class VentasView implements VentasInterface {
 	private ListenerVolverVentaStock listenerVolverVenta;
 	private ListenerDetalleVehiculo listenerDetalle;
 	private ListenerComboModelo listenerComboModelo;
-	private ListenerReiniciarVenta listenerReiniciar;
-	private ListenerDate listenerDate;
+//	private ListenerReiniciarVenta listenerReiniciar;
+//	private ListenerDate listenerDate;
 
 	public VentasView(){
 		panelVentasMenu= new VentasMenu();
@@ -99,14 +99,14 @@ public class VentasView implements VentasInterface {
 		listenerValidarG = new ListenerValidarG(ventasController);
 		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
 		listenerAceptarV = new ListenerValidarVenta(ventasController);
-		listenerReiniciar = new ListenerReiniciarVenta(ventasController);
+//		listenerReiniciar = new ListenerReiniciarVenta(ventasController);
 		
 		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
 		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
 		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
 		panelVentas.getBtnVolverNewVenta().addActionListener(listenerVolverAVentas);
 		panelVentas.getBtnAceptarNewVenta().addActionListener(listenerAceptarV);
-		panelVentas.getBtnReset().addActionListener(listenerReiniciar);
+//		panelVentas.getBtnReset().addActionListener(listenerReiniciar);
 		
 		PantallaUtil.refresh(frame);
 	}
@@ -339,8 +339,8 @@ public class VentasView implements VentasInterface {
 		PantallaUtil.refresh(frame);
 		
 		panelVentas.ingresarDetalleVenta(idVenta, cliente, garante, vehiculo,precio);
-		listenerDate= new ListenerDate(ventasController);
-		panelVentas.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
+//		listenerDate= new ListenerDate(ventasController);
+//		panelVentas.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
 	}
 
 	@Override
