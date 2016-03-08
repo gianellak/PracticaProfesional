@@ -29,10 +29,7 @@ public class ListenerDate implements PropertyChangeListener {
 		   if ("date".equals(evt.getPropertyName())) {
            	Date fecha = (Date) evt.getNewValue();
            	cc.veoFecha(fecha);
-           	
-               
            }
-		
 	}
 
 }

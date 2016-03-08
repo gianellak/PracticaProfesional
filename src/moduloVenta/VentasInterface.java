@@ -1,17 +1,9 @@
 package moduloVenta;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
-
-import exceptions.DBException;
-import objetos.Cuota;
-import objetos.Persona;
-import objetos.Stock;
-import objetos.Usuario;
-import objetos.Vehiculo;
+import objetos.*;
 
 public interface VentasInterface {
 

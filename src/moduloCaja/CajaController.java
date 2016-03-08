@@ -1,17 +1,25 @@
 package moduloCaja;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import connections.*;
 import objetos.*;
 import utilitarios.Mensajes;
-import utilitarios.StringMsj;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -25,9 +33,11 @@ public class CajaController {
 		this.ci = ci;
 		this.pc = pc;
 	}
+	
+	public static String globalSelectedDate  ="";
+    public static String globalPath = "C:\\Tias\\";
 
 	
-
 	public void verMovimientos() throws DBException {
 
 		System.out.println("Ver Movimientos - Controller");
@@ -153,11 +163,8 @@ public class CajaController {
 
 	public void verOtrosMovimientos() {
 		
-		ci.verOtrosMovimientos();
-		
-		
+		ci.verOtrosMovimientos();		
 	}
-
 
 
 	public void veoFecha(Date fecha) {
@@ -167,51 +174,72 @@ public class CajaController {
 		String stringDate = df.format(fecha);
 		
 		System.out.println(stringDate);
-
-		List<Movimiento> lista = cDB.findByDay(stringDate);
 		
-		if(lista.size() == 0){
+		List<Movimiento> listaMov = cDB.findByDay(stringDate);
+		globalSelectedDate = stringDate;
+		
+		if(listaMov.size() == 0){
 			
-			Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_MOV);
-			
+			Mensajes.mensajeInfo("No hay movimientos registrados para el día seleccionado. Intente con otra fecha.");
 		} else{
 			
-			ci.onVerOtro(lista, stringDate);
+			ci.onVerOtro(listaMov, stringDate);		
 		}
-		
-		
 	}
-
-
-
+	
+	
+	
 	public void cleanCaja() {
 		ci.cleanPanelCaja();
 		
 	}
-	
-	
-	// LOG . NO TOCAR.
-	
-	
-//	public class archivoLog () {
-//	     FileWriter archivo //nuestro archivo log
-//
-//	     public void crearLog(String Operacion) {
-//
-//	        //Pregunta el archivo existe, caso contrario crea uno con el nombre log.txt
-//	        if (new File("log.txt").exists()==false){archivo=new FileWriter(new File("log.txt"),false);}
-//	             archivo = new FileWriter(new File("log.txt"), true);
-//	             Calendar fechaActual = Calendar.getInstance(); //Para poder utilizar el paquete calendar     
-//	             //Empieza a escribir en el archivo
-//	             archivo.write((String.valueOf(fechaActual.get(Calendar.DAY_OF_MONTH))
-//	                  +"/"+String.valueOf(fechaActual.get(Calendar.MONTH)+1)
-//	                  +"/"+String.valueOf(fechaActual.get(Calendar.YEAR))
-//	                  +";"+String.valueOf(fechaActual.get(Calendar.HOUR_OF_DAY))
-//	                  +":"+String.valueOf(fechaActual.get(Calendar.MINUTE))
-//	                  +":"+String.valueOf(fechaActual.get(Calendar.SECOND)))+";"+operacion+"\r\n");
-//	             archivo.close(); //Se cierra el archivo
-//	     }//Fin del metodo crearLog
-	    
-	
 
+	
+	public void generarArchivoLog(){
+	
+		Date fechaActual = new Date();
+		DateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+	    DateFormat formatoHora = new SimpleDateFormat("HH.mm.ss");	    
+	 
+	    String nameOfFile = "log_"+formatoFecha.format(fechaActual)+"_"+formatoHora.format(fechaActual)+".txt";
+	    
+	    File f = new File(globalPath+nameOfFile);
+		
+	    try {
+			FileWriter w;
+			w = new FileWriter(f,true);
+			BufferedWriter bw = new BufferedWriter(w);
+					
+			PrintWriter wr = new PrintWriter(bw);  
+			
+		//	wr.write("Hola");
+
+		
+			List<Movimiento> listaMov = cDB.findByDay(globalSelectedDate);
+			
+			if(listaMov.size() == 0){
+				
+				Mensajes.mensajeInfo("No hay movimientos registrados para el día seleccionado. Intente con otra fecha.");
+				wr.write("No hay movimientos registrados");
+			} else{
+				
+				int i = 0;
+
+				for (Movimiento m : listaMov) {
+					i++;	
+					String linea = "";
+					linea = linea + i+","+ m.getDescripcion()+","+m.getIngreso()+","+m.getEgreso()+","+
+					m.getFecha()+","+m.getUsuario();
+					wr.println(linea);
+				}
+			}
+
+			
+			wr.close();
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

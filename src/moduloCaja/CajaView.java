@@ -29,6 +29,7 @@ public class CajaView implements CajaInterface {
 	private Object pantallaCaja;
 	private ListenerDate listenerDate;
 	private ListenerCajaVolver listenerVolver;
+	private ListenerLogMovimiento listenerLog;
 
 	public CajaView(){
 	
@@ -49,19 +50,16 @@ public class CajaView implements CajaInterface {
 		
 		PanelGeneral panelGeneral = new PanelGeneral(u);
 		
-		//new listeners -> HAY QUE CREAR LAS CLASES LISTENERS
 		listenerCajaVolver= new ListenerCajaVolver(cc);
 		listenerVerMovimientos =new ListenerVerMovimientos(cc);
 		listenerVerOtrosMovimientos =new ListenerVerOtrosMovimientos(cc);
-		//listenerVerLog =new ListenerVerLog(cc); [ADMIN]
 		
-		
-		//ESTO VA A ANDAR CUANDO CREES LO LISTENER,NO HAY QUE TOCAR NADA ACA
-		//OK TIA
+	
 		panelCajaMenu.getBtnVolver().addActionListener(listenerCajaVolver);
 		panelCajaMenu.getBtnVerMovs().addActionListener(listenerVerMovimientos);
 		panelCajaMenu.getBtnVerUnDia().addActionListener(listenerVerOtrosMovimientos);
-		//panelClientesMenu.getBtnVerLog().addActionListener(listenerVerLog);
+		
+		
 			
 		frame.setTitle("Menu Caja");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -89,11 +87,9 @@ public class CajaView implements CajaInterface {
 		
 		
 		listenerVolver = new ListenerCajaVolver(cajaController);
-		
 		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
 		
 		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimiento);
-		
 		
 		panelCaja.getBtnVolver().addActionListener(listenerCajaVolver);
 		
@@ -221,8 +217,12 @@ public class CajaView implements CajaInterface {
 		panelCaja.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
 		
 		listenerVolver = new ListenerCajaVolver(cajaController);
+		listenerLog = new ListenerLogMovimiento(cajaController);
+
 		
 		panelCaja.getBtnVolver().addActionListener(listenerCajaVolver);
+		panelCaja.getBtnLog().addActionListener(listenerLog);
+
 		
 		
 		PantallaUtil.refresh(frame);
@@ -259,10 +259,6 @@ public class CajaView implements CajaInterface {
 		PantallaUtil.remove(panelCaja);
 		
 	}
-
-
-
-
 
 
 }

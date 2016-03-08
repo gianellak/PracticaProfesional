@@ -49,3 +49,4 @@ src/moduloVehiculo/paneles/FormModificarVehiculo.java
 src/moduloVehiculo/paneles/FormModificarVehiculo.java
 target/classes/moduloVehiculo/paneles/FormModificarVehiculo.class
 src/moduloVehiculo/paneles/FormModificarVehiculo.java
+*.java

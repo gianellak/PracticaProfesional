@@ -24,21 +24,24 @@ import moduloVenta.paneles.VentasMenu;
 public class VentasView implements VentasInterface {
 	
 	private JFrame frame;
+	
 	private PanelVentas panelVentas;
+	private PanelClientes panelClientes;
+	private PanelVehiculos panelVehiculos;
+
 	private VentasMenu panelVentasMenu;
 	private VentasController ventasController;
+	
 	private ListenerVentasVolver listenerVolver;
 	private ListenerNuevaVenta listenerNuevaVenta;
 	private ListenerNuevaCompra listenerNuevaCompra;
 	private ListenerValidarC listenerValidarC;
 	private ListenerAltaClienteV listenerAltaAceptar;
-	private PanelClientes panelClientes;
 	private ListenerValidarG listenerValidarG;
 	private ListenerAltaGaranteV listenerAltaAceptarG;
 	private ListenerBuscarVehiculoV listenerBuscarV;
 	private ListenerVolverVentas listenerVolverAVentas;
 	private ListenerValidarVenta listenerAceptarV;
-	private PanelVehiculos panelVehiculos;
 	private ListenerSeleccionar listenerSeleccionar;
 	private ListenerVolverVentaStock listenerVolverVenta;
 	private ListenerDetalleVehiculo listenerDetalle;
@@ -47,23 +50,16 @@ public class VentasView implements VentasInterface {
 	private ListenerDate listenerDate;
 
 	public VentasView(){
-		
-		
-	
 		panelVentasMenu= new VentasMenu();
 		panelVentas = new PanelVentas();
 	
 	}
 
-	
 
-	
 //Muestra el Menu de Ventas. Viene del Menu Principal.
 	@Override
 	public void showMenuVentas(VentasController vc,
 			JFrame f, Usuario u) {
-		
-		
 		
 		ventasController = vc;
 		frame = f;
@@ -108,8 +104,8 @@ public class VentasView implements VentasInterface {
 		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
 		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
 		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
-		panelVentas.getBtnVolverNuevaV().addActionListener(listenerVolverAVentas);
-		panelVentas.getBtnAceptarNuevaV().addActionListener(listenerAceptarV);
+		panelVentas.getBtnVolverNewVenta().addActionListener(listenerVolverAVentas);
+		panelVentas.getBtnAceptarNewVenta().addActionListener(listenerAceptarV);
 		panelVentas.getBtnReset().addActionListener(listenerReiniciar);
 		
 		PantallaUtil.refresh(frame);
@@ -283,25 +279,20 @@ public class VentasView implements VentasInterface {
 	public void muestroStock(List<Stock> lista, ArrayList<String> comboMarca, ArrayList<String> comboModelo, ArrayList<String>comboYear) {
 		
 		panelVehiculos = new PanelVehiculos();
-		
 		panelVehiculos.muestroStock(lista);
 		panelVehiculos.menuVentaStock();
-
 		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
-
 		
 		frame.add(panelVehiculos);
 		
 		panelVentas.setVisible(false);
 		
 		listenerSeleccionar = new ListenerSeleccionar(ventasController);
-		
 		listenerDetalle = new ListenerDetalleVehiculo(ventasController);
 		listenerVolverVenta = new ListenerVolverVentaStock(ventasController);
-		
 		listenerComboModelo = new ListenerComboModelo(ventasController);
+
 		panelVehiculos.getComboListModelo().addActionListener(listenerComboModelo);
-		
 		panelVehiculos.getBtnVolverVenta().addActionListener(listenerVolverVenta);
 		panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
 		panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
@@ -310,75 +301,47 @@ public class VentasView implements VentasInterface {
 				
 	}
 
-
-
-
 	@Override
 	public String getVehiculoTabla() {
 		return panelVehiculos.getVehiculoTabla();
 	}
 
-
-
-
 	@Override
 	public int msjSinPatente() {
 		
 		String s = new String("No se ha registrado el ingreso de una patente válida. ¿Desea ver los autos en stock?");
-		
-		int codigo=JOptionPane.showConfirmDialog(null, s , "Not Found", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-       
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Not Found", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);  
 		return codigo;
 		
 	}
-
-
-
 
 	@Override
 	public void cleanStock() {
 		
 		frame.remove(panelVehiculos);
-		
-		panelVentas.setVisible(true);
-		
+		panelVentas.setVisible(true);		
 		PantallaUtil.refresh(frame);
-		
 	}
-
-
 
 
 	@Override
 	public void mostrarDetalleVehiculo(Vehiculo vehiculo){
 		
 		panelVehiculos.mostrarDetalleVehiculo(vehiculo);
-		
-		PantallaUtil.refresh(frame);
-		
+		PantallaUtil.refresh(frame);	
 	}
 
 
-
-
-	
 	@Override
 	public void ingresarDetalleVenta(int idVenta, String cliente, String garante, String vehiculo, int precio){
 		
 		PantallaUtil.remove(panelVentas);
-		
 		PantallaUtil.refresh(frame);
 		
 		panelVentas.ingresarDetalleVenta(idVenta, cliente, garante, vehiculo,precio);
-		
 		listenerDate= new ListenerDate(ventasController);
-		
 		panelVentas.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
-		
 	}
-
-
-
 
 	@Override
 	public void msjVentaError() {
@@ -386,41 +349,21 @@ public class VentasView implements VentasInterface {
 		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al actualizar el vehiculo. Por favor, realice la baja de stock manualmente.");
 		
 	}
-
-
-
-
+	
 	@Override
 	public int getCuotas() {
 		
 		return Integer.valueOf(panelVentas.getCuotasText().getText());
 	}
 
-
-
-
 	@Override
 	public void cargarTabla(List<Cuota> lista) {
-		
-		panelVentas.cargarTabla(lista);
-		
-		
+		panelVentas.cargarTabla(lista);		
 	}
-
-
-
 
 	@Override
 	public Double getSaldo() {
 		return Double.valueOf(panelVentas.getSaldoText().getText());
 	}
-
-
-
-
-
-
-
-
 
 }
