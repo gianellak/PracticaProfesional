@@ -11,11 +11,7 @@ public class CajaMenu extends JPanel {
 	
 	private Dimension preferredSize =new Dimension(200,25) ;
 
-	private JButton btnVolver;
-	private JButton btnVerMovs;
-	private JButton btnVerLog;
-
-	private JButton btnVerUnDia;
+	private JButton btnVolver, btnVerMovs,  btnVerUnDia;
 
 
 public CajaMenu() {
@@ -30,16 +26,11 @@ public CajaMenu() {
 		btnVerUnDia = new JButton("Ver Caja de Otro día");
 		btnVerUnDia.setPreferredSize(preferredSize);
 		this.add(btnVerUnDia);
-		
-		btnVerLog = new JButton("Descargar Log");
-		btnVerLog.setPreferredSize(preferredSize);
-		this.add(btnVerLog);
-		
+				
 		btnVolver = new JButton("Volver");
 		btnVolver.setPreferredSize(preferredSize);
 		this.add(btnVolver);
-		
-		
+	
 
 	}
 
@@ -60,15 +51,6 @@ public CajaMenu() {
 	public void setBtnVerMovs(JButton btnVerMovs) {
 		this.btnVerMovs = btnVerMovs;
 	}
-
-	public JButton getBtnVerLog() {
-		return btnVerLog;
-	}
-
-	public void setBtnVerLog(JButton btnVerLog) {
-		this.btnVerLog = btnVerLog;
-	}
-
 
 	public JButton getBtnVerUnDia() {
 		return btnVerUnDia;

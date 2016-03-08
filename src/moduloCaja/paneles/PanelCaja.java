@@ -3,48 +3,24 @@ package moduloCaja.paneles;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import com.toedter.calendar.JDateChooser;
-
 import objetos.Movimiento;
 import objetos.Usuario;
-import utilitarios.Mensajes;
 
 public class PanelCaja extends JPanel {
 
-	private JButton btnVolver;
-	private JLabel idText;
-	private JTextField descripcionText;
-	private JButton btnAceptar;
-	private JTextField dniText;
-	private JLabel usuarioText;
-	private JTextField montoText;
+	private JButton btnVolver, btnAceptar, btnAlta, btnAbrir, btnMod, btnEliminar, btnLog;
+	private JTextField descripcionText, dniText, montoText;
+	private JLabel usuarioText, dateField, idText, idLabel;
 	private JTable tabla;
-	private JRadioButton ingresoButton;
-	private JRadioButton egresoButton;
-	private JButton btnAlta;
-	private JLabel dateField;
-	private JButton btnAbrir;
-	private JButton btnMod;
-	private JButton btnEliminar;
+	private JRadioButton ingresoButton, egresoButton;
 	private JDateChooser dateChooser;
-	private JLabel idLabel;
 	
 	public PanelCaja() {
 
@@ -222,9 +198,6 @@ public class PanelCaja extends JPanel {
 	}
 
 	
-	
-	
-	
 	public void onVer(Usuario usuario, List<Movimiento> lista) {
 
 		this.removeAll();
@@ -250,6 +223,7 @@ public class PanelCaja extends JPanel {
 		btnVolver.setBounds(720, 300, 80, 25);
 		this.add(btnVolver);
 		
+
 		btnMod = new JButton("Modificar");
 		btnMod.setBounds(600, 300, 100, 25);
 		this.add(btnMod);
@@ -268,16 +242,12 @@ public class PanelCaja extends JPanel {
 		JLabel calendario = new JLabel("Seleccione la fecha que desea ver: ");
 		calendario.setBounds(10,0,200,20);
 		
-		
 		this.add(calendario);
 		
 		dateChooser = new JDateChooser();
 		dateChooser.setBounds(10, 20, 200, 20);
-		
-		
+	
 		this.add(dateChooser);
-		    
-		
 	}
 	
 	public void onVerOtro(Usuario usuario) {
@@ -290,12 +260,9 @@ public class PanelCaja extends JPanel {
 		idLabel = new JLabel("Movimientos del día: --/--/-- " );
 		idLabel.setBounds(10, 60, 280, 25);
 		this.add(idLabel);
-		
-		
+			
 		tabla = this.createTablaMovimientos();
-		
-		
-		
+			
 		JScrollPane jp= new JScrollPane(tabla);
 		
 		jp.setBounds(10, 90, 800, 200);
@@ -306,6 +273,9 @@ public class PanelCaja extends JPanel {
 		btnVolver.setBounds(720, 300, 80, 25);
 		this.add(btnVolver);
 		
+		btnLog = new JButton("Descargar log");
+		btnLog.setBounds(590,300,130,25);
+		this.add(btnLog);
 		
 		this.validate();
 		this.repaint();
@@ -315,7 +285,7 @@ public class PanelCaja extends JPanel {
 	public void verDia(List<Movimiento> lista, String date){
 		
 		
-		idLabel.setText("Movimientos del día: " + date );
+		idLabel.setText("Movimientos del día: " + date);
 		
 		((DefaultTableModel) tabla.getModel()).setRowCount(0);
 		
@@ -323,9 +293,9 @@ public class PanelCaja extends JPanel {
 		
 		this.validate();
 		this.repaint();
-
 	}
 
+	
 	private void cargarTabla(List<Movimiento> lista) {
 		int i = 0;
 
@@ -340,28 +310,20 @@ public class PanelCaja extends JPanel {
 			o[3] = m.getEgreso();
 			o[4] = m.getFecha();
 			o[5] = m.getUsuario();
-			
-			
+				
 			((DefaultTableModel) tabla.getModel()).addRow(o);
 		}
-		
-
-		
 	}
 
 	private JTable createTablaMovimientos() {
 		// Create columns names
 		String columnNames[] = { "ID", "Descripcion", "Ingreso", "Egreso", "Fecha", "Usuario"}; // Marca no se muestra
-
-		
 		
 		JTable tabla = new JTable();
 		DefaultTableModel modelo = new DefaultTableModel(){ 
 			public boolean isCellEditable(int row, int column){
 		      return false;
-		    }
-			
-		
+		    }	
 		};
 		
 		tabla.getTableHeader().setReorderingAllowed(false);
@@ -376,9 +338,7 @@ public class PanelCaja extends JPanel {
 		tabla.getColumn("Egreso").setPreferredWidth(100);
 		tabla.getColumn("Fecha").setPreferredWidth(100);
 		tabla.getColumn("Usuario").setPreferredWidth(100);
-		
-		
-		
+			
 		return tabla;
 	}
 
@@ -543,6 +503,14 @@ public class PanelCaja extends JPanel {
 
 	public void setDateChooser(JDateChooser dateChooser) {
 		this.dateChooser = dateChooser;
+	}
+
+	public JButton getBtnLog() {
+		return btnLog;
+	}
+
+	public void setBtnLog(JButton btnLog) {
+		this.btnLog = btnLog;
 	}
 
 
