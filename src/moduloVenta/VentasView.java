@@ -350,6 +350,8 @@ public class VentasView implements VentasInterface {
 		
 	}
 	
+	//
+	
 	@Override
 	public int getCuotas() {
 		

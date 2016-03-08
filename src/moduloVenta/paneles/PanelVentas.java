@@ -80,7 +80,7 @@ public class PanelVentas extends JPanel {
 		dniCompradorText.setBounds(300, 60, 160, 25);
 		this.add(dniCompradorText);
 		
-		btnValidarDniC = new JButton("Validar DNI");
+		btnValidarDniC = new JButton("Validar Dni");
 		btnValidarDniC.setPreferredSize(preferredSize);
 		btnValidarDniC.setBounds(480, 60, 160, 25);
 		this.add(btnValidarDniC);
@@ -98,7 +98,7 @@ public class PanelVentas extends JPanel {
 		btnBuscarVehiculo.setBounds(480, 90, 160, 25);
 		this.add(btnBuscarVehiculo);
 		
-		JLabel garanteLabel = new JLabel("Ingrese DNI del Garante: ");
+		JLabel garanteLabel = new JLabel("Usuario: ");
 		garanteLabel.setBounds(50, 120, 200, 25);
 		this.add(garanteLabel);
 		
@@ -106,7 +106,7 @@ public class PanelVentas extends JPanel {
 		dniGaranteText.setBounds(300, 120, 160, 25);
 		this.add(dniGaranteText);
 		
-		btnValidarDniG = new JButton("Validar DNI");
+		btnValidarDniG = new JButton("Validar Dni");
 		btnValidarDniG.setPreferredSize(preferredSize);
 		btnValidarDniG.setBounds(480, 120, 160, 25);
 		this.add(btnValidarDniG);
