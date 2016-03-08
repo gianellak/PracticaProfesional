@@ -2,6 +2,7 @@ package moduloVenta.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import exceptions.DBException;
 import moduloVenta.VentasController;
@@ -25,7 +26,7 @@ public class ListenerValidarG implements ActionListener {
 
 		try {
 			vc.validarGarante();
-		} catch (DBException e1) {
+		} catch (DBException | NumberFormatException | ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

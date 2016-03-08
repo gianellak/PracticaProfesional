@@ -1,15 +1,17 @@
 package moduloClientes;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.swing.JFrame;
+
 import moduloClientes.paneles.PanelClientes;
 import objetos.Persona;
 import objetos.Usuario;
 
 public interface ClientesInterface {
 
-	public void onAlta();
+	public void onAlta(int dni) throws ParseException;
 	
 	public void onMod();
 	

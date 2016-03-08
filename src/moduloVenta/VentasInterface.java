@@ -2,14 +2,8 @@ package moduloVenta;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
-
-import exceptions.DBException;
-import objetos.Persona;
-import objetos.Stock;
-import objetos.Usuario;
-import objetos.Vehiculo;
+import objetos.*;
 
 public interface VentasInterface {
 
@@ -20,26 +14,17 @@ public interface VentasInterface {
 
 	int getDniBuscarC();
 
-	void msjErrorDNI();
-
-	int msjClienteNotFound();
-
-	void altaCliente();
+	void altaCliente(int dni);
 
 	Persona getPersonaAlta();
-
-	void insertOk();
-
-	void insertBad();
 
 	void mostrarCliente(Persona cliente);
 
 	void mostrarGarante(Persona cliente);
 
-	void altaGarante();
+	void altaGarante(int dni);
 
-	void insertGaranteOk();
-
+	
 	int getDniBuscarG();
 
 	String getPatenteBuscar();
@@ -63,9 +48,19 @@ public interface VentasInterface {
 	void muestroStock(List<Stock> lista, ArrayList<String> comboMarca,
 			ArrayList<String> comboModelo, ArrayList<String> comboYear);
 
-	void msjVentaOk();
-
 	void msjVentaError();
+
+	
+	int getCuotas();
+
+	void cargarTabla(List<Cuota> lista);
+
+	
+	void ingresarDetalleVenta(int idVenta, String cliente, String garante,
+			String vehiculo, int precio);
+
+	Double getSaldo();
+
 
 
 

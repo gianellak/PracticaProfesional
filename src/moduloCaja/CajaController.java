@@ -213,6 +213,7 @@ public class CajaController {
 			PrintWriter wr = new PrintWriter(bw);  
 			
 		//	wr.write("Hola");
+			//.
 		
 			List<Movimiento> listaMov = cDB.findByDay(globalSelectedDate);
 			

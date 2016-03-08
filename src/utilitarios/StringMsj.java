@@ -1,6 +1,19 @@
 package utilitarios;
 
+import javax.swing.JOptionPane;
+
 public class StringMsj {
+	
+	//VARIOS
+	
+	public static final String MSG_DNI_NOT_VALID =
+			"No ha ingresado un DNI válido. Por favor reingrese.";	
+	
+	public static final String MSG_NEW_CLIENT =
+		"Dni no registrado en el sistema. ¿Desea dar de alta a la persona?";
+	
+
+	//CLIENTES
 	
 	public static final String MSG_CLI_NOT_FOUND =
 			"El cliente ingresado no se encuentra en la base de datos. Por favor reintente.";	
@@ -23,4 +36,24 @@ public class StringMsj {
 	public static final String MSG_CLI_INS_BAD =
 			"Ha ocurrido un error al intentar dar de alta el cliente. Por favor reintente.";	
 
+	public static final String MSG_CLI_NOT_OBLI = 
+			"Algunos de los campos obligatorios no ha sido completados o resultan inválidos. Por favor, revise los datos y vuelva a intentarlo.";	
+	
+	//CAJA
+	
+	public static final String MSG_CJA_NOT_MOV =
+			"No hay movimientos registrados para el día seleccionado. Intente con otra fecha";
+	
+	//VENTAS
+
+	public static final String MSG_GTE_INS_BAD = 
+			"Ha ocurrido un error al intentar dar de alta el garante. Por favor reintente.";
+	
+	public static final String MSG_GTE_INS_OK = 
+			"Ha ocurrido un error al intentar dar de alta el garante. Por favor reintente.";
+
+	public static final String MSG_VTA_OK = 
+			"Venta generada con éxito. Por favor, complete los datos de pago.";
+
+	
 }

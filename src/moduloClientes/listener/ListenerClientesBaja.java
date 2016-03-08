@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import exceptions.DBException;
+import exceptions.LexicalException;
 import moduloClientes.ClientesController;
 
 public class ListenerClientesBaja implements ActionListener {

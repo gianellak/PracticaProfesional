@@ -442,7 +442,7 @@ public class PanelVehiculos extends JPanel {
 		lblModelo.setBounds(50, 30, 50, 25);
 		this.add(lblModelo);
 
-		JLabel lblYear = new JLabel("Modelo: ");
+		JLabel lblYear = new JLabel("Año: ");
 		lblYear.setBounds(280, 0, 50, 25);
 		this.add(lblYear);
 				
