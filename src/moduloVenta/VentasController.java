@@ -449,13 +449,29 @@ public class VentasController {
 		}else{
 			idVehiculo = vehiculo.getPatente();
 		}
-	
+
 		
-		DetalleVenta dv = vi.getNewDetalle();
-		
+		DetalleVenta dv = vi.getNewDetalle();	
 		System.out.println(dv.getAdelanto());
-		
-		
-	
+
 	}
+	
+	
+	public void buscarVentaPantalla() {
+		System.out.println("Buscar Venta Pantalla");
+		
+		vi.mostrarBuscarVenta();
+
+	}
+	
+	public void buscarVenta(){
+		
+		// int dni = vi.getDniBuscarC();
+		int dni = 12345678;
+		
+// NO DEVUELVE UNA LISTA		List<Venta> listaV = vDB.findByDNI(dni);
+		
+		
+	}
+	
 }

@@ -1,16 +1,12 @@
 package moduloVenta.paneles;
 
 import java.awt.Dimension;
-import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,12 +20,8 @@ import moduloVenta.listener.ListenerDetalleTotal;
 
 import com.toedter.calendar.JDateChooser;
 
-import objetos.Cuota;
-import objetos.DetalleVenta;
-import objetos.Movimiento;
-import objetos.Persona;
-import objetos.Vehiculo;
-import objetos.Venta;
+import objetos.*;
+
 
 public class PanelVentas extends JPanel {
 
@@ -39,7 +31,7 @@ public class PanelVentas extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Dimension preferredSize = new Dimension(200, 25);
 	private JTextField dniCompradorText,patenteText, dniGaranteText, cuotasText, adelantoText,comentarioText, saldoText, comisionText,descuentoText, precioFText;
-	private JButton btnValidarDniC, btnValidarDniG, btnBuscarVehiculo, btnAceptarNewVenta, btnVolverNewVenta,btnReset,btnAceptarDetalle;
+	private JButton btnValidarVenta, btnValidarDniC, btnValidarDniG, btnBuscarVehiculo, btnAceptarNewVenta, btnVolverNewVenta,btnReset,btnAceptarDetalle;
 	private FocusListener l;
 	private JDateChooser dateChooser;
 	private JTable tabla;
@@ -56,6 +48,7 @@ public class PanelVentas extends JPanel {
 		this.setLayout(null);
 
 	}
+	
 
 	// Muestra los tres campos iniciales para crear una venta.
 
@@ -69,7 +62,6 @@ public class PanelVentas extends JPanel {
 		compradorLabel.setBounds(50, 60, 200, 25);
 		this.add(compradorLabel);
 
-		dniCompradorText = new JTextField(9);
 		dniCompradorText.setBounds(300, 60, 160, 25);
 		this.add(dniCompradorText);
 
@@ -370,6 +362,86 @@ public class PanelVentas extends JPanel {
 		this.add(dateChooser);
 
 	}
+	
+	public void showBuscarVenta() {
+		 
+        this.removeAll();
+
+        System.out.println("En BuscarVenta");
+
+        JLabel compradorLabel = new JLabel("Ingrese DNI del Comprador: ");
+        compradorLabel.setBounds(50, 60, 200, 25);
+        this.add(compradorLabel);
+
+        dniCompradorText = new JTextField(9);
+        dniCompradorText.setBounds(300, 60, 160, 25);
+        this.add(dniCompradorText);
+
+        btnValidarVenta = new JButton("Ver ventas");
+        btnValidarVenta.setBounds(480, 60, 160, 25);
+        this.add(btnValidarVenta);
+
+        this.validate();
+        this.repaint();
+
+}
+
+
+	public DetalleVenta getNewDetalle() {
+		
+		DetalleVenta v  = new DetalleVenta(idV, idVehiculo, p , Integer.valueOf(cuotasText.getText()), 
+				Double.valueOf(saldoText.getText()), Double.valueOf(adelantoText.getText()), Double.valueOf(comisionText.getText()), 
+				comentarioText.getText());
+		
+		return v;
+	}
+
+	public void recalcularFinal() {
+		
+		try {
+			comision = new Double(comisionText.getText());
+			descuento = new Double(descuentoText.getText());
+		    }
+		    catch (NumberFormatException e) {
+		        comision = Double.valueOf(0);
+		        descuento = Double.valueOf(0);
+		    }
+		
+		Double f = (double) (p + comision - descuento);
+		
+		precioFText.setText(String.valueOf(f));
+		
+		this.revalidate();
+		this.repaint();
+	
+		
+	}
+
+	public void recalcularSaldo() {
+		
+		try {
+			comision = new Double(comisionText.getText());
+			descuento = new Double(descuentoText.getText());
+			adelanto = new Double(adelantoText.getText());
+		    }
+		    catch (NumberFormatException | NullPointerException e ) {
+		        comision = Double.valueOf(0);
+		        descuento = Double.valueOf(0);
+		        adelanto = Double.valueOf(0);
+		        		    }
+		Double s = (double) (p - descuento + comision - adelanto);
+		
+		saldoText.setText(String.valueOf(s));
+		
+		this.revalidate();
+		this.repaint();
+		
+	}
+	
+	
+	
+	
+	
 
 	public JButton getBtnReset() {
 		return btnReset;
@@ -498,56 +570,15 @@ public class PanelVentas extends JPanel {
 	public void setBtnAceptarDetalle(JButton btnAceptarDetalle) {
 		this.btnAceptarDetalle = btnAceptarDetalle;
 	}
-
-	public DetalleVenta getNewDetalle() {
-		
-		DetalleVenta v  = new DetalleVenta(idV, idVehiculo, p , Integer.valueOf(cuotasText.getText()), 
-				Double.valueOf(saldoText.getText()), Double.valueOf(adelantoText.getText()), Double.valueOf(comisionText.getText()), 
-				comentarioText.getText());
-		
-		return v;
+	public JButton getBtnValidarVenta() {
+		return btnValidarVenta;
 	}
-
-	public void recalcularFinal() {
-		
-		try {
-			comision = new Double(comisionText.getText());
-			descuento = new Double(descuentoText.getText());
-		    }
-		    catch (NumberFormatException e) {
-		        comision = Double.valueOf(0);
-		        descuento = Double.valueOf(0);
-		    }
-		
-		Double f = (double) (p + comision - descuento);
-		
-		precioFText.setText(String.valueOf(f));
-		
-		this.revalidate();
-		this.repaint();
 	
-		
+	
+	public void setBtnValidarVenta(JButton btnValidarVenta) {
+		this.btnValidarVenta = btnValidarVenta;
 	}
 
-	public void recalcularSaldo() {
-		
-		try {
-			comision = new Double(comisionText.getText());
-			descuento = new Double(descuentoText.getText());
-			adelanto = new Double(adelantoText.getText());
-		    }
-		    catch (NumberFormatException | NullPointerException e ) {
-		        comision = Double.valueOf(0);
-		        descuento = Double.valueOf(0);
-		        adelanto = Double.valueOf(0);
-		        		    }
-		Double s = (double) (p - descuento + comision - adelanto);
-		
-		saldoText.setText(String.valueOf(s));
-		
-		this.revalidate();
-		this.repaint();
-		
-	}
+
 
 }

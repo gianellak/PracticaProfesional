@@ -77,7 +77,7 @@ public class VentasView implements VentasInterface {
 
 		
 		panelVentasMenu.getBtnNuevaVenta().addActionListener(listenerNuevaVenta);
-		panelVentasMenu.getBtnNuevaCompra().addActionListener(listenerNuevaCompra);
+		panelVentasMenu.getBtnBuscarVenta().addActionListener(listenerNuevaCompra);
 		panelVentasMenu.getBtnVolver().addActionListener(listenerVolver);
 
 		frame.setTitle("Menu Ventas");
@@ -381,6 +381,12 @@ public class VentasView implements VentasInterface {
 	@Override
 	public DetalleVenta getNewDetalle() {
 		return panelVentas.getNewDetalle();
+	}
+
+	@Override
+	public void mostrarBuscarVenta() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

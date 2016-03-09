@@ -5,60 +5,56 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class VentasMenu extends JPanel {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Dimension preferredSize =new Dimension(200,25) ;
-	private JButton btnVolver;
-	private JButton btnNuevaVenta;
-	private JButton btnNuevaCompra;
+	private Dimension preferredSize = new Dimension(200, 25);
+	private JButton btnVolver, btnNuevaVenta, btnBuscarVenta;
 
-
-
-public VentasMenu() {		
+	public VentasMenu() {
 
 		this.setPreferredSize(new Dimension(250, 500));
-		
+
 		btnNuevaVenta = new JButton("Nueva Venta");
 		btnNuevaVenta.setPreferredSize(preferredSize);
 		this.add(btnNuevaVenta);
-		
-		btnNuevaCompra = new JButton("Nueva Compra");
-		btnNuevaCompra.setPreferredSize(preferredSize);
-		this.add(btnNuevaCompra);
-		
+
+		btnBuscarVenta = new JButton("Buscar Venta");
+		btnBuscarVenta.setPreferredSize(preferredSize);
+		this.add(btnBuscarVenta);
+
 		btnVolver = new JButton("Volver");
 		btnVolver.setPreferredSize(preferredSize);
 		this.add(btnVolver);
-		
+
 	}
 
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
 
+	public void setBtnVolver(JButton btnVolver) {
+		this.btnVolver = btnVolver;
+	}
 
-public JButton getBtnVolver() {
-	return btnVolver;
-}
+	public JButton getBtnNuevaVenta() {
+		return btnNuevaVenta;
+	}
 
-public void setBtnVolver(JButton btnVolver) {
-	this.btnVolver = btnVolver;
-}
+	public void setBtnNuevaVenta(JButton btnNuevaVenta) {
+		this.btnNuevaVenta = btnNuevaVenta;
+	}
 
-public JButton getBtnNuevaVenta() {
-	return btnNuevaVenta;
-}
+	public JButton getBtnBuscarVenta() {
+		return btnBuscarVenta;
+	}
 
-public void setBtnNuevaVenta(JButton btnNuevaVenta) {
-	this.btnNuevaVenta = btnNuevaVenta;
-}
+	public void setBtnBuscarVenta(JButton btnBuscarVenta) {
+		this.btnBuscarVenta = btnBuscarVenta;
+	}
 
-public JButton getBtnNuevaCompra() {
-	return btnNuevaCompra;
-}
-
-public void setBtnNuevaCompra(JButton btnNuevaCompra) {
-	this.btnNuevaCompra = btnNuevaCompra;
-}	
+	
 
 }

@@ -66,6 +66,8 @@ public interface VentasInterface {
 	
 	DetalleVenta getNewDetalle();
 
+	void mostrarBuscarVenta();
+
 
 
 
