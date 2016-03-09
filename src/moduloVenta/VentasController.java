@@ -30,6 +30,7 @@ public class VentasController {
 	private Persona cliente;
 	private Persona garante;
 	private Vehiculo vehiculo;
+	private int idVenta;
 
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -318,14 +319,16 @@ public class VentasController {
 			SimpleDateFormat df = new SimpleDateFormat(format);
 			String stringDate = df.format(d);
 
-			int idVenta = vDB.countAll();
+			idVenta = vDB.countAll();
 			System.out.println(idVenta);
 			// falta idEmpleado
 
-			Venta v = new Venta(idVenta, stringDate, cliente.getDni(),
+			Venta v = new Venta(idVenta + 1, stringDate, cliente.getDni(),
 					garante.getDni(), 1);
 
 			if (vDB.insertVenta(v)) {
+				
+				
 
 				vehiculo.setCondicion("Vendido");
 				vehiculo.setFechaVenta(stringDate);
@@ -439,7 +442,20 @@ public class VentasController {
 	
 	public void insertarDetalleVenta(){
 		
+		String idVehiculo;
 		
+		if(vehiculo.getPatente().equals("000000")){
+			idVehiculo = vehiculo.getMotor();
+		}else{
+			idVehiculo = vehiculo.getPatente();
+		}
+	
+		
+		DetalleVenta dv = vi.getNewDetalle();
+		
+		System.out.println(dv.getAdelanto());
+		
+		
+	
 	}
-
 }

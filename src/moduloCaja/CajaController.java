@@ -147,8 +147,12 @@ public class CajaController {
 				Mensajes.mensajeInfo(StringMsj.MSG_MOD_MOV_BAD);
 				verMovimientos();
 			}
+		}else{
+			if (codigo ==JOptionPane.CANCEL_OPTION){
+				verMovimientos();
+				
+			}
 		}
-		
 		
 	}
 

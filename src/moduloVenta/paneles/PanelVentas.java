@@ -3,6 +3,8 @@ package moduloVenta.paneles;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.event.AncestorEvent;
@@ -18,9 +20,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import moduloVenta.listener.ListenerDetalleTotal;
+
 import com.toedter.calendar.JDateChooser;
 
 import objetos.Cuota;
+import objetos.DetalleVenta;
 import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Vehiculo;
@@ -50,6 +55,15 @@ public class PanelVentas extends JPanel {
 	private JTextField comentarioText;
 	private JTextField saldoText;
 	private JTextField comisionText;
+	private JButton btnAceptarDetalle;
+	private int idV;
+	private String idVehiculo;
+	private Double p;
+	private JTextField descuentoText;
+	private JTextField precioFText;
+	private Double comision;
+	private Double descuento;
+	private Double adelanto;
 
 	public PanelVentas() {
 
@@ -136,17 +150,6 @@ public class PanelVentas extends JPanel {
 		compradorLabel.setBounds(650, 60, 200, 25);
 		this.add(compradorLabel);
 
-		// dniCompradorText.addFocusListener(new FocusListener() {
-		// public void focusGained(FocusEvent e) {
-		// btnValidarDniC.setEnabled(true);
-		// compradorLabel.setText("");
-		// }
-		//
-		// public void focusLost(FocusEvent e) {
-		// btnAceptarNuevaV.requestFocus(true);
-		// }
-		// });
-
 		dniCompradorText.setEditable(false);
 		btnValidarDniC.setEnabled(false);
 
@@ -159,16 +162,6 @@ public class PanelVentas extends JPanel {
 		garanteLabel.setBounds(650, 120, 200, 25);
 		this.add(garanteLabel);
 
-		// dniGaranteText.addFocusListener(new FocusListener() {
-		// public void focusGained(FocusEvent e) {
-		// btnValidarDniG.setEnabled(true);
-		// garanteLabel.setText("");
-		// }
-		//
-		// public void focusLost(FocusEvent e) {
-		// btnAceptarNuevaV.requestFocus(true);
-		// }
-		// });
 		dniGaranteText.setEditable(false);
 		btnValidarDniG.setEnabled(false);
 
@@ -181,18 +174,6 @@ public class PanelVentas extends JPanel {
 		vehiculoLabel.setBounds(650, 90, 250, 25);
 		this.add(vehiculoLabel);
 
-		// patenteText.addFocusListener(new FocusListener() {
-		// public void focusGained(FocusEvent e) {
-		// btnBuscarVehiculo.setEnabled(true);
-		// vehiculoLabel.setText("");
-		// }
-		//
-		//
-		// public void focusLost(FocusEvent e) {
-		// btnAceptarNuevaV.requestFocus(true);
-		// }
-		// });
-		//
 		patenteText.setEditable(false);
 		btnBuscarVehiculo.setEnabled(false);
 
@@ -237,69 +218,70 @@ public class PanelVentas extends JPanel {
 			String garante, String vehiculo, int precio) {
 
 		mostrarDetalleVenta(idVenta, cliente, garante, vehiculo);
+		
+		idV = idVenta;
+		idVehiculo = vehiculo;
+		p = new Double(precio);
 
-		JLabel precioLabel = new JLabel("Precio: $" + String.valueOf(precio));
+		JLabel precioLabel = new JLabel("Precio Lista: $" + String.valueOf(precio));
 		precioLabel.setBounds(0, 120, 160, 20);
 		this.add(precioLabel);
+
+		JLabel precioTLabel = new JLabel("Precio Final: ");
+		precioTLabel.setBounds(170, 120, 100, 20);
+		this.add(precioTLabel);
+		
+		precioFText = new JTextField("0");
+		precioFText.setEditable(false);
+		precioFText.setBounds(280, 120, 100, 20);
+		this.add(precioFText);
 
 		JLabel adelantoLabel = new JLabel("Adelanto: ");
 		adelantoLabel.setBounds(0, 145, 100, 20);
 		this.add(adelantoLabel);
 
-		adelantoText = new JTextField();
+		adelantoText = new JTextField("0");
 		adelantoText.setBounds(110, 145, 100, 20);
-		adelantoText.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
-				warn();
-			}
-
-			public void removeUpdate(DocumentEvent e) {
-				warn();
-			}
-
-			public void insertUpdate(DocumentEvent e) {
-				warn();
-			}
-
-			public void warn() {
-				if (Integer.parseInt(adelantoText.getText()) > 0) {
-					Double d = (double) (precio
-							+ Integer.valueOf(comisionText.getText()) - Integer
-							.valueOf(adelantoText.getText()));
-					saldoText.setText(String.valueOf(d));
-				}
-			}
-		});
+		adelantoText.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyTyped(KeyEvent e) {
+	           recalcularSaldo();
+	           recalcularFinal();
+	        }
+	    });
+		adelantoText.getDocument().addDocumentListener(new ListenerDetalleTotal(this));
 		this.add(adelantoText);
 
 		JLabel comisionLabel = new JLabel("Comision: ");
 		comisionLabel.setBounds(220, 145, 100, 20);
 		this.add(comisionLabel);
 
+		JLabel descuentoLabel = new JLabel("Descuento: ");
+		descuentoLabel.setBounds(440, 145, 100, 20);
+		this.add(descuentoLabel);
+		
+		descuentoText = new JTextField("0");
+		descuentoText.setBounds(550, 145, 100, 20);
+		descuentoText.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyTyped(KeyEvent e) {
+	           recalcularSaldo();
+	           recalcularFinal();
+	        }
+	    });
+		descuentoText.getDocument().addDocumentListener(new ListenerDetalleTotal(this));
+		this.add(descuentoText);
+			
 		comisionText = new JTextField("0");
 		comisionText.setBounds(330, 145, 100, 20);
-		comisionText.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
-				warn();
-			}
-
-			public void removeUpdate(DocumentEvent e) {
-				warn();
-			}
-
-			public void insertUpdate(DocumentEvent e) {
-				warn();
-			}
-
-			public void warn() {
-				if (Integer.parseInt(adelantoText.getText()) > 0) {
-					Double d = (double) (precio
-							+ Integer.valueOf(comisionText.getText()) - Integer
-							.valueOf(adelantoText.getText()));
-					saldoText.setText(String.valueOf(d));
-				}
-			}
-		});
+		comisionText.getDocument().addDocumentListener(new ListenerDetalleTotal(this));
+		comisionText.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyTyped(KeyEvent e) {
+	           recalcularSaldo();
+	           recalcularFinal();
+	        }
+	    });
 		this.add(comisionText);
 
 		JLabel comentarioLabel = new JLabel("Comentarios: ");
@@ -336,10 +318,10 @@ public class PanelVentas extends JPanel {
 
 		this.add(jp);
 
-		btnAceptarNewVenta = new JButton("Aceptar");
-		btnAceptarNewVenta.setPreferredSize(preferredSize);
-		btnAceptarNewVenta.setBounds(650, 300, 150, 25);
-		this.add(btnAceptarNewVenta);
+		btnAceptarDetalle = new JButton("Aceptar");
+		btnAceptarDetalle.setPreferredSize(preferredSize);
+		btnAceptarDetalle.setBounds(650, 300, 150, 25);
+		this.add(btnAceptarDetalle);
 
 		this.validate();
 		this.repaint();
@@ -525,6 +507,65 @@ public class PanelVentas extends JPanel {
 
 	public void setBtnBuscarVehiculo(JButton btnBuscarVehiculo) {
 		this.btnBuscarVehiculo = btnBuscarVehiculo;
+	}
+
+	public JButton getBtnAceptarDetalle() {
+		return btnAceptarDetalle;
+	}
+
+	public void setBtnAceptarDetalle(JButton btnAceptarDetalle) {
+		this.btnAceptarDetalle = btnAceptarDetalle;
+	}
+
+	public DetalleVenta getNewDetalle() {
+		
+		DetalleVenta v  = new DetalleVenta(idV, idVehiculo, p , Integer.valueOf(cuotasText.getText()), 
+				Double.valueOf(saldoText.getText()), Double.valueOf(adelantoText.getText()), Double.valueOf(comisionText.getText()), 
+				comentarioText.getText());
+		
+		return v;
+	}
+
+	public void recalcularFinal() {
+		
+		try {
+			comision = new Double(comisionText.getText());
+			descuento = new Double(descuentoText.getText());
+		    }
+		    catch (NumberFormatException e) {
+		        comision = Double.valueOf(0);
+		        descuento = Double.valueOf(0);
+		    }
+		
+		Double f = (double) (p + comision - descuento);
+		
+		precioFText.setText(String.valueOf(f));
+		
+		this.revalidate();
+		this.repaint();
+	
+		
+	}
+
+	public void recalcularSaldo() {
+		
+		try {
+			comision = new Double(comisionText.getText());
+			descuento = new Double(descuentoText.getText());
+			adelanto = new Double(adelantoText.getText());
+		    }
+		    catch (NumberFormatException | NullPointerException e ) {
+		        comision = Double.valueOf(0);
+		        descuento = Double.valueOf(0);
+		        adelanto = Double.valueOf(0);
+		        		    }
+		Double s = (double) (p - descuento + comision - adelanto);
+		
+		saldoText.setText(String.valueOf(s));
+		
+		this.revalidate();
+		this.repaint();
+		
 	}
 
 }

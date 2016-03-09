@@ -2,7 +2,9 @@ package moduloVenta;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JFrame;
+
 import objetos.*;
 
 public interface VentasInterface {
@@ -60,6 +62,9 @@ public interface VentasInterface {
 			String vehiculo, int precio);
 
 	Double getSaldo();
+
+	
+	DetalleVenta getNewDetalle();
 
 
 

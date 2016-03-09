@@ -128,6 +128,37 @@ public class SchemaGenerator {
 		
 	}
 	
+	public boolean generateSchemaDetalleVenta() throws SQLException {
+		
+		Connection c = this.connection.getConnection();
+		
+		Statement statement = c.createStatement();
+		
+		String sql ="create table DetalleVenta (idVenta INTEGER REFERENCES Venta(idVenta) PRIMARY KEY, " +
+					"idVehiculo VARCHAR(8)REFERENCES Vehiculo(motor), "+
+					"precio REAL, " +
+					"cuotas INTEGER, " +
+					"deuda REAL, " +
+					"adelanto REAL, " +
+					"comision REAL, " +
+					"descuento REAL, " +
+					"detalle VARCHAR(180))";
+		
+		try {
+			
+			
+			statement.execute(sql);
+			
+			return true;
+			
+		} catch (SQLException e) {
+			
+			
+			return false;
+		}
+		
+	}
+	
 	public boolean generateSchemaUsuario() throws SQLException{
 		
 		Connection c = this.connection.getConnection();

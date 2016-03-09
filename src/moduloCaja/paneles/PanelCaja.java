@@ -282,7 +282,7 @@ public class PanelCaja extends JPanel {
 		this.add(btnLog);
 		
 		btnCierre= new JButton("Cerrar caja");
-		btnCierre.setBounds(590,300,130,25);
+		btnCierre.setBounds(450,300,130,25);
 		this.add(btnCierre);
 		
 		this.validate();
@@ -568,9 +568,6 @@ public class PanelCaja extends JPanel {
 		this.repaint();
 		
 	}
-	
-	
-
 
 
 }

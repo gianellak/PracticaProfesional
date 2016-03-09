@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import objetos.Cuota;
+import objetos.DetalleVenta;
 import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
@@ -48,6 +49,8 @@ public class VentasView implements VentasInterface {
 	private ListenerComboModelo listenerComboModelo;
 	private ListenerReiniciarVenta listenerReiniciar;
 	private ListenerDate listenerDate;
+
+	private ListenerAceptarDetalle listenerAceptarDetalle;
 
 	public VentasView(){
 		panelVentasMenu= new VentasMenu();
@@ -339,8 +342,14 @@ public class VentasView implements VentasInterface {
 		PantallaUtil.refresh(frame);
 		
 		panelVentas.ingresarDetalleVenta(idVenta, cliente, garante, vehiculo,precio);
+		
 		listenerDate= new ListenerDate(ventasController);
+		
 		panelVentas.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
+		
+		listenerAceptarDetalle = new ListenerAceptarDetalle(ventasController);
+		
+		panelVentas.getBtnAceptarDetalle().addActionListener(listenerAceptarDetalle);
 	}
 
 	@Override
@@ -364,6 +373,12 @@ public class VentasView implements VentasInterface {
 	@Override
 	public Double getSaldo() {
 		return Double.valueOf(panelVentas.getSaldoText().getText());
+	}
+
+
+	@Override
+	public DetalleVenta getNewDetalle() {
+		return panelVentas.getNewDetalle();
 	}
 
 }
