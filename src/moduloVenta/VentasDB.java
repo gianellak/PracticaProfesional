@@ -184,7 +184,7 @@ public class VentasDB  {
 		Object[] values = {
 	            p.getDni(),
 	            p.getTelefonoP(),
-	            p.getTelefonoC(),
+	            p.getEmail(),
 	            p.getTelefonoL(),
 	            p.getNombre(),
 	            p.getApellido(),
@@ -258,7 +258,7 @@ public class VentasDB  {
 	
 		Object[] values = {
 	            p.getTelefonoP(),
-	            p.getTelefonoC(),
+	            p.getEmail(),
 	            p.getTelefonoL(),
 	            p.getNombre(),
 	            p.getApellido(),

@@ -28,7 +28,7 @@ public class ClientesDB  {
 			"SELECT * FROM Persona WHERE dni=?";
 	
 	private static final String SQL_UPDATE =
-			 "UPDATE Persona SET telefono_p=?, telefono_c=?, telefono_l=?, nombre=?, apellido=?, domicilio=?,"
+			 "UPDATE Persona SET telefono_p=?, email=?, telefono_l=?, nombre=?, apellido=?, domicilio=?,"
 			 + "ciudad=?, provincia=?, domicilio_l=?, empresa=? WHERE DNI=?";
 	
 	private static final String SQL_DELETE =
@@ -106,7 +106,7 @@ public class ClientesDB  {
 		Persona persona = new Persona(
 				resultSet.getInt("dni"),
 				resultSet.getString("telefono_p"), 
-				resultSet.getString("telefono_c"), 
+				resultSet.getString("email"), 
 				resultSet.getString("telefono_l"), 
 				resultSet.getString("nombre"), 
 				resultSet.getString("apellido"),
@@ -115,6 +115,7 @@ public class ClientesDB  {
 				resultSet.getString("provincia"),
 				resultSet.getString("domicilio_l"),
 				resultSet.getString("empresa"));
+				
 		
 		return persona;
 	}
@@ -124,7 +125,7 @@ public class ClientesDB  {
 		Object[] values = {
 	            p.getDni(),
 	            p.getTelefonoP(),
-	            p.getTelefonoC(),
+	            p.getEmail(),
 	            p.getTelefonoL(),
 	            p.getNombre(),
 	            p.getApellido(),
@@ -198,7 +199,7 @@ public class ClientesDB  {
 	
 		Object[] values = {
 	            p.getTelefonoP(),
-	            p.getTelefonoC(),
+	            p.getEmail(),
 	            p.getTelefonoL(),
 	            p.getNombre(),
 	            p.getApellido(),

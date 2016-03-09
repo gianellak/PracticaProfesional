@@ -4,7 +4,7 @@ public class Persona {
 	
 	int dni;
 	String telefonoP;
-	String telefonoC;
+	String email;
 	String telefonoL;
 	String nombre;
 	String apellido;
@@ -15,13 +15,13 @@ public class Persona {
 	String empresa;
 	
 	
-	public Persona(int dni, String telefonoP, String telefonoC, String telefonoL,
+	public Persona(int dni, String telefonoP, String email, String telefonoL,
 			String nombre, String apellido, String domicilio, String ciudad,
 			String provincia, String domicilioL, String empresa) {
 		super();
 		this.dni = dni;
 		this.telefonoP = telefonoP;
-		this.telefonoC = telefonoC;
+		this.email = email;
 		this.telefonoL = telefonoL;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -53,13 +53,13 @@ public class Persona {
 	}
 
 
-	public String getTelefonoC() {
-		return telefonoC;
+	public String getEmail() {
+		return email;
 	}
 
 
-	public void setTelefonoC(String telefonoC) {
-		this.telefonoC = telefonoC;
+	public void setTelefonoC(String email) {
+		this.email = email;
 	}
 
 
