@@ -23,9 +23,7 @@ public class ListenerDetalleVehiculo implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		vc.mostrarDetalle();
-		
-		
+		vc.mostrarDetalle();		
 	}
 	
 }

@@ -38,32 +38,14 @@ public class PanelVentas extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Dimension preferredSize = new Dimension(200, 25);
-	private JTextField dniCompradorText;
-	private JTextField patenteText;
-	private JTextField dniGaranteText;
-	private JButton btnValidarDniC;
-	private JButton btnValidarDniG;
-	private JButton btnBuscarVehiculo;
-	private JButton btnAceptarNewVenta;
-	private JButton btnVolverNewVenta;
+	private JTextField dniCompradorText,patenteText, dniGaranteText, cuotasText, adelantoText,comentarioText, saldoText, comisionText,descuentoText, precioFText;
+	private JButton btnValidarDniC, btnValidarDniG, btnBuscarVehiculo, btnAceptarNewVenta, btnVolverNewVenta,btnReset,btnAceptarDetalle;
 	private FocusListener l;
-	private JButton btnReset;
 	private JDateChooser dateChooser;
 	private JTable tabla;
-	private JTextField cuotasText;
-	private JTextField adelantoText;
-	private JTextField comentarioText;
-	private JTextField saldoText;
-	private JTextField comisionText;
-	private JButton btnAceptarDetalle;
 	private int idV;
 	private String idVehiculo;
-	private Double p;
-	private JTextField descuentoText;
-	private JTextField precioFText;
-	private Double comision;
-	private Double descuento;
-	private Double adelanto;
+	private Double p,comision,descuento,adelanto;
 
 	public PanelVentas() {
 
