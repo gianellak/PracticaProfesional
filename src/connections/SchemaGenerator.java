@@ -5,6 +5,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import exceptions.DBException;
+import moduloUsuarios.UsuarioDB;
+import objetos.Usuario;
+
 public class SchemaGenerator {
 	
 	ConnectionProvider connection;
@@ -142,22 +146,16 @@ public class SchemaGenerator {
 				+ "Apellido VARCHAR(15),"
 				+ "bloqueo BOOLEAN)";
 		try {
-			
-	    	
 	    	statement.execute(sql);
-	    	
+	    		    	
 	    	return true;
-			
 		} catch (SQLException e) {
-			
-		
 			return false;
 		}
-		
-		
-		
-	}
 	
+	}
+
+
 	public boolean generateSchemaVehiculo() throws SQLException{
 		
 		Connection c = this.connection.getConnection();

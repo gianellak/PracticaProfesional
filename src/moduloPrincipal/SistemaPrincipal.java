@@ -9,15 +9,20 @@ import moduloLogin.LoginDB;
 import moduloLogin.LoginInterface;
 import moduloLogin.LoginView;
 import moduloLogin.LoginDB;
+import moduloUsuarios.UsuarioDB;
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import connections.SchemaGenerator;
+import exceptions.DBException;
 
 public class SistemaPrincipal {
 
+	
 	public static void main(String[] args) throws SQLException,
-			InterruptedException {
+			InterruptedException, DBException {
 		// TODO Auto-generated method stub
+		
+		Boolean hayTabla = false;
 
 		ConnectionProvider conn = new DBConnection();
 
@@ -28,23 +33,34 @@ public class SistemaPrincipal {
 			e.printStackTrace();
 		}
 
-		 //TABLA USUARIO
-		
-		 SchemaGenerator s = new SchemaGenerator(conn);
-		
-		 try {
-			 s.generateSchemaEmpleado();
-			 s.generateSchema();
-			 s.generateSchemaPersona();
-			 s.generateSchemaUsuario();
-			 s.generateSchemaVehiculo();
-			 s.generateSchemaVenta();
-		 } catch (SQLException e1) {
-		 // TODO Auto-generated catch block
-		 e1.printStackTrace();
-		 }
-		
-		
+		// TABLA USUARIO
+
+		SchemaGenerator s = new SchemaGenerator(conn);
+
+		try {
+			s.generateSchemaEmpleado();
+			s.generateSchema();
+			s.generateSchemaPersona();
+			if (s.generateSchemaUsuario() == true) {
+				hayTabla = true;
+			}
+			;
+			s.generateSchemaVehiculo();
+			s.generateSchemaVenta();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		if (hayTabla) {
+			Usuario u = new Usuario("admin", "admin", 00000000, 0, "Usuario",
+					"Administrador", false);
+
+			UsuarioDB uDB = new UsuarioDB(conn);
+
+			uDB.insert(u);
+		}
+
 		LoginInterface ventanaL = new LoginView();
 
 		LoginDB lgDB = new LoginDB(conn);
