@@ -57,6 +57,8 @@ public class VentasView implements VentasInterface {
 		panelVentas = new PanelVentas();
 	
 	}
+	
+	//
 
 
 //Muestra el Menu de Ventas. Viene del Menu Principal.

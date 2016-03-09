@@ -113,8 +113,6 @@ public class ClientesController {
 		
 		Persona persona = ci.getUpdatePersona();
 		
-
-
 		try {
 			if(persona.getDni() != 0 && 
 							Sintaxis.analizoDNI(String.valueOf(persona.getDni())) &&
@@ -140,8 +138,6 @@ public class ClientesController {
 		}
 	}
 	
-
-
 
 	public void showMod() {
 		ci.onMod();

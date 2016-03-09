@@ -1,6 +1,5 @@
 package connections;
 
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,34 +19,23 @@ public class SchemaGenerator {
 	
 	public boolean generateSchema() throws SQLException {
 		
-		Connection c = this.connection.getConnection();
-				
+		Connection c = this.connection.getConnection();		
 		Statement statement = c.createStatement();
-		
 		String sql ="create table Movimiento (ID INTEGER PRIMARY KEY, Descripcion VARCHAR(140), "
 				+ "Ingreso Real, Egreso Real, Fecha VARCHAR(8), "
 				+ "Usuario VARCHAR(8), Marca BOOLEAN)";
-
 		try {
-			
-	    	
 	    	statement.execute(sql);
-	    	
 	    	return true;
-			
 		} catch (SQLException e) {
-			
-		
 			return false;
 		}
-		
 	}
 	
 
 	public boolean generateSchemaPersona() throws SQLException {
 		
 		Connection c = this.connection.getConnection();
-				
 		Statement statement = c.createStatement();
 		
 		String sql ="create table Persona (dni INTEGER PRIMARY KEY,"
@@ -64,22 +52,19 @@ public class SchemaGenerator {
 
 		try {
 			
-	    	
-	    	statement.execute(sql);
-	    	
-	    	return true;
+			statement.execute(sql);
+	       	return true;
 			
 		} catch (SQLException e) {
-			
-		
 			return false;
 		}
 		
 	}
+	
+	
 	public boolean generateSchemaEmpleado() throws SQLException {
 		
 		Connection c = this.connection.getConnection();
-		
 		Statement statement = c.createStatement();
 		
 		String sql ="create table Empleado (idEmpleado INTEGER PRIMARY KEY,"
@@ -91,24 +76,17 @@ public class SchemaGenerator {
 				+ " email VARCHAR(70))";
 		
 		try {
-			
-			
 			statement.execute(sql);
-			
-			return true;
-			
+			return true;	
 		} catch (SQLException e) {
-			
-			
 			return false;
 		}
-		
 	}
 
+	
 	public boolean generateSchemaVenta() throws SQLException {
 		
 		Connection c = this.connection.getConnection();
-		
 		Statement statement = c.createStatement();
 		
 		String sql ="create table Venta (idVenta INTEGER PRIMARY KEY, "
@@ -116,26 +94,20 @@ public class SchemaGenerator {
 				+ "idCliente INTEGER, "
 				+ "idGarante INTEGER, "
 				+ "idVendedor INTEGER)";
-		
 		try {
-			
-			
-			statement.execute(sql);
-			
+			statement.execute(sql);	
 			return true;
 			
 		} catch (SQLException e) {
-			
-			
 			return false;
 		}
 		
 	}
 	
+
 	public boolean generateSchemaDetalleVenta() throws SQLException {
 		
 		Connection c = this.connection.getConnection();
-		
 		Statement statement = c.createStatement();
 		
 		String sql ="create table DetalleVenta (idVenta INTEGER REFERENCES Venta(idVenta) PRIMARY KEY, " +
@@ -147,26 +119,22 @@ public class SchemaGenerator {
 					"comision REAL, " +
 					"descuento REAL, " +
 					"detalle VARCHAR(180))";
-		
 		try {
 			
-			
 			statement.execute(sql);
-			
 			return true;
 			
 		} catch (SQLException e) {
-			
-			
+	
 			return false;
 		}
 		
 	}
 	
+
 	public boolean generateSchemaUsuario() throws SQLException{
 		
-		Connection c = this.connection.getConnection();
-		
+		Connection c = this.connection.getConnection();	
 		Statement statement = c.createStatement();
 		
 		String sql ="create table Usuario (Username VARCHAR(8) PRIMARY KEY, "

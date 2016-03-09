@@ -221,18 +221,9 @@ public class ClientesView implements ClientesInterface {
 		
 	}
 
-
-
-
-
 	@Override
 	public PanelClientes getPanelClientes() {
 		return panelClientes;
 	}
-
-	
-	
-
-
 
 }
