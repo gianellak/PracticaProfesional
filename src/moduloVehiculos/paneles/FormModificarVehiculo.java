@@ -19,7 +19,7 @@ public class FormModificarVehiculo extends JPanel {
 
 		this.setLayout(null);
 
-		JLabel lblPatente = new JLabel("Patente: ");
+		JLabel lblPatente = new JLabel("Patente(*): ");
 		lblPatente.setBounds(100, 10, 160, 25);
 		this.add(lblPatente);
 
@@ -27,7 +27,7 @@ public class FormModificarVehiculo extends JPanel {
 		txtPatente.setBounds(100, 30, 160, 25);
 		this.add(txtPatente);
 
-		JLabel lblMarca = new JLabel("Marca: ");
+		JLabel lblMarca = new JLabel("Marca(*): ");
 		lblMarca.setBounds(100, 50, 160, 25);
 		this.add(lblMarca);
 
@@ -35,7 +35,7 @@ public class FormModificarVehiculo extends JPanel {
 		lblMarca2.setBounds(100, 70, 160, 25);
 		this.add(lblMarca2);
 
-		JLabel lblModelo = new JLabel("Modelo: ");
+		JLabel lblModelo = new JLabel("Modelo(*): ");
 		lblModelo.setBounds(100, 90, 160, 25);
 		this.add(lblModelo);
 
@@ -43,7 +43,7 @@ public class FormModificarVehiculo extends JPanel {
 		lblModelo2.setBounds(100, 110, 160, 25);
 		this.add(lblModelo2);
 
-		JLabel lblYear = new JLabel("Año: ");
+		JLabel lblYear = new JLabel("Año(*): ");
 		lblYear.setBounds(100, 130, 160, 25);
 		this.add(lblYear);
 
@@ -51,7 +51,7 @@ public class FormModificarVehiculo extends JPanel {
 		lblYear2.setBounds(100, 150, 260, 25);
 		this.add(lblYear2);
 
-		JLabel lblColor = new JLabel("Color: ");
+		JLabel lblColor = new JLabel("Color(*): ");
 		lblColor.setBounds(100, 170, 160, 25);
 		this.add(lblColor);
 
@@ -59,7 +59,7 @@ public class FormModificarVehiculo extends JPanel {
 		lblColor.setBounds(100, 190, 260, 25);
 		this.add(lblColor2);
 
-		JLabel lblKm = new JLabel("Km: ");
+		JLabel lblKm = new JLabel("Km(*): ");
 		lblKm.setBounds(100, 210, 160, 25);
 		this.add(lblKm);
 
@@ -67,7 +67,7 @@ public class FormModificarVehiculo extends JPanel {
 		txtKm.setBounds(100, 230, 260, 25);
 		this.add(txtKm);
 		
-		JLabel lblMotor = new JLabel("Motor: ");
+		JLabel lblMotor = new JLabel("Motor(*): ");
 		lblMotor.setBounds(100, 250, 160, 25);
 		this.add(lblMotor);
 
@@ -83,7 +83,7 @@ public class FormModificarVehiculo extends JPanel {
 		lblDominio2.setBounds(100, 310, 260, 25);
 		this.add(lblDominio2);
 		
-		JLabel lblPvc = new JLabel("PVC: ");
+		JLabel lblPvc = new JLabel("PVC(*): ");
 		lblPvc.setBounds(100, 330, 160, 25);
 		this.add(lblPvc);
 

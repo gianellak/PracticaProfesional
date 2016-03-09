@@ -136,19 +136,13 @@ public class VehiculosView implements VehiculosInterface {
 		
 		PantallaUtil.remove(panelVehiculos);
 		
-		panelVehiculos.muestroStock(listaStockVehiculos);
-		
+		panelVehiculos.muestroStock(listaStockVehiculos);		
 		panelVehiculos.menuVerStock();
-
 		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
-
 		
 		frame.add(panelVehiculos);
 		
 		PantallaUtil.refresh(frame);
-
-	
-		
 	}
 
 	@Override
@@ -166,8 +160,6 @@ public class VehiculosView implements VehiculosInterface {
 	}
 
 	public Vehiculo getDatosNuevoVehiculo() {
-		
-
 		
 		Vehiculo v = new Vehiculo(
 				
@@ -285,9 +277,7 @@ public class VehiculosView implements VehiculosInterface {
 	public void onBuscarVehiculo() {
 		
 		panelVehiculos.onBuscarVehiculo();
-		
 		listenerBuscarPatente = new ListenerBuscarPatente(vc);
-		
 		panelVehiculos.getBtnBuscar().addActionListener(listenerBuscarPatente);
 		
 		PantallaUtil.refresh(frame);
