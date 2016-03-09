@@ -32,6 +32,7 @@ public class CajaView implements CajaInterface {
 	private ListenerLogMovimiento listenerLog;
 	private ListenerModMovimiento listenerModMovimiento;
 	private ListenerEliminarMovimiento listenerEliminarMovimiento;
+	private ListenerAceptarMod listenerAceptarMod;
 
 	public CajaView(){
 	
@@ -106,36 +107,7 @@ public class CajaView implements CajaInterface {
 	
 	}
 	
-	@Override
-	public void onBaja() {
-		
-		
-	//	panelClientes.onBaja();
-		
-		//listenerBajaAceptar = new ListenerBajaAceptar(clientesController);
-		//listenerBajaVolver = new ListenerMenuClientesVolver(clientesController);
-		
-		//panelClientes.getBtnAceptar().addActionListener(listenerBajaAceptar);
-		//panelClientes.getBtnVolver().addActionListener(listenerBajaVolver);
-		
-		
-		frame.validate();
-		frame.repaint();
-	}
 	
-	@Override
-	public void insertOk() {
-		
-		JOptionPane.showMessageDialog(null, "Movimiento agregado correctamente");
-		
-		PantallaUtil.remove(panelCaja);		
-	}
-
-	@Override
-	public void insertError() {
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el movimiento. Por favor reintente");
-	}
-
 
 	@Override
 	public int getBajaMovimiento() {
@@ -170,48 +142,12 @@ public class CajaView implements CajaInterface {
 
 
 	@Override
-	public void showNotFound() {
-		
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar borrar el movimiento. Por favor reintente");	
-		
-	}
-
-	
-	public void showToDelete(Movimiento v) {
-		
-//		String s = new String("¿Esta seguro que desea eliminar el usuario: " + p.getApellido() + " " + p.getNombre() + "?");
-//		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar Persona", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-//       
-//		return codigo;
-//		
-		
-	}
-
-
-	@Override
-	public void deleteOk() {
-		JOptionPane.showMessageDialog(null, "Movimiento borrado correctamente");
-		
-		PantallaUtil.remove(panelCaja);
-		
-	}
-
-	public void deleteError() {
-		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al intentar eliminar el movimiento. Por favor reintente");
-	}
-
-
-	@Override
 	public Movimiento getNuevoMovimiento() {
 		
 		return panelCaja.getNuevoMovimiento();
 	}
 
-	@Override
-	public void primerMovimiento() {
-		JOptionPane.showMessageDialog(null, "No hay movimientos registrados al día de la fecha. Deberá realizar la apertura de la caja.");
-		
-	}
+	
 
 	@Override
 	public void verOtrosMovimientos() {
@@ -271,6 +207,19 @@ public class CajaView implements CajaInterface {
 	@Override
 	public String getMovimientoTabla() {
 		return panelCaja.getMovimientoTabla();
+	}
+
+	@Override
+	public void mostrarMovimientoMod(Movimiento m) {
+		
+		panelCaja.mostrarMovimientoMod(m);
+		
+		listenerAceptarMod = new ListenerAceptarMod(cajaController);
+		panelCaja.getBtnAlta().removeActionListener(listenerAltaMovimiento);
+		panelCaja.getBtnAlta().addActionListener(listenerAceptarMod);
+		
+		
+		
 	}
 
 

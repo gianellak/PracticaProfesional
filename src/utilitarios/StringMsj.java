@@ -44,6 +44,18 @@ public class StringMsj {
 	public static final String MSG_CJA_NOT_MOV =
 			"No hay movimientos registrados para el día seleccionado. Intente con otra fecha";
 	
+	public static final String MSG_MOD_MOV = 
+			"¿Está de acuerdo con los cambios en el movimiento?";
+	
+	public static final String MSG_MOD_MOV_OK = 
+			"El movimiento ha sido modificado correctamente.";
+	
+	public static final String MSG_MOV_NOT_MOD = 
+			"No está autorizado a modificar este movimiento. ";
+	
+	public static final String MSG_MOD_MOV_BAD = 
+			"Ha ocurrido un problema al intentar modificar el movimiento. Por favor reintente.";
+
 	public static final String MSG_DEL_MOV = 
 			"¿Está seguro que desea eliminar el movimiento seleccionado?";
 
@@ -51,15 +63,28 @@ public class StringMsj {
 			"El movimiento se ha eliminado correctamente.";
 
 	public static final String MSG_DEL_MOV_BAD = 
-			"No es posible eliminar este movimiento.";
+			"No es posible eliminar el movimiento seleccionado.";
 
+	public static final String MSG_FIRST_MOV= 
+			"No hay movimientos registrados al día de la fecha. Deberá realizar la apertura de la caja para continuar.";
+
+	public static final String MSG_LAST_MOV= 
+			"¿Está seguro de que desea cerrar la caja? No podrá ingresar nuevos movimientos por este día.";
+
+	public static final String MSG_MOV_INS_OK= 
+			"Movimiento agregado correctamente.";
+	
+	public static final String MSG_MOV_INS_BAD= 
+			"Ha ocurrido un error al intentar ingresar el movimiento. Por favor, revise los datos ingresados y reintente.";
+	
+	
 	//VENTAS
 
 	public static final String MSG_GTE_INS_BAD = 
 			"Ha ocurrido un error al intentar dar de alta el garante. Por favor reintente.";
 	
 	public static final String MSG_GTE_INS_OK = 
-			"Ha ocurrido un error al intentar dar de alta el garante. Por favor reintente.";
+			"Garante registrado correctamente.";
 
 	public static final String MSG_VTA_OK = 
 			"Venta generada con éxito. Por favor, complete los datos de pago.";

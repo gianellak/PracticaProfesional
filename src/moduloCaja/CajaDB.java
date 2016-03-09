@@ -25,7 +25,7 @@ public class CajaDB {
 
 	private static final String SQL_DELETE = "UPDATE Movimiento SET descripcion=?, marca=FALSE WHERE id=?";
 	
-	private static final String SQL_UPDATE_MOVIMIENTO = "UPDATE FROM Movimiento WHERE id = ?";
+	private static final String SQL_UPDATE_MOVIMIENTO = "UPDATE Movimiento SET marca=FALSE WHERE id = ?";
 
 	private static final int MYSQL_DUPLICATE_PK = -104;
 
@@ -214,13 +214,7 @@ public class CajaDB {
 		Object[] values = {
 				
 				mov.getId(),
-				mov.getDescripcion(),
-				mov.getIngreso(),
-				mov.getEgreso(),
-				mov.getFecha(),
-				mov.getUsuario(),
-				mov.isMarca()
-				
+					
 				};
 
 		try
@@ -229,18 +223,21 @@ public class CajaDB {
 		PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_UPDATE_MOVIMIENTO, false, values);)
 
 		{
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			if (e.getErrorCode() == MYSQL_DUPLICATE_PK) {
-				throw new DBException("Duplicated Key, cannot modify movimiento");
+			int affectedRows = statement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new DBException(
+						"Inserting user failed, no rows affected.");
+
 			} else {
-				throw new DBException(e);
+				return true;
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 
-		return null;
 	}
-
 	
 	
 	public List<Movimiento> findByDay(String stringDate) {

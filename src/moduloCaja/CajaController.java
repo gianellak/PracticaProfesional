@@ -29,6 +29,7 @@ public class CajaController {
 	private CajaInterface ci;
 	private PrincipalController pc;
 	private CajaDB cDB;
+	private Movimiento mov;
 
 	public CajaController(CajaView ci, PrincipalController pc) {
 		this.ci = ci;
@@ -54,7 +55,7 @@ public class CajaController {
 		
 		if(lista.size() == 0){
 			
-			ci.primerMovimiento();
+			Mensajes.mensajeInfo(StringMsj.MSG_FIRST_MOV);
 			ci.abroCaja();
 			
 		} else{
@@ -124,6 +125,32 @@ public class CajaController {
 		
 
 	}
+	
+	public void movimientoModificado() throws DBException {
+		
+		Movimiento m = ci.getNuevoMovimiento();
+		
+		int codigo = Mensajes.msjOkCancel(StringMsj.MSG_MOD_MOV, "Modificar");
+		
+		if (codigo ==JOptionPane.YES_OPTION){
+			
+			
+			mov.setMarca(false);
+			
+			if(cDB.insert(m)){
+				Mensajes.mensajeInfo(StringMsj.MSG_MOD_MOV_OK);
+				
+				if(cDB.update(mov)){
+				verMovimientos();
+				}
+			}else{
+				Mensajes.mensajeInfo(StringMsj.MSG_MOD_MOV_BAD);
+				verMovimientos();
+			}
+		}
+		
+		
+	}
 
 	public void altaMovimiento() throws DBException {
 
@@ -131,22 +158,17 @@ public class CajaController {
 
 		if (cDB.insert(movimiento)) {
 
-			ci.insertOk();
+			Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_OK);
 			verMovimientos();
+			
 		} else {
-			ci.insertError();
+			Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_BAD);
+			
 		}
 	}
 
-	public void showBaja() {
-		ci.onBaja();
-	}
-
-//	public void showMod() {
-//		ci.onMod();
-//	}
-
-
+	
+	
 	public void showCaja() {
 
 		ci.showMenuCaja(this, pc.getView(), pc.getUser());
@@ -244,6 +266,7 @@ public class CajaController {
 		Movimiento m  = cDB.findId(Integer.valueOf(idMov));
 		
 		System.out.println(m.getDescripcion());
+		
 		bajaMovimiento(m);
 		
 	}
@@ -252,10 +275,13 @@ public class CajaController {
 
 		String idMov = ci.getMovimientoTabla();
 		
-		Movimiento m  = cDB.findId(Integer.valueOf(idMov));
+		mov  = cDB.findId(Integer.valueOf(idMov));
 		
-		System.out.println(m.getDescripcion());
-		
+		if(String.valueOf(mov.getId()).matches("[1][0-9]{6}")){
+			Mensajes.mensajeInfo(StringMsj.MSG_MOV_NOT_MOD);			
+		} else{
+			ci.mostrarMovimientoMod(mov);
+		}
 		
 	}
 }

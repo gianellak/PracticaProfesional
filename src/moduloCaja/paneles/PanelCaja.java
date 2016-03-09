@@ -24,6 +24,7 @@ public class PanelCaja extends JPanel {
 	private JTable tabla;
 	private JRadioButton ingresoButton, egresoButton;
 	private JDateChooser dateChooser;
+	private JButton btnCierre;
 	
 	public PanelCaja() {
 
@@ -273,12 +274,16 @@ public class PanelCaja extends JPanel {
 		this.add(jp);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(720, 300, 80, 25);
+		btnVolver.setBounds(730, 300, 80, 25);
 		this.add(btnVolver);
 		
 		btnLog = new JButton("Descargar log");
 		btnLog.setBounds(590,300,130,25);
 		this.add(btnLog);
+		
+		btnCierre= new JButton("Cerrar caja");
+		btnCierre.setBounds(590,300,130,25);
+		this.add(btnCierre);
 		
 		this.validate();
 		this.repaint();
@@ -538,6 +543,33 @@ public class PanelCaja extends JPanel {
 				
 		return idMov;
 	}
+
+	public void mostrarMovimientoMod(Movimiento m) {
+		
+		descripcionText.setText(m.getDescripcion());
+
+		Double monto;
+		
+		btnAlta.setText("Aceptar cambios");
+		
+		if(m.getIngreso() == 0){
+			monto = m.getEgreso();
+			egresoButton.setSelected(true);
+			
+		}else{
+			monto=m.getIngreso();
+			ingresoButton.setSelected(true);
+		}
+		
+		montoText.setText(String.valueOf(monto));
+		
+	
+		this.validate();
+		this.repaint();
+		
+	}
+	
+	
 
 
 
