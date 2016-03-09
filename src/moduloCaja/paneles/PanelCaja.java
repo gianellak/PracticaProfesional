@@ -6,10 +6,13 @@ import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
 import com.toedter.calendar.JDateChooser;
+
 import objetos.Movimiento;
 import objetos.Usuario;
 
@@ -32,14 +35,14 @@ public class PanelCaja extends JPanel {
 
 	}
 
-	public void onAlta(Usuario usuario) {
+	public void onAlta(int i, Usuario usuario) {
 
 
 		JLabel idLabel = new JLabel("ID: ");
 		idLabel.setBounds(0, 350, 30, 25);
 		this.add(idLabel);
 
-		idText = new JLabel(String.valueOf(tabla.getRowCount() + 1));
+		idText = new JLabel(String.valueOf(i+1));
 		idText.setBounds(30, 350, 40, 25);
 		this.add(idText);
 
@@ -303,8 +306,14 @@ public class PanelCaja extends JPanel {
 			
 			i++;
 			
+			String id = String.valueOf(m.getId());
+			String f = m.getFecha();
+			String[] partes = f.split("/");			
+			String fecha = String.valueOf(partes[0]+partes[1]+partes[2]);
+			id = id.replace(fecha, "");
+			
 			Object[] o = new Object[6];
-			o[0] = i;
+			o[0] = id;
 			o[1] = m.getDescripcion();
 			o[2] = m.getIngreso();
 			o[3] = m.getEgreso();
@@ -511,6 +520,23 @@ public class PanelCaja extends JPanel {
 
 	public void setBtnLog(JButton btnLog) {
 		this.btnLog = btnLog;
+	}
+
+	public String getMovimientoTabla() {
+
+		int a = this.tabla.getSelectedRow();
+		
+		String d = String.valueOf(tabla.getModel().getValueAt(a, 4));
+		
+		String[] partes = d.split("/");
+		
+		String fecha = String.valueOf(partes[0]+partes[1]+partes[2]);
+		
+		String idMov = String.valueOf(tabla.getModel().getValueAt(a,0)) + fecha;
+	
+		
+				
+		return idMov;
 	}
 
 

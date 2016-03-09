@@ -44,6 +44,15 @@ public class StringMsj {
 	public static final String MSG_CJA_NOT_MOV =
 			"No hay movimientos registrados para el día seleccionado. Intente con otra fecha";
 	
+	public static final String MSG_DEL_MOV = 
+			"¿Está seguro que desea eliminar el movimiento seleccionado?";
+
+	public static final String MSG_DEL_MOV_OK = 
+			"El movimiento se ha eliminado correctamente.";
+
+	public static final String MSG_DEL_MOV_BAD = 
+			"No es posible eliminar este movimiento.";
+
 	//VENTAS
 
 	public static final String MSG_GTE_INS_BAD = 
@@ -54,6 +63,12 @@ public class StringMsj {
 
 	public static final String MSG_VTA_OK = 
 			"Venta generada con éxito. Por favor, complete los datos de pago.";
+
+
+
+	
+
+	
 
 	
 }

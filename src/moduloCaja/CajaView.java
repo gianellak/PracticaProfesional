@@ -30,6 +30,8 @@ public class CajaView implements CajaInterface {
 	private ListenerDate listenerDate;
 	private ListenerCajaVolver listenerVolver;
 	private ListenerLogMovimiento listenerLog;
+	private ListenerModMovimiento listenerModMovimiento;
+	private ListenerEliminarMovimiento listenerEliminarMovimiento;
 
 	public CajaView(){
 	
@@ -77,17 +79,23 @@ public class CajaView implements CajaInterface {
 
 	
 	@Override
-	public void onVer(List<Movimiento> lista) {
+	public void onVer(int i, List<Movimiento> lista) {
 		
 		PantallaUtil.remove(panelCaja);
 		
 		panelCaja.onVer(usuario, lista);
 		
-		panelCaja.onAlta(usuario);
+		panelCaja.onAlta(i, usuario);
 		
 		
 		listenerVolver = new ListenerCajaVolver(cajaController);
 		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
+		listenerModMovimiento = new ListenerModMovimiento(cajaController);
+		listenerEliminarMovimiento = new ListenerEliminarMovimiento(cajaController);
+		
+		
+		panelCaja.getBtnMod().addActionListener(listenerModMovimiento);
+		panelCaja.getBtnEliminar().addActionListener(listenerEliminarMovimiento);
 		
 		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimiento);
 		
@@ -258,6 +266,11 @@ public class CajaView implements CajaInterface {
 	public void cleanPanelCaja() {
 		PantallaUtil.remove(panelCaja);
 		
+	}
+
+	@Override
+	public String getMovimientoTabla() {
+		return panelCaja.getMovimientoTabla();
 	}
 
 

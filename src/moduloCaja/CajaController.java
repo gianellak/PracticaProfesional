@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import connections.*;
 import objetos.*;
 import utilitarios.Mensajes;
+import utilitarios.StringMsj;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -52,11 +53,13 @@ public class CajaController {
 		List<Movimiento> lista = cDB.findByDay(stringDate);
 		
 		if(lista.size() == 0){
+			
 			ci.primerMovimiento();
 			ci.abroCaja();
-		} else{
 			
-			ci.onVer(lista);
+		} else{
+			int i = cDB.countAll(stringDate);
+			ci.onVer(i, lista);
 		}
 
 		
@@ -96,41 +99,30 @@ public class CajaController {
 
 
 	
-	public void bajaMovimiento() throws DBException {
+	public void bajaMovimiento(Movimiento mov) throws DBException {
 
-		int u = ci.getBajaMovimiento();
-
-		Movimiento movimiento = cDB.findId(u);
-
-		if (movimiento != null) {
-
-			ci.showToDelete(movimiento);
-
-			// PEGAR ESTO ADENTRO DEL IF yes option pane
-
-			Movimiento mov = movimiento;
+		
+		
+		int codigo = Mensajes.msjOkCancel(StringMsj.MSG_DEL_MOV, "Eliminar");
+		
+		if (codigo ==JOptionPane.YES_OPTION){
+			
+			
 			mov.setMarca(false);
+			mov.setDescripcion("Movimiento eliminado por Usuario: " + pc.getUser().getUsername());
 
-			cDB.update(movimiento.getId(), movimiento);
-			cDB.insert(mov);
-
-			// int codigo = ci.showToDelete(movimiento);
-			//
-			// if (codigo==JOptionPane.YES_OPTION){
-			// if(cDB.delete(u)){
-			//
-			// ci.deleteOk();
-			// }else
-			// {
-			// ci.deleteBad();
-			// }
-			// }else if(codigo==JOptionPane.NO_OPTION){
-			// ci.onBaja();
-			// }
-
-		} else {
-			ci.showNotFound();
+			if(cDB.delete(mov)){
+				Mensajes.mensajeInfo(StringMsj.MSG_DEL_MOV_OK);
+				
+				verMovimientos();
+				
+			}else{
+				Mensajes.mensajeInfo(StringMsj.MSG_DEL_MOV_BAD);
+				
+			}
 		}
+		
+
 	}
 
 	public void altaMovimiento() throws DBException {
@@ -140,7 +132,7 @@ public class CajaController {
 		if (cDB.insert(movimiento)) {
 
 			ci.insertOk();
-			this.verMovimientos();
+			verMovimientos();
 		} else {
 			ci.insertError();
 		}
@@ -180,7 +172,8 @@ public class CajaController {
 		
 		if(listaMov.size() == 0){
 			
-			Mensajes.mensajeInfo("No hay movimientos registrados para el día seleccionado. Intente con otra fecha.");
+			Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_MOV);
+			
 		} else{
 			
 			ci.onVerOtro(listaMov, stringDate);		
@@ -215,12 +208,12 @@ public class CajaController {
 		//	wr.write("Hola");
 
 		
-			List<Movimiento> listaMov = cDB.findByDay(globalSelectedDate);
+			List<Movimiento> listaMov = cDB.findAllByDay(globalSelectedDate);
 			
 			if(listaMov.size() == 0){
 				
-				Mensajes.mensajeInfo("No hay movimientos registrados para el día seleccionado. Intente con otra fecha.");
-				wr.write("No hay movimientos registrados");
+				Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_MOV);
+				wr.write("No hay movimientos registrados.");
 			} else{
 				
 				int i = 0;
@@ -241,5 +234,28 @@ public class CajaController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void eliminarMov() throws NumberFormatException, DBException {
+
+
+		String idMov = ci.getMovimientoTabla();
+		
+		Movimiento m  = cDB.findId(Integer.valueOf(idMov));
+		
+		System.out.println(m.getDescripcion());
+		bajaMovimiento(m);
+		
+	}
+
+	public void modMovimiento() throws NumberFormatException, DBException {
+
+		String idMov = ci.getMovimientoTabla();
+		
+		Movimiento m  = cDB.findId(Integer.valueOf(idMov));
+		
+		System.out.println(m.getDescripcion());
+		
+		
 	}
 }

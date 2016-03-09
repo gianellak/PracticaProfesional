@@ -14,7 +14,7 @@ public interface CajaInterface {
 	
 	// CONSULTAS 
 	
-	void onVer(List<Movimiento> lista);
+	void onVer(int i, List<Movimiento> lista);
 	public void onBaja();
 	int getBajaMovimiento();
 	public Movimiento getNuevoMovimiento();
@@ -40,5 +40,6 @@ public interface CajaInterface {
 	void abroCaja();
 	void onVerOtro(List<Movimiento> lista, String stringDate);
 	void cleanPanelCaja();
+	String getMovimientoTabla();
 	
 }
