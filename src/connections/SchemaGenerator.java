@@ -48,7 +48,7 @@ public class SchemaGenerator {
 		
 		String sql ="create table Persona (dni INTEGER PRIMARY KEY,"
 				+ " telefono_p VARCHAR(20),"
-				+ " telefono_c VARCHAR(20),"
+				+ " email VARCHAR(40),"
 				+ " telefono_l VARCHAR(20),"
 				+ " nombre VARCHAR(15),"
 				+ " apellido VARCHAR(15),"
