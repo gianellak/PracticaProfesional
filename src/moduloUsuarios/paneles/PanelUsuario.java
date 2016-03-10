@@ -1,12 +1,19 @@
 
 package moduloUsuarios.paneles;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
 import objetos.Empleado;
 import objetos.Usuario;
 
@@ -47,14 +54,33 @@ public class PanelUsuario extends JPanel {
 	private JButton btnValidarE;
 
 	private JButton btnAceptarE;
+
+	private JPanel empleadoPanel;
+
+	private JPanel userPanel;
+
+	private JTextField nombreEText;
+
+	private JTextField apellidoEText;
+
+	private JButton btnModificarE;
+
+	private JButton btnEliminarE;
+
+	private JTextField dniEText;
 	
 	public PanelUsuario(){
+
 		
+		Double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int w = width.intValue() - 250;
 		
-		System.out.println("Creo nuevo panel Usuario");
+		Double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		int h = height.intValue() - 150;
 		
-		this.setPreferredSize(new Dimension(1000, 500));
-		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.setPreferredSize(new Dimension(w, h));
+		this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
+		
 		this.setLayout(null);
 		
 		
@@ -63,46 +89,60 @@ public class PanelUsuario extends JPanel {
 	public void onAlta(){
 		
 		this.removeAll();
-		System.out.println("ONALTA");
-		
+
+
+		JLabel textLabel = new JLabel("Por favor, ingrese los datos del nuevo usuario. ");
+		textLabel.setBounds(50, 40, 380, 25);
+		this.add(textLabel);
+
 		JLabel userLabel = new JLabel("Usuario: ");
-		userLabel.setBounds(150, 30, 80, 25);
+		userLabel.setBounds(50, 90, 70, 25);
 		this.add(userLabel);
 
 		userText = new JTextField(9);
-		userText.setBounds(300, 30, 160, 25);
+		userText.setBounds(150, 90, 160, 25);
 		this.add(userText);
 		
-		JLabel passLabel = new JLabel("Contrasena");
-		passLabel.setBounds(150, 60, 80, 25);
+		JLabel passLabel = new JLabel("Contraseña: ");
+		passLabel.setBounds(50, 130, 80, 25);
 		this.add(passLabel);
 
 		passwordText = new JPasswordField(8);
-		passwordText.setBounds(300, 60, 160, 25);
+		passwordText.setBounds(150, 130, 160, 25);
 		this.add(passwordText);
 		
 		JLabel patenteLabel = new JLabel("Permisos: ");
-		patenteLabel.setBounds(150, 90, 160, 25);
+		patenteLabel.setBounds(50, 170, 70, 25);
 		this.add(patenteLabel);
 		
+		
+		JPanel permisos = new JPanel();
+	    permisos.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
+	            "Permisos"));
+	    permisos.setBounds(330, 150, 170, 70);
+	    permisos.add(new JLabel("0 = Usuario Administrativo."));
+	    permisos.add(new JLabel("1 = Usuario Funcional."));
+	        this.add(permisos);
+	
+		
 		permisosText = new JTextField(3);
-		permisosText.setBounds(300, 90, 160, 25);
+		permisosText.setBounds(150, 170, 160, 25);
 		this.add(permisosText);
 		
 		JLabel nombreLabel = new JLabel("Nombre: ");
-		nombreLabel.setBounds(150, 120, 160, 25);
+		nombreLabel.setBounds(50, 210, 70, 25);
 		this.add(nombreLabel);
 		
 		nombreText = new JTextField(6);
-		nombreText.setBounds(300, 120, 160, 25);
+		nombreText.setBounds(150, 210, 160, 25);
 		this.add(nombreText);
 		
 		JLabel apellidoLabel = new JLabel("Apellido: ");
-		apellidoLabel.setBounds(150, 150, 160, 25);
+		apellidoLabel.setBounds(50, 250, 70, 25);
 		this.add(apellidoLabel);
 
 		apellidoText = new JTextField(6);
-		apellidoText.setBounds(300, 150, 160, 25);
+		apellidoText.setBounds(150, 250, 160, 25);
 		this.add(apellidoText);
 		
 
@@ -110,25 +150,25 @@ public class PanelUsuario extends JPanel {
 		apellidoText.setEditable(false);
 
 		
-		JLabel dniLabel = new JLabel("Dni Usuario: ");
-		dniLabel.setBounds(150, 180, 160, 25);
+		JLabel dniLabel = new JLabel("DNI: ");
+		dniLabel.setBounds(50, 290, 70, 25);
 		this.add(dniLabel);
 
 		dniText = new JTextField();
-		dniText.setBounds(300, 180, 160, 25);
+		dniText.setBounds(150, 290, 160, 25);
 		this.add(dniText);
 		
 
 		btnValidarE = new JButton("Validar");
-		btnValidarE.setBounds(500, 180, 100, 25);
+		btnValidarE.setBounds(330, 290, 100, 25);
 		this.add(btnValidarE);
 
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(500, 210, 100, 25);
+		btnAceptar.setBounds(100, 360, 100, 25);
 		this.add(btnAceptar);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 240, 100, 25);
+		btnVolver.setBounds(210, 360, 100, 25);
 		this.add(btnVolver);
 
 		
@@ -142,8 +182,6 @@ public class PanelUsuario extends JPanel {
 	public void onBaja() {
 		
 		this.removeAll();
-		
-		System.out.println("ONBAJA");
 		
 		JLabel userLabel = new JLabel("Usuario a dar de baja: ");
 		userLabel.setBounds(150, 0, 160, 25);
@@ -174,10 +212,7 @@ public class PanelUsuario extends JPanel {
 	
 	public void onMod(){
 		
-		
-		System.out.println("ONMOD");
-		
-		
+	
 		//Aca solo el permiso 0 puede modificar el campo user.
 		userText.setEditable(true);
 		passwordText.setEditable(true);
@@ -186,14 +221,14 @@ public class PanelUsuario extends JPanel {
 		dniText.setEditable(false);
 		apellidoText.setEditable(false);
 		
-		btnAceptarMod = new JButton("Modificar Usuario");
-		btnAceptarMod.setBounds(500, 180, 160, 25);
-		this.add(btnAceptarMod);
+		btnAceptarMod = new JButton("Aceptar Cambios");
+		btnAceptarMod.setBounds(110, 290, 160, 25);
+		userPanel.add(btnAceptarMod);
+
 		
 		btnModificar.setVisible(false);
 		btnEliminar.setVisible(false);		
 		btnResetear.setVisible(false);	
-		btnVolver.setBounds(500, 210, 160, 25);
 		
 		
 		this.validate();
@@ -201,28 +236,6 @@ public class PanelUsuario extends JPanel {
 		
 	}
 
-	public void onVer(List<Usuario> lista) {
-		
-		this.removeAll();
-		System.out.println("ONVER");
-
-		JLabel userLabel = new JLabel("Usuarios habilitados a usar el sistema: ");
-		userLabel.setBounds(150, 0, 280, 25);
-		this.add(userLabel);
-		
-		createTablaUsuarios(lista);
-		
-		this.add(jp);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 180, 100, 25);
-		this.add(btnVolver);
-		
-		
-		this.validate();
-		this.repaint();
-
-	}
 
 public void createTablaUsuarios(List<Usuario> lista) {
 		
@@ -234,6 +247,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		model.setColumnIdentifiers(columnNames);
 		
 		tabla = new JTable();
+		tabla.setEnabled(false);
 
 		tabla.setModel(model);
 		tabla.getTableHeader().setReorderingAllowed(false);
@@ -258,7 +272,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 			model.addRow(o);
 		}
 		
-		jp.setBounds(150, 50, 600, 200);
+		jp.setBounds(50, 90, 600, 200);
 
 
 	
@@ -268,28 +282,33 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		this.removeAll();
 		System.out.println("ONBuscar");
 		
-		JLabel buscarLabel = new JLabel("Ingrese el nombre de usuario a consultar: ");
-		buscarLabel.setBounds(100, 0, 280, 25);
+		JLabel textLabel = new JLabel("Por favor, ingrese alguno de los siguientes datos para realizar la búsqueda.");
+		textLabel.setBounds(50, 40, 480, 25);
+		this.add(textLabel);
+
+		
+		JLabel buscarLabel = new JLabel("Nombre de usuario: ");
+		buscarLabel.setBounds(50, 90, 150, 25);
 		this.add(buscarLabel);
 
 		userText = new JTextField();
-		userText.setBounds(300, 30, 160, 25);
+		userText.setBounds(210, 90, 160, 25);
 		this.add(userText);
 		
-		JLabel buscarELabel = new JLabel("Ingrese el DNI del empleado a consultar: ");
-		buscarELabel.setBounds(100, 70, 280, 25);
+		JLabel buscarELabel = new JLabel("DNI del empleado: ");
+		buscarELabel.setBounds(50, 130, 150, 25);
 		this.add(buscarELabel);
 		
 		empText = new JTextField();
-		empText.setBounds(300, 100, 160, 25);
+		empText.setBounds(210, 130, 160, 25);
 		this.add(empText);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(500, 180, 100, 25);
+		btnBuscar.setBounds(100, 200, 100, 25);
 		this.add(btnBuscar);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 210, 100, 25);
+		btnVolver.setBounds(210, 200, 100, 25);
 		this.add(btnVolver);
 		
 		
@@ -299,242 +318,305 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	}
 
 
-	public void verUnUsuario(Usuario u) {
-		
-		this.removeAll();
-		
-		user = u;
-		
-		JLabel userLabel = new JLabel("Usuario: ");
-		userLabel.setBounds(150, 30, 80, 25);
-		this.add(userLabel);
-		
-		userText = new JTextField(u.getUsername());
-		userText.setBounds(300, 30, 160, 25);
-		userText.setEditable(false);
-		this.add(userText);
-		
-		JLabel passLabel = new JLabel("Contrasena");
-		passLabel.setBounds(150, 60, 160, 25);
-		this.add(passLabel);
-
-		passwordText = new JPasswordField(u.getPassword());
-		passwordText.setBounds(300, 60, 160, 25);
-		passwordText.setEditable(false);
-		this.add(passwordText);
-		
-		JLabel patenteLabel = new JLabel("Permisos: ");
-		patenteLabel.setBounds(150, 90, 160, 25);
-		this.add(patenteLabel);
-		
-		permisosText = new JTextField(String.valueOf(u.getPermisos()));
-		permisosText.setBounds(300, 90, 160, 25);
-		permisosText.setEditable(false);
-		this.add(permisosText);
-		
-		JLabel nombreLabel = new JLabel("Nombre: ");
-		nombreLabel.setBounds(150, 120, 160, 25);
-		this.add(nombreLabel);
-		
-		nombreText = new JTextField(u.getNombre());
-		nombreText.setBounds(300, 120, 160, 25);
-		nombreText.setEditable(false);
-		this.add(nombreText);
-		
-		JLabel apellidoLabel = new JLabel("Apellido: ");
-		apellidoLabel.setBounds(150, 150, 160, 25);
-		this.add(apellidoLabel);
-
-		apellidoText = new JTextField(u.getApellido());
-		apellidoText.setEditable(false);
-		apellidoText.setBounds(300, 150, 160, 25);
-		this.add(apellidoText);
-		
-		JLabel dniLabel = new JLabel("Dni Usuario: ");
-		dniLabel.setBounds(150, 180, 160, 25);
-		this.add(dniLabel);
-
-		dniText = new JTextField(String.valueOf(u.getDniUsuario()));
-		dniText.setEditable(false);
-		dniText.setBounds(300, 180, 160, 25);
-		this.add(dniText);
-	
-		
-		btnModificar = new JButton("Modificar Usuario");
-		btnModificar.setBounds(500, 180, 160, 25);
-		this.add(btnModificar);
-		
-		btnEliminar = new JButton("Eliminar Usuario");
-		btnEliminar.setBounds(500, 210, 160, 25);
-		this.add(btnEliminar);
-		
-		btnResetear = new JButton("Resetear Usuario");
-		btnResetear.setBounds(500, 240, 160, 25);
-		this.add(btnResetear);
-		
-
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 270, 160, 25);
-		this.add(btnVolver);
-		
-		this.validate();
-		this.repaint();
-		
-	}
 	
 	public void onAltaE() {
 
 		this.removeAll();
-		System.out.println("ONALTAE");
+		
+		JLabel textLabel = new JLabel("Por favor, ingrese los datos del nuevo empleado. ");
+		textLabel.setBounds(50, 40, 380, 25);
+		this.add(textLabel);
 
-		JLabel dniLabel = new JLabel("Dni Empleado: ");
-		dniLabel.setBounds(150, 30, 100, 25);
+		JLabel dniLabel = new JLabel("DNI(*): ");
+		dniLabel.setBounds(50, 90, 80, 25);
 		this.add(dniLabel);
 
-		dniText = new JTextField(9);
-		dniText.setBounds(300, 30, 160, 25);
-		this.add(dniText);
+		dniEText = new JTextField(9);
+		dniEText.setBounds(150, 90, 160, 25);
+		this.add(dniEText);
 
-		JLabel nombreLabel = new JLabel("Nombre");
-		nombreLabel.setBounds(150, 60, 80, 25);
+		JLabel nombreLabel = new JLabel("Nombre(*): ");
+		nombreLabel.setBounds(50, 130, 80, 25);
 		this.add(nombreLabel);
 
-		nombreText = new JTextField(8);
-		nombreText.setBounds(300, 60, 160, 25);
-		this.add(nombreText);
+		nombreEText = new JTextField(8);
+		nombreEText.setBounds(150, 130, 160, 25);
+		this.add(nombreEText);
 
-		JLabel apellidoLabel = new JLabel("Apellido: ");
-		apellidoLabel.setBounds(150, 90, 160, 25);
+		JLabel apellidoLabel = new JLabel("Apellido(*): ");
+		apellidoLabel.setBounds(50, 170, 160, 25);
 		this.add(apellidoLabel);
 
-		apellidoText = new JTextField(3);
-		apellidoText.setBounds(300, 90, 160, 25);
-		this.add(apellidoText);
+		apellidoEText = new JTextField(3);
+		apellidoEText.setBounds(150, 170, 160, 25);
+		this.add(apellidoEText);
 
 		JLabel direccionLabel = new JLabel("Direccion: ");
-		direccionLabel.setBounds(150, 120, 160, 25);
+		direccionLabel.setBounds(50, 210, 160, 25);
 		this.add(direccionLabel);
 
 		direccionText = new JTextField(6);
-		direccionText.setBounds(300, 120, 160, 25);
+		direccionText.setBounds(150, 210, 160, 25);
 		this.add(direccionText);
 
 		JLabel idCargoLabel = new JLabel("Cargo: ");
-		idCargoLabel.setBounds(150, 150, 160, 25);
+		idCargoLabel.setBounds(50, 250, 160, 25);
 		this.add(idCargoLabel);
 
 		idCargoText = new JTextField(6);
-		idCargoText.setBounds(300, 150, 160, 25);
+		idCargoText.setBounds(150, 250, 160, 25);
 		this.add(idCargoText);
 
-		JLabel telefonoLabel = new JLabel("Telefono: ");
-		telefonoLabel.setBounds(150, 180, 160, 25);
+		JLabel telefonoLabel = new JLabel("Telefono(*): ");
+		telefonoLabel.setBounds(50, 290, 160, 25);
 		this.add(telefonoLabel);
 
 		telefonoText = new JTextField();
-		telefonoText.setBounds(300, 180, 160, 25);
+		telefonoText.setBounds(150, 290, 160, 25);
 		this.add(telefonoText);
 
 		JLabel emailLabel = new JLabel("Email: ");
-		emailLabel.setBounds(150, 210, 160, 25);
+		emailLabel.setBounds(50, 330, 160, 25);
 		this.add(emailLabel);
 
 		emailText = new JTextField();
-		emailText.setBounds(300, 210, 160, 25);
+		emailText.setBounds(150, 330, 160, 25);
 		this.add(emailText);
 
 		btnAceptarE = new JButton("Aceptar");
-		btnAceptarE.setBounds(500, 210, 100, 25);
+		btnAceptarE.setBounds(100, 400, 100, 25);
 		this.add(btnAceptarE);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 240, 100, 25);
+		btnVolver.setBounds(210, 400, 100, 25);
 		this.add(btnVolver);
+		
+		JLabel textObLabel = new JLabel("Los campos marcados con (*) son obligatorios.");
+		textObLabel.setBounds(50, 440, 380, 25);
+		this.add(textObLabel);
 
 		this.validate();
 		this.repaint();
 
 	}
 
+	public void empleadoSinUsuario() {
+		
+	
+		userPanel.removeAll();
+		JLabel sinUser = new JLabel("El empleado no posee un usuario en el sistema.");
+		sinUser.setBounds(10, 20, 290, 30);
+		userPanel.add(sinUser);
+		
+		this.add(userPanel);
+
+		this.validate();
+		this.repaint();
+	}
+	
+
+	public void verUnUsuario(Usuario u) {
+		
+		
+	    
+	    this.add(userPanel);
+	        
+	    user = u;
+		
+		userText = new JTextField(u.getUsername());
+		userText.setEditable(false);
+		passwordText = new JPasswordField(u.getPassword());
+		passwordText.setEditable(false);
+		permisosText = new JTextField(String.valueOf(u.getPermisos()));
+		permisosText.setEditable(false);
+		nombreText = new JTextField(u.getNombre());
+		nombreText.setEditable(false);
+		apellidoText = new JTextField(u.getApellido());
+		apellidoText.setEditable(false);
+		dniText = new JTextField(String.valueOf(u.getDniUsuario()));
+		dniText.setEditable(false);
+		
+		JLabel userLabel = new JLabel("Usuario: ");
+		userLabel.setBounds(10, 20, 70, 25);
+		userPanel.add(userLabel);
+
+		userText.setBounds(90, 20, 160, 25);
+		userPanel.add(userText);
+		
+		JLabel passLabel = new JLabel("Contraseña: ");
+		passLabel.setBounds(10, 60, 80, 25);
+		userPanel.add(passLabel);
+
+		passwordText.setBounds(90, 60, 160, 25);
+		userPanel.add(passwordText);
+		
+		JLabel patenteLabel = new JLabel("Permisos: ");
+		patenteLabel.setBounds(10, 100, 70, 25);
+		userPanel.add(patenteLabel);
+		
+		permisosText.setBounds(90, 100, 160, 25);
+		userPanel.add(permisosText);
+		
+		JLabel nombreLabel = new JLabel("Nombre: ");
+		nombreLabel.setBounds(10, 140, 70, 25);
+		userPanel.add(nombreLabel);
+		
+		nombreText.setBounds(90, 140, 160, 25);
+		userPanel.add(nombreText);
+		
+		JLabel apellidoLabel = new JLabel("Apellido: ");
+		apellidoLabel.setBounds(10, 180, 70, 25);
+		userPanel.add(apellidoLabel);
+
+		apellidoText.setBounds(90, 180, 160, 25);
+		userPanel.add(apellidoText);
+
+		JLabel dniLabel = new JLabel("DNI: ");
+		dniLabel.setBounds(10, 220, 70, 25);
+		userPanel.add(dniLabel);
+
+		dniText.setBounds(90, 220, 160, 25);
+		userPanel.add(dniText);
+		
+		
+		btnModificar = new JButton("Modificar Usuario");
+		btnModificar.setBounds(110, 290, 160, 25);
+		userPanel.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar Usuario");
+		btnEliminar.setBounds(110, 330, 160, 25);
+		userPanel.add(btnEliminar);
+		
+		btnResetear = new JButton("Resetear Usuario");
+		btnResetear.setBounds(110, 370, 160, 25);
+		userPanel.add(btnResetear);
+		
+		this.validate();
+		this.repaint();
+		
+	}
+	
 	public void verUnEmpleado(Empleado e) {
 
-		this.removeAll();
-
-		JLabel dniLabel = new JLabel("Dni Empleado: ");
-		dniLabel.setBounds(150, 30, 80, 25);
-		this.add(dniLabel);
-
-		dniText = new JTextField(String.valueOf(e.getIdEmpleado()));
-		dniText.setBounds(300, 30, 160, 25);
-		dniText.setEditable(false);
-		this.add(dniText);
-
-		JLabel nombreLabel = new JLabel("Nombre");
-		nombreLabel.setBounds(150, 60, 80, 25);
-		this.add(nombreLabel);
-
-		nombreText = new JTextField(e.getNombre());
-		nombreText.setEditable(false);
-		nombreText.setBounds(300, 60, 160, 25);
-		this.add(nombreText);
-
-		JLabel apellidoLabel = new JLabel("Apellido: ");
-		apellidoLabel.setBounds(150, 90, 160, 25);
-		this.add(apellidoLabel);
-
-		apellidoText = new JTextField(e.getApellido());
-		apellidoText.setEditable(false);
-		apellidoText.setBounds(300, 90, 160, 25);
-		this.add(apellidoText);
-
-		JLabel direccionLabel = new JLabel("Direccion: ");
-		direccionLabel.setBounds(150, 120, 160, 25);
-		this.add(direccionLabel);
-
+		userPanel = new JPanel();
+		userPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
+				"Usuario"));
+		userPanel.setBounds(470, 40, 400, 500);
+		userPanel.setLayout(null);
+		
+		empleadoPanel = new JPanel();
+		empleadoPanel.setLayout(null);
+		empleadoPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Empleado"));
+	    empleadoPanel.setBounds(50, 40, 400, 500);
+	    
+	    this.add(empleadoPanel);
+		
+		
+		//CARGO LOS CAMPOS NO EDITABLES
+		dniEText = new JTextField(String.valueOf(e.getIdEmpleado()));
+		dniEText.setEditable(false);
+		nombreEText = new JTextField(e.getNombre());
+		nombreEText.setEditable(false);
+		apellidoEText = new JTextField(e.getApellido());
+		apellidoEText.setEditable(false);
 		direccionText = new JTextField(e.getDireccion());
 		direccionText.setEditable(false);
-		direccionText.setBounds(300, 120, 160, 25);
-		this.add(direccionText);
-
-		JLabel idCargoLabel = new JLabel("Cargo: ");
-		idCargoLabel.setBounds(150, 150, 160, 25);
-		this.add(idCargoLabel);
-
 		idCargoText = new JTextField(e.getIdCargo());
 		idCargoText.setEditable(false);
-		idCargoText.setBounds(300, 150, 160, 25);
-		this.add(idCargoText);
-
-		JLabel telefonoLabel = new JLabel("Telefono: ");
-		telefonoLabel.setBounds(150, 180, 160, 25);
-		this.add(telefonoLabel);
-
 		telefonoText = new JTextField(String.valueOf(e.getTelefono()));
 		telefonoText.setEditable(false);
-		telefonoText.setBounds(300, 180, 160, 25);
-		this.add(telefonoText);
-
-		JLabel emailLabel = new JLabel("Email: ");
-		emailLabel.setBounds(150, 210, 160, 25);
-		this.add(emailLabel);
-
 		emailText = new JTextField(e.getEmail());
 		emailText.setEditable(false);
-		emailText.setBounds(300, 210, 160, 25);
-		this.add(emailText);
+		
+		//LABELS + SIZE + ADD
 
-		btnModificar = new JButton("Modificar Empleado");
-		btnModificar.setBounds(500, 180, 160, 25);
-		this.add(btnModificar);
+		JLabel dniLabel = new JLabel("DNI(*): ");
+		dniLabel.setBounds(10, 20, 70, 25);
+		empleadoPanel.add(dniLabel);
 
-		btnEliminar = new JButton("Eliminar Empleado");
-		btnEliminar.setBounds(500, 210, 160, 25);
-		this.add(btnEliminar);
+		dniEText.setBounds(90, 20, 160, 25);
+		empleadoPanel.add(dniEText);
+
+		JLabel nombreLabel = new JLabel("Nombre(*): ");
+		nombreLabel.setBounds(10, 60, 80, 25);
+		empleadoPanel.add(nombreLabel);
+
+		nombreEText.setBounds(90, 60, 160, 25);
+		empleadoPanel.add(nombreEText);
+
+		JLabel apellidoLabel = new JLabel("Apellido(*): ");
+		apellidoLabel.setBounds(10, 100, 160, 25);
+		empleadoPanel.add(apellidoLabel);
+
+		apellidoEText.setBounds(90, 100, 160, 25);
+		empleadoPanel.add(apellidoEText);
+
+		JLabel direccionLabel = new JLabel("Direccion: ");
+		direccionLabel.setBounds(10, 140, 160, 25);
+		empleadoPanel.add(direccionLabel);
+
+		direccionText.setBounds(90, 140, 160, 25);
+		empleadoPanel.add(direccionText);
+
+		JLabel idCargoLabel = new JLabel("Cargo: ");
+		idCargoLabel.setBounds(10, 180, 160, 25);
+		empleadoPanel.add(idCargoLabel);
+
+		idCargoText.setBounds(90, 180, 160, 25);
+		empleadoPanel.add(idCargoText);
+
+		JLabel telefonoLabel = new JLabel("Telefono(*): ");
+		telefonoLabel.setBounds(10, 220, 160, 25);
+		empleadoPanel.add(telefonoLabel);
+
+		telefonoText.setBounds(90, 220, 160, 25);
+		empleadoPanel.add(telefonoText);
+
+		JLabel emailLabel = new JLabel("Email: ");
+		emailLabel.setBounds(10, 260, 160, 25);
+		empleadoPanel.add(emailLabel);
+
+		emailText.setBounds(90, 260, 160, 25);
+		empleadoPanel.add(emailText);
+		
+		
+		btnModificarE = new JButton("Modificar Empleado");
+		btnModificarE.setBounds(110, 330, 160, 25);
+		empleadoPanel.add(btnModificarE);
+
+		btnEliminarE = new JButton("Eliminar Empleado");
+		btnEliminarE.setBounds(110, 370, 160, 25);
+		empleadoPanel.add(btnEliminarE);
+
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(500, 270, 160, 25);
+		btnVolver.setBounds(900, 470, 160, 25);
 		this.add(btnVolver);
+		
+		
+		this.validate();
+		this.repaint();
 
+	}
+
+	public void onVer(List<Usuario> lista) {
+		
+		this.removeAll();
+		
+
+		JLabel textLabel = new JLabel("Usuarios registrados en el sistema. ");
+		textLabel.setBounds(50, 40, 380, 25);
+		this.add(textLabel);
+		
+		createTablaUsuarios(lista);
+		
+		this.add(jp);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(500, 180, 100, 25);
+		this.add(btnVolver);
+		
+		
 		this.validate();
 		this.repaint();
 
@@ -544,21 +626,23 @@ public void createTablaUsuarios(List<Usuario> lista) {
 
 		System.out.println("ONMOD");
 
-		nombreText.setEditable(true);
-		apellidoText.setEditable(true);
+		nombreEText.setEditable(true);
+		apellidoEText.setEditable(true);
 		direccionText.setEditable(true);
 		idCargoText.setEditable(true);
 		telefonoText.setEditable(true);
 		emailText.setEditable(true);
 
-		btnAceptarModE = new JButton("Modificar Empleado");
-		btnAceptarModE.setBounds(500, 180, 160, 25);
-		this.add(btnAceptarModE);
+		btnAceptarModE = new JButton("Aceptar Cambios");
+		btnAceptarModE.setBounds(110, 330, 160, 25);
+		empleadoPanel.add(btnAceptarModE);
 
-		btnModificar.setVisible(false);
-		btnEliminar.setVisible(false);
-		btnVolver.setBounds(500, 210, 160, 25);
+		btnModificarE.setVisible(false);
+		btnEliminarE.setVisible(false);
 
+		empleadoPanel.validate();
+		empleadoPanel.repaint();
+		
 		this.validate();
 		this.repaint();
 
@@ -612,9 +696,19 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	}
 
 	public Empleado getModEmpleado() {
-		return new Empleado(Integer.parseInt(dniText.getText()), nombreText.getText(),
-		apellidoText.getText(),
-		direccionText.getText(), idCargoText.getText(), Integer.parseInt(telefonoText.getText()),
+		
+		int dniE;
+		int telE;
+		try {
+			dniE = Integer.parseInt(dniEText.getText());
+		    }
+		    catch (NumberFormatException e) {
+		        dniE = 0;
+		    }
+		
+		return new Empleado(dniE, nombreEText.getText(),
+		apellidoEText.getText(),
+		direccionText.getText(), idCargoText.getText(), telefonoText.getText(),
 		emailText.getText());
 	}
 
@@ -657,6 +751,13 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	public void setNombreText(JTextField nombreText) {
 		this.nombreText = nombreText;
 	}
+	public JTextField getNombreEText() {
+		return nombreEText;
+	}
+	
+	public void setNombreEText(JTextField nombreText) {
+		this.nombreEText = nombreText;
+	}
 
 	public JTextField getApellidoText() {
 		return apellidoText;
@@ -664,6 +765,14 @@ public void createTablaUsuarios(List<Usuario> lista) {
 
 	public void setApellidoText(JTextField apellidoText) {
 		this.apellidoText = apellidoText;
+	}
+	
+	public JTextField getApellidoEText() {
+		return apellidoEText;
+	}
+	
+	public void setApellidoEText(JTextField apellidoText) {
+		this.apellidoEText = apellidoText;
 	}
 
 	
@@ -802,6 +911,48 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	public void setBtnAceptarE(JButton btnAceptarE) {
 		this.btnAceptarE = btnAceptarE;
 	}
+
+	public JPanel getEmpleadoPanel() {
+		return empleadoPanel;
+	}
+
+	public void setEmpleadoPanel(JPanel empleadoPanel) {
+		this.empleadoPanel = empleadoPanel;
+	}
+
+	public JPanel getUserPanel() {
+		return userPanel;
+	}
+
+	public void setUserPanel(JPanel userPanel) {
+		this.userPanel = userPanel;
+	}
+
+	public JButton getBtnModificarE() {
+		return btnModificarE;
+	}
+
+	public void setBtnModificarE(JButton btnModificarE) {
+		this.btnModificarE = btnModificarE;
+	}
+
+	public JButton getBtnEliminarE() {
+		return btnEliminarE;
+	}
+
+	public void setBtnEliminarE(JButton btnEliminarE) {
+		this.btnEliminarE = btnEliminarE;
+	}
+
+	public JTextField getDniEText() {
+		return dniEText;
+	}
+
+	public void setDniEText(JTextField dniEText) {
+		this.dniEText = dniEText;
+	}
+
+	
 
 	
 	

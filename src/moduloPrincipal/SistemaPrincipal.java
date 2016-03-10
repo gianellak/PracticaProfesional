@@ -1,5 +1,6 @@
 package moduloPrincipal;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -21,6 +22,9 @@ public class SistemaPrincipal {
 	public static void main(String[] args) throws SQLException,
 			InterruptedException, DBException {
 		// TODO Auto-generated method stub
+		
+
+		System.out.println( Toolkit.getDefaultToolkit().getScreenSize());
 		
 		Boolean hayTabla = false;
 

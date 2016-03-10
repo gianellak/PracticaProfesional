@@ -168,8 +168,18 @@ public class UsuarioView implements UsuarioInterface {
 		
 		String s = new String(panelUsuario.getPasswordText().getPassword());
 		
-		Usuario u = new Usuario(panelUsuario.getUserText().getText(), s, Integer.parseInt(panelUsuario.getDniText().getText()),
-				Integer.parseInt(panelUsuario.getPermisosText().getText()), 
+		int permisos;
+		int dni;
+		try {
+			permisos = Integer.parseInt(panelUsuario.getPermisosText().getText());
+			dni = Integer.parseInt(panelUsuario.getDniText().getText());
+		    }
+		    catch (NumberFormatException e) {
+		       permisos = 99;
+		       dni = 0;
+		    }
+		Usuario u = new Usuario(panelUsuario.getUserText().getText(), s, dni,
+				permisos, 
 				panelUsuario.getNombreText().getText(),
 				panelUsuario.getApellidoText().getText(), false);
 		
@@ -208,7 +218,7 @@ public class UsuarioView implements UsuarioInterface {
 	@Override
 	public void verUsuario(Usuario u) {
 		
-		PantallaUtil.remove(panelUsuario);
+		
 		
 		panelUsuario.verUnUsuario(u);
 		
@@ -272,19 +282,7 @@ public class UsuarioView implements UsuarioInterface {
 				
 	}
 
-	@Override
-	public void deleteOk() {
-		JOptionPane.showMessageDialog(null, "Usuario borrado correctamente");
-		
-		PantallaUtil.remove(panelUsuario);
-	}
-	
 
-	@Override
-	public void deleteBad() {
-		JOptionPane.showMessageDialog(null, "Error al borrar usuario");
-		
-	}
 
 //	MODIFICAR 
 	@Override
@@ -305,6 +303,7 @@ public class UsuarioView implements UsuarioInterface {
 
 		@Override
 	public String getUsuarioABuscar(){
+			
 		return panelUsuario.getUserText().getText();
 		
 	}
@@ -361,25 +360,29 @@ public class UsuarioView implements UsuarioInterface {
 
 	@Override
 	public int getEmpleadoABuscar() {
+		try {
+			return Integer.parseInt(panelUsuario.getEmpText().getText());
+		    }
+		    catch (NumberFormatException e) {
+		        return 0;
+		    }
 		
-		return Integer.parseInt(panelUsuario.getEmpText().getText());
 	}
 
 	@Override
 	public void verEmpleado(Empleado e) {
 		
-		PantallaUtil.remove(panelUsuario);
+		
 		
 		panelUsuario.verUnEmpleado(e);
 		
-		listenerAltaVolver = new ListenerMenuUsuarioVolver(userController);
 		listenerModE = new ListenerEmpleadoMod(userController);
 		listenerBajaE = new ListenerEmpleadoBaja(userController);
 		
 		
-		panelUsuario.getBtnModificar().addActionListener(listenerModE);
-		panelUsuario.getBtnEliminar().addActionListener(listenerBajaE);
-		panelUsuario.getBtnVolver().addActionListener(listenerAltaVolver);
+		panelUsuario.getBtnModificarE().addActionListener(listenerModE);
+		panelUsuario.getBtnEliminarE().addActionListener(listenerBajaE);
+
 		
 		PantallaUtil.refresh(frame);
 		
@@ -398,10 +401,8 @@ public class UsuarioView implements UsuarioInterface {
 		panelUsuario.onModE();
 		
 		listenerModAceptarE = new ListenerModAceptarE(userController);
-		listenerModVolver = new ListenerMenuUsuarioVolver(userController);
 		
 		panelUsuario.getBtnAceptarModE().addActionListener(listenerModAceptarE);
-		panelUsuario.getBtnVolver().addActionListener(listenerModVolver);
 		
 		
 	}
@@ -482,6 +483,12 @@ public class UsuarioView implements UsuarioInterface {
 	@Override
 	public void insertBadE() {
 		JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ingresar el empleado. Por favor reintente");
+	}
+
+	@Override
+	public void empleadoSinUsuario() {
+		panelUsuario.empleadoSinUsuario();
+		
 	}
 
 

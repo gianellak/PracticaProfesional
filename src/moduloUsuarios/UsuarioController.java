@@ -9,7 +9,12 @@ import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Empleado;
 import objetos.Usuario;
+import utilitarios.Mensajes;
+import utilitarios.PantallaUtil;
+import utilitarios.Sintaxis;
+import utilitarios.StringMsj;
 import exceptions.DBException;
+import exceptions.LexicalException;
 import moduloPrincipal.PrincipalController;
 
 public class UsuarioController {
@@ -89,35 +94,54 @@ public class UsuarioController {
 	public void altaUsuario() throws DBException {
 
 		Usuario usuario = ui.getNuevoUsuario();
-			
-		if ((uDB.findIdEmpleado(usuario.getDniUsuario()) != null)){ // SI ES EMPLEADO
-	
-			if ((uDB.findDNIu(usuario.getDniUsuario()) == null)){ // SI NO EXISTE ESE DNI EN TABLA USUARIOS
+		
+		if(!usuario.getUsername().isEmpty() && !usuario.getPassword().isEmpty() && !usuario.getApellido().isEmpty() && usuario.getPermisos() != 99)
+			try {
+				if(Sintaxis.analizoUsuario(usuario.getUsername()) && Sintaxis.analizoPass(usuario.getPassword()) 
+						&& Sintaxis.analizoNumero(String.valueOf(usuario.getPermisos()))){
+					
 				
-				if (uDB.findId(usuario.getUsername()) == null){ // SI NO EXISTE ESE USERNAME EN TABLA USUARIOS
-					
-					
-					if (uDB.insert(usuario)) { // QUE HAGA EL INSERT
-						
-						ui.insertOk();
-						
-					} else {
-						
-						ui.insertBad();
-					}
-					
-				} else{
-					// QUE MUESTRE CARTEL INFORMANDO QUE YA EXISTE UN USUARIO CON ESE USERNAME.
-					ui.showMensaje("Ya existe un usuario registrado con ese nombre de usuario. Elija otro y vuelva a intentar.");
-				}
+				
+					if ((uDB.findIdEmpleado(usuario.getDniUsuario()) != null)){ // SI ES EMPLEADO
 
-			} else{
-					// QUE MUESTRE CARTEL INFORMANDO QUE YA EXISTE UN USUARIO CON ESE DNI.
-				ui.showMensaje("Ya existe un usuario registrado con ese DNI.");
+						if ((uDB.findDNIu(usuario.getDniUsuario()) == null)){ // SI NO EXISTE ESE DNI EN TABLA USUARIOS
+					
+							if (uDB.findId(usuario.getUsername()) == null){ // SI NO EXISTE ESE USERNAME EN TABLA USUARIOS
+						
+						
+								if (uDB.insert(usuario)) { // QUE HAGA EL INSERT
+							
+									ui.insertOk();
+							
+								} else {
+							
+									ui.insertBad();
+								}
+						
+							} else{
+								// QUE MUESTRE CARTEL INFORMANDO QUE YA EXISTE UN USUARIO CON ESE USERNAME.
+								ui.showMensaje("Ya existe un usuario registrado con ese nombre de usuario. Elija otro y vuelva a intentar.");
+							}
+
+						} else{
+							// QUE MUESTRE CARTEL INFORMANDO QUE YA EXISTE UN USUARIO CON ESE DNI.
+							ui.showMensaje("Ya existe un usuario registrado con ese DNI.");
+						}
+					} else{
+						// QUE MUESTRE CARTEL INFORMANDO QUE NO ES EMPLEADO.
+						ui.showMensaje("La persona no está registrada como empleado en el sistema. Por favor, ingreselo y vuelva a intentar."); 
+					}
+
+				}else{
+					
+					Mensajes.mensajeWarning(StringMsj.MSG_BAD_DATA);
+				}
+			} catch (LexicalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} else{
-			// QUE MUESTRE CARTEL INFORMANDO QUE NO ES EMPLEADO.
-			ui.showMensaje("La persona no está registrada como empleado en el sistema. Por favor, ingreselo y vuelva a intentar."); 
+		else{
+			Mensajes.mensajeWarning(StringMsj.MSG_OBLI);
 		}
 		
 	}
@@ -131,48 +155,75 @@ public class UsuarioController {
 	// *********************************
 	// ON OPCION BUSCAR UN USUARIO [LISTENER]
 
-	public void buscarUnUsuario() throws DBException {
+	public void buscarUnUsuario() throws DBException, LexicalException {
 
+		String u = ui.getUsuarioABuscar();
 		
+		String e = String.valueOf(ui.getEmpleadoABuscar());
 		
-		if (!ui.getUsuarioABuscar().isEmpty()){
+		if(e.equals("0") && u.isEmpty()){
 			
-			System.out.println("BUSCO EN LA DB AL USUARIO");
+			Mensajes.mensajeInfo(StringMsj.MSG_INPUT_MISSING);
 			
-			Usuario u  = uDB.findId(ui.getUsuarioABuscar());
-			
-			if(u != null){
-				
-				ui.verUsuario(u);
-			}else
-			{
-				ui.showNotFound();
-			}
-			
-		}else {
-		
-			String g = String.valueOf(ui.getEmpleadoABuscar());
-		
-			if(!g.isEmpty()){
-				
-			
-				System.out.println("BUSCO EN LA DB AL EMP");
-			
-			
-				Empleado e = uDB.findIdEmpleado(ui.getEmpleadoABuscar());
-			
-			
-				if(e != null){
-				
-					ui.verEmpleado(e);
-			
-				}else{
-					
-				ui.showNotFound();
-			}
 		}else{
-			ui.msjNoIngresoBusqueda();
+			
+			
+			if(u.isEmpty()){
+
+				if(Sintaxis.analizoDNI(e)){
+					
+					
+					
+					Empleado empleado = uDB.findIdEmpleado(ui.getEmpleadoABuscar());
+					
+					if(empleado != null){
+						ui.cleanPanelUsuario();
+						ui.verEmpleado(empleado);
+
+						Usuario usuario = uDB.findDNIu(empleado.getIdEmpleado());
+						
+						if(usuario != null){
+							ui.verUsuario(usuario);
+						}else{
+							ui.empleadoSinUsuario();
+						}
+						
+					}else{
+						Mensajes.mensajeInfo(StringMsj.MSG_EMP_NOT_FOUND);
+					}
+					
+				}else{
+					Mensajes.mensajeInfo(StringMsj.MSG_DNI_NOT_VALID);
+				}
+				
+			}else{
+				
+				if(Sintaxis.analizoUsuario(u)){
+					
+					Usuario usuario  = uDB.findId(ui.getUsuarioABuscar());
+
+					if(usuario != null){
+					
+						ui.cleanPanelUsuario();
+					
+						Empleado empleado = uDB.findIdEmpleado(usuario.getDniUsuario());
+					
+						if(empleado != null){
+						
+							ui.verEmpleado(empleado);
+							ui.verUsuario(usuario);
+						}
+				
+					}else{
+						Mensajes.mensajeInfo(StringMsj.MSG_USER_NOT_FOUND);
+					}
+					
+				}else{
+					Mensajes.mensajeWarning(StringMsj.MSG_USER_NOT_VALID);
+				}
+				
 			}
+			
 		}
 		
 
@@ -194,17 +245,17 @@ public class UsuarioController {
 			if (codigo == JOptionPane.YES_OPTION) {
 				if (uDB.delete(u)) {
 
-					ui.deleteOk();
+					Mensajes.mensajeInfo(StringMsj.MSG_USER_DEL_OK);
+					
+					ui.empleadoSinUsuario();
+					
+					
 				} else {
-					ui.deleteBad();
+					Mensajes.mensajeInfo(StringMsj.MSG_USER_DEL_BAD);
 				}
-			} else if (codigo == JOptionPane.NO_OPTION) {
-				ui.onBaja();
-			}
+			} 
 
-		} else {
-			ui.showNotFound();
-		}
+		} 
 
 	}
 
@@ -267,15 +318,13 @@ public class UsuarioController {
 		int codigo = ui.showToDelete(e);
 		
 		 if (codigo==JOptionPane.YES_OPTION){
-			 if(uDB.deleteEmpleado(e.getIdEmpleado())){
+			 if(uDB.deleteEmpleado(dni)){
 					
-					ui.deleteOk();
+					Mensajes.mensajeInfo(StringMsj.MSG_EMP_DEL_OK);
 				}else
 				{
-					ui.deleteBad();
+					Mensajes.mensajeInfo(StringMsj.MSG_EMP_DEL_BAD);
 				}
-	        }else if(codigo==JOptionPane.NO_OPTION){
-	            ui.onBaja();
 	        }
 		
 		}else{
@@ -298,26 +347,41 @@ public class UsuarioController {
 	}
 
 	public void modEmpleado() throws DBException {
-	
-		Empleado e = ui.getModEmpleado();
 		
-		if(e != null){
+		
+	Empleado e = ui.getModEmpleado();
+		
+
+	if(e.getIdEmpleado() != 0 && !e.getNombre().isEmpty() && !e.getApellido().isEmpty() && !e.getTelefono().isEmpty()){
 			
-			int codigo = ui.showToUpdateE(e);
-			
-			 if (codigo==JOptionPane.YES_OPTION){
-				 if(uDB.updateEmpleado(e)){
+		
+		try {
+			if(e.getIdEmpleado() != 0 && 
+							Sintaxis.analizoDNI(String.valueOf(e.getIdEmpleado())) &&
+							Sintaxis.analizoTexto(e.getNombre()) &&
+							Sintaxis.analizoTexto(e.getApellido()) &&
+							Sintaxis.analizoTelefono(e.getTelefono())
+									){
+					
+						if(uDB.updateEmpleado(e)){
 						
-						ui.updateOk();
-					}else
-					{
-						ui.updateBad();
+							Mensajes.mensajeInfo(StringMsj.MSG_EMP_MOD_OK);;			
+							cleanUsuario();
+					
+						}else{
+							Mensajes.mensajeWarning(StringMsj.MSG_EMP_MOD_BAD);
+							}
+					}else{
+						Mensajes.mensajeWarning(StringMsj.MSG_BAD_DATA);
 					}
-		        }else if(codigo==JOptionPane.NO_OPTION){
-		            ui.onModE();
-		        }
-			
+		} catch (LexicalException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		}else{
+			Mensajes.mensajeInfo(StringMsj.MSG_OBLI);
+		}
+	
 	}
 
 	// RESETEAR USUARIO
@@ -352,20 +416,38 @@ public class UsuarioController {
 	}
 
 	public void altaEmpleado() throws DBException {
-		System.out.println("Alta Em");
 		
 		Empleado e = ui.getModEmpleado();
-
-		if (uDB.inserE(e)) {
-
-			ui.insertOkE();
-			
-		} else {
-			
-			ui.insertBadE();
-		}
-
 		
+		if(e.getIdEmpleado() != 0 && !e.getNombre().isEmpty() && !e.getApellido().isEmpty() && !e.getTelefono().isEmpty()){
+			
+		
+		try {
+			if(e.getIdEmpleado() != 0 && 
+							Sintaxis.analizoDNI(String.valueOf(e.getIdEmpleado())) &&
+							Sintaxis.analizoTexto(e.getNombre()) &&
+							Sintaxis.analizoTexto(e.getApellido()) &&
+							Sintaxis.analizoTelefono(e.getTelefono())
+									){
+					
+						if(uDB.inserE(e)){
+						
+							Mensajes.mensajeInfo(StringMsj.MSG_EMP_INS_OK);;			
+							cleanUsuario();
+					
+						}else{
+							Mensajes.mensajeWarning(StringMsj.MSG_EMP_INS_BAD);
+							}
+					}else{
+						Mensajes.mensajeWarning(StringMsj.MSG_BAD_DATA);
+					}
+		} catch (LexicalException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		}else{
+			Mensajes.mensajeInfo(StringMsj.MSG_OBLI);
+		}
 	}
 
 	

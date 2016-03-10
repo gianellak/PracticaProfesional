@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import objetos.Usuario;
 import exceptions.DBException;
+import exceptions.LexicalException;
 import moduloPrincipal.PrincipalController;
 import moduloUsuarios.UsuarioController;
 import moduloUsuarios.UsuarioView;
@@ -29,7 +30,7 @@ public class ListenerBuscarUnUsuario implements ActionListener {
 		
 		try {
 			uc.buscarUnUsuario();
-		} catch (DBException e1) {
+		} catch (DBException | LexicalException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

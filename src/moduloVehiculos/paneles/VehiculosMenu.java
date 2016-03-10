@@ -1,10 +1,13 @@
 package moduloVehiculos.paneles;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 
 public class VehiculosMenu extends JPanel {
 	
@@ -18,9 +21,10 @@ public class VehiculosMenu extends JPanel {
 public VehiculosMenu() {
 		
 
-		this.setPreferredSize(new Dimension(250, 500));
-		
-this.setPreferredSize(new Dimension(250, 300));
+	Double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	int h = height.intValue() - 150;
+	this.setPreferredSize(new Dimension(250, h));
+	this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		
 		btnBuscar = new JButton("Buscar Vehiculo");
 		btnBuscar.setPreferredSize(preferredSize);

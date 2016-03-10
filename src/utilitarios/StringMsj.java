@@ -1,6 +1,6 @@
 package utilitarios;
 
-import javax.swing.JOptionPane;
+
 
 public class StringMsj {
 	
@@ -9,8 +9,26 @@ public class StringMsj {
 	public static final String MSG_DNI_NOT_VALID =
 			"No ha ingresado un DNI válido. Por favor reingrese.";	
 	
+	public static final String MSG_USER_NOT_VALID =
+			"El usuario ingresado no es válido.";	
+	
 	public static final String MSG_NEW_CLIENT =
-		"Dni no registrado en el sistema. ¿Desea dar de alta a la persona?";
+			"Dni no registrado en el sistema. ¿Desea dar de alta a la persona?";
+	
+	public static final String MSG_INPUT_MISSING = 
+			"No se ha registrado el ingreso de datos válidos. Por favor reintente.";
+
+	public static final String MSG_NOT_OBLI = 
+			"Algunos de los campos obligatorios no ha sido completados o resultan inválidos. Por favor, revise los datos y vuelva a intentarlo.";	
+	
+	public static final String MSG_OBLI = 
+			"Algunos de los campos obligatorios no ha sido completados. Por favor, revise los datos y vuelva a intentarlo.";	
+	
+	public static final String MSG_BAD_DATA = 
+			"Algunos de los campos resultan inválidos. Por favor, revise los datos y vuelva a intentarlo.";	
+
+
+
 	
 
 	//CLIENTES
@@ -22,22 +40,19 @@ public class StringMsj {
 			"Los datos del cliente han sido modificados correctamente.";	
 
 	public static final String MSG_CLI_INS_OK =
-			"El cliente cliente ha sido agregado correctamente.";	
+			"El cliente ha sido agregado correctamente.";	
 	
 	public static final String MSG_CLI_DEL_OK =
-			"El cliente hasido borrado correctamente.";	
+			"El cliente ha sido borrado correctamente.";	
 	
 	public static final String MSG_CLI_DEL_BAD =
 			"Ha ocurrido un error al intentar borrar cliente. Por favor reintente.";	
-	
+
 	public static final String MSG_CLI_MOD_BAD =
 			"Ha ocurrido un error al intentar modificar el cliente. Por favor reintente.";	
 	
 	public static final String MSG_CLI_INS_BAD =
 			"Ha ocurrido un error al intentar dar de alta el cliente. Por favor reintente.";	
-
-	public static final String MSG_CLI_NOT_OBLI = 
-			"Algunos de los campos obligatorios no ha sido completados o resultan inválidos. Por favor, revise los datos y vuelva a intentarlo.";	
 	
 	//CAJA
 	
@@ -89,7 +104,37 @@ public class StringMsj {
 	public static final String MSG_VTA_OK = 
 			"Venta generada con éxito. Por favor, complete los datos de pago.";
 
+	//USUARIO
+	
+	public static final String MSG_EMP_MOD_OK =
+			"Los datos del empleado han sido modificados correctamente.";	
 
+	public static final String MSG_EMP_MOD_BAD =
+			"Ha ocurrido un error al intentar modificar el empleado. Por favor reintente.";	
+	
+	public static final String MSG_EMP_NOT_FOUND = 
+			"El DNI ingresado no corresponde a un empleado registrado. Por favor, revise y vuelva a intentarlo.";
+	
+	public static final String MSG_USER_NOT_FOUND = 
+			"El nombre de usuario ingresado no se encuentra registrado en el sistema. Por favor, revise y vuelva a intentarlo.";
+
+	public static final String MSG_EMP_INS_OK =
+			"El empleado ha sido agregado correctamente.";	
+	
+	public static final String MSG_EMP_INS_BAD =
+			"Ha ocurrido un error al intentar registrar el empleado. Por favor reintente.";	
+	
+	public static final String MSG_USER_DEL_BAD =
+			"Ha ocurrido un error al intentar eliminar el usuario. Por favor reintente.";	
+
+	public static final String MSG_USER_DEL_OK =
+			"El usuario se ha eliminado correctamente.";	
+	
+	public static final String MSG_EMP_DEL_BAD =
+			"Ha ocurrido un error al intentar dar de baja al empleado. Por favor reintente.";	
+	
+	public static final String MSG_EMP_DEL_OK =
+			"El empleado ha sido dado de baja correctamente.";	
 
 	
 

@@ -130,7 +130,7 @@ public class ClientesController {
 							Mensajes.mensajeWarning(StringMsj.MSG_CLI_INS_BAD);
 							}
 					}else{
-						Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_OBLI);
+						Mensajes.mensajeInfo(StringMsj.MSG_NOT_OBLI);
 					}
 		} catch (LexicalException e) {
 			// TODO Auto-generated catch block
@@ -216,7 +216,7 @@ public class ClientesController {
 							ci.onMod();
 						}
 				}else{
-					Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_OBLI);
+					Mensajes.mensajeInfo(StringMsj.MSG_NOT_OBLI);
 				}
 			} catch (LexicalException e) {
 				// TODO Auto-generated catch block

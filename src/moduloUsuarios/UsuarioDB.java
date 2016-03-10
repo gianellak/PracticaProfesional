@@ -271,7 +271,7 @@ public class UsuarioDB {
 		Empleado e = new Empleado(rs.getInt("idEmpleado"),
 				rs.getString("nombre"), rs.getString("apellido"),
 				rs.getString("direccion"), rs.getString("idCargo"),
-				rs.getInt("telefono"), rs.getString("email"));
+				rs.getString("telefono"), rs.getString("email"));
 
 		return e;
 	}
@@ -290,7 +290,7 @@ public class UsuarioDB {
 						connection, SQL_INSERT_EMP, false, values);) {
 			int affectedRows = statement.executeUpdate();
 			if (affectedRows == 0) {
-				throw new DBException("Inserting emp failed, no rows affected.");
+				return false;
 
 			} else {
 				return true;

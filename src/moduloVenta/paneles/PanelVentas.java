@@ -1,10 +1,12 @@
 package moduloVenta.paneles;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+
 
 
 import javax.swing.table.DefaultTableModel;
@@ -15,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import moduloVenta.listener.ListenerDetalleTotal;
 
@@ -43,8 +46,15 @@ public class PanelVentas extends JPanel {
 
 		System.out.println("Creo nuevo panel Venta");
 
-		this.setPreferredSize(new Dimension(1000, 500));
-		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+		Double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int w = width.intValue() - 250;
+		
+		Double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		int h = height.intValue() - 150;
+		
+		this.setPreferredSize(new Dimension(w, h));
+		this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
+		
 		this.setLayout(null);
 
 	}

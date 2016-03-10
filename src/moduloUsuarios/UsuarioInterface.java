@@ -53,10 +53,6 @@ public interface UsuarioInterface {
 
 	public int showToDelete(Usuario user);
 
-	public void deleteOk();
-
-	public void deleteBad();
-	
 	public void onMod();
 
 	public int showToUpdate(Usuario user);
@@ -96,6 +92,8 @@ public interface UsuarioInterface {
 	public void insertOkE();
 
 	public void insertBadE();
+
+	public void empleadoSinUsuario();
 
 
 

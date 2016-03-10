@@ -1,15 +1,14 @@
 package moduloPrincipal.paneles;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import objetos.Usuario;
 
@@ -18,13 +17,14 @@ public class PanelGeneral extends JPanel {
 	
 	public PanelGeneral(Usuario user){
 		
-		
-		System.out.println("Creo nuevo panel");
+
 		
 		//this.setBackground(Color.red);
+		Double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int w = width.intValue();
 		
-		this.setPreferredSize(new Dimension(700, 150));
-		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.setPreferredSize(new Dimension(w, 150));
+		this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		this.setLayout(null);
 		
 		JLabel logoLabel = new JLabel("Gitanes Automotores S.R.L");

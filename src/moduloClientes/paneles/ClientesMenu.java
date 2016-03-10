@@ -3,9 +3,12 @@ package moduloClientes.paneles;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 
 public class ClientesMenu extends JPanel {
 	
@@ -18,7 +21,11 @@ public class ClientesMenu extends JPanel {
 public ClientesMenu() {
 		
 
-		this.setPreferredSize(new Dimension(250, 500));
+	Double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	int h = height.intValue() - 150;
+	this.setPreferredSize(new Dimension(250, h));
+	this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
+		
 		
 		btnAltaC = new JButton("Alta Cliente");
 		btnAltaC.setPreferredSize(preferredSize);

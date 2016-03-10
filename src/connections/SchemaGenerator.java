@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import exceptions.DBException;
-import moduloUsuarios.UsuarioDB;
-import objetos.Usuario;
-
 public class SchemaGenerator {
 	
 	ConnectionProvider connection;
@@ -72,7 +68,7 @@ public class SchemaGenerator {
 				+ " apellido VARCHAR(15),"
 				+ " direccion VARCHAR(20),"
 				+ " idCargo VARCHAR(8),"
-				+ " telefono INTEGER,"
+				+ " telefono VARCHAR(20),"
 				+ " email VARCHAR(70))";
 		
 		try {

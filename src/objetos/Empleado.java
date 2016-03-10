@@ -7,7 +7,7 @@ public class Empleado {
 	String apellido;
 	String direccion;
 	String idCargo;
-	int telefono;
+	String telefono;
 	String email;
 	
 	public int getIdEmpleado() {
@@ -40,10 +40,10 @@ public class Empleado {
 	public void setIdCargo(String idCargo) {
 		this.idCargo = idCargo;
 	}
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	public String getEmail() {
@@ -54,14 +54,14 @@ public class Empleado {
 	}
 	
 	public Empleado(int idEmpleado, String nombre, String apellido,
-			String direccion, String idCargo, int telefono, String email) {
+			String direccion, String idCargo, String string, String email) {
 		super();
 		this.idEmpleado = idEmpleado;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;
 		this.idCargo = idCargo;
-		this.telefono = telefono;
+		this.telefono = string;
 		this.email = email;
 	}
 

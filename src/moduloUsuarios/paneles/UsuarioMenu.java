@@ -3,9 +3,11 @@ package moduloUsuarios.paneles;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 public class UsuarioMenu extends JPanel {
 	
@@ -20,7 +22,10 @@ public class UsuarioMenu extends JPanel {
 public UsuarioMenu() {
 		
 
-		this.setPreferredSize(new Dimension(250, 300));
+	Double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	int h = height.intValue() - 150;
+	this.setPreferredSize(new Dimension(250, h));
+	this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		
 		btnAltaE = new JButton("Alta Empleado");
 		btnAltaE.setPreferredSize(preferredSize);
