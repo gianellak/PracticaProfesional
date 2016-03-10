@@ -97,8 +97,6 @@ public class ClientesController {
 				{
 					Mensajes.mensajeWarning(StringMsj.MSG_CLI_DEL_BAD);
 				}
-	        }else if(codigo==JOptionPane.NO_OPTION){
-	            ci.verCliente(persona);
 	        }
 		
 		}else{
@@ -212,8 +210,6 @@ public class ClientesController {
 							}else{
 								Mensajes.mensajeWarning(StringMsj.MSG_CLI_MOD_BAD);
 							}
-						}else if(codigo==JOptionPane.NO_OPTION){
-							ci.onMod();
 						}
 				}else{
 					Mensajes.mensajeInfo(StringMsj.MSG_NOT_OBLI);
@@ -222,6 +218,11 @@ public class ClientesController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		
+	}
+
+	public void nuevaVenta() {
+		// TODO Auto-generated method stub
 		
 	}
 

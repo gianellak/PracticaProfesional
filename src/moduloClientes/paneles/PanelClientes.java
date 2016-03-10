@@ -22,9 +22,10 @@ public class PanelClientes extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton btnVolver, btnAceptar, btnBuscar, btnModificar,	btnEliminar, btnVender, btnComprar;
+	private JButton btnVolver, btnAceptar, btnBuscar, btnModificar,	btnEliminar, btnVender;
 	
 	private JTextField nombreCompradorText, apellidoCompradorText, dniCompradorText, domicilioPartText, domicilioLabText, telPartText, emailText, telLabText, ciudadText, provinciaText, empresaText;
+	private JButton btnAceptarCambios;
 
 	public PanelClientes() {
 
@@ -47,112 +48,113 @@ public class PanelClientes extends JPanel {
 	public void onAlta() {
 
 		this.removeAll();
-		System.out.println("ONALTA");
-
+		
 		JLabel datosLabel = new JLabel(
 				"Por favor, ingrese los datos del cliente a dar de alta.");
-		datosLabel.setBounds(0, 0, 360, 25);
+		datosLabel.setBounds(50	, 40, 360, 25);
 		this.add(datosLabel);
 
 		JLabel dniCompradorLabel = new JLabel("DNI(*): ");
-		dniCompradorLabel.setBounds(0, 50, 160, 25);
+		dniCompradorLabel.setBounds(50, 90, 70, 25);
 		this.add(dniCompradorLabel);
 
 		dniCompradorText = new JTextField(9);
-		dniCompradorText.setBounds(150, 50, 160, 25);
+		dniCompradorText.setBounds(150, 90, 160, 25);
 		this.add(dniCompradorText);
 
 		JLabel nombreCompradorLabel = new JLabel("Nombre(*): ");
-		nombreCompradorLabel.setBounds(0, 80, 80, 25);
+		nombreCompradorLabel.setBounds(50, 130, 70, 25);
 		this.add(nombreCompradorLabel);
 
 		nombreCompradorText = new JTextField(9);
-		nombreCompradorText.setBounds(150, 80, 160, 25);
+		nombreCompradorText.setBounds(150, 130, 160, 25);
 		this.add(nombreCompradorText);
 
 		JLabel apellidoCompradorLabel = new JLabel("Apellido(*): ");
-		apellidoCompradorLabel.setBounds(0, 110, 80, 25);
+		apellidoCompradorLabel.setBounds(50, 170, 70, 25);
 		this.add(apellidoCompradorLabel);
 
 		apellidoCompradorText = new JTextField(9);
-		apellidoCompradorText.setBounds(150, 110, 160, 25);
+		apellidoCompradorText.setBounds(150, 170, 160, 25);
 		this.add(apellidoCompradorText);
 
 		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
-		domicilioPartLabel.setBounds(0, 140, 160, 25);
+		domicilioPartLabel.setBounds(50, 210, 100, 25);
 		this.add(domicilioPartLabel);
 
 		domicilioPartText = new JTextField(25);
-		domicilioPartText.setBounds(150, 140, 160, 25);
+		domicilioPartText.setBounds(150, 210, 160, 25);
 		this.add(domicilioPartText);
 
 		JLabel ciudadLabel = new JLabel("Ciudad: ");
-		ciudadLabel.setBounds(0, 170, 160, 25);
+		ciudadLabel.setBounds(50, 250, 70, 25);
 		this.add(ciudadLabel);
 
 		ciudadText = new JTextField(25);
-		ciudadText.setBounds(150, 170, 160, 25);
+		ciudadText.setBounds(150, 250, 160, 25);
 		this.add(ciudadText);
 
+		/// DERECHA ---------
+		
 		JLabel provinciaLabel = new JLabel("Provincia: ");
-		provinciaLabel.setBounds(0, 200, 160, 25);
+		provinciaLabel.setBounds(340, 90, 70, 25);
 		this.add(provinciaLabel);
 
 		provinciaText = new JTextField(25);
-		provinciaText.setBounds(150, 200, 160, 25);
+		provinciaText.setBounds(460, 90, 160, 25);
 		this.add(provinciaText);
 
 		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
-		domicilioLabLabel.setBounds(0, 230, 160, 25);
+		domicilioLabLabel.setBounds(340, 130, 90, 25);
 		this.add(domicilioLabLabel);
 
 		domicilioLabText = new JTextField(25);
-		domicilioLabText.setBounds(150, 230, 160, 25);
+		domicilioLabText.setBounds(460, 130, 160, 25);
 		this.add(domicilioLabText);
 
 		JLabel telPartLabel = new JLabel("Tel. Particular(*): ");
-		telPartLabel.setBounds(0, 260, 160, 25);
+		telPartLabel.setBounds(340, 170, 100, 25);
 		this.add(telPartLabel);
 
 		telPartText = new JTextField(25);
-		telPartText.setBounds(150, 260, 160, 25);
+		telPartText.setBounds(460, 170, 160, 25);
 		this.add(telPartText);
 
 		JLabel telCelLabel = new JLabel("Email: ");
-		telCelLabel.setBounds(0, 290, 160, 25);
+		telCelLabel.setBounds(340, 210, 70, 25);
 		this.add(telCelLabel);
 
 		emailText = new JTextField(25);
-		emailText.setBounds(150, 290, 160, 25);
+		emailText.setBounds(460, 210, 160, 25);
 		this.add(emailText);
 
 		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
-		telLabLabel.setBounds(0, 320, 160, 25);
+		telLabLabel.setBounds(340, 250, 100, 25);
 		this.add(telLabLabel);
 
 		telLabText = new JTextField(25);
-		telLabText.setBounds(150, 320, 160, 25);
+		telLabText.setBounds(460, 250, 160, 25);
 		this.add(telLabText);
 
 		JLabel empresaLabel = new JLabel("Empresa: ");
-		empresaLabel.setBounds(0, 350, 160, 25);
+		empresaLabel.setBounds(340, 290, 80, 25);
 		this.add(empresaLabel);
 
 		empresaText = new JTextField();
-		empresaText.setBounds(150, 350, 160, 25);
+		empresaText.setBounds(460, 290, 160, 25);
 		this.add(empresaText);
 
 		JLabel obLabel = new JLabel(
 				"Los campos marcados con (*) son obligatorios.");
-		obLabel.setBounds(0, 380, 360, 25);
+		obLabel.setBounds(70, 350, 360, 25);
 		this.add(obLabel);
 
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(50, 430, 100, 25);
+		btnAceptar.setBounds(70, 320, 100, 25);
 		this.add(btnAceptar);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(160, 430, 100, 25);
+		btnVolver.setBounds(180, 320, 100, 25);
 		this.add(btnVolver);
 
 		this.validate();
@@ -163,27 +165,26 @@ public class PanelClientes extends JPanel {
 	public void onMod() {
 
 		this.removeAll();
-		System.out.println("ONMOD");
 
 		JLabel datosLabel = new JLabel(
 				"Por favor, ingrese el DNI del cliente a buscar.");
-		datosLabel.setBounds(0, 0, 360, 25);
+		datosLabel.setBounds(50	, 40, 360, 25);
 		this.add(datosLabel);
 
-		JLabel dniCompradorLabel = new JLabel("DNI: ");
-		dniCompradorLabel.setBounds(0, 50, 160, 25);
+		JLabel dniCompradorLabel = new JLabel("DNI(*): ");
+		dniCompradorLabel.setBounds(50, 90, 70, 25);
 		this.add(dniCompradorLabel);
 
 		dniCompradorText = new JTextField(9);
-		dniCompradorText.setBounds(150, 50, 160, 25);
+		dniCompradorText.setBounds(150, 90, 160, 25);
 		this.add(dniCompradorText);
 
 		btnBuscar = new JButton("Buscar Cliente");
-		btnBuscar.setBounds(700, 270, 160, 25);
+		btnBuscar.setBounds(70, 160, 160, 25);
 		this.add(btnBuscar);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(700, 300, 160, 25);
+		btnVolver.setBounds(240, 160, 160, 25);
 		this.add(btnVolver);
 
 		this.validate();
@@ -195,50 +196,11 @@ public class PanelClientes extends JPanel {
 		this.removeAll();
 		System.out.println("ONVERMOD");
 
-		JLabel dniCompradorLabel = new JLabel("DNI(*): ");
-		dniCompradorLabel.setBounds(0, 50, 160, 25);
-		this.add(dniCompradorLabel);
-
-		JLabel nombreCompradorLabel = new JLabel("Nombre(*): ");
-		nombreCompradorLabel.setBounds(0, 80, 80, 25);
-		this.add(nombreCompradorLabel);
-
-		JLabel apellidoCompradorLabel = new JLabel("Apellido(*): ");
-		apellidoCompradorLabel.setBounds(0, 110, 80, 25);
-		this.add(apellidoCompradorLabel);
-
-		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
-		domicilioPartLabel.setBounds(0, 140, 160, 25);
-		this.add(domicilioPartLabel);
-
-		JLabel ciudadLabel = new JLabel("Ciudad: ");
-		ciudadLabel.setBounds(0, 170, 160, 25);
-		this.add(ciudadLabel);
-
-		JLabel provinciaLabel = new JLabel("Provincia: ");
-		provinciaLabel.setBounds(0, 200, 160, 25);
-		this.add(provinciaLabel);
-
-		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
-		domicilioLabLabel.setBounds(0, 230, 160, 25);
-		this.add(domicilioLabLabel);
-
-		JLabel telPartLabel = new JLabel("Tel. Particular(*): ");
-		telPartLabel.setBounds(0, 260, 160, 25);
-		this.add(telPartLabel);
-
-		JLabel telCelLabel = new JLabel("Email: ");
-		telCelLabel.setBounds(0, 290, 160, 25);
-		this.add(telCelLabel);
-
-		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
-		telLabLabel.setBounds(0, 320, 160, 25);
-		this.add(telLabLabel);
-
-		JLabel empresaLabel = new JLabel("Empresa: ");
-		empresaLabel.setBounds(0, 350, 160, 25);
-		this.add(empresaLabel);
-
+		JLabel datosLabel = new JLabel(
+				"Por favor, ingrese los datos del cliente a dar de alta.");
+		datosLabel.setBounds(50	, 40, 360, 25);
+		this.add(datosLabel);
+		
 		dniCompradorText = new JTextField(String.valueOf(p.getDni()));
 		dniCompradorText.setEditable(false);
 
@@ -271,49 +233,105 @@ public class PanelClientes extends JPanel {
 
 		empresaText = new JTextField(p.getTelefonoL());
 		empresaText.setEditable(false);
+		
+		//LABELS + SIZE
 
-		dniCompradorText.setBounds(150, 50, 160, 25);
-		nombreCompradorText.setBounds(150, 80, 160, 25);
-		apellidoCompradorText.setBounds(150, 110, 160, 25);
-		domicilioPartText.setBounds(150, 140, 160, 25);
-		ciudadText.setBounds(150, 170, 160, 25);
-		provinciaText.setBounds(150, 200, 160, 25);
-		domicilioLabText.setBounds(150, 230, 160, 25);
-		telPartText.setBounds(150, 260, 160, 25);
-		emailText.setBounds(150, 290, 160, 25);
-		telLabText.setBounds(150, 320, 160, 25);
-		empresaText.setBounds(150, 350, 160, 25);
+		JLabel dniCompradorLabel = new JLabel("DNI(*): ");
+		dniCompradorLabel.setBounds(50, 90, 70, 25);
+		this.add(dniCompradorLabel);
 
+		dniCompradorText.setBounds(150, 90, 160, 25);
 		this.add(dniCompradorText);
+
+		JLabel nombreCompradorLabel = new JLabel("Nombre(*): ");
+		nombreCompradorLabel.setBounds(50, 130, 70, 25);
+		this.add(nombreCompradorLabel);
+
+		nombreCompradorText.setBounds(150, 130, 160, 25);
 		this.add(nombreCompradorText);
+
+		JLabel apellidoCompradorLabel = new JLabel("Apellido(*): ");
+		apellidoCompradorLabel.setBounds(50, 170, 70, 25);
+		this.add(apellidoCompradorLabel);
+
+		apellidoCompradorText.setBounds(150, 170, 160, 25);
 		this.add(apellidoCompradorText);
+
+		JLabel domicilioPartLabel = new JLabel("Dom.Particular: ");
+		domicilioPartLabel.setBounds(50, 210, 100, 25);
+		this.add(domicilioPartLabel);
+
+		domicilioPartText.setBounds(150, 210, 160, 25);
 		this.add(domicilioPartText);
+
+		JLabel ciudadLabel = new JLabel("Ciudad: ");
+		ciudadLabel.setBounds(50, 250, 70, 25);
+		this.add(ciudadLabel);
+
+		ciudadText.setBounds(150, 250, 160, 25);
 		this.add(ciudadText);
+
+		/// DERECHA ---------
+		
+		JLabel provinciaLabel = new JLabel("Provincia: ");
+		provinciaLabel.setBounds(340, 90, 70, 25);
+		this.add(provinciaLabel);
+
+		provinciaText.setBounds(460, 90, 160, 25);
 		this.add(provinciaText);
+
+		JLabel domicilioLabLabel = new JLabel("Dom.Laboral: ");
+		domicilioLabLabel.setBounds(340, 130, 90, 25);
+		this.add(domicilioLabLabel);
+
+		domicilioLabText.setBounds(460, 130, 160, 25);
 		this.add(domicilioLabText);
+
+		JLabel telPartLabel = new JLabel("Tel. Particular(*): ");
+		telPartLabel.setBounds(340, 170, 100, 25);
+		this.add(telPartLabel);
+
+		telPartText.setBounds(460, 170, 160, 25);
 		this.add(telPartText);
+
+		JLabel telCelLabel = new JLabel("Email: ");
+		telCelLabel.setBounds(340, 210, 70, 25);
+		this.add(telCelLabel);
+
+		emailText.setBounds(460, 210, 160, 25);
 		this.add(emailText);
+
+		JLabel telLabLabel = new JLabel("Tel. Laboral: ");
+		telLabLabel.setBounds(340, 250, 100, 25);
+		this.add(telLabLabel);
+
+		telLabText.setBounds(460, 250, 160, 25);
 		this.add(telLabText);
+
+		JLabel empresaLabel = new JLabel("Empresa: ");
+		empresaLabel.setBounds(340, 290, 80, 25);
+		this.add(empresaLabel);
+
+		empresaText.setBounds(460, 290, 160, 25);
 		this.add(empresaText);
 
+		
+		
+		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(350, 300, 160, 25);
+		btnModificar.setBounds(70, 330, 100, 25);
 		this.add(btnModificar);
 
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(350, 330, 160, 25);
+		btnEliminar.setBounds(180, 330, 100, 25);
 		this.add(btnEliminar);
 
 		btnVender = new JButton("Iniciar Venta");
-		btnVender.setBounds(350, 360, 160, 25);
+		btnVender.setBounds(600, 330, 160, 25);
 		this.add(btnVender);
 
-		btnComprar = new JButton("Comprar Vehiculo");
-		btnComprar.setBounds(350, 390, 160, 25);
-		this.add(btnComprar);
-
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(350, 420, 160, 25);
+		btnVolver.setBounds(600, 370, 160, 25);
 		this.add(btnVolver);
 
 		this.validate();
@@ -350,13 +368,13 @@ public class PanelClientes extends JPanel {
 		System.out.println("ONVERMOD");
 
 		JLabel datosLabel = new JLabel(
-				"Por favor, ingrese los datos del clientea modificar.");
+				"Por favor, ingrese los datos del cliente a modificar.");
 		datosLabel.setBounds(0, 0, 360, 25);
 		this.add(datosLabel);
 
 		JLabel obLabel = new JLabel(
 				"Los campos marcados con (*) son obligatorios.");
-		obLabel.setBounds(0, 380, 360, 25);
+		obLabel.setBounds(70, 350, 360, 25);
 		this.add(obLabel);
 
 		dniCompradorText.setEditable(false);
@@ -373,16 +391,15 @@ public class PanelClientes extends JPanel {
 
 		this.remove(btnModificar);
 		this.remove(btnVender);
-		this.remove(btnComprar);
 		this.remove(btnEliminar);
 		this.remove(btnVolver);
 
-		btnAceptar = new JButton("Aceptar Cambios");
-		btnAceptar.setBounds(350, 270, 160, 25);
-		this.add(btnAceptar);
+		btnAceptarCambios = new JButton("Aceptar Cambios");
+		btnAceptarCambios.setBounds(600, 330, 160, 25);
+		this.add(btnAceptarCambios);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(350, 300, 100, 25);
+		btnVolver.setBounds(600, 370, 160, 25);
 		this.add(btnVolver);
 
 		this.validate();
@@ -494,13 +511,7 @@ public class PanelClientes extends JPanel {
 		this.btnVender = btnVender;
 	}
 
-	public JButton getBtnComprar() {
-		return btnComprar;
-	}
-
-	public void setBtnComprar(JButton btnComprar) {
-		this.btnComprar = btnComprar;
-	}
+	
 
 	public Persona getUpdatePersona() {
 		int dni;
@@ -536,6 +547,30 @@ public class PanelClientes extends JPanel {
 		this.validate();
 		this.repaint();
 
+	}
+
+	public JTextField getEmailText() {
+		return emailText;
+	}
+
+	public void setEmailText(JTextField emailText) {
+		this.emailText = emailText;
+	}
+
+	public JTextField getEmpresaText() {
+		return empresaText;
+	}
+
+	public void setEmpresaText(JTextField empresaText) {
+		this.empresaText = empresaText;
+	}
+
+	public JButton getBtnAceptarCambios() {
+		return btnAceptarCambios;
+	}
+
+	public void setBtnAceptarCambios(JButton btnAceptarCambios) {
+		this.btnAceptarCambios = btnAceptarCambios;
 	}
 
 }

@@ -22,12 +22,7 @@ public class ListenerClientesVenta implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		try {
-			cc.altaPersona();
-		} catch (DBException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		cc.nuevaVenta();
 		
 		
 	}

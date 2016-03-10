@@ -173,13 +173,11 @@ public class ClientesView implements ClientesInterface {
 		listenerClientesMod =new ListenerClientesMod(clientesController);
 		listenerClientesBaja =new ListenerClientesBaja(clientesController);
 		listenerClientesVenta =new ListenerClientesVenta(clientesController);
-		listenerClientesCompra =new ListenerClientesCompra(clientesController);
 	
 		//ADD LISTENERS
 		panelClientes.getBtnModificar().addActionListener(listenerClientesMod);
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
 		panelClientes.getBtnVender().addActionListener(listenerClientesVenta);
-		panelClientes.getBtnComprar().addActionListener(listenerClientesCompra);
 		panelClientes.getBtnEliminar().addActionListener(listenerClientesBaja);
 	
 	}
@@ -195,7 +193,7 @@ public class ClientesView implements ClientesInterface {
 		listenerModAceptar = new ListenerModAceptar(clientesController);
 		
 		panelClientes.getBtnVolver().addActionListener(listenerMenuClientesVolver);
-		panelClientes.getBtnAceptar().addActionListener(listenerModAceptar);
+		panelClientes.getBtnAceptarCambios().addActionListener(listenerModAceptar);
 		
 		
 		
