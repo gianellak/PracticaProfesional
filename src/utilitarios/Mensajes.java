@@ -60,5 +60,18 @@ public class Mensajes {
 		
 	}
 
+	
+	// VENTAS
+	
+	public static int msjSinStock() {
+		
+		String s = new String("La unidad ingresada ya no se encuentra en stock. ¿Desea ver la lista actual de unidades disponibles?");
+		
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Not Found", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+		
+	}
+
 
 }

@@ -103,7 +103,7 @@ public class StringMsj {
 
 	public static final String MSG_VTA_OK = 
 			"Venta generada con éxito. Por favor, complete los datos de pago.";
-
+	
 	//USUARIO
 	
 	public static final String MSG_EMP_MOD_OK =
@@ -131,10 +131,10 @@ public class StringMsj {
 			"El usuario se ha eliminado correctamente.";	
 	
 	public static final String MSG_EMP_DEL_BAD =
-			"Ha ocurrido un error al intentar dar de baja al empleado. Por favor reintente.";	
+			"Ha ocurrido un error al intentar dar de baja al empleado y usuario asociado. Por favor reintente.";	
 	
 	public static final String MSG_EMP_DEL_OK =
-			"El empleado ha sido dado de baja correctamente.";	
+			"El empleado y usuario asociado han sido dado de baja correctamente.";	
 
 	
 
