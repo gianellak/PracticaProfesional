@@ -338,7 +338,7 @@ public class VentasView implements VentasInterface {
 
 
 	@Override
-	public void ingresarDetalleVenta(int idVenta, String cliente, String garante, String vehiculo, int precio){
+	public void ingresarDetalleVenta(int idVenta, Persona cliente, Persona garante, Vehiculo vehiculo, int precio){
 		
 		PantallaUtil.remove(panelVentas);
 		PantallaUtil.refresh(frame);
@@ -363,8 +363,14 @@ public class VentasView implements VentasInterface {
 	
 	@Override
 	public int getCuotas() {
+		int cuota;
 		
-		return Integer.valueOf(panelVentas.getCuotasText().getText());
+		try {
+			cuota = Integer.valueOf(panelVentas.getCuotasText().getText());
+		} catch (NumberFormatException e) {
+			cuota = 0;
+		}
+		return cuota;
 	}
 
 	@Override

@@ -11,6 +11,8 @@ import java.util.List;
 
 
 
+
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -49,6 +51,8 @@ public class PanelVentas extends JPanel {
 	private int h;
 	private int w;
 	private JPanel detallePanel;
+	private JPanel pagoPanel;
+	private JButton btnAdqUnidad;
 
 	public PanelVentas() {
 
@@ -75,7 +79,7 @@ public class PanelVentas extends JPanel {
 		this.removeAll();
 
 		JLabel textLabel = new JLabel("Por favor, complete los siguientes datos para comenzar el proceso de venta.");
-		textLabel.setBounds(50, 40, 380, 25);
+		textLabel.setBounds(50, 40, 480, 25);
 		this.add(textLabel);
 
 		JLabel compradorLabel = new JLabel("DNI del comprador: ");
@@ -86,12 +90,12 @@ public class PanelVentas extends JPanel {
 		dniCompradorText.setBounds(170, 90, 150, 25);
 		this.add(dniCompradorText);
 
-		btnValidarDniC = new JButton("Validar Dni");
+		btnValidarDniC = new JButton("Validar DNI");
 		btnValidarDniC.setPreferredSize(preferredSize);
 		btnValidarDniC.setBounds(330, 90, 140, 25);
 		this.add(btnValidarDniC);
 
-		JLabel vehiculoLabel = new JLabel("Ingrese Patente: ");
+		JLabel vehiculoLabel = new JLabel("Ingrese dominio: ");
 		vehiculoLabel.setBounds(50, 130, 120, 25);
 		this.add(vehiculoLabel);
 
@@ -112,7 +116,7 @@ public class PanelVentas extends JPanel {
 		dniGaranteText.setBounds(170, 170, 150, 25);
 		this.add(dniGaranteText);
 
-		btnValidarDniG = new JButton("Validar Dni");
+		btnValidarDniG = new JButton("Validar DNI");
 		btnValidarDniG.setPreferredSize(preferredSize);
 		btnValidarDniG.setBounds(330, 170, 140, 25);
 		this.add(btnValidarDniG);
@@ -121,7 +125,7 @@ public class PanelVentas extends JPanel {
 		miniVentaPanel = new JPanel();
 		miniVentaPanel.setLayout(null);
 	    miniVentaPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
-	            "Detalle de la venta."));
+	            "Detalle de la venta "));
 	    miniVentaPanel.setBounds(490, 80, 260, 130);
 	   
 	        this.add(miniVentaPanel);
@@ -191,8 +195,8 @@ public class PanelVentas extends JPanel {
 		}
 	}
 
-	public void mostrarDetalleVenta(int idVenta, String cliente,
-			String garante, String vehiculo) {
+	public void mostrarDetalleVenta(int idVenta, Persona cliente,
+			Persona garante, Vehiculo vehiculo) {
 
 		this.removeAll();
 		
@@ -200,56 +204,95 @@ public class PanelVentas extends JPanel {
 		detallePanel = new JPanel();
 		detallePanel.setLayout(null);
 	    detallePanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
-	            "Detalle de Venta N°: " + idVenta));
-	    detallePanel.setBounds(20, 40, w - 290, 150);
+	            "Detalle de Venta N°: " + idVenta + "  " ));
+	    detallePanel.setBounds(20, 20, w - 290, 150);
 	   
 	      this.add(detallePanel);
 
 		
-		JLabel dniCompradorLabel = new JLabel("Cliente: " + cliente);
-		dniCompradorLabel.setBounds(20, 20, 260, 20);
+	    JLabel clienteLabel = new JLabel("Cliente: " + cliente.getApellido() + " " + cliente.getNombre());
+	    clienteLabel.setBounds(20, 20, 260, 20);
+	    detallePanel.add(clienteLabel);
+
+	    JLabel dniCompradorLabel = new JLabel("DNI: " + cliente.getDni());
+		dniCompradorLabel.setBounds(280, 20, 260, 20);
 		detallePanel.add(dniCompradorLabel);
 
-		JLabel nombreCompradorLabel = new JLabel("Garante: " + garante);
-		nombreCompradorLabel.setBounds(20, 50, 260, 20);
-		detallePanel.add(nombreCompradorLabel);
+		
+		JLabel garanteLabel = new JLabel("Garante: " + garante.getApellido() + " " + garante.getNombre());
+		garanteLabel.setBounds(20, 50, 260, 20);
+		detallePanel.add(garanteLabel);
 
-		JLabel vehiculoLabel = new JLabel("Vehiculo: " + vehiculo);
+		JLabel dniGaranteLabel = new JLabel("DNI: " + garante.getDni());
+		dniGaranteLabel.setBounds(280, 50, 260, 20);
+		detallePanel.add(dniGaranteLabel);
+
+		JLabel vehiculoLabel = new JLabel("Unidad vendida: " + vehiculo.getMarca() + " " + vehiculo.getModelo());
 		vehiculoLabel.setBounds(20, 80, 260, 20);
 		detallePanel.add(vehiculoLabel);
+
+		JLabel patenteLabel = new JLabel("Dominio: " + vehiculo.getPatente());
+		patenteLabel.setBounds(280, 80, 150, 20);
+		detallePanel.add(patenteLabel);
+		
+		JLabel vehiculoALabel = new JLabel("Unidad adquirida: " );
+		vehiculoALabel.setBounds(20, 110, 260, 20);
+		detallePanel.add(vehiculoALabel);
+		
+		JLabel patenteALabel = new JLabel("Dominio: ");
+		patenteALabel.setBounds(280, 110, 150, 20);
+		detallePanel.add(patenteALabel);
+
+		btnAdqUnidad = new JButton("Ingresar Unidad");
+		btnAdqUnidad.setBounds(440, 110, 150, 20);
+		detallePanel.add(btnAdqUnidad);
+
+		JLabel yearLabel = new JLabel("Año: " + vehiculo.getYear());
+		yearLabel.setBounds(440, 80, 260, 20);
+		detallePanel.add(yearLabel);
+
 
 		this.revalidate();
 		this.repaint();
 	}
 
-	public void ingresarDetalleVenta(int idVenta, String cliente,
-			String garante, String vehiculo, int precio) {
+	public void ingresarDetalleVenta(int idVenta, Persona cliente,
+			Persona garante, Vehiculo vehiculo, int precio) {
 
 		mostrarDetalleVenta(idVenta, cliente, garante, vehiculo);
 		
+		
+		pagoPanel = new JPanel();
+		pagoPanel.setLayout(null);
+	    pagoPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
+	            "Detalle de financiación  " ));
+	    pagoPanel.setBounds(20, 175, w - 290, h - 400);
+	   
+	     this.add(pagoPanel);
+
 		idV = idVenta;
-		idVehiculo = vehiculo;
+		idVehiculo = vehiculo.getMotor();
 		p = new Double(precio);
 
 		JLabel precioLabel = new JLabel("Precio Lista: $" + String.valueOf(precio));
-		precioLabel.setBounds(0, 120, 160, 20);
-		this.add(precioLabel);
+		precioLabel.setBounds(20, 20, 160, 20);
+		pagoPanel.add(precioLabel);
 
 		JLabel precioTLabel = new JLabel("Precio Final: ");
-		precioTLabel.setBounds(170, 120, 100, 20);
-		this.add(precioTLabel);
+		precioTLabel.setBounds(170, 20, 100, 20);
+		pagoPanel.add(precioTLabel);
 		
 		precioFText = new JTextField("0");
 		precioFText.setEditable(false);
-		precioFText.setBounds(280, 120, 100, 20);
-		this.add(precioFText);
+		precioFText.setBounds(280, 20, 100, 20);
+		pagoPanel.add(precioFText);
 
 		JLabel adelantoLabel = new JLabel("Adelanto: ");
-		adelantoLabel.setBounds(0, 145, 100, 20);
-		this.add(adelantoLabel);
+		adelantoLabel.setBounds(20, 50, 100, 20);
+		pagoPanel.add(adelantoLabel);
 
 		adelantoText = new JTextField("0");
-		adelantoText.setBounds(110, 145, 100, 20);
+		adelantoText.setBounds(110, 50, 100, 20);
 		adelantoText.addKeyListener(new KeyAdapter() {
 	        @Override
 	        public void keyTyped(KeyEvent e) {
@@ -258,18 +301,18 @@ public class PanelVentas extends JPanel {
 	        }
 	    });
 		adelantoText.getDocument().addDocumentListener(new ListenerDetalleTotal(this));
-		this.add(adelantoText);
+		pagoPanel.add(adelantoText);
 
 		JLabel comisionLabel = new JLabel("Comision: ");
-		comisionLabel.setBounds(220, 145, 100, 20);
-		this.add(comisionLabel);
+		comisionLabel.setBounds(220, 50, 100, 20);
+		pagoPanel.add(comisionLabel);
 
 		JLabel descuentoLabel = new JLabel("Descuento: ");
-		descuentoLabel.setBounds(440, 145, 100, 20);
-		this.add(descuentoLabel);
+		descuentoLabel.setBounds(440, 50, 100, 20);
+		pagoPanel.add(descuentoLabel);
 		
 		descuentoText = new JTextField("0");
-		descuentoText.setBounds(550, 145, 100, 20);
+		descuentoText.setBounds(550, 50, 100, 20);
 		descuentoText.addKeyListener(new KeyAdapter() {
 	        @Override
 	        public void keyTyped(KeyEvent e) {
@@ -278,10 +321,10 @@ public class PanelVentas extends JPanel {
 	        }
 	    });
 		descuentoText.getDocument().addDocumentListener(new ListenerDetalleTotal(this));
-		this.add(descuentoText);
+		pagoPanel.add(descuentoText);
 			
 		comisionText = new JTextField("0");
-		comisionText.setBounds(330, 145, 100, 20);
+		comisionText.setBounds(330, 50, 100, 20);
 		comisionText.getDocument().addDocumentListener(new ListenerDetalleTotal(this));
 		comisionText.addKeyListener(new KeyAdapter() {
 	        @Override
@@ -290,31 +333,38 @@ public class PanelVentas extends JPanel {
 	           recalcularFinal();
 	        }
 	    });
-		this.add(comisionText);
+		pagoPanel.add(comisionText);
 
 		JLabel comentarioLabel = new JLabel("Comentarios: ");
-		comentarioLabel.setBounds(0, 170, 100, 20);
-		this.add(comentarioLabel);
+		comentarioLabel.setBounds(20, 80, 100, 20);
+		pagoPanel.add(comentarioLabel);
 
 		comentarioText = new JTextField();
-		comentarioText.setBounds(110, 170, 600, 20);
-		this.add(comentarioText);
+		comentarioText.setBounds(110, 80, 600, 20);
+		pagoPanel.add(comentarioText);
 
 		JLabel saldoLabel = new JLabel("Saldo: ");
-		saldoLabel.setBounds(0, 195, 100, 20);
-		this.add(saldoLabel);
+		saldoLabel.setBounds(20, 110, 100, 20);
+		pagoPanel.add(saldoLabel);
 
 		saldoText = new JTextField("0");
-		saldoText.setBounds(110, 195, 160, 20);
-		this.add(saldoText);
+		saldoText.setBounds(110, 110, 160, 20);
+		pagoPanel.add(saldoText);
 
 		JLabel cuotasLabel = new JLabel("Cantidad de cuotas: ");
-		cuotasLabel.setBounds(0, 220, 160, 20);
-		this.add(cuotasLabel);
+		cuotasLabel.setBounds(20, 140, 160, 20);
+		pagoPanel.add(cuotasLabel);
 
 		cuotasText = new JTextField();
-		cuotasText.setBounds(165, 220, 50, 20);
-		this.add(cuotasText);
+		cuotasText.setBounds(165, 140, 50, 20);
+		cuotasText.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyTyped(KeyEvent e) {
+	           recalcularSaldo();
+	           recalcularFinal();
+	        }
+	    });
+		pagoPanel.add(cuotasText);
 
 		calendar();
 
@@ -322,9 +372,9 @@ public class PanelVentas extends JPanel {
 
 		JScrollPane jp = new JScrollPane(tabla);
 
-		jp.setBounds(0, 265, 600, 200);
+		jp.setBounds(60, 180, 600, 150);
 
-		this.add(jp);
+		pagoPanel.add(jp);
 
 		btnAceptarDetalle = new JButton("Aceptar");
 		btnAceptarDetalle.setPreferredSize(preferredSize);
@@ -386,14 +436,14 @@ public class PanelVentas extends JPanel {
 
 		JLabel calendario = new JLabel(
 				"Seleccione vencimiento de la primera cuota: ");
-		calendario.setBounds(0, 245, 300, 20);
+		calendario.setBounds(225, 140, 300, 20);
 
-		this.add(calendario);
+		pagoPanel.add(calendario);
 
 		dateChooser = new JDateChooser();
-		dateChooser.setBounds(310, 245, 200, 20);
+		dateChooser.setBounds(310, 140, 200, 20);
 
-		this.add(dateChooser);
+		pagoPanel.add(dateChooser);
 
 	}
 	
@@ -611,6 +661,16 @@ public class PanelVentas extends JPanel {
 	
 	public void setBtnValidarVenta(JButton btnValidarVenta) {
 		this.btnValidarVenta = btnValidarVenta;
+	}
+
+
+	public JButton getBtnAdqUnidad() {
+		return btnAdqUnidad;
+	}
+
+
+	public void setBtnAdqUnidad(JButton btnAdqUnidad) {
+		this.btnAdqUnidad = btnAdqUnidad;
 	}
 
 

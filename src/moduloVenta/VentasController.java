@@ -338,14 +338,8 @@ public class VentasController {
 
 					Mensajes.mensajeInfo(StringMsj.MSG_VTA_OK);
 
-					String c = new String(cliente.getNombre() + " "
-							+ cliente.getApellido());
-					String g = new String(garante.getNombre() + " "
-							+ garante.getApellido());
-					String vh = new String(vehiculo.getMarca() + " - "
-							+ vehiculo.getModelo());
-
-					vi.ingresarDetalleVenta(idVenta, c, g, vh,
+					
+					vi.ingresarDetalleVenta(idVenta, cliente, garante, vehiculo,
 							vehiculo.getPvc());
 
 				} else {
