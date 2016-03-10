@@ -52,6 +52,8 @@ public interface UsuarioInterface {
 	public void cleanPanelUsuario();
 
 	public int showToDelete(Usuario user);
+	
+	public int showToDeleteBoth(Usuario user);
 
 	public void onMod();
 

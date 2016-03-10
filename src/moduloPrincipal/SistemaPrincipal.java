@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import objetos.Empleado;
 import objetos.Usuario;
 import moduloLogin.LoginController;
 import moduloLogin.LoginDB;
@@ -27,6 +28,7 @@ public class SistemaPrincipal {
 		System.out.println( Toolkit.getDefaultToolkit().getScreenSize());
 		
 		Boolean hayTabla = false;
+		Boolean hayTablaE = false;
 
 		ConnectionProvider conn = new DBConnection();
 
@@ -41,14 +43,16 @@ public class SistemaPrincipal {
 		SchemaGenerator s = new SchemaGenerator(conn);
 
 		try {
-			s.generateSchemaEmpleado();
+			
+			if(s.generateSchemaEmpleado())
+				hayTablaE = true;
+			
 			s.generateSchema();
 			s.generateSchemaPersona();
 			s.generateSchemaDetalleVenta();
-			if (s.generateSchemaUsuario() == true) {
+			if (s.generateSchemaUsuario()) 
 				hayTabla = true;
-			}
-			;
+	
 			s.generateSchemaVehiculo();
 			s.generateSchemaVenta();
 		} catch (SQLException e1) {
@@ -56,6 +60,16 @@ public class SistemaPrincipal {
 			e1.printStackTrace();
 		}
 
+		
+		if (hayTablaE){
+			Empleado e = new Empleado(00000000, "Usuario", "Administrador", "", "", "", "");
+			
+			UsuarioDB uDB = new UsuarioDB(conn);
+			
+			uDB.inserE(e);
+		}
+		
+		
 		if (hayTabla) {
 			Usuario u = new Usuario("admin", "admin", 00000000, 0, "Usuario",
 					"Administrador", false);

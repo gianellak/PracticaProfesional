@@ -223,7 +223,7 @@ public class VentasController {
 	public void buscarVehiculo() throws DBException {
 
 		String p = vi.getPatenteBuscar().toUpperCase();
-		
+
 		System.out.println("patente ingresada: " + p);
 
 		if (p.isEmpty()) {
@@ -241,20 +241,39 @@ public class VentasController {
 			vehiculo = vhDB.getVehiculo(p);
 
 			if (vehiculo != null) {
-				vi.mostrarPatente(vehiculo);
+
+				if (vehiculo.getCondicion() != "VENDIDO") {
+
+					vi.mostrarPatente(vehiculo);
+				} else {
+					int cod = Mensajes.msjSinStock();
+
+					if (cod == JOptionPane.YES_OPTION) {
+
+						List<Vehiculo> lista = vhDB.getAllVehiculos();
+						muestroStock(lista);
+			
+					} else {
+						if (cod == JOptionPane.NO_OPTION) {
+
+						}
+					}
+
+				}
 			} else {
 
 				int codigo = Mensajes.msjSinPatente();
 
 				if (codigo == JOptionPane.YES_OPTION) {
-					
+
 					List<Vehiculo> lista = vhDB.getAllVehiculos();
 					muestroStock(lista);
 				} else {
-					
+
 					if (codigo == JOptionPane.NO_OPTION) {
 					}
 				}
+
 			}
 		}
 	}
@@ -265,12 +284,13 @@ public class VentasController {
 
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
 
-		
 		for (int i = 0; i < lista.size(); i++) {
-			System.out.println("Condicion: " +lista.get(i).getCondicion().toUpperCase());
+			System.out.println("Condicion: "
+					+ lista.get(i).getCondicion().toUpperCase());
 
 			if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
-					&& !(lista.get(i).getCondicion().toUpperCase().equals("NO DISPONIBLE"))) {
+					&& !(lista.get(i).getCondicion().toUpperCase()
+							.equals("NO DISPONIBLE"))) {
 
 				Stock s = new Stock();
 
@@ -327,8 +347,6 @@ public class VentasController {
 					garante.getDni(), 1);
 
 			if (vDB.insertVenta(v)) {
-				
-				
 
 				vehiculo.setCondicion("Vendido");
 				vehiculo.setFechaVenta(stringDate);
@@ -433,39 +451,36 @@ public class VentasController {
 
 		return lista;
 	}
-	
-	public void insertarDetalleVenta(){
-		
+
+	public void insertarDetalleVenta() {
+
 		String idVehiculo;
-		
-		if(vehiculo.getPatente().equals("000000")){
+
+		if (vehiculo.getPatente().equals("000000")) {
 			idVehiculo = vehiculo.getMotor();
-		}else{
+		} else {
 			idVehiculo = vehiculo.getPatente();
 		}
 
-		
-		DetalleVenta dv = vi.getNewDetalle();	
+		DetalleVenta dv = vi.getNewDetalle();
 		System.out.println(dv.getAdelanto());
 
 	}
-	
-	
+
 	public void buscarVentaPantalla() {
 		System.out.println("Buscar Venta Pantalla");
-		
+
 		vi.mostrarBuscarVenta();
 
 	}
-	
-	public void buscarVenta(){
-		
+
+	public void buscarVenta() {
+
 		// int dni = vi.getDniBuscarC();
 		int dni = 12345678;
-		
-// NO DEVUELVE UNA LISTA		List<Venta> listaV = vDB.findByDNI(dni);
-		
-		
+
+		// NO DEVUELVE UNA LISTA List<Venta> listaV = vDB.findByDNI(dni);
+
 	}
-	
+
 }

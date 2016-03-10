@@ -281,6 +281,16 @@ public class UsuarioView implements UsuarioInterface {
 		return codigo;
 				
 	}
+	
+	
+	public int showToDeleteBoth(Usuario user) {
+		
+		String s = new String("Para eliminar el empleado debe eliminar el usuario asociado ¿Esta seguro que desea eliminar el usuario: " + user.getUsername() + "?");
+		int codigo=JOptionPane.showConfirmDialog(null, s , "Eliminar usuario", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+       
+		return codigo;
+				
+	}
 
 
 
