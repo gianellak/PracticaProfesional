@@ -1,11 +1,13 @@
 package moduloVenta.paneles;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+
 
 
 
@@ -18,6 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import moduloVenta.listener.ListenerDetalleTotal;
 
@@ -41,18 +45,22 @@ public class PanelVentas extends JPanel {
 	private int idV;
 	private String idVehiculo;
 	private Double p,comision,descuento,adelanto;
+	private JPanel miniVentaPanel;
+	private int h;
+	private int w;
+	private JPanel detallePanel;
 
 	public PanelVentas() {
 
 		System.out.println("Creo nuevo panel Venta");
 
 		Double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int w = width.intValue() - 250;
+		w = width.intValue();
 		
 		Double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-		int h = height.intValue() - 150;
+		h = height.intValue() ;
 		
-		this.setPreferredSize(new Dimension(w, h));
+		this.setPreferredSize(new Dimension(w -250, h-150));
 		this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		
 		this.setLayout(null);
@@ -66,60 +74,73 @@ public class PanelVentas extends JPanel {
 
 		this.removeAll();
 
-		System.out.println("En Nueva Venta");
+		JLabel textLabel = new JLabel("Por favor, complete los siguientes datos para comenzar el proceso de venta.");
+		textLabel.setBounds(50, 40, 380, 25);
+		this.add(textLabel);
 
-		JLabel compradorLabel = new JLabel("Ingrese DNI del Comprador: ");
-		compradorLabel.setBounds(50, 60, 200, 25);
+		JLabel compradorLabel = new JLabel("DNI del comprador: ");
+		compradorLabel.setBounds(50, 90, 120, 25);
 		this.add(compradorLabel);
 
-		dniCompradorText.setBounds(300, 60, 160, 25);
+		dniCompradorText = new JTextField(10);
+		dniCompradorText.setBounds(170, 90, 150, 25);
 		this.add(dniCompradorText);
 
 		btnValidarDniC = new JButton("Validar Dni");
 		btnValidarDniC.setPreferredSize(preferredSize);
-		btnValidarDniC.setBounds(480, 60, 160, 25);
+		btnValidarDniC.setBounds(330, 90, 140, 25);
 		this.add(btnValidarDniC);
 
 		JLabel vehiculoLabel = new JLabel("Ingrese Patente: ");
-		vehiculoLabel.setBounds(50, 90, 200, 25);
+		vehiculoLabel.setBounds(50, 130, 120, 25);
 		this.add(vehiculoLabel);
 
 		patenteText = new JTextField(9);
-		patenteText.setBounds(300, 90, 160, 25);
+		patenteText.setBounds(170, 130, 150, 25);
 		this.add(patenteText);
 
 		btnBuscarVehiculo = new JButton("Buscar Vehiculo");
 		btnBuscarVehiculo.setPreferredSize(preferredSize);
-		btnBuscarVehiculo.setBounds(480, 90, 160, 25);
+		btnBuscarVehiculo.setBounds(330, 130, 140, 25);
 		this.add(btnBuscarVehiculo);
 
-		JLabel garanteLabel = new JLabel("Usuario: ");
-		garanteLabel.setBounds(50, 120, 200, 25);
+		JLabel garanteLabel = new JLabel("DNI del garante: ");
+		garanteLabel.setBounds(50, 170, 120, 25);
 		this.add(garanteLabel);
 
 		dniGaranteText = new JTextField(9);
-		dniGaranteText.setBounds(300, 120, 160, 25);
+		dniGaranteText.setBounds(170, 170, 150, 25);
 		this.add(dniGaranteText);
 
 		btnValidarDniG = new JButton("Validar Dni");
 		btnValidarDniG.setPreferredSize(preferredSize);
-		btnValidarDniG.setBounds(480, 120, 160, 25);
+		btnValidarDniG.setBounds(330, 170, 140, 25);
 		this.add(btnValidarDniG);
 
+		
+		miniVentaPanel = new JPanel();
+		miniVentaPanel.setLayout(null);
+	    miniVentaPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
+	            "Detalle de la venta."));
+	    miniVentaPanel.setBounds(490, 80, 260, 130);
+	   
+	        this.add(miniVentaPanel);
+	        
+	        
 		btnAceptarNewVenta = new JButton("Aceptar");
 		btnAceptarNewVenta.requestFocus(true);
 		btnAceptarNewVenta.setPreferredSize(preferredSize);
-		btnAceptarNewVenta.setBounds(450, 200, 150, 25);
+		btnAceptarNewVenta.setBounds(70, 240, 120, 25);
 		this.add(btnAceptarNewVenta);
 
 		btnVolverNewVenta = new JButton("Volver");
 		btnVolverNewVenta.setPreferredSize(preferredSize);
-		btnVolverNewVenta.setBounds(610, 200, 150, 25);
+		btnVolverNewVenta.setBounds(200, 240, 120, 25);
 		this.add(btnVolverNewVenta);
 
 		btnReset = new JButton("Reiniciar");
 		btnReset.setPreferredSize(preferredSize);
-		btnReset.setBounds(770, 200, 150, 25);
+		btnReset.setBounds(330, 240, 120, 25);
 		this.add(btnReset);
 
 		this.validate();
@@ -129,10 +150,9 @@ public class PanelVentas extends JPanel {
 
 	public void mostrarCliente(Persona cliente) {
 
-		JLabel compradorLabel = new JLabel("Sr./Sra.: " + cliente.getApellido()
-				+ " " + cliente.getNombre());
-		compradorLabel.setBounds(650, 60, 200, 25);
-		this.add(compradorLabel);
+		JLabel compradorLabel = new JLabel("Cliente: " + cliente.getApellido() + " " + cliente.getNombre());
+		compradorLabel.setBounds(10, 20, 200, 25);
+		miniVentaPanel.add(compradorLabel);
 
 		dniCompradorText.setEditable(false);
 		btnValidarDniC.setEnabled(false);
@@ -141,10 +161,9 @@ public class PanelVentas extends JPanel {
 
 	public void mostrarGarante(Persona cliente) {
 
-		JLabel garanteLabel = new JLabel("Sr./Sra.: " + cliente.getApellido()
-				+ " " + cliente.getNombre());
-		garanteLabel.setBounds(650, 120, 200, 25);
-		this.add(garanteLabel);
+		JLabel garanteLabel = new JLabel("Garante " +cliente.getApellido() + " " + cliente.getNombre());
+		garanteLabel.setBounds(10, 80, 200, 25);
+		miniVentaPanel.add(garanteLabel);
 
 		dniGaranteText.setEditable(false);
 		btnValidarDniG.setEnabled(false);
@@ -153,10 +172,9 @@ public class PanelVentas extends JPanel {
 
 	public void mostrarPatente(Vehiculo vehiculo) {
 
-		JLabel vehiculoLabel = new JLabel("Vehículo: " + vehiculo.getMarca()
-				+ " " + vehiculo.getModelo());
-		vehiculoLabel.setBounds(650, 90, 250, 25);
-		this.add(vehiculoLabel);
+		JLabel vehiculoLabel = new JLabel("Vehiculo: " + vehiculo.getMarca() + " " + vehiculo.getModelo());
+		vehiculoLabel.setBounds(10, 50, 250, 25);
+		miniVentaPanel.add(vehiculoLabel);
 
 		patenteText.setEditable(false);
 		btnBuscarVehiculo.setEnabled(false);
@@ -177,22 +195,28 @@ public class PanelVentas extends JPanel {
 			String garante, String vehiculo) {
 
 		this.removeAll();
+		
+	
+		detallePanel = new JPanel();
+		detallePanel.setLayout(null);
+	    detallePanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
+	            "Detalle de Venta N°: " + idVenta));
+	    detallePanel.setBounds(20, 40, w - 290, 150);
+	   
+	      this.add(detallePanel);
 
-		JLabel idVentaLabel = new JLabel("Venta N°: " + idVenta);
-		idVentaLabel.setBounds(0, 20, 160, 20);
-		this.add(idVentaLabel);
-
+		
 		JLabel dniCompradorLabel = new JLabel("Cliente: " + cliente);
-		dniCompradorLabel.setBounds(0, 45, 260, 20);
-		this.add(dniCompradorLabel);
+		dniCompradorLabel.setBounds(20, 20, 260, 20);
+		detallePanel.add(dniCompradorLabel);
 
 		JLabel nombreCompradorLabel = new JLabel("Garante: " + garante);
-		nombreCompradorLabel.setBounds(0, 70, 260, 20);
-		this.add(nombreCompradorLabel);
+		nombreCompradorLabel.setBounds(20, 50, 260, 20);
+		detallePanel.add(nombreCompradorLabel);
 
 		JLabel vehiculoLabel = new JLabel("Vehiculo: " + vehiculo);
-		vehiculoLabel.setBounds(0, 95, 260, 20);
-		this.add(vehiculoLabel);
+		vehiculoLabel.setBounds(20, 80, 260, 20);
+		detallePanel.add(vehiculoLabel);
 
 		this.revalidate();
 		this.repaint();

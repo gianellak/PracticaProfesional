@@ -103,6 +103,10 @@ public class PanelUsuario extends JPanel {
 		userText.setBounds(150, 90, 160, 25);
 		this.add(userText);
 		
+		JLabel limitUserLabel = new JLabel("[Alfanumérico, de 5 a 8 caracteres.]");
+		limitUserLabel.setBounds(320, 90, 280, 25);
+		this.add(limitUserLabel);
+
 		JLabel passLabel = new JLabel("Contraseña: ");
 		passLabel.setBounds(50, 130, 80, 25);
 		this.add(passLabel);
@@ -110,6 +114,10 @@ public class PanelUsuario extends JPanel {
 		passwordText = new JPasswordField(8);
 		passwordText.setBounds(150, 130, 160, 25);
 		this.add(passwordText);
+		
+		JLabel limitPassLabel = new JLabel("[Alfanumérico, de 6 caracteres.]");
+		limitPassLabel.setBounds(320, 130, 280, 25);
+		this.add(limitPassLabel);
 		
 		JLabel patenteLabel = new JLabel("Permisos: ");
 		patenteLabel.setBounds(50, 170, 70, 25);
@@ -119,7 +127,7 @@ public class PanelUsuario extends JPanel {
 		JPanel permisos = new JPanel();
 	    permisos.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
 	            "Permisos"));
-	    permisos.setBounds(330, 150, 170, 70);
+	    permisos.setBounds(330, 170, 170, 70);
 	    permisos.add(new JLabel("0 = Usuario Administrativo."));
 	    permisos.add(new JLabel("1 = Usuario Funcional."));
 	        this.add(permisos);
