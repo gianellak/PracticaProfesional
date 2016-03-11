@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,9 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
-
 import moduloVehiculos.listener.ListenerCombo;
-import moduloVenta.listener.ListenerComboModelo;
 import objetos.Stock;
 import objetos.Vehiculo;
 
@@ -55,7 +52,6 @@ public class PanelVehiculos extends JPanel {
 	private JButton btnVolverAStock;
 	private JComboBox<String> comboListModelo;
 	private JComboBox<String> comboListYear;
-	private ListenerComboModelo listenerComboModelo;
 	private JComboBox comboListMarca;
 	private Component btnCopiar;
 	private JTextField patenteText;
@@ -374,15 +370,15 @@ public class PanelVehiculos extends JPanel {
 	public void menuVentaStock(){
 		
 		btnDetalle = new JButton("Ver Detalle");
-		btnDetalle.setBounds(150, 400, 150, 25);
+		btnDetalle.setBounds(150, 500, 150, 25);
 		this.add(btnDetalle);
 
 		btnSeleccionar = new JButton("Elegir vehiculo");
-		btnSeleccionar.setBounds(320, 400, 150, 25);
+		btnSeleccionar.setBounds(320, 500, 150, 25);
 		this.add(btnSeleccionar);
 		
 		btnVolverVenta = new JButton("Volver");
-		btnVolverVenta.setBounds(490, 400, 150, 25);
+		btnVolverVenta.setBounds(490, 500, 150, 25);
 		this.add(btnVolverVenta);
 		
 		
@@ -394,19 +390,19 @@ public class PanelVehiculos extends JPanel {
 	public void menuVerStock(){
 		
 		btnDetalle = new JButton("Ver Detalle");
-		btnDetalle.setBounds(150, 400, 150, 25);
+		btnDetalle.setBounds(150, 500, 150, 25);
 		this.add(btnDetalle);
 		
 		btnSeleccionar = new JButton("Vender vehiculo");
-		btnSeleccionar.setBounds(320, 400, 150, 25);
+		btnSeleccionar.setBounds(320, 500, 150, 25);
 		this.add(btnSeleccionar);
 		
 		btnCopiar = new JButton("Copiar Vehiculo");
-		btnCopiar.setBounds(490, 400, 150, 25);
+		btnCopiar.setBounds(490, 500, 150, 25);
 		this.add(btnCopiar);
 		
 		btnVolverVenta = new JButton("Volver");
-		btnVolverVenta.setBounds(650, 400, 150, 25);
+		btnVolverVenta.setBounds(650, 500, 150, 25);
 		this.add(btnVolverVenta);
 		
 		
@@ -431,72 +427,71 @@ public class PanelVehiculos extends JPanel {
 		this.removeAll();
 		
 		txtPatente = new JTextField(v.getPatente());
-		
 		txtMarca = new JTextField(v.getMarca());
-		
 		txtModelo = new JTextField(v.getModelo());
-		
 		txtYear = new JTextField(v.getYear());
-		
 		txtColor = new JTextField(v.getColor());
-
 		txtKm = new JTextField(v.getKm());
-	
 		txtMotor = new JTextField(v.getMotor());
-	
 		txtDominio = new JTextField(v.getDominio());
-	
 		txtPvc = new JTextField(v.getPvc());
-	
 		txtFechaIngreso = new JTextField(v.getFechaIngreso());
-	
 		txtFechaVenta = new JTextField(v.getFechaVenta());
-		
 		txtCondicion = new JTextField(v.getCondicion());
-		
 		txtProveedor = new JTextField(v.getIdProveedor());
-		
 		txtCliente = new JTextField(v.getIdCliente());
-		
 		txtComentarios = new JTextField(25);
 		
+		txtPatente.setEditable(false); 
+		txtMarca.setEditable(false);
+		txtModelo.setEditable(false);
+		txtYear.setEditable(false);
+		txtColor.setEditable(false);
+		txtKm.setEditable(false);
+		txtMotor.setEditable(false);
+		txtDominio.setEditable(false);
+		txtPvc.setEditable(false);
+		txtFechaIngreso.setEditable(false);
+		txtFechaVenta.setEditable(false);
+		txtCondicion.setEditable(false);
+		txtProveedor.setEditable(false);
+		txtCliente.setEditable(false);
+		txtComentarios.setEditable(false);
 		
-		JLabel datosLabel = new JLabel(
-				"A continuación de muestra el detalle de la unidad consultada. ");
+		
+		JLabel datosLabel = new JLabel("A continuación de muestra el detalle de la unidad consultada. ");
 		datosLabel.setBounds(50	, 40, 360, 25);
 		this.add(datosLabel);
 
-		JLabel lblPatente = new JLabel("Patente: ");
+		JLabel lblPatente = new JLabel("Patente(*): ");
 		lblPatente.setBounds(50, 90, 70, 25);
 		this.add(lblPatente);
-
-
 
 		txtPatente.setBounds(170, 90, 160, 25);
 		this.add(txtPatente);
 
-		JLabel lblMarca = new JLabel("Marca: ");
+		JLabel lblMarca = new JLabel("Marca(*): ");
 		lblMarca.setBounds(360, 90, 70, 25);
 		this.add(lblMarca);
 
 		txtMarca.setBounds(480, 90, 160, 25);
 		this.add(txtMarca);
 
-		JLabel lblModelo = new JLabel("Modelo: ");
+		JLabel lblModelo = new JLabel("Modelo(*): ");
 		lblModelo.setBounds(50, 130, 70, 25);
 		this.add(lblModelo);
 
 		txtModelo.setBounds(170, 130, 160, 25);
 		this.add(txtModelo);
 
-		JLabel lblYear = new JLabel("Año: ");
+		JLabel lblYear = new JLabel("Año(*): ");
 		lblYear.setBounds(360, 130, 70, 25);
 		this.add(lblYear);
 
 		txtYear.setBounds(480, 130, 160, 25);
 		this.add(txtYear);
 
-		JLabel lblColor = new JLabel("Color: ");
+		JLabel lblColor = new JLabel("Color(*): ");
 		lblColor.setBounds(50, 170, 70, 25);
 		this.add(lblColor);
 
@@ -517,7 +512,7 @@ public class PanelVehiculos extends JPanel {
 		txtDominio.setBounds(170, 210, 160, 25);
 		this.add(txtDominio);
 		
-		JLabel lblPvc = new JLabel("Precio Lista: ");
+		JLabel lblPvc = new JLabel("PVC(*): ");
 		lblPvc.setBounds(360, 210, 100, 25);
 		this.add(lblPvc);
 
@@ -560,7 +555,7 @@ public class PanelVehiculos extends JPanel {
 		txtCliente.setBounds(170, 330, 160, 25);
 		this.add(txtCliente);
 		
-		JLabel lblMotor = new JLabel("Motor: ");
+		JLabel lblMotor = new JLabel("Motor(*): ");
 		lblMotor.setBounds(360, 330, 70, 25);
 		this.add(lblMotor);
 
@@ -603,10 +598,6 @@ public void muestroStock(List<Stock> lista) {
 		lblMarca.setBounds(50, 100, 50, 25);
 		this.add(lblMarca);
 		
-//		JLabel lblModelo = new JLabel("Modelo: ");
-//		lblModelo.setBounds(260, 100, 50, 25);
-//		this.add(lblModelo);
-
 		JLabel lblYear = new JLabel("Año: ");
 		lblYear.setBounds(260, 100, 50, 25);
 		this.add(lblYear);
@@ -620,10 +611,6 @@ public void muestroStock(List<Stock> lista) {
 	
 	public void preparoFiltros(ArrayList<String> comboMarca, ArrayList<String> comboModelo, ArrayList<String> comboYear) {
 		
-//		comboListModelo = extracted(comboModelo);
-//		comboListModelo.setBounds(260, 120, 200, 25);
-//		this.add(comboListModelo);
-//		
 		comboListMarca = extracted(comboMarca);
 		comboListMarca.setBounds(50, 120, 200, 25);
 		this.add(comboListMarca);		
@@ -877,14 +864,6 @@ public void muestroStock(List<Stock> lista) {
 
 	public void setComboListYear(JComboBox<String> comboListYear) {
 		this.comboListYear = comboListYear;
-	}
-
-	public ListenerComboModelo getListenerComboModelo() {
-		return listenerComboModelo;
-	}
-
-	public void setListenerComboModelo(ListenerComboModelo listenerComboModelo) {
-		this.listenerComboModelo = listenerComboModelo;
 	}
 
 	public JComboBox getComboListMarca() {

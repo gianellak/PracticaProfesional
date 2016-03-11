@@ -31,6 +31,8 @@ public class VentasController {
 	private Persona garante;
 	private Vehiculo vehiculo;
 	private int idVenta;
+	private String marca;
+	private String year;
 
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -251,6 +253,7 @@ public class VentasController {
 					if (cod == JOptionPane.YES_OPTION) {
 
 						List<Vehiculo> lista = vhDB.getAllVehiculos();
+						
 						muestroStock(lista);
 			
 					} else {
@@ -482,11 +485,53 @@ public class VentasController {
 		// NO DEVUELVE UNA LISTA List<Venta> listaV = vDB.findByDNI(dni);
 
 	}
+	
+	public void getCombos() {
+		marca = vi.getMarca();
+		year = vi.getYear();
+	}
 
-	public void aplicoFiltros() {
-		String marca = vi.getSelectedMarca(); 
-		String year = vi.getSelectedYear();
+	public void aplicoFiltros() throws DBException {
+
+		List<Vehiculo> lista;
 		
+		if(marca.equals("-") || year.equals("-"))
+		{
+			lista = vhDB.getFilterVehiculos(marca, year);
+		}else{
+			lista = vhDB.getBothFilters(marca, year);
+		}
+		
+		List<Stock> stockAMostrar = new ArrayList<Stock>();
+
+		for (int i = 0; i < lista.size(); i++) {
+
+			if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
+					&& !(lista.get(i).getCondicion().toUpperCase()
+							.equals("NO DISPONIBLE"))) {
+
+				Stock s = new Stock();
+				String patenteActual = lista.get(i).getPatente();
+
+				if (patenteActual == "000000") {
+					s.setPatente(lista.get(i).getMotor());
+				} else {
+
+					s.setPatente(patenteActual);
+				}
+				s.setCondicion(lista.get(i).getCondicion());
+				s.setColor(lista.get(i).getColor());
+				s.setMarca(lista.get(i).getMarca());
+				s.setModelo(lista.get(i).getModelo());
+				s.setYear(lista.get(i).getYear());
+				s.setPvc(lista.get(i).getPvc());
+
+				stockAMostrar.add(s);
+			}
+		}
+
+		vi.actualizoStock(stockAMostrar);
+
 	}
 
 }

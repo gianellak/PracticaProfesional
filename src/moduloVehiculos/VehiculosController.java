@@ -112,8 +112,8 @@ public class VehiculosController {
 			int codigo = Mensajes.msjSinPatente();
 
 			if (codigo == JOptionPane.YES_OPTION) {
-				List<Vehiculo> lista = vDB.getAllVehiculos();
-				muestroStock(lista);
+				onStock();
+				
 			} else {
 				if (codigo == JOptionPane.NO_OPTION) {
 
@@ -243,44 +243,48 @@ public class VehiculosController {
 
 		List<Vehiculo> lista;
 		
-		if(marca.equals("-") || year.equals("-"))
-		{
-			lista = vDB.getFilterVehiculos(marca, year);
-		}else{
-			System.out.println("aca 2");
-			lista = vDB.getBothFilters(marca, year);
+		try {
+			if(marca.equals("-") || year.equals("-"))
+			{
+				lista = vDB.getFilterVehiculos(marca, year);
+			}else{
+				lista = vDB.getBothFilters(marca, year);
+			}
+			List<Stock> stockAMostrar = new ArrayList<Stock>();
+
+			for (int i = 0; i < lista.size(); i++) {
+
+				if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
+						&& !(lista.get(i).getCondicion().toUpperCase()
+								.equals("NO DISPONIBLE"))) {
+
+					Stock s = new Stock();
+					String patenteActual = lista.get(i).getPatente();
+
+					if (patenteActual == "000000") {
+						s.setPatente(lista.get(i).getMotor());
+					} else {
+
+						s.setPatente(patenteActual);
+					}
+					s.setCondicion(lista.get(i).getCondicion());
+					s.setColor(lista.get(i).getColor());
+					s.setMarca(lista.get(i).getMarca());
+					s.setModelo(lista.get(i).getModelo());
+					s.setYear(lista.get(i).getYear());
+					s.setPvc(lista.get(i).getPvc());
+
+					stockAMostrar.add(s);
+				}
+			}
+
+			vi.actualizoStock(stockAMostrar);
+
+		} catch (NullPointerException e) {
+			
 		}
 		
-		List<Stock> stockAMostrar = new ArrayList<Stock>();
-
-		for (int i = 0; i < lista.size(); i++) {
-
-			if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
-					&& !(lista.get(i).getCondicion().toUpperCase()
-							.equals("NO DISPONIBLE"))) {
-
-				Stock s = new Stock();
-				String patenteActual = lista.get(i).getPatente();
-
-				if (patenteActual == "000000") {
-					s.setPatente(lista.get(i).getMotor());
-				} else {
-
-					s.setPatente(patenteActual);
-				}
-				s.setCondicion(lista.get(i).getCondicion());
-				s.setColor(lista.get(i).getColor());
-				s.setMarca(lista.get(i).getMarca());
-				s.setModelo(lista.get(i).getModelo());
-				s.setYear(lista.get(i).getYear());
-				s.setPvc(lista.get(i).getPvc());
-
-				stockAMostrar.add(s);
-			}
-		}
-
-		vi.actualizoStock(stockAMostrar);
-
+		
 		
 		
 	}
