@@ -41,6 +41,7 @@ public interface VehiculosInterface {
 		public String getMarca();
 		public String getYear();
 		public void actualizoStock(List<Stock> stockAMostrar);
+		public void copioVehiculo(Vehiculo vehiculo);
 	
 	
 		

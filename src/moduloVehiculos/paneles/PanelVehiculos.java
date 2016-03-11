@@ -52,7 +52,7 @@ public class PanelVehiculos extends JPanel {
 	private JButton btnVolverAStock;
 	private JComboBox<String> comboListYear;
 	private JComboBox<String> comboListMarca;
-	private Component btnCopiar;
+	private JButton btnCopiar;
 	private JTextField patenteText;
 	private JButton btnBuscar;
 	private int w;
@@ -102,6 +102,7 @@ public class PanelVehiculos extends JPanel {
 	}
 	
 	private void textFields() {
+		
 		txtPatente = new JTextField(9);
 		txtPatente.setBounds(170, 90, 160, 25);
 		this.add(txtPatente);
@@ -398,21 +399,22 @@ private void allEditableTextFields() {
 
 private void cargarTextFields(Vehiculo v) {
 	
-		txtPatente = new JTextField(v.getPatente());
-		txtMarca = new JTextField(v.getMarca());
-		txtModelo = new JTextField(v.getModelo());
-		txtYear = new JTextField(v.getYear());
-		txtColor = new JTextField(v.getColor());
-		txtKm = new JTextField(v.getKm());
-		txtMotor = new JTextField(v.getMotor());
-		txtDominio = new JTextField(v.getDominio());
-		txtPvc = new JTextField(v.getPvc());
-		txtFechaIngreso = new JTextField(v.getFechaIngreso());
-		txtFechaVenta = new JTextField(v.getFechaVenta());
-		txtCondicion = new JTextField(v.getCondicion());
-		txtProveedor = new JTextField(v.getIdProveedor());
-		txtCliente = new JTextField(v.getIdCliente());
-		txtComentarios = new JTextField(25);
+		txtPatente.setText(v.getPatente());
+		txtMarca.setText(v.getMarca());
+		txtModelo.setText(v.getModelo());
+		txtYear.setText(v.getYear());
+		txtColor.setText(v.getColor());
+		txtKm.setText(String.valueOf(v.getKm()));
+		txtMotor.setText(v.getMotor());
+		txtDominio.setText(v.getDominio());
+		txtPvc.setText(String.valueOf(v.getPvc()));
+		txtFechaIngreso.setText(v.getFechaIngreso());
+		txtFechaVenta.setText(v.getFechaVenta());
+		txtCondicion.setText(v.getCondicion());
+		txtProveedor.setText(String.valueOf(v.getIdProveedor()));
+		txtCliente.setText(String.valueOf(v.getIdCliente()));
+		txtComentarios.setText(v.getComentarios());
+		
 		
 	}
 
@@ -699,11 +701,11 @@ public void muestroStock(List<Stock> lista) {
 		this.comboListMarca = comboListMarca;
 	}
 
-	public Component getBtnCopiar() {
+	public JButton getBtnCopiar() {
 		return btnCopiar;
 	}
 
-	public void setBtnCopiar(Component btnCopiar) {
+	public void setBtnCopiar(JButton btnCopiar) {
 		this.btnCopiar = btnCopiar;
 	}
 
@@ -745,6 +747,37 @@ public void muestroStock(List<Stock> lista) {
 
 	public void setBtnFiltrar(JButton btnFiltrar) {
 		this.btnFiltrar = btnFiltrar;
+	}
+
+	public void copioVehiculo(Vehiculo vehiculo) {
+
+		this.removeAll();
+
+		JLabel datosLabel = new JLabel("Por favor, ingrese los datos de la nueva unidad.");
+		datosLabel.setBounds(50	, 40, 360, 25);
+		this.add(datosLabel);
+
+		labels();
+		
+		textFields();
+		
+		cargarTextFields(vehiculo);
+		
+		txtPatente.setText("");
+		txtMotor.setText("");
+		btnAceptar = new JButton("Guardar");
+		btnAceptar.setBounds(100, 440, 100, 25);
+		this.add(btnAceptar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(210, 440, 100, 25);
+		this.add(btnCancelar);
+		
+		this.validate();
+		this.repaint();
+
+
+		
 	}
 
 	

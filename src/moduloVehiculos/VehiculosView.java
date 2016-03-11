@@ -40,6 +40,7 @@ public class VehiculosView implements VehiculosInterface {
 	private ListenerFiltroStock listenerFiltroStock;
 	private ListenerCombo listenerMarca;
 	private ListenerCombo listenerYear;
+	private ListenerCopiar listenerCopiar;
 
 	
 
@@ -148,6 +149,9 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
 		listenerFiltroStock = new ListenerFiltroStock(vc);
 		panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
+		listenerCopiar = new ListenerCopiar(vc);
+		panelVehiculos.getBtnCopiar().addActionListener(listenerCopiar);
+		
 		
 		
 		frame.add(panelVehiculos);
@@ -372,13 +376,22 @@ public class VehiculosView implements VehiculosInterface {
 	}
 
 
-	
-
-//	@Override
-//	public String getSelectedModelo() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public void copioVehiculo(Vehiculo vehiculo) {
+		
+		PantallaUtil.remove(panelVehiculos);
+		
+		panelVehiculos.copioVehiculo(vehiculo);
+		
+		listenerAceptarAlta =new ListenerAceptarAltaVehiculo(vc);
+		listenerVolverAlta =new ListenerVehiculoVolver(vc);
+		
+		panelVehiculos.getBtnAceptar().addActionListener(listenerAceptarAlta);
+		panelVehiculos.getBtnCancelar().addActionListener(listenerVolver);
+		
+		PantallaUtil.refresh(frame);
+		
+	}
 
 
 	

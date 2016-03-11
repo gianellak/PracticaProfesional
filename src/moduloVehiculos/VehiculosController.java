@@ -234,6 +234,23 @@ public class VehiculosController {
 		}
 
 	}
+	
+	public void copiarVechiulo(){
+		
+		String p = vi.getVehiculoTabla();
+		
+		if(p != null){
+		
+			System.out.println("COPIO");
+			vehiculo = vDB.getVehiculo(p);
+		
+			vi.copioVehiculo(vehiculo);
+			
+		}else{
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
+		}
+		
+	}
 
 	public void getCombos() {
 		marca = vi.getMarca();
