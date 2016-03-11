@@ -20,20 +20,17 @@ public class VehiculosView implements VehiculosInterface {
 
 	private JFrame frmVehiculo;
 	private VehiculosController vc;
+	private JButton btnSalir, btnBuscar, btnNuevo, btnStock;
+	private VehiculosMenu panelVehiculosMenu;
+	private PanelVehiculos panelVehiculos;
+	private VehiculosController cc;
+	private JFrame frame;
 
 	// LISTENERS
 
 	private ListenerNuevoVehiculo listenerNuevo;
 	private ListenerBuscarVehiculo listenerBuscar;
 	private ListenerStock listenerStock;
-	private JButton btnSalir;
-	private JButton btnBuscar;
-	private JButton btnNuevo;
-	private JButton btnStock;
-	private VehiculosMenu panelVehiculosMenu;
-	private PanelVehiculos panelVehiculos;
-	private VehiculosController cc;
-	private JFrame frame;
 	private ListenerVehiculoVolver listenerVolver;
 	private ListenerBuscarPatente listenerBuscarPatente;
 	private ListenerSeleccionar listenerSeleccionar;
@@ -142,13 +139,13 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.muestroStock(listaStockVehiculos);		
 		panelVehiculos.menuVerStock();
 		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
+		
 		listenerMarca = new ListenerCombo(vc);
-		listenerYear = new ListenerCombo(vc);
-		
-		
 		panelVehiculos.getComboListMarca().addItemListener(listenerMarca);
+		listenerYear = new ListenerCombo(vc);
 		panelVehiculos.getComboListYear().addItemListener(listenerYear);
-		
+		listenerDetalle = new ListenerDetalleVehiculo(vc);
+		panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
 		listenerFiltroStock = new ListenerFiltroStock(vc);
 		panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
 		
@@ -320,13 +317,18 @@ public class VehiculosView implements VehiculosInterface {
 			
 			frame.add(panelVehiculos);
 			
-			listenerSeleccionar = new ListenerSeleccionar(vc);			
-			listenerDetalle = new ListenerDetalleVehiculo(vc);
-			listenerFiltroStock = new ListenerFiltroStock(vc);
+			listenerMarca = new ListenerCombo(vc);
+			panelVehiculos.getComboListMarca().addItemListener(listenerMarca);
+			listenerYear = new ListenerCombo(vc);
+			panelVehiculos.getComboListYear().addItemListener(listenerYear);
 			
-			panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
+			listenerSeleccionar = new ListenerSeleccionar(vc);			
 			panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
+			listenerDetalle = new ListenerDetalleVehiculo(vc);
 			panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
+			listenerFiltroStock = new ListenerFiltroStock(vc);
+			panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
+			
 			
 			PantallaUtil.refresh(frame);
 					

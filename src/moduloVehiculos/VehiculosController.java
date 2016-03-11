@@ -8,11 +8,10 @@ import javax.swing.JOptionPane;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
-import objetos.Persona;
 import objetos.Stock;
-import objetos.Usuario;
 import objetos.Vehiculo;
 import utilitarios.Mensajes;
+import utilitarios.StringMsj;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -104,6 +103,8 @@ public class VehiculosController {
 	public void onBuscarPorPatente() throws DBException {
 
 		String patente = vi.getPatenteABuscar().toUpperCase();
+		
+	
 		Vehiculo vehiculo = vDB.getVehiculo(patente);
 
 		if (vehiculo != null) {
@@ -216,18 +217,21 @@ public class VehiculosController {
 
 	}
 
-	public void seleccionaVehiculo() {
-		// TODO Auto-generated method stub
-
-	}
-
-
-
+	
 	public void mostrarDetalle() {
 
+		
 		String p = vi.getVehiculoTabla();
-		vehiculo = vDB.getVehiculo(p);
-		vi.mostrarDetalleVehiculo(vehiculo);
+		
+		if(p != null){
+		
+			vehiculo = vDB.getVehiculo(p);
+		
+			vi.mostrarDetalleVehiculo(vehiculo);}
+		
+		else{
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
+		}
 
 	}
 
@@ -286,6 +290,11 @@ public class VehiculosController {
 		
 		
 		
+		
+	}
+
+	public void seleccionaVehiculo() {
+		// TODO Auto-generated method stub
 		
 	}
 

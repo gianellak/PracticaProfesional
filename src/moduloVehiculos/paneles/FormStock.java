@@ -2,17 +2,19 @@ package moduloVehiculos.paneles;
 
 import java.awt.Dimension;
 import java.util.List;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import objetos.Stock;
-import objetos.Usuario;
 
 public class FormStock extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable tablaStock;
 	private JScrollPane jp;
 
@@ -38,7 +40,12 @@ public class FormStock extends JPanel {
 		DefaultTableModel modelo = new DefaultTableModel(){
 		
 		
-		    public boolean isCellEditable(int row, int column)
+		    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column)
 		    {
 		      return false;
 		    }

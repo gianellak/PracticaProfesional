@@ -2,15 +2,16 @@ package moduloVehiculos.paneles;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 public class VehiculosMenu extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Dimension preferredSize =new Dimension(200,25) ;
 	private JButton btnNuevo;
 	private JButton btnBuscar;

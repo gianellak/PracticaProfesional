@@ -3,20 +3,20 @@ package moduloVehiculos.paneles;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.Icon;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
-import moduloVehiculos.listener.ListenerCombo;
+
 import objetos.Stock;
 import objetos.Vehiculo;
+import utilitarios.Mensajes;
+import utilitarios.StringMsj;
 
 public class PanelVehiculos extends JPanel {
 	
@@ -50,9 +50,8 @@ public class PanelVehiculos extends JPanel {
 	private JButton btnVolverVenta;
 	private JButton btnElegir;
 	private JButton btnVolverAStock;
-	private JComboBox<String> comboListModelo;
 	private JComboBox<String> comboListYear;
-	private JComboBox comboListMarca;
+	private JComboBox<String> comboListMarca;
 	private Component btnCopiar;
 	private JTextField patenteText;
 	private JButton btnBuscar;
@@ -75,142 +74,20 @@ public class PanelVehiculos extends JPanel {
 		this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		
 		this.setLayout(null);
-		
-		
-		
-		
 	}
 	
 	public void onNuevoVehiculo() {
 
 		this.removeAll();
 
-		JLabel datosLabel = new JLabel("Por favor, ingrese los datos del vehiculo a dar de alta.");
+		JLabel datosLabel = new JLabel("Por favor, ingrese los datos de la nueva unidad.");
 		datosLabel.setBounds(50	, 40, 360, 25);
 		this.add(datosLabel);
 
-		JLabel lblPatente = new JLabel("Patente: ");
-		lblPatente.setBounds(50, 90, 70, 25);
-		this.add(lblPatente);
-
-		txtPatente = new JTextField(9);
-		txtPatente.setBounds(170, 90, 160, 25);
-		this.add(txtPatente);
-
-		JLabel lblMarca = new JLabel("Marca: ");
-		lblMarca.setBounds(360, 90, 70, 25);
-		this.add(lblMarca);
-
-		txtMarca = new JTextField(9);
-		txtMarca.setBounds(480, 90, 160, 25);
-		this.add(txtMarca);
-
-		JLabel lblModelo = new JLabel("Modelo: ");
-		lblModelo.setBounds(50, 130, 70, 25);
-		this.add(lblModelo);
-
-		txtModelo = new JTextField(6);
-		txtModelo.setBounds(170, 130, 160, 25);
-		this.add(txtModelo);
-
-		JLabel lblYear = new JLabel("Año: ");
-		lblYear.setBounds(360, 130, 70, 25);
-		this.add(lblYear);
-
-		txtYear = new JTextField(25);
-		txtYear.setBounds(480, 130, 160, 25);
-		this.add(txtYear);
-
-		JLabel lblColor = new JLabel("Color: ");
-		lblColor.setBounds(50, 170, 70, 25);
-		this.add(lblColor);
-
-		txtColor = new JTextField(25);
-		txtColor.setBounds(170, 170, 160, 25);
-		this.add(txtColor);
-
-		JLabel lblKm = new JLabel("Km: ");
-		lblKm.setBounds(360, 170, 70, 25);
-		this.add(lblKm);
-
-		txtKm = new JTextField(25);
-		txtKm.setBounds(480, 170, 160, 25);
-		this.add(txtKm);
-
-		JLabel lblDominio = new JLabel("Dominio: ");
-		lblDominio.setBounds(50, 210, 70, 25);
-		this.add(lblDominio);
-
-		txtDominio = new JTextField(25);
-		txtDominio.setBounds(170, 210, 160, 25);
-		this.add(txtDominio);
+		labels();
 		
-		JLabel lblPvc = new JLabel("Precio Lista: ");
-		lblPvc.setBounds(360, 210, 100, 25);
-		this.add(lblPvc);
-
-		txtPvc = new JTextField(25);
-		txtPvc.setBounds(480, 210, 160, 25);
-		this.add(txtPvc);
+		textFields();
 		
-		JLabel lblfechaIngreso = new JLabel("Fecha ingreso: ");
-		lblfechaIngreso.setBounds(50, 250, 90, 25);
-		this.add(lblfechaIngreso);
-
-		txtFechaIngreso = new JTextField(25);
-		txtFechaIngreso.setBounds(170, 250, 160, 25);
-		this.add(txtFechaIngreso);
-		
-		JLabel lblProveedor = new JLabel("Proveedor: ");
-		lblProveedor.setBounds(360, 250, 70, 25);
-		this.add(lblProveedor);
-		
-		txtProveedor = new JTextField(25);
-		txtProveedor.setBounds(480, 250, 160, 25);
-		this.add(txtProveedor);
-
-		JLabel lblFechaVenta = new JLabel("Fecha condicion: ");
-		lblFechaVenta.setBounds(50, 290, 90, 25);
-		this.add(lblFechaVenta);
-
-		txtFechaVenta = new JTextField(25);
-		txtFechaVenta.setBounds(170, 290, 160, 25);
-		this.add(txtFechaVenta);
-		
-		JLabel lblCondicion = new JLabel("Condicion: ");
-		lblCondicion.setBounds(360, 290, 70, 25);
-		this.add(lblCondicion);
-
-		txtCondicion = new JTextField(25);
-		txtCondicion.setBounds(480, 290, 160, 25);
-		this.add(txtCondicion);
-		
-		
-		JLabel lblCliente = new JLabel("Cliente: ");
-		lblCliente.setBounds(50, 330, 70, 25);
-		this.add(lblCliente);
-
-		txtCliente = new JTextField(25);
-		txtCliente.setBounds(170, 330, 160, 25);
-		this.add(txtCliente);
-		
-		JLabel lblMotor = new JLabel("Motor: ");
-		lblMotor.setBounds(360, 330, 70, 25);
-		this.add(lblMotor);
-
-		txtMotor = new JTextField(25);
-		txtMotor.setBounds(480, 330, 160, 25);
-		this.add(txtMotor);
-		
-		
-		JLabel lblComentarios = new JLabel("Comentarios: ");
-		lblComentarios.setBounds(50, 370, 90, 25);
-		this.add(lblComentarios);
-
-		txtComentarios = new JTextField(25);
-		txtComentarios.setBounds(170, 370, 500, 25);
-		this.add(txtComentarios);
-
 		btnAceptar = new JButton("Guardar");
 		btnAceptar.setBounds(100, 440, 100, 25);
 		this.add(btnAceptar);
@@ -219,140 +96,83 @@ public class PanelVehiculos extends JPanel {
 		btnCancelar.setBounds(210, 440, 100, 25);
 		this.add(btnCancelar);
 		
-		
 		this.validate();
 		this.repaint();
 
 	}
 	
+	private void textFields() {
+		txtPatente = new JTextField(9);
+		txtPatente.setBounds(170, 90, 160, 25);
+		this.add(txtPatente);
+
+		txtMarca = new JTextField(9);
+		txtMarca.setBounds(480, 90, 160, 25);
+		this.add(txtMarca);
+
+		txtModelo = new JTextField(6);
+		txtModelo.setBounds(170, 130, 160, 25);
+		this.add(txtModelo);
+		
+		txtYear = new JTextField(25);
+		txtYear.setBounds(480, 130, 160, 25);
+		this.add(txtYear);
+
+		txtColor = new JTextField(25);
+		txtColor.setBounds(170, 170, 160, 25);
+		this.add(txtColor);
+
+		txtKm = new JTextField(25);
+		txtKm.setBounds(480, 170, 160, 25);
+		this.add(txtKm);
+
+		txtDominio = new JTextField(25);
+		txtDominio.setBounds(170, 210, 160, 25);
+		this.add(txtDominio);
+		
+		txtPvc = new JTextField(25);
+		txtPvc.setBounds(480, 210, 160, 25);
+		this.add(txtPvc);
+		
+		txtFechaIngreso = new JTextField(25);
+		txtFechaIngreso.setBounds(170, 250, 160, 25);
+		this.add(txtFechaIngreso);
+		
+		txtProveedor = new JTextField(25);
+		txtProveedor.setBounds(480, 250, 160, 25);
+		this.add(txtProveedor);
+
+		txtFechaVenta = new JTextField(25);
+		txtFechaVenta.setBounds(170, 290, 160, 25);
+		this.add(txtFechaVenta);
+		
+		txtCondicion = new JTextField(25);
+		txtCondicion.setBounds(480, 290, 160, 25);
+		this.add(txtCondicion);
+		
+		txtCliente = new JTextField(25);
+		txtCliente.setBounds(170, 330, 160, 25);
+		this.add(txtCliente);
+		
+		txtMotor = new JTextField(25);
+		txtMotor.setBounds(480, 330, 160, 25);
+		this.add(txtMotor);
+		
+		txtComentarios = new JTextField(25);
+		txtComentarios.setBounds(170, 370, 500, 25);
+		this.add(txtComentarios);
+
+		
+	}
+
 	public void onModificarVehiculo() {
 
 		this.setLayout(null);
-
-		JLabel lblPatente = new JLabel("Patente: ");
-		lblPatente.setBounds(100, 10, 160, 25);
-		this.add(lblPatente);
-
-		txtPatente = new JTextField(9);
-		txtPatente.setBounds(100, 30, 160, 25);
-		this.add(txtPatente);
-
-		JLabel lblMarca = new JLabel("Marca: ");
-		lblMarca.setBounds(100, 50, 160, 25);
-		this.add(lblMarca);
-
-		JLabel lblMarca2 = new JLabel(); 
-		lblMarca2.setBounds(100, 70, 160, 25);
-		this.add(lblMarca2);
-
-		JLabel lblModelo = new JLabel("Modelo: ");
-		lblModelo.setBounds(100, 90, 160, 25);
-		this.add(lblModelo);
-
-		JLabel lblModelo2 = new JLabel();
-		lblModelo2.setBounds(100, 110, 160, 25);
-		this.add(lblModelo2);
-
-		JLabel lblYear = new JLabel("Año: ");
-		lblYear.setBounds(100, 130, 160, 25);
-		this.add(lblYear);
-
-		JLabel lblYear2 = new JLabel();
-		lblYear2.setBounds(100, 150, 260, 25);
-		this.add(lblYear2);
-
-		JLabel lblColor = new JLabel("Color: ");
-		lblColor.setBounds(100, 170, 160, 25);
-		this.add(lblColor);
-
-		JLabel lblColor2 = new JLabel();
-		lblColor.setBounds(100, 190, 260, 25);
-		this.add(lblColor2);
-
-		JLabel lblKm = new JLabel("Km: ");
-		lblKm.setBounds(100, 210, 160, 25);
-		this.add(lblKm);
-
-		txtKm = new JTextField(25);
-		txtKm.setBounds(100, 230, 260, 25);
-		this.add(txtKm);
 		
-		JLabel lblMotor = new JLabel("Motor: ");
-		lblMotor.setBounds(100, 250, 160, 25);
-		this.add(lblMotor);
-
-		JLabel lblMotor2 = new JLabel();
-		lblMotor2.setBounds(100, 270, 260, 25);
-		this.add(lblMotor2);
+		System.out.println("ACA EN MODIFICAR VEHICULO");
 		
-		JLabel lblDominio = new JLabel("Dominio: ");
-		lblDominio.setBounds(100, 290, 160, 25);
-		this.add(lblDominio);
-
-		JLabel lblDominio2 = new JLabel();
-		lblDominio2.setBounds(100, 310, 260, 25);
-		this.add(lblDominio2);
+		editableTextFields();
 		
-		JLabel lblPvc = new JLabel("PVC: ");
-		lblPvc.setBounds(100, 330, 160, 25);
-		this.add(lblPvc);
-
-		txtPvc = new JTextField(25);
-		txtPvc.setBounds(100, 350, 260, 25);
-		this.add(txtPvc);
-		
-		JLabel lblfechaIngreso = new JLabel("Fecha de ingreso: ");
-		lblfechaIngreso.setBounds(100, 370, 160, 25);
-		this.add(lblfechaIngreso);
-
-		JLabel lblfechaIngreso2 = new JLabel();
-		lblfechaIngreso2.setBounds(100, 390, 260, 25);
-		this.add(lblfechaIngreso2);
-		
-		JLabel lblFechaVenta = new JLabel("Fecha de venta: ");
-		lblFechaVenta.setBounds(100, 410, 160, 25);
-		this.add(lblFechaVenta);
-
-		txtFechaVenta = new JTextField(25);
-		txtFechaVenta.setBounds(100, 430, 260, 25);
-		this.add(txtFechaVenta);
-		
-		JLabel lblCondicion = new JLabel("Condicion: ");
-		lblCondicion.setBounds(100, 450, 160, 25);
-		this.add(lblCondicion);
-
-		txtCondicion = new JTextField(25);
-		txtCondicion.setBounds(100, 470, 260, 25);
-		this.add(txtCondicion);
-		
-		JLabel lblProveedor = new JLabel("Proveedor: ");
-		lblProveedor.setBounds(100, 490, 160, 25);
-		this.add(lblProveedor);
-
-		JLabel lblProveedor2 = new JLabel();
-		lblProveedor2.setBounds(100, 510, 260, 25);
-		this.add(lblProveedor2);
-		
-		
-		JLabel lblCliente = new JLabel("Cliente: ");
-		lblCliente.setBounds(100, 530, 160, 25);
-		this.add(lblCliente);
-
-		txtCliente = new JTextField(25);
-		txtCliente.setBounds(100, 550, 260, 25);
-		this.add(txtCliente);
-		
-		
-		JLabel lblComentarios = new JLabel("Comentarios: ");
-		lblComentarios.setBounds(100, 570, 160, 25);
-		this.add(lblComentarios);
-
-		txtComentarios = new JTextField(25);
-		txtComentarios.setBounds(100, 590, 260, 25);
-		this.add(txtComentarios);
-		
-		
-
 		btnAceptar = new JButton("Guardar");
 		btnAceptar.setBounds(500, 220, 100, 25);
 		this.add(btnAceptar);
@@ -414,35 +234,117 @@ public class PanelVehiculos extends JPanel {
 	
 
 	public String getVehiculoTabla() {
+		
 		int a = panelStock.getTablaStock().getSelectedRow();
 		
-		String patente = String.valueOf(panelStock.getTablaStock().getModel().getValueAt(a,0));
+		String patente = null;
+		try {
+			patente = String.valueOf(panelStock.getTablaStock().getModel().getValueAt(a,0));
+		} catch (Exception e) {
+			return null;
+		}
 				
 		return patente;
 		
+	}
+	
+	public void labels(){
+		
+		JLabel lblPatente = new JLabel("Patente(*): ");
+		lblPatente.setBounds(50, 90, 70, 25);
+		this.add(lblPatente);
+
+		JLabel lblMarca = new JLabel("Marca(*): ");
+		lblMarca.setBounds(360, 90, 70, 25);
+		this.add(lblMarca);
+
+		JLabel lblModelo = new JLabel("Modelo(*): ");
+		lblModelo.setBounds(50, 130, 70, 25);
+		this.add(lblModelo);
+
+		JLabel lblYear = new JLabel("Año(*): ");
+		lblYear.setBounds(360, 130, 70, 25);
+		this.add(lblYear);
+
+		JLabel lblColor = new JLabel("Color(*): ");
+		lblColor.setBounds(50, 170, 70, 25);
+		this.add(lblColor);
+
+		JLabel lblKm = new JLabel("Km: ");
+		lblKm.setBounds(360, 170, 70, 25);
+		this.add(lblKm);
+
+		JLabel lblDominio = new JLabel("Dominio: ");
+		lblDominio.setBounds(50, 210, 70, 25);
+		this.add(lblDominio);
+		
+		JLabel lblPvc = new JLabel("PVC(*): ");
+		lblPvc.setBounds(360, 210, 100, 25);
+		this.add(lblPvc);
+		
+		JLabel lblfechaIngreso = new JLabel("Fecha ingreso: ");
+		lblfechaIngreso.setBounds(50, 250, 90, 25);
+		this.add(lblfechaIngreso);
+		
+		JLabel lblProveedor = new JLabel("Proveedor: ");
+		lblProveedor.setBounds(360, 250, 70, 25);
+		this.add(lblProveedor);
+
+		JLabel lblFechaVenta = new JLabel("Fecha condicion: ");
+		lblFechaVenta.setBounds(50, 290, 90, 25);
+		this.add(lblFechaVenta);
+		
+		JLabel lblCondicion = new JLabel("Condicion: ");
+		lblCondicion.setBounds(360, 290, 70, 25);
+		this.add(lblCondicion);		
+		
+		JLabel lblCliente = new JLabel("Cliente: ");
+		lblCliente.setBounds(50, 330, 70, 25);
+		this.add(lblCliente);
+		
+		JLabel lblMotor = new JLabel("Motor(*): ");
+		lblMotor.setBounds(360, 330, 70, 25);
+		this.add(lblMotor);
+				
+		JLabel lblComentarios = new JLabel("Comentarios: ");
+		lblComentarios.setBounds(50, 370, 70, 25);
+		this.add(lblComentarios);
 	}
 
 	public void mostrarDetalleVehiculo(Vehiculo v) {
 		
 		this.removeAll();
 		
-		txtPatente = new JTextField(v.getPatente());
-		txtMarca = new JTextField(v.getMarca());
-		txtModelo = new JTextField(v.getModelo());
-		txtYear = new JTextField(v.getYear());
-		txtColor = new JTextField(v.getColor());
-		txtKm = new JTextField(v.getKm());
-		txtMotor = new JTextField(v.getMotor());
-		txtDominio = new JTextField(v.getDominio());
-		txtPvc = new JTextField(v.getPvc());
-		txtFechaIngreso = new JTextField(v.getFechaIngreso());
-		txtFechaVenta = new JTextField(v.getFechaVenta());
-		txtCondicion = new JTextField(v.getCondicion());
-		txtProveedor = new JTextField(v.getIdProveedor());
-		txtCliente = new JTextField(v.getIdCliente());
-		txtComentarios = new JTextField(25);
+			JLabel datosLabel = new JLabel("A continuación de muestra el detalle de la unidad consultada. ");
+		datosLabel.setBounds(50	, 40, 360, 25);
+		this.add(datosLabel);
+
+		labels();
+
+		textFields();
 		
-		txtPatente.setEditable(false); 
+		cargarTextFields(v);
+		
+		notEditableTextFields();
+		
+		
+
+		btnElegir = new JButton("Seleccionar Vehiculo");
+		btnElegir.setBounds(700, 220, 160, 25);
+		this.add(btnElegir);
+
+		btnVolverAStock = new JButton("Volver a Stock");
+		btnVolverAStock.setBounds(700, 250, 160, 25);
+		this.add(btnVolverAStock);
+
+		this.validate();
+		this.repaint();
+		
+	}
+
+private void notEditableTextFields() {
+	
+		txtPatente.setEditable(false);
 		txtMarca.setEditable(false);
 		txtModelo.setEditable(false);
 		txtYear.setEditable(false);
@@ -458,129 +360,59 @@ public class PanelVehiculos extends JPanel {
 		txtCliente.setEditable(false);
 		txtComentarios.setEditable(false);
 		
-		
-		JLabel datosLabel = new JLabel("A continuación de muestra el detalle de la unidad consultada. ");
-		datosLabel.setBounds(50	, 40, 360, 25);
-		this.add(datosLabel);
+	}
 
-		JLabel lblPatente = new JLabel("Patente(*): ");
-		lblPatente.setBounds(50, 90, 70, 25);
-		this.add(lblPatente);
+private void editableTextFields() {
+	
+	txtPatente.setEditable(true);
+	txtYear.setEditable(true);
+	txtKm.setEditable(true);
+	txtPvc.setEditable(true);
+	txtFechaIngreso.setEditable(true);
+	txtFechaVenta.setEditable(true);
+	txtCondicion.setEditable(true);
+	txtCliente.setEditable(true);
+	txtComentarios.setEditable(true);
+	
+}
 
-		txtPatente.setBounds(170, 90, 160, 25);
-		this.add(txtPatente);
+private void allEditableTextFields() {
+	
+	txtPatente.setEditable(true); 
+	txtMarca.setEditable(true);
+	txtModelo.setEditable(true);
+	txtYear.setEditable(true);
+	txtColor.setEditable(true);
+	txtKm.setEditable(true);
+	txtMotor.setEditable(true);
+	txtDominio.setEditable(true);
+	txtPvc.setEditable(true);
+	txtFechaIngreso.setEditable(true);
+	txtFechaVenta.setEditable(true);
+	txtCondicion.setEditable(true);
+	txtProveedor.setEditable(true);
+	txtCliente.setEditable(true);
+	txtComentarios.setEditable(true);
+	
+}
 
-		JLabel lblMarca = new JLabel("Marca(*): ");
-		lblMarca.setBounds(360, 90, 70, 25);
-		this.add(lblMarca);
-
-		txtMarca.setBounds(480, 90, 160, 25);
-		this.add(txtMarca);
-
-		JLabel lblModelo = new JLabel("Modelo(*): ");
-		lblModelo.setBounds(50, 130, 70, 25);
-		this.add(lblModelo);
-
-		txtModelo.setBounds(170, 130, 160, 25);
-		this.add(txtModelo);
-
-		JLabel lblYear = new JLabel("Año(*): ");
-		lblYear.setBounds(360, 130, 70, 25);
-		this.add(lblYear);
-
-		txtYear.setBounds(480, 130, 160, 25);
-		this.add(txtYear);
-
-		JLabel lblColor = new JLabel("Color(*): ");
-		lblColor.setBounds(50, 170, 70, 25);
-		this.add(lblColor);
-
-		txtColor.setBounds(170, 170, 160, 25);
-		this.add(txtColor);
-
-		JLabel lblKm = new JLabel("Km: ");
-		lblKm.setBounds(360, 170, 70, 25);
-		this.add(lblKm);
-
-		txtKm.setBounds(480, 170, 160, 25);
-		this.add(txtKm);
-
-		JLabel lblDominio = new JLabel("Dominio: ");
-		lblDominio.setBounds(50, 210, 70, 25);
-		this.add(lblDominio);
-
-		txtDominio.setBounds(170, 210, 160, 25);
-		this.add(txtDominio);
-		
-		JLabel lblPvc = new JLabel("PVC(*): ");
-		lblPvc.setBounds(360, 210, 100, 25);
-		this.add(lblPvc);
-
-		txtPvc.setBounds(480, 210, 160, 25);
-		this.add(txtPvc);
-		
-		JLabel lblfechaIngreso = new JLabel("Fecha ingreso: ");
-		lblfechaIngreso.setBounds(50, 250, 90, 25);
-		this.add(lblfechaIngreso);
-
-		txtFechaIngreso.setBounds(170, 250, 160, 25);
-		this.add(txtFechaIngreso);
-		
-		JLabel lblProveedor = new JLabel("Proveedor: ");
-		lblProveedor.setBounds(360, 250, 70, 25);
-		this.add(lblProveedor);
-		
-		txtProveedor.setBounds(480, 250, 160, 25);
-		this.add(txtProveedor);
-
-		JLabel lblFechaVenta = new JLabel("Fecha condicion: ");
-		lblFechaVenta.setBounds(50, 290, 90, 25);
-		this.add(lblFechaVenta);
-
-		txtFechaVenta.setBounds(170, 290, 160, 25);
-		this.add(txtFechaVenta);
-		
-		JLabel lblCondicion = new JLabel("Condicion: ");
-		lblCondicion.setBounds(360, 290, 70, 25);
-		this.add(lblCondicion);
-
-		txtCondicion.setBounds(480, 290, 160, 25);
-		this.add(txtCondicion);
-		
-		
-		JLabel lblCliente = new JLabel("Cliente: ");
-		lblCliente.setBounds(50, 330, 70, 25);
-		this.add(lblCliente);
-
-		txtCliente.setBounds(170, 330, 160, 25);
-		this.add(txtCliente);
-		
-		JLabel lblMotor = new JLabel("Motor(*): ");
-		lblMotor.setBounds(360, 330, 70, 25);
-		this.add(lblMotor);
-
-		txtMotor.setBounds(480, 330, 160, 25);
-		this.add(txtMotor);
-		
-		
-		JLabel lblComentarios = new JLabel("Comentarios: ");
-		lblComentarios.setBounds(50, 370, 70, 25);
-		this.add(lblComentarios);
-
-		txtComentarios.setBounds(170, 370, 500, 25);
-		this.add(txtComentarios);
-
-
-		btnElegir = new JButton("Seleccionar Vehiculo");
-		btnElegir.setBounds(700, 220, 160, 25);
-		this.add(btnElegir);
-
-		btnVolverAStock = new JButton("Volver a Stock");
-		btnVolverAStock.setBounds(700, 250, 160, 25);
-		this.add(btnVolverAStock);
-
-		this.validate();
-		this.repaint();
+private void cargarTextFields(Vehiculo v) {
+	
+		txtPatente = new JTextField(v.getPatente());
+		txtMarca = new JTextField(v.getMarca());
+		txtModelo = new JTextField(v.getModelo());
+		txtYear = new JTextField(v.getYear());
+		txtColor = new JTextField(v.getColor());
+		txtKm = new JTextField(v.getKm());
+		txtMotor = new JTextField(v.getMotor());
+		txtDominio = new JTextField(v.getDominio());
+		txtPvc = new JTextField(v.getPvc());
+		txtFechaIngreso = new JTextField(v.getFechaIngreso());
+		txtFechaVenta = new JTextField(v.getFechaVenta());
+		txtCondicion = new JTextField(v.getCondicion());
+		txtProveedor = new JTextField(v.getIdProveedor());
+		txtCliente = new JTextField(v.getIdCliente());
+		txtComentarios = new JTextField(25);
 		
 	}
 
@@ -609,6 +441,7 @@ public void muestroStock(List<Stock> lista) {
 		this.add(panelStock.getJp());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void preparoFiltros(ArrayList<String> comboMarca, ArrayList<String> comboModelo, ArrayList<String> comboYear) {
 		
 		comboListMarca = extracted(comboMarca);
@@ -617,7 +450,6 @@ public void muestroStock(List<Stock> lista) {
 		
 		comboListYear = extracted(comboYear);
 		comboListYear.setBounds(260, 120, 200, 25);
-		
 		this.add(comboListYear);
 		
 		btnFiltrar = new JButton("Filtrar");
@@ -627,13 +459,14 @@ public void muestroStock(List<Stock> lista) {
 		
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private JComboBox extracted(ArrayList<String> comboModelo) {
 		return new JComboBox(comboModelo.toArray());
 	}
 
 	public void onBuscarVehiculo() {
+		
 		this.removeAll();
-		System.out.println("ONMOD");
 		
 		JLabel dniCompradorLabel = new JLabel("Ingrese patente o motor a buscar: ");
 		dniCompradorLabel.setBounds(50, 50, 200, 25);
@@ -850,14 +683,6 @@ public void muestroStock(List<Stock> lista) {
 		this.btnVolverAStock = btnVolverAStock;
 	}
 
-	public JComboBox<String> getComboListModelo() {
-		return comboListModelo;
-	}
-
-	public void setComboListModelo(JComboBox<String> comboListModelo) {
-		this.comboListModelo = comboListModelo;
-	}
-
 	public JComboBox<String> getComboListYear() {
 		return comboListYear;
 	}
@@ -866,11 +691,11 @@ public void muestroStock(List<Stock> lista) {
 		this.comboListYear = comboListYear;
 	}
 
-	public JComboBox getComboListMarca() {
+	public JComboBox<String> getComboListMarca() {
 		return comboListMarca;
 	}
 
-	public void setComboListMarca(JComboBox comboListMarca) {
+	public void setComboListMarca(JComboBox<String> comboListMarca) {
 		this.comboListMarca = comboListMarca;
 	}
 

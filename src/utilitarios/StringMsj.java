@@ -135,9 +135,10 @@ public class StringMsj {
 	
 	public static final String MSG_EMP_DEL_OK =
 			"El empleado y usuario asociado han sido dado de baja correctamente.";	
-
 	
-
+	public static final String MSG_BAD_ROW = 
+			"No se ha registrado la selección de una unidad.";
+			
 	
 
 	
