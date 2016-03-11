@@ -10,8 +10,7 @@ import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.Stock;
 import objetos.Vehiculo;
-import utilitarios.Mensajes;
-import utilitarios.StringMsj;
+import utilitarios.*;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -135,31 +134,36 @@ public class VehiculosController {
 
 		Vehiculo newVehiculoAInsertar = vi.getDatosNuevoVehiculo();
 
-		if ((newVehiculoAInsertar.getPatente() == null)
-				|| (newVehiculoAInsertar.getMarca() == null)
-				|| (newVehiculoAInsertar.getModelo() == null)
-				|| (newVehiculoAInsertar.getColor() == null)
-				|| (newVehiculoAInsertar.getYear() == null)
-				|| (newVehiculoAInsertar.getPvc() == null)
-				|| (newVehiculoAInsertar.getMotor() == null)) {
+		if ((newVehiculoAInsertar.getPatente().isEmpty())
+				|| (newVehiculoAInsertar.getMarca().isEmpty())
+				|| (newVehiculoAInsertar.getModelo().isEmpty())
+				|| (newVehiculoAInsertar.getColor().isEmpty())
+				|| (newVehiculoAInsertar.getYear().isEmpty())
+				|| (newVehiculoAInsertar.getPvc() == 0)
+				|| (newVehiculoAInsertar.getMotor().isEmpty())) {
 			
-			vi.insertError(); //ACA MOSTRAR UN MENSAJE DICIENDO QUE LLENE LOS CAMPOS OBLIGATORIOS.
-								// no puse condición porque crea EN STOCK por default.
+			System.out.println("NOT_OBLI");
+		
+			Mensajes.mensajeWarning(StringMsj.MSG_NOT_OBLI);
+			
 
 		} else {
 
 			if ((newVehiculoAInsertar.getCondicion() == "")
-					|| (newVehiculoAInsertar.getCondicion() == null)) {
-				newVehiculoAInsertar.setCondicion("EN STOCK");
+					|| (newVehiculoAInsertar.getCondicion().isEmpty())) {
+				newVehiculoAInsertar.setCondicion("STOCK");
 			}
+			
+			Vehiculo v = vDB.getVehiculo(newVehiculoAInsertar.getPatente());
 
-			newVehiculoAInsertar.setCondicion(newVehiculoAInsertar
-					.getCondicion().toUpperCase());
-
-			if (vDB.createVehiculo(newVehiculoAInsertar)) {
-				vi.insertOk();
-			} else {
-				vi.insertError();
+			if(v == null){
+				if (vDB.createVehiculo(newVehiculoAInsertar)) {
+					Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
+				} else {
+					Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
+				}
+			}else{
+				Mensajes.mensajeWarning(StringMsj.MSG_VEH_DUP);				
 			}
 		}
 	}

@@ -175,22 +175,48 @@ public class VehiculosView implements VehiculosInterface {
 
 	public Vehiculo getDatosNuevoVehiculo() {
 		
+		
+		
+		int km, pvc, pro, cli;
+		
+		try {
+			km = Integer.parseInt(panelVehiculos.getTxtKm().getText());
+		} catch (NumberFormatException e) {
+			km = 0;
+		}
+		
+		try {
+			pvc = Integer.parseInt(panelVehiculos.getTxtPvc().getText());
+		} catch (NumberFormatException e) {
+			pvc = 0;
+		}
+		try {
+			pro = Integer.parseInt(panelVehiculos.getTxtProveedor().getText());
+		} catch (NumberFormatException e) {
+			pro = 0;
+		}
+		try {
+			cli = Integer.parseInt(panelVehiculos.getTxtCliente().getText());
+		} catch (NumberFormatException e) {
+			cli = 0;
+		}
+		
 		Vehiculo v = new Vehiculo(
 				
-				panelVehiculos.getTxtPatente().getText(),
+				panelVehiculos.getTxtPatente().getText().toUpperCase(),
 				panelVehiculos.getTxtMarca().getText(),
 				panelVehiculos.getTxtModelo().getText(),
 				panelVehiculos.getTxtYear().getText(),
 				panelVehiculos.getTxtColor().getText(),
-				Integer.parseInt(panelVehiculos.getTxtKm().getText()),
-				panelVehiculos.getTxtMotor().getText(),
-				panelVehiculos.getTxtDominio().getText(),
-				Integer.parseInt(panelVehiculos.getTxtPvc().getText()),
+				km,
+				panelVehiculos.getTxtMotor().getText().toUpperCase(),
+				panelVehiculos.getTxtDominio().getText().toUpperCase(),
+				pvc,
 				panelVehiculos.getTxtFechaIngreso().getText(),
 				panelVehiculos.getTxtFechaVenta().getText(), 
-				panelVehiculos.getTxtCondicion().getText(), 
-				Integer.parseInt(panelVehiculos.getTxtProveedor().getText()),
-				Integer.parseInt(panelVehiculos.getTxtCliente().getText()),
+				panelVehiculos.getTxtCondicion().getText().toUpperCase(), 
+				pro,
+				cli,
 				panelVehiculos.getTxtComentarios().getText());
 
 		return v;

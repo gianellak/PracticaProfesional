@@ -139,7 +139,16 @@ public class StringMsj {
 	public static final String MSG_BAD_ROW = 
 			"No se ha registrado la selección de una unidad.";
 			
-	
+	//VEHICULOS
 
+	public static final String MSG_VEH_DUP = 
+			"Ya existe una unidad ingresada con la misma patente y/o mismo motor.";
+	
+	public static final String MSG_VEH_INS_OK = 
+			"La nueva unidad ha sido registrada exitosamente.";
+	
+	public static final String MSG_VEH_INS_BAD = 
+			"No ha sido posible registrar la nueva unidad. Por favor verifique los datos ingresados y reintente.";
+	
 	
 }
