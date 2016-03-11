@@ -77,7 +77,7 @@ public class FormStock extends JPanel {
 		jp= new JScrollPane(tablaStock);
 		
 
-		jp.setBounds(0, 80, 1000, 300);
+		
 	}
 	
 
@@ -97,6 +97,28 @@ public class FormStock extends JPanel {
 	public String getRowSelected() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void actualizoStock(List<Stock> stockAMostrar) {
+
+		((DefaultTableModel) tablaStock.getModel()).setRowCount(0);
+		
+
+		for (Stock v : stockAMostrar) {
+			
+			Object[] o = new Object[7];
+			o[0] = v.getPatente();
+			o[1] = v.getMarca();
+			o[2] = v.getModelo();
+			o[3] = v.getColor();
+			o[4] = v.getYear();
+			o[5] = v.getPvc();
+			o[6] = v.getCondicion();
+			
+			((DefaultTableModel) tablaStock.getModel()).addRow(o);
+		}
+		
+		
 	}
 
 

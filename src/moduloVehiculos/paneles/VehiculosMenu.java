@@ -26,21 +26,21 @@ public VehiculosMenu() {
 	this.setPreferredSize(new Dimension(250, h));
 	this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		
-		btnBuscar = new JButton("Buscar Vehiculo");
-		btnBuscar.setPreferredSize(preferredSize);
-		this.add(btnBuscar);
+	btnNuevo = new JButton("Nuevo Vehiculo");
+	btnNuevo.setPreferredSize(preferredSize);
+	this.add(btnNuevo);
+	
+	btnBuscar = new JButton("Buscar Vehiculo");
+	btnBuscar.setPreferredSize(preferredSize);
+	this.add(btnBuscar);
 		
-		btnNuevo = new JButton("Nuevo Vehiculo");
-		btnNuevo.setPreferredSize(preferredSize);
-		this.add(btnNuevo);
-		
-		btnStock = new JButton("Ver Stock");
-		btnStock.setPreferredSize(preferredSize);
-		this.add(btnStock);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.setPreferredSize(preferredSize);
-		this.add(btnVolver);
+	btnStock = new JButton("Ver Stock");
+	btnStock.setPreferredSize(preferredSize);
+	this.add(btnStock);
+	
+	btnVolver = new JButton("Volver");
+	btnVolver.setPreferredSize(preferredSize);
+	this.add(btnVolver);
 		
 	}
 

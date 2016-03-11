@@ -16,7 +16,6 @@ public interface VehiculosInterface {
 	
 		// PANTALLA
 		public void closeVehiculo();
-		public void refresh();
 		void showStock(List<Stock> listaStockVehiculos,
 				ArrayList<String> comboMarca, ArrayList<String> comboModelo,
 				ArrayList<String> comboYear); // Mostrar form stock, grilla - excepto vendidos y no disponible
@@ -41,6 +40,11 @@ public interface VehiculosInterface {
 				ArrayList<String> comboYear);
 		public String getVehiculoTabla();
 		public void mostrarDetalleVehiculo(Vehiculo vehiculo);
+		public void refresh();
+		public String getMarca();
+		public String getYear();
+		public void actualizoStock(List<Stock> stockAMostrar);
+	
 	
 		
 		

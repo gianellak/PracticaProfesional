@@ -68,6 +68,10 @@ public interface VentasInterface {
 
 	void mostrarBuscarVenta();
 
+	String getSelectedMarca();
+
+	String getSelectedYear();
+
 
 
 

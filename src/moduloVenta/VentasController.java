@@ -242,7 +242,7 @@ public class VentasController {
 
 			if (vehiculo != null) {
 
-				if (vehiculo.getCondicion() != "VENDIDO") {
+				if (!vehiculo.getCondicion().toUpperCase().equals("VENDIDO")) {
 
 					vi.mostrarPatente(vehiculo);
 				} else {
@@ -481,6 +481,12 @@ public class VentasController {
 
 		// NO DEVUELVE UNA LISTA List<Venta> listaV = vDB.findByDNI(dni);
 
+	}
+
+	public void aplicoFiltros() {
+		String marca = vi.getSelectedMarca(); 
+		String year = vi.getSelectedYear();
+		
 	}
 
 }

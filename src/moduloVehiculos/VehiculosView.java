@@ -40,6 +40,9 @@ public class VehiculosView implements VehiculosInterface {
 	private ListenerDetalleVehiculo listenerDetalle;
 	private ListenerAceptarAltaVehiculo listenerAceptarAlta;
 	private ListenerVehiculoVolver listenerVolverAlta;
+	private ListenerFiltroStock listenerFiltroStock;
+	private ListenerCombo listenerMarca;
+	private ListenerCombo listenerYear;
 
 	
 
@@ -139,6 +142,16 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.muestroStock(listaStockVehiculos);		
 		panelVehiculos.menuVerStock();
 		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
+		listenerMarca = new ListenerCombo(vc);
+		listenerYear = new ListenerCombo(vc);
+		
+		
+		panelVehiculos.getComboListMarca().addItemListener(listenerMarca);
+		panelVehiculos.getComboListYear().addItemListener(listenerYear);
+		
+		listenerFiltroStock = new ListenerFiltroStock(vc);
+		panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
+		
 		
 		frame.add(panelVehiculos);
 		
@@ -307,11 +320,11 @@ public class VehiculosView implements VehiculosInterface {
 			
 			frame.add(panelVehiculos);
 			
-			listenerSeleccionar = new ListenerSeleccionar(vc);
-			
+			listenerSeleccionar = new ListenerSeleccionar(vc);			
 			listenerDetalle = new ListenerDetalleVehiculo(vc);
+			listenerFiltroStock = new ListenerFiltroStock(vc);
 			
-			
+			panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
 			panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
 			panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
 			
@@ -334,6 +347,39 @@ public class VehiculosView implements VehiculosInterface {
 		PantallaUtil.refresh(frame);
 	}
 
+
+	@Override
+	public String getMarca() {
+		// TODO Auto-generated method stub
+		return panelVehiculos.getComboListMarca().getSelectedItem().toString();
+				
+	}
+
+
+	@Override
+	public String getYear() {
+		// TODO Auto-generated method stub
+		return panelVehiculos.getComboListYear().getSelectedItem().toString();
+	}
+
+
+	@Override
+	public void actualizoStock(List<Stock> stockAMostrar) {
+		panelVehiculos.getPanelStock().actualizoStock(stockAMostrar);
+		
+	}
+
+
+	
+
+//	@Override
+//	public String getSelectedModelo() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+
+	
 	
 
 }

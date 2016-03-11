@@ -52,6 +52,8 @@ public class VentasView implements VentasInterface {
 
 	private ListenerAceptarDetalle listenerAceptarDetalle;
 
+	private ListenerFiltroStock listenerFiltroStock;
+
 	public VentasView(){
 		panelVentasMenu= new VentasMenu();
 		panelVentas = new PanelVentas();
@@ -295,9 +297,9 @@ public class VentasView implements VentasInterface {
 		listenerSeleccionar = new ListenerSeleccionar(ventasController);
 		listenerDetalle = new ListenerDetalleVehiculo(ventasController);
 		listenerVolverVenta = new ListenerVolverVentaStock(ventasController);
-		listenerComboModelo = new ListenerComboModelo(ventasController);
-
-		panelVehiculos.getComboListModelo().addActionListener(listenerComboModelo);
+		listenerFiltroStock = new ListenerFiltroStock(ventasController);
+		
+		panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
 		panelVehiculos.getBtnVolverVenta().addActionListener(listenerVolverVenta);
 		panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
 		panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
@@ -393,6 +395,17 @@ public class VentasView implements VentasInterface {
 	public void mostrarBuscarVenta() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getSelectedMarca() {
+		return panelVehiculos.getComboListMarca().getSelectedItem().toString();
+	
+	}
+
+	@Override
+	public String getSelectedYear() {
+		return panelVehiculos.getComboListYear().getSelectedItem().toString();
 	}
 
 }
