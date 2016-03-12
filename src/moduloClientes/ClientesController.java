@@ -14,6 +14,8 @@ import utilitarios.*;
 import exceptions.DBException;
 import exceptions.LexicalException;
 import moduloPrincipal.PrincipalController;
+import moduloVenta.VentasController;
+import moduloVenta.VentasView;
 
 public class ClientesController {
 
@@ -22,6 +24,7 @@ public class ClientesController {
 	private ClientesInterface ci;
 	private PrincipalController pc;
 	private ClientesDB cDB;
+	private VentasView vi;
 	
 	public ClientesController(ClientesView ci, PrincipalController pc) {
 		this.ci = ci;
@@ -222,7 +225,17 @@ public class ClientesController {
 	}
 
 	public void nuevaVenta() {
-		// TODO Auto-generated method stub
+		
+		
+
+		vi = new VentasView();
+		
+		VentasController vc = new VentasController(vi, pc);
+		
+		String dni = ci.clienteVenta();
+		
+		vc.ventaDesdeCliente(dni);
+		
 		
 	}
 

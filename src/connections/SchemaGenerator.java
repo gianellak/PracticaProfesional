@@ -161,7 +161,7 @@ public class SchemaGenerator {
 				+ "patente VARCHAR(6), " 
 				+ "marca VARCHAR(10), "
 				+ "modelo VARCHAR(25), "
-				+ "year VARCHAR(4), "
+				+ "year VARCHAR(10), "
 				+ "color VARCHAR(15), "
 				+ "km INTEGER, "
 				+ "dominio VARCHAR(10), "

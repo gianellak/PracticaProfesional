@@ -22,6 +22,7 @@ public class ListenerClientesVenta implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		
 		cc.nuevaVenta();
 		
 		

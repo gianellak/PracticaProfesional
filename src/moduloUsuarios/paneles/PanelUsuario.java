@@ -95,10 +95,6 @@ public class PanelUsuario extends JPanel {
 		textLabel.setBounds(50, 40, 380, 25);
 		this.add(textLabel);
 
-		JLabel userLabel = new JLabel("Usuario: ");
-		userLabel.setBounds(50, 90, 70, 25);
-		this.add(userLabel);
-
 		userText = new JTextField(9);
 		userText.setBounds(150, 90, 160, 25);
 		this.add(userText);
@@ -412,6 +408,7 @@ public void createTablaUsuarios(List<Usuario> lista) {
 		
 	
 		userPanel.removeAll();
+		
 		JLabel sinUser = new JLabel("El empleado no posee un usuario en el sistema.");
 		sinUser.setBounds(10, 20, 290, 30);
 		userPanel.add(sinUser);
@@ -505,7 +502,9 @@ public void createTablaUsuarios(List<Usuario> lista) {
 	}
 	
 	public void verUnEmpleado(Empleado e) {
-
+		
+		
+		
 		userPanel = new JPanel();
 		userPanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
 				"Usuario"));

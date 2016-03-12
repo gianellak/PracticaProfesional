@@ -534,4 +534,13 @@ public class VentasController {
 
 	}
 
+	public void ventaDesdeCliente(String dni) {
+
+		vi.showMenuVentas(this, pc.getView(), pc.getUser());
+
+		this.conectar();
+		
+		vi.ventaDesdeCliente(dni);
+	}
+
 }

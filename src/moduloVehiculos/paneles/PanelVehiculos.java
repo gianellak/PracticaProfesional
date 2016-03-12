@@ -25,39 +25,13 @@ public class PanelVehiculos extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton btnVolver;
-	private JButton btnAceptar;
-
-	private JTextField txtPatente;
-	private JTextField txtKm;
-	private JTextField txtPvc;
-	private JTextField txtFechaVenta;
-	private JTextField txtCondicion;
-	private JTextField txtCliente;
-	private JTextField txtComentarios;
-	private JButton btnCancelar;
-	private JTextField txtProveedor;
-	private JTextField txtFechaIngreso;
-	private JTextField txtDominio;
-	private JTextField txtMotor;
-	private JTextField txtYear;
-	private JTextField txtColor;
-	private JTextField txtMarca;
-	private JTextField txtModelo;
+	private JButton btnVolver, btnAceptar, btnFiltrar, btnCancelar, btnDetalle, btnSeleccionar, 
+					btnVolverVenta, btnElegir, btnVolverAStock, btnCopiar, btnBuscar;
+	private JTextField txtPatente, txtKm, txtPvc, txtFechaVenta, txtCondicion, txtCliente, txtComentarios, txtProveedor, 
+					   txtFechaIngreso, txtDominio, txtMotor, txtYear, txtColor, txtMarca, txtModelo, patenteText;
 	private FormStock panelStock;
-	private JButton btnDetalle;
-	private JButton btnSeleccionar;
-	private JButton btnVolverVenta;
-	private JButton btnElegir;
-	private JButton btnVolverAStock;
-	private JComboBox<String> comboListYear;
-	private JComboBox<String> comboListMarca;
-	private JButton btnCopiar;
-	private JTextField patenteText;
-	private JButton btnBuscar;
-	private int w;
-	private int h;
-	private JButton btnFiltrar;
+	private JComboBox<String> comboListYear, comboListMarca;
+	private int w, h;
 	
 	
 	public PanelVehiculos(){
@@ -308,7 +282,7 @@ public class PanelVehiculos extends JPanel {
 		this.add(lblMotor);
 				
 		JLabel lblComentarios = new JLabel("Comentarios: ");
-		lblComentarios.setBounds(50, 370, 70, 25);
+		lblComentarios.setBounds(50, 370, 90, 25);
 		this.add(lblComentarios);
 	}
 
@@ -441,6 +415,9 @@ public void muestroStock(List<Stock> lista) {
 		panelStock.getJp().setBounds(50, 170, w - 100, 300);
 		
 		this.add(panelStock.getJp());
+		
+		this.revalidate();
+		this.repaint();
 	}
 	
 	@SuppressWarnings("unchecked")

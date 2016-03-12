@@ -224,4 +224,10 @@ public class ClientesView implements ClientesInterface {
 		return panelClientes;
 	}
 
+
+	@Override
+	public String clienteVenta() {
+		return panelClientes.getDniCompradorText().getText();
+	}
+
 }

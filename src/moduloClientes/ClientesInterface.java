@@ -36,4 +36,6 @@ public interface ClientesInterface {
 
 	public PanelClientes getPanelClientes();
 
+	public String clienteVenta();
+
 }

@@ -1,13 +1,16 @@
 package moduloVenta;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import exceptions.DBException;
 import objetos.Cuota;
 import objetos.DetalleVenta;
 import objetos.Persona;
@@ -58,6 +61,7 @@ public class VentasView implements VentasInterface {
 	private ListenerCombo listenerYear;
 
 	public VentasView(){
+		
 		panelVentasMenu= new VentasMenu();
 		panelVentas = new PanelVentas();
 	
@@ -424,6 +428,42 @@ public class VentasView implements VentasInterface {
 	@Override
 	public void actualizoStock(List<Stock> stockAMostrar) {
 		panelVehiculos.getPanelStock().actualizoStock(stockAMostrar);
+		
+	}
+
+
+	@Override
+	public void ventaDesdeCliente(String dni) {
+
+panelVentas.showNuevaVenta();
+		
+		listenerValidarC = new ListenerValidarC(ventasController);
+		listenerBuscarV = new ListenerBuscarVehiculoV(ventasController);
+		listenerValidarG = new ListenerValidarG(ventasController);
+		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
+		listenerAceptarV = new ListenerValidarVenta(ventasController);
+		listenerReiniciar = new ListenerReiniciarVenta(ventasController);
+		
+		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
+		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
+		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
+		panelVentas.getBtnVolverNewVenta().addActionListener(listenerVolverAVentas);
+		panelVentas.getBtnAceptarNewVenta().addActionListener(listenerAceptarV);
+		panelVentas.getBtnReset().addActionListener(listenerReiniciar);
+
+		panelVentas.getDniCompradorText().setText(dni);
+		
+		try {
+			ventasController.validarCliente();
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		PantallaUtil.refresh(frame);
+		
+
+		
 		
 	}
 

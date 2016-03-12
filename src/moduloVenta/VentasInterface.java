@@ -75,6 +75,8 @@ public interface VentasInterface {
 
 	void actualizoStock(List<Stock> stockAMostrar);
 
+	void ventaDesdeCliente(String dni);
+
 
 
 
