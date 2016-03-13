@@ -268,7 +268,7 @@ public class VehiculosController {
 
 	public void getCombos() {
 		marca = vi.getMarca();
-		year = vi.getYear();
+		year = vi.getYear(); //
 		
 		System.out.println(marca + " " + year);
 		
