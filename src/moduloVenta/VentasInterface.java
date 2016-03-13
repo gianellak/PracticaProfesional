@@ -77,6 +77,8 @@ public interface VentasInterface {
 
 	void ventaDesdeCliente(String dni);
 
+	void ventaDesdeVehiculo(String dominio);
+
 
 
 

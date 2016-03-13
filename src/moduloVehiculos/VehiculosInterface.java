@@ -2,7 +2,9 @@ package moduloVehiculos;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JFrame;
+
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
@@ -42,6 +44,7 @@ public interface VehiculosInterface {
 		public String getYear();
 		public void actualizoStock(List<Stock> stockAMostrar);
 		public void copioVehiculo(Vehiculo vehiculo);
+		public String vehiculoVenta();
 	
 	
 		

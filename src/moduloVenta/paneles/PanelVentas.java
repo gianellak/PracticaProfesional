@@ -178,6 +178,7 @@ public class PanelVentas extends JPanel {
 
 		JLabel vehiculoLabel = new JLabel("Vehiculo: " + vehiculo.getMarca() + " " + vehiculo.getModelo());
 		vehiculoLabel.setBounds(10, 50, 250, 25);
+		
 		miniVentaPanel.add(vehiculoLabel);
 
 		patenteText.setEditable(false);

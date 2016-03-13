@@ -382,6 +382,7 @@ public class VentasController {
 		String p = vi.getVehiculoTabla();
 
 		vehiculo = vhDB.getVehiculo(p);
+		
 		vi.mostrarPatente(vehiculo);
 
 	}
@@ -541,6 +542,15 @@ public class VentasController {
 		this.conectar();
 		
 		vi.ventaDesdeCliente(dni);
+	}
+	
+	public void ventaDesdeVehiculo(String dominio) {
+		
+		vi.showMenuVentas(this, pc.getView(), pc.getUser());
+		
+		this.conectar();
+		
+		vi.ventaDesdeVehiculo(dominio);
 	}
 
 }

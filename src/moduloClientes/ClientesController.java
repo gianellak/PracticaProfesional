@@ -224,9 +224,7 @@ public class ClientesController {
 		
 	}
 
-	public void nuevaVenta() {
-		
-		
+	public void nuevaVenta() {		
 
 		vi = new VentasView();
 		

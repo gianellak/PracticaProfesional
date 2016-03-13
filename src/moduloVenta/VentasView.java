@@ -435,7 +435,7 @@ public class VentasView implements VentasInterface {
 	@Override
 	public void ventaDesdeCliente(String dni) {
 
-panelVentas.showNuevaVenta();
+		panelVentas.showNuevaVenta();
 		
 		listenerValidarC = new ListenerValidarC(ventasController);
 		listenerBuscarV = new ListenerBuscarVehiculoV(ventasController);
@@ -462,7 +462,41 @@ panelVentas.showNuevaVenta();
 			
 		PantallaUtil.refresh(frame);
 		
+	
+	}
 
+	@Override
+	public void ventaDesdeVehiculo(String dominio) {
+
+		panelVentas.showNuevaVenta();
+		
+		listenerValidarC = new ListenerValidarC(ventasController);
+		listenerBuscarV = new ListenerBuscarVehiculoV(ventasController);
+		listenerValidarG = new ListenerValidarG(ventasController);
+		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
+		listenerAceptarV = new ListenerValidarVenta(ventasController);
+		listenerReiniciar = new ListenerReiniciarVenta(ventasController);
+		
+		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
+		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
+		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
+		panelVentas.getBtnVolverNewVenta().addActionListener(listenerVolverAVentas);
+		panelVentas.getBtnAceptarNewVenta().addActionListener(listenerAceptarV);
+		panelVentas.getBtnReset().addActionListener(listenerReiniciar);
+
+		panelVentas.getPatenteText().setText(dominio);
+		
+		try {
+			ventasController.buscarVehiculo();
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		PantallaUtil.refresh(frame);
+		
+
+		
 		
 		
 	}

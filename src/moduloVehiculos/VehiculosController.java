@@ -13,6 +13,8 @@ import objetos.Vehiculo;
 import utilitarios.*;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
+import moduloVenta.VentasController;
+import moduloVenta.VentasView;
 
 public class VehiculosController {
 
@@ -22,6 +24,7 @@ public class VehiculosController {
 	private Vehiculo vehiculo;
 	private String marca;
 	private String year;
+	private VentasView vtai;
 
 	public VehiculosController(VehiculosView ci, PrincipalController pc) {
 		this.vi = ci;
@@ -315,7 +318,16 @@ public class VehiculosController {
 	}
 
 	public void seleccionaVehiculo() {
-		// TODO Auto-generated method stub
+
+		vtai = new VentasView();
+		
+		VentasController vc = new VentasController(vtai, pc);
+		
+		String p = vi.getVehiculoTabla();
+
+		vc.ventaDesdeVehiculo(p);
+
+
 		
 	}
 

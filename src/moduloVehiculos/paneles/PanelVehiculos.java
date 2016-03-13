@@ -32,6 +32,7 @@ public class PanelVehiculos extends JPanel {
 	private FormStock panelStock;
 	private JComboBox<String> comboListYear, comboListMarca;
 	private int w, h;
+	private JButton btnVender;
 	
 	
 	public PanelVehiculos(){
@@ -188,9 +189,9 @@ public class PanelVehiculos extends JPanel {
 		btnDetalle.setBounds(150, 500, 150, 25);
 		this.add(btnDetalle);
 		
-		btnSeleccionar = new JButton("Vender vehiculo");
-		btnSeleccionar.setBounds(320, 500, 150, 25);
-		this.add(btnSeleccionar);
+		btnVender = new JButton("Vender vehiculo");
+		btnVender.setBounds(320, 500, 150, 25);
+		this.add(btnVender);
 		
 		btnCopiar = new JButton("Copiar Vehiculo");
 		btnCopiar.setBounds(490, 500, 150, 25);
@@ -755,6 +756,14 @@ public void muestroStock(List<Stock> lista) {
 
 
 		
+	}
+
+	public JButton getBtnVender() {
+		return btnVender;
+	}
+
+	public void setBtnVender(JButton btnVender) {
+		this.btnVender = btnVender;
 	}
 
 	

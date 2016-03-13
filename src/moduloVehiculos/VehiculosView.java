@@ -41,6 +41,7 @@ public class VehiculosView implements VehiculosInterface {
 	private ListenerCombo listenerMarca;
 	private ListenerCombo listenerYear;
 	private ListenerCopiar listenerCopiar;
+	private ListenerVenderVehiculo listenerVender;
 
 	
 
@@ -141,6 +142,9 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.menuVerStock();
 		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
 		
+		
+		listenerVender = new ListenerVenderVehiculo(vc);			
+		panelVehiculos.getBtnVender().addActionListener(listenerVender);
 		listenerMarca = new ListenerCombo(vc);
 		panelVehiculos.getComboListMarca().addItemListener(listenerMarca);
 		listenerYear = new ListenerCombo(vc);
@@ -352,8 +356,10 @@ public class VehiculosView implements VehiculosInterface {
 			listenerYear = new ListenerCombo(vc);
 			panelVehiculos.getComboListYear().addItemListener(listenerYear);
 			
+		
 			listenerSeleccionar = new ListenerSeleccionar(vc);			
 			panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
+			
 			listenerDetalle = new ListenerDetalleVehiculo(vc);
 			panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
 			listenerFiltroStock = new ListenerFiltroStock(vc);
@@ -416,6 +422,14 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.getBtnCancelar().addActionListener(listenerVolver);
 		
 		PantallaUtil.refresh(frame);
+		
+	}
+
+
+	@Override
+	public String vehiculoVenta() {
+		
+		return panelVehiculos.getPatenteText().getText();
 		
 	}
 
