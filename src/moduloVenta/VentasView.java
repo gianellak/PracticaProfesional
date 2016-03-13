@@ -27,7 +27,7 @@ import moduloVenta.paneles.PanelVentas;
 import moduloVenta.paneles.VentasMenu;
 
 public class VentasView implements VentasInterface {
-	
+	//
 	private JFrame frame;
 	
 	private PanelVentas panelVentas;

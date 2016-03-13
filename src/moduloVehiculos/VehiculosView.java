@@ -17,7 +17,7 @@ import moduloVehiculos.paneles.VehiculosMenu;
 
 
 public class VehiculosView implements VehiculosInterface {
-
+//
 	private JFrame frmVehiculo;
 	private VehiculosController vc;
 	private JButton btnSalir, btnBuscar, btnNuevo, btnStock;
