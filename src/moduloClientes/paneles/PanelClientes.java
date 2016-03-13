@@ -197,7 +197,7 @@ public class PanelClientes extends JPanel {
 		System.out.println("ONVERMOD");
 
 		JLabel datosLabel = new JLabel(
-				"A continuación se muestran los datos del cliente consultado.");
+				"Por favor, ingrese los datos del cliente a dar de alta.");
 		datosLabel.setBounds(50	, 40, 360, 25);
 		this.add(datosLabel);
 		
@@ -315,6 +315,8 @@ public class PanelClientes extends JPanel {
 		empresaText.setBounds(460, 290, 160, 25);
 		this.add(empresaText);
 
+		
+		
 		
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(70, 330, 100, 25);

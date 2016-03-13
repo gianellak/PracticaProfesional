@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import exceptions.DBException;
+import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
@@ -14,11 +16,11 @@ public interface VehiculosInterface {
 	
 		// PANTALLA
 		public void closeVehiculo();
+		public void refresh();
 		void showStock(List<Stock> listaStockVehiculos,
 				ArrayList<String> comboMarca, ArrayList<String> comboModelo,
 				ArrayList<String> comboYear); // Mostrar form stock, grilla - excepto vendidos y no disponible
-
-		//	public void showVehiculo(VehiculosController vehiculosController); // muestra form menu veh con todos los botones (nuevo, modificar, stock, buscar por patente).
+//	public void showVehiculo(VehiculosController vehiculosController); // muestra form menu veh con todos los botones (nuevo, modificar, stock, buscar por patente).
 		public void showFormNuevoVehiculo(); // Mostrar form nuevo veh.
 		public void showFormModificarVehiculo();
 		
@@ -39,6 +41,7 @@ public interface VehiculosInterface {
 				ArrayList<String> comboYear);
 		public String getVehiculoTabla();
 		public void mostrarDetalleVehiculo(Vehiculo vehiculo);
+
 		public void refresh();
 		public String getMarca();
 		public String getYear();
@@ -46,7 +49,7 @@ public interface VehiculosInterface {
 		public void copioVehiculo(Vehiculo vehiculo);
 		public String vehiculoVenta();
 	
-	
+
 		
 		
 		
