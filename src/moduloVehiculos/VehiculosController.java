@@ -1,9 +1,5 @@
 package moduloVehiculos;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -374,7 +370,10 @@ public class VehiculosController {
 		System.out.println("Done");
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	public void seleccionaVehiculo() {
 
 		vtai = new VentasView();
