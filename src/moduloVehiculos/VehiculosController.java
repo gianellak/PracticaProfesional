@@ -1,5 +1,9 @@
 package moduloVehiculos;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +12,7 @@ import javax.swing.JOptionPane;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
-import objetos.Persona;
-import objetos.Stock;
-import objetos.Usuario;
-import objetos.Vehiculo;
+import objetos.*;
 import utilitarios.Mensajes;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
@@ -139,9 +140,11 @@ public class VehiculosController {
 				|| (newVehiculoAInsertar.getYear() == null)
 				|| (newVehiculoAInsertar.getPvc() == null)
 				|| (newVehiculoAInsertar.getMotor() == null)) {
-			
-			vi.insertError(); //ACA MOSTRAR UN MENSAJE DICIENDO QUE LLENE LOS CAMPOS OBLIGATORIOS.
-								// no puse condición porque crea EN STOCK por default.
+
+			vi.insertError(); // ACA MOSTRAR UN MENSAJE DICIENDO QUE LLENE LOS
+								// CAMPOS OBLIGATORIOS.
+								// no puse condición porque crea EN STOCK por
+								// default.
 
 		} else {
 
@@ -231,4 +234,42 @@ public class VehiculosController {
 		vi.mostrarDetalleVehiculo(vehiculo);
 
 	}
+
+	public void readCvs() {
+
+		String csvFile = "C:\\Tias\\STOCK.cvs"; // ACÁ PONER URL QUE INGRESO
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+
+		try {
+
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+
+				// use comma as separator
+				String[] country = line.split(cvsSplitBy);
+
+				System.out.println("Country [code= " + country[4] + " , name="
+						+ country[5] + "]");
+
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		System.out.println("Done");
+	}
+
 }
