@@ -1,12 +1,10 @@
 package moduloVenta;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -20,18 +18,20 @@ import objetos.Vehiculo;
 import utilitarios.PantallaUtil;
 import moduloClientes.paneles.*;
 import moduloPrincipal.paneles.PanelGeneral;
+import moduloVehiculos.listener.ListenerFiltroStock;
 import moduloVehiculos.paneles.PanelVehiculos;
 import moduloVenta.listener.*;
 import moduloVenta.paneles.PanelVentas;
 import moduloVenta.paneles.VentasMenu;
 
 public class VentasView implements VentasInterface {
-	//
+	
 	private JFrame frame;
 	
 	private PanelVentas panelVentas;
 	private PanelClientes panelClientes;
 	private PanelVehiculos panelVehiculos;
+
 
 	private VentasMenu panelVentasMenu;
 	private VentasController ventasController;

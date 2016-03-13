@@ -14,10 +14,11 @@ import moduloPrincipal.paneles.PanelGeneral;
 import moduloVehiculos.listener.*;
 import moduloVehiculos.paneles.PanelVehiculos;
 import moduloVehiculos.paneles.VehiculosMenu;
+import moduloVenta.listener.ListenerCombo;
 
 
 public class VehiculosView implements VehiculosInterface {
-//
+
 	private JFrame frmVehiculo;
 	private VehiculosController vc;
 	private JButton btnSalir, btnBuscar, btnNuevo, btnStock;

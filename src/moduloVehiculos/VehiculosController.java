@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 
 import connections.ConnectionProvider;
 import connections.DBConnection;
-import objetos.*;
-
+import objetos.Stock;
+import objetos.Vehiculo;
 import utilitarios.*;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
@@ -99,7 +99,7 @@ public class VehiculosController {
 				stockAMostrar.add(s);
 			}
 		}
-		//
+
 		ArrayList<String> comboMarca = vDB.getComboMarca();
 		ArrayList<String> comboModelo = vDB.getComboModelo();
 		ArrayList<String> comboYear = vDB.getComboYear();
@@ -267,6 +267,7 @@ public class VehiculosController {
 		marca = vi.getMarca();
 		year = vi.getYear();
 
+		
 		System.out.println(marca + " " + year);
 
 	}
@@ -372,6 +373,7 @@ public class VehiculosController {
 
 		System.out.println("Done");
 	}
+
 
 	public void seleccionaVehiculo() {
 

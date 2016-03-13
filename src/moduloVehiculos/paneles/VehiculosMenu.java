@@ -2,15 +2,16 @@ package moduloVehiculos.paneles;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 public class VehiculosMenu extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Dimension preferredSize =new Dimension(200,25) ;
 	private JButton btnNuevo;
 	private JButton btnBuscar;
@@ -26,21 +27,21 @@ public VehiculosMenu() {
 	this.setPreferredSize(new Dimension(250, h));
 	this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		
-		btnBuscar = new JButton("Buscar Vehiculo");
-		btnBuscar.setPreferredSize(preferredSize);
-		this.add(btnBuscar);
+	btnNuevo = new JButton("Nuevo Vehiculo");
+	btnNuevo.setPreferredSize(preferredSize);
+	this.add(btnNuevo);
+	
+	btnBuscar = new JButton("Buscar Vehiculo");
+	btnBuscar.setPreferredSize(preferredSize);
+	this.add(btnBuscar);
 		
-		btnNuevo = new JButton("Nuevo Vehiculo");
-		btnNuevo.setPreferredSize(preferredSize);
-		this.add(btnNuevo);
-		
-		btnStock = new JButton("Ver Stock");
-		btnStock.setPreferredSize(preferredSize);
-		this.add(btnStock);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.setPreferredSize(preferredSize);
-		this.add(btnVolver);
+	btnStock = new JButton("Ver Stock");
+	btnStock.setPreferredSize(preferredSize);
+	this.add(btnStock);
+	
+	btnVolver = new JButton("Volver");
+	btnVolver.setPreferredSize(preferredSize);
+	this.add(btnVolver);
 		
 	}
 
