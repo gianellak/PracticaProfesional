@@ -70,7 +70,7 @@ public class VehiculosController {
 	public void onStock() throws DBException {
 
 		List<Vehiculo> stockActual = vDB.getAllVehiculos();
-		
+
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
 
 		for (int i = 0; i < stockActual.size(); i++) {
@@ -99,7 +99,7 @@ public class VehiculosController {
 				stockAMostrar.add(s);
 			}
 		}
-//
+		//
 		ArrayList<String> comboMarca = vDB.getComboMarca();
 		ArrayList<String> comboModelo = vDB.getComboModelo();
 		ArrayList<String> comboYear = vDB.getComboYear();
@@ -110,8 +110,7 @@ public class VehiculosController {
 	public void onBuscarPorPatente() throws DBException {
 
 		String patente = vi.getPatenteABuscar().toUpperCase();
-		
-	
+
 		Vehiculo vehiculo = vDB.getVehiculo(patente);
 
 		if (vehiculo != null) {
@@ -121,7 +120,7 @@ public class VehiculosController {
 
 			if (codigo == JOptionPane.YES_OPTION) {
 				onStock();
-				
+
 			} else {
 				if (codigo == JOptionPane.NO_OPTION) {
 
@@ -149,11 +148,10 @@ public class VehiculosController {
 				|| (newVehiculoAInsertar.getYear().isEmpty())
 				|| (newVehiculoAInsertar.getPvc() == 0)
 				|| (newVehiculoAInsertar.getMotor().isEmpty())) {
-			
+
 			System.out.println("NOT_OBLI");
-		
+
 			Mensajes.mensajeWarning(StringMsj.MSG_NOT_OBLI);
-			
 
 		} else {
 
@@ -161,17 +159,17 @@ public class VehiculosController {
 					|| (newVehiculoAInsertar.getCondicion().isEmpty())) {
 				newVehiculoAInsertar.setCondicion("STOCK");
 			}
-			
+
 			Vehiculo v = vDB.getVehiculo(newVehiculoAInsertar.getPatente());
 
-			if(v == null){
+			if (v == null) {
 				if (vDB.createVehiculo(newVehiculoAInsertar)) {
 					Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
 				} else {
 					Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
 				}
-			}else{
-				Mensajes.mensajeWarning(StringMsj.MSG_VEH_DUP);				
+			} else {
+				Mensajes.mensajeWarning(StringMsj.MSG_VEH_DUP);
 			}
 		}
 	}
@@ -229,67 +227,66 @@ public class VehiculosController {
 
 	}
 
-	
 	public void mostrarDetalle() {
 
-		
 		String p = vi.getVehiculoTabla();
-		
-		if(p != null){
-		
+
+		if (p != null) {
+
 			vehiculo = vDB.getVehiculo(p);
-		
-			vi.mostrarDetalleVehiculo(vehiculo);}
-		
-		else{
+
+			vi.mostrarDetalleVehiculo(vehiculo);
+		}
+
+		else {
 			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
 		}
 
 	}
-	
-	public void copiarVechiulo(){
-		
+
+	public void copiarVechiulo() {
+
 		String p = vi.getVehiculoTabla();
-		
-		if(p != null){
-		
+
+		if (p != null) {
+
 			System.out.println("COPIO");
-			
+
 			vehiculo = vDB.getVehiculo(p);
-		
+
 			System.out.println(vehiculo.getPatente());
 			vi.copioVehiculo(vehiculo);
-			
-		}else{
+
+		} else {
 			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
 		}
-		
+
 	}
 
 	public void getCombos() {
 		marca = vi.getMarca();
-		year = vi.getYear(); //
-		
+		year = vi.getYear();
+
 		System.out.println(marca + " " + year);
-		
+
 	}
 
 	public void aplicoFiltros() throws DBException {
 
 		List<Vehiculo> lista;
-		
+
 		try {
-			if(marca.equals("-") || year.equals("-"))
-			{
+			if (marca.equals("-") || year.equals("-")) {
 				lista = vDB.getFilterVehiculos(marca, year);
-			}else{
+			} else {
 				lista = vDB.getBothFilters(marca, year);
 			}
 			List<Stock> stockAMostrar = new ArrayList<Stock>();
 
 			for (int i = 0; i < lista.size(); i++) {
 
-				if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
+				if (!(lista.get(i).getCondicion().toUpperCase()
+						.equals("VENDIDO"))
 						&& !(lista.get(i).getCondicion().toUpperCase()
 								.equals("NO DISPONIBLE"))) {
 
@@ -316,64 +313,76 @@ public class VehiculosController {
 			vi.actualizoStock(stockAMostrar);
 
 		} catch (NullPointerException e) {
-			
+
 		}
-		
-		
-		
-		
+
 	}
 
-//	public void readCvs() {
-//
-//		String csvFile = "C:\\Tias\\STOCK.cvs"; // ACÁ PONER URL QUE INGRESO
-//		BufferedReader br = null;
-//		String line = "";
-//		String cvsSplitBy = ",";
-//
-//		try {
-//
-//			br = new BufferedReader(new FileReader(csvFile));
-//			while ((line = br.readLine()) != null) {
-//
-//				// use comma as separator
-//				String[] country = line.split(cvsSplitBy);
-//
-//				System.out.println("Country [code= " + country[4] + " , name="
-//						+ country[5] + "]");
-//
-//			}
-//
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			if (br != null) {
-//				try {
-//					br.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//
-//		System.out.println("Done");
-//	}
+	public void readCvs() {
+
+		String csvFile = "C:\\Tias\\STOCK.cvs"; // ACÁ PONER URL QUE INGRESO
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+
+		try {
+
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+
+				// use comma as separator
+				String[] vehiculo = line.split(cvsSplitBy);
+
+				Vehiculo v = new objetos.Vehiculo(
+						vehiculo[0],
+						vehiculo[1],
+						vehiculo[2],
+						vehiculo[3],
+						vehiculo[4],
+						Integer.parseInt(vehiculo[5]),
+						vehiculo[6],
+						vehiculo[7],
+						Integer.parseInt(vehiculo[8]),
+						vehiculo[9],
+						vehiculo[10],
+						vehiculo[11],
+						Integer.parseInt(vehiculo[12]),
+						Integer.parseInt(vehiculo[13]),
+						vehiculo[14]);
+
+				// System.out.println("Country [code= " + country[4] +
+				// " , name="
+				// + country[5] + "]");
+
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		System.out.println("Done");
+	}
 
 	public void seleccionaVehiculo() {
 
 		vtai = new VentasView();
-		
+
 		VentasController vc = new VentasController(vtai, pc);
-		
+
 		String p = vi.getVehiculoTabla();
 
 		vc.ventaDesdeVehiculo(p);
 
-
-		
 	}
-
 
 }
