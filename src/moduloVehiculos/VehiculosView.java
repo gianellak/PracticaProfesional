@@ -410,9 +410,7 @@ public class VehiculosView implements VehiculosInterface {
 
 	@Override
 	public void copioVehiculo(Vehiculo vehiculo) {
-		
-		PantallaUtil.remove(panelVehiculos);
-		
+			
 		panelVehiculos.copioVehiculo(vehiculo);
 		
 		listenerAceptarAlta =new ListenerAceptarAltaVehiculo(vc);

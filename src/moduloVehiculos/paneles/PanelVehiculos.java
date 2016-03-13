@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.crypto.NullCipher;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -214,12 +215,14 @@ public class PanelVehiculos extends JPanel {
 		int a = panelStock.getTablaStock().getSelectedRow();
 		
 		String patente = null;
+		
 		try {
 			patente = String.valueOf(panelStock.getTablaStock().getModel().getValueAt(a,0));
 		} catch (Exception e) {
 			return null;
 		}
 				
+		System.out.println(patente);
 		return patente;
 		
 	}
@@ -374,21 +377,26 @@ private void allEditableTextFields() {
 
 private void cargarTextFields(Vehiculo v) {
 	
-		txtPatente.setText(v.getPatente());
-		txtMarca.setText(v.getMarca());
-		txtModelo.setText(v.getModelo());
-		txtYear.setText(v.getYear());
-		txtColor.setText(v.getColor());
-		txtKm.setText(String.valueOf(v.getKm()));
-		txtMotor.setText(v.getMotor());
-		txtDominio.setText(v.getDominio());
-		txtPvc.setText(String.valueOf(v.getPvc()));
-		txtFechaIngreso.setText(v.getFechaIngreso());
-		txtFechaVenta.setText(v.getFechaVenta());
-		txtCondicion.setText(v.getCondicion());
-		txtProveedor.setText(String.valueOf(v.getIdProveedor()));
-		txtCliente.setText(String.valueOf(v.getIdCliente()));
-		txtComentarios.setText(v.getComentarios());
+	
+		try {
+			txtPatente.setText(v.getPatente());
+			txtMarca.setText(v.getMarca());
+			txtModelo.setText(v.getModelo());
+			txtYear.setText(v.getYear());
+			txtColor.setText(v.getColor());
+			txtKm.setText(String.valueOf(v.getKm()));
+			txtMotor.setText(v.getMotor());
+			txtDominio.setText(v.getDominio());
+			txtPvc.setText(String.valueOf(v.getPvc()));
+			txtFechaIngreso.setText(v.getFechaIngreso());
+			txtFechaVenta.setText(v.getFechaVenta());
+			txtCondicion.setText(v.getCondicion());
+			txtProveedor.setText(String.valueOf(v.getIdProveedor()));
+			txtCliente.setText(String.valueOf(v.getIdCliente()));
+			txtComentarios.setText(v.getComentarios());
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage().toString());
+		}
 		
 		
 	}
@@ -743,6 +751,7 @@ public void muestroStock(List<Stock> lista) {
 		
 		txtPatente.setText("");
 		txtMotor.setText("");
+		
 		btnAceptar = new JButton("Guardar");
 		btnAceptar.setBounds(100, 440, 100, 25);
 		this.add(btnAceptar);

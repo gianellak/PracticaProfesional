@@ -66,6 +66,7 @@ public class VehiculosController {
 	public void onStock() throws DBException {
 
 		List<Vehiculo> stockActual = vDB.getAllVehiculos();
+		
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
 
 		for (int i = 0; i < stockActual.size(); i++) {
@@ -249,8 +250,10 @@ public class VehiculosController {
 		if(p != null){
 		
 			System.out.println("COPIO");
+			
 			vehiculo = vDB.getVehiculo(p);
 		
+			System.out.println(vehiculo.getPatente());
 			vi.copioVehiculo(vehiculo);
 			
 		}else{

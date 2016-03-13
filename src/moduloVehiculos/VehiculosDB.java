@@ -131,29 +131,8 @@ public class VehiculosDB  {
 						.prepareStatement(SQL_SELECT_ALL_VEHICULO);
 				ResultSet rs = statement.executeQuery();) {
 			while (rs.next()) {
-
-				String patente = rs.getString(1);
-				String marca = rs.getString(2);
-				String modelo = rs.getString(3);
-				String year = rs.getString(4);
-				String color = rs.getString(5);
-				Integer km = rs.getInt(6);
-				String motor = rs.getString(7);
-				String dominio = rs.getString(8);
-				Integer pvc = rs.getInt(9);
-				String fechaIngreso = rs.getString(10);
-				String fechaVenta = rs.getString(11);
-				String condicion = rs.getString(12);
-				Integer idProveedor = rs.getInt(13);
-				Integer idCliente = rs.getInt(14);
-				String comentarios = rs.getString(15);
-
-				Vehiculo vehiculo = new Vehiculo(patente, marca, modelo, year,
-						color, km, motor, dominio, pvc, fechaIngreso,
-						fechaVenta, condicion, idProveedor, idCliente,
-						comentarios);
-
-				stock.add(vehiculo);
+				
+				stock.add(map(rs));
 
 			}
 		} catch (SQLException e) {
@@ -266,13 +245,13 @@ public class VehiculosDB  {
 		
 		Object[] values = {
 				
+				vehiculo.getMotor(),
 				vehiculo.getPatente(),
 				vehiculo.getMarca(),
 				vehiculo.getModelo(),
 				vehiculo.getYear(),
 				vehiculo.getColor(),
 				vehiculo.getKm(),
-				vehiculo.getMotor(),
 				vehiculo.getDominio(),
 				vehiculo.getPvc(),
 				vehiculo.getFechaIngreso(),

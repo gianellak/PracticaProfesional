@@ -1,7 +1,6 @@
 package moduloPrincipal;
 
 import java.awt.Toolkit;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import objetos.Empleado;
@@ -10,7 +9,6 @@ import moduloLogin.LoginController;
 import moduloLogin.LoginDB;
 import moduloLogin.LoginInterface;
 import moduloLogin.LoginView;
-import moduloLogin.LoginDB;
 import moduloUsuarios.UsuarioDB;
 import connections.ConnectionProvider;
 import connections.DBConnection;

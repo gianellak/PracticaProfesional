@@ -163,7 +163,7 @@ public class SchemaGenerator {
 				+ "modelo VARCHAR(25), "
 				+ "year VARCHAR(10), "
 				+ "color VARCHAR(15), "
-				+ "km INTEGER, "
+				+ "km VARCHAR(10), "
 				+ "dominio VARCHAR(10), "
 				+ "pvc INTEGER, "
 				+ "fechaIngreso VARCHAR(8), "
