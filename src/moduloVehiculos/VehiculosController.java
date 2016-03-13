@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
 import connections.ConnectionProvider;
 import connections.DBConnection;
 import objetos.*;
-import utilitarios.Mensajes;
+
+import utilitarios.*;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
 
@@ -23,6 +24,8 @@ public class VehiculosController {
 	private PrincipalController pc;
 	private VehiculosDB vDB;
 	private Vehiculo vehiculo;
+	private String marca;
+	private String year;
 
 	public VehiculosController(VehiculosView ci, PrincipalController pc) {
 		this.vi = ci;
@@ -92,7 +95,7 @@ public class VehiculosController {
 				stockAMostrar.add(s);
 			}
 		}
-
+//
 		ArrayList<String> comboMarca = vDB.getComboMarca();
 		ArrayList<String> comboModelo = vDB.getComboModelo();
 		ArrayList<String> comboYear = vDB.getComboYear();
@@ -103,6 +106,8 @@ public class VehiculosController {
 	public void onBuscarPorPatente() throws DBException {
 
 		String patente = vi.getPatenteABuscar().toUpperCase();
+		
+	
 		Vehiculo vehiculo = vDB.getVehiculo(patente);
 
 		if (vehiculo != null) {
@@ -111,8 +116,8 @@ public class VehiculosController {
 			int codigo = Mensajes.msjSinPatente();
 
 			if (codigo == JOptionPane.YES_OPTION) {
-				List<Vehiculo> lista = vDB.getAllVehiculos();
-				muestroStock(lista);
+				onStock();
+				
 			} else {
 				if (codigo == JOptionPane.NO_OPTION) {
 
@@ -133,33 +138,36 @@ public class VehiculosController {
 
 		Vehiculo newVehiculoAInsertar = vi.getDatosNuevoVehiculo();
 
-		if ((newVehiculoAInsertar.getPatente() == null)
-				|| (newVehiculoAInsertar.getMarca() == null)
-				|| (newVehiculoAInsertar.getModelo() == null)
-				|| (newVehiculoAInsertar.getColor() == null)
-				|| (newVehiculoAInsertar.getYear() == null)
-				|| (newVehiculoAInsertar.getPvc() == null)
-				|| (newVehiculoAInsertar.getMotor() == null)) {
-
-			vi.insertError(); // ACA MOSTRAR UN MENSAJE DICIENDO QUE LLENE LOS
-								// CAMPOS OBLIGATORIOS.
-								// no puse condición porque crea EN STOCK por
-								// default.
+		if ((newVehiculoAInsertar.getPatente().isEmpty())
+				|| (newVehiculoAInsertar.getMarca().isEmpty())
+				|| (newVehiculoAInsertar.getModelo().isEmpty())
+				|| (newVehiculoAInsertar.getColor().isEmpty())
+				|| (newVehiculoAInsertar.getYear().isEmpty())
+				|| (newVehiculoAInsertar.getPvc() == 0)
+				|| (newVehiculoAInsertar.getMotor().isEmpty())) {
+			
+			System.out.println("NOT_OBLI");
+		
+			Mensajes.mensajeWarning(StringMsj.MSG_NOT_OBLI);
+			
 
 		} else {
 
 			if ((newVehiculoAInsertar.getCondicion() == "")
-					|| (newVehiculoAInsertar.getCondicion() == null)) {
-				newVehiculoAInsertar.setCondicion("EN STOCK");
+					|| (newVehiculoAInsertar.getCondicion().isEmpty())) {
+				newVehiculoAInsertar.setCondicion("STOCK");
 			}
+			
+			Vehiculo v = vDB.getVehiculo(newVehiculoAInsertar.getPatente());
 
-			newVehiculoAInsertar.setCondicion(newVehiculoAInsertar
-					.getCondicion().toUpperCase());
-
-			if (vDB.createVehiculo(newVehiculoAInsertar)) {
-				vi.insertOk();
-			} else {
-				vi.insertError();
+			if(v == null){
+				if (vDB.createVehiculo(newVehiculoAInsertar)) {
+					Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
+				} else {
+					Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
+				}
+			}else{
+				Mensajes.mensajeWarning(StringMsj.MSG_VEH_DUP);				
 			}
 		}
 	}
@@ -217,59 +225,140 @@ public class VehiculosController {
 
 	}
 
-	public void seleccionaVehiculo() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void filtrarModelo() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	public void mostrarDetalle() {
 
+		
 		String p = vi.getVehiculoTabla();
-		vehiculo = vDB.getVehiculo(p);
-		vi.mostrarDetalleVehiculo(vehiculo);
-
-	}
-
-	public void readCvs() {
-
-		String csvFile = "C:\\Tias\\STOCK.cvs"; // ACÁ PONER URL QUE INGRESO
-		BufferedReader br = null;
-		String line = "";
-		String cvsSplitBy = ",";
-
-		try {
-
-			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
-				String[] country = line.split(cvsSplitBy);
-
-				System.out.println("Country [code= " + country[4] + " , name="
-						+ country[5] + "]");
-
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+		
+		if(p != null){
+		
+			vehiculo = vDB.getVehiculo(p);
+		
+			vi.mostrarDetalleVehiculo(vehiculo);}
+		
+		else{
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
 		}
 
-		System.out.println("Done");
 	}
+	
+	public void copiarVechiulo(){
+		
+		String p = vi.getVehiculoTabla();
+		
+		if(p != null){
+		
+			System.out.println("COPIO");
+			vehiculo = vDB.getVehiculo(p);
+		
+			vi.copioVehiculo(vehiculo);
+			
+		}else{
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
+		}
+		
+	}
+
+	public void getCombos() {
+		marca = vi.getMarca();
+		year = vi.getYear();
+		
+		System.out.println(marca + " " + year);
+		
+	}
+
+	public void aplicoFiltros() throws DBException {
+
+		List<Vehiculo> lista;
+		
+		try {
+			if(marca.equals("-") || year.equals("-"))
+			{
+				lista = vDB.getFilterVehiculos(marca, year);
+			}else{
+				lista = vDB.getBothFilters(marca, year);
+			}
+			List<Stock> stockAMostrar = new ArrayList<Stock>();
+
+			for (int i = 0; i < lista.size(); i++) {
+
+				if (!(lista.get(i).getCondicion().toUpperCase().equals("VENDIDO"))
+						&& !(lista.get(i).getCondicion().toUpperCase()
+								.equals("NO DISPONIBLE"))) {
+
+					Stock s = new Stock();
+					String patenteActual = lista.get(i).getPatente();
+
+					if (patenteActual == "000000") {
+						s.setPatente(lista.get(i).getMotor());
+					} else {
+
+						s.setPatente(patenteActual);
+					}
+					s.setCondicion(lista.get(i).getCondicion());
+					s.setColor(lista.get(i).getColor());
+					s.setMarca(lista.get(i).getMarca());
+					s.setModelo(lista.get(i).getModelo());
+					s.setYear(lista.get(i).getYear());
+					s.setPvc(lista.get(i).getPvc());
+
+					stockAMostrar.add(s);
+				}
+			}
+
+			vi.actualizoStock(stockAMostrar);
+
+		} catch (NullPointerException e) {
+			
+		}
+		
+		
+		
+		
+	}
+
+//	public void readCvs() {
+//
+//		String csvFile = "C:\\Tias\\STOCK.cvs"; // ACÁ PONER URL QUE INGRESO
+//		BufferedReader br = null;
+//		String line = "";
+//		String cvsSplitBy = ",";
+//
+//		try {
+//
+//			br = new BufferedReader(new FileReader(csvFile));
+//			while ((line = br.readLine()) != null) {
+//
+//				// use comma as separator
+//				String[] country = line.split(cvsSplitBy);
+//
+//				System.out.println("Country [code= " + country[4] + " , name="
+//						+ country[5] + "]");
+//
+//			}
+//
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (br != null) {
+//				try {
+//					br.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//
+//		System.out.println("Done");
+//	}
+
+	public void seleccionaVehiculo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

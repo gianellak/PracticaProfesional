@@ -58,8 +58,8 @@ public interface VentasInterface {
 	void cargarTabla(List<Cuota> lista);
 
 	
-	void ingresarDetalleVenta(int idVenta, String cliente, String garante,
-			String vehiculo, int precio);
+	void ingresarDetalleVenta(int idVenta, Persona cliente, Persona garante,
+			Vehiculo vehiculo, int precio);
 
 	Double getSaldo();
 
@@ -67,6 +67,15 @@ public interface VentasInterface {
 	DetalleVenta getNewDetalle();
 
 	void mostrarBuscarVenta();
+
+
+	String getYear();
+
+	String getMarca();
+
+	void actualizoStock(List<Stock> stockAMostrar);
+
+	void ventaDesdeCliente(String dni);
 
 
 

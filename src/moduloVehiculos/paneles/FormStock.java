@@ -2,17 +2,19 @@ package moduloVehiculos.paneles;
 
 import java.awt.Dimension;
 import java.util.List;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import objetos.Stock;
-import objetos.Usuario;
 
 public class FormStock extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable tablaStock;
 	private JScrollPane jp;
 
@@ -38,7 +40,12 @@ public class FormStock extends JPanel {
 		DefaultTableModel modelo = new DefaultTableModel(){
 		
 		
-		    public boolean isCellEditable(int row, int column)
+		    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column)
 		    {
 		      return false;
 		    }
@@ -77,7 +84,7 @@ public class FormStock extends JPanel {
 		jp= new JScrollPane(tablaStock);
 		
 
-		jp.setBounds(0, 80, 1000, 300);
+		
 	}
 	
 
@@ -97,6 +104,28 @@ public class FormStock extends JPanel {
 	public String getRowSelected() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void actualizoStock(List<Stock> stockAMostrar) {
+
+		((DefaultTableModel) tablaStock.getModel()).setRowCount(0);
+		
+
+		for (Stock v : stockAMostrar) {
+			
+			Object[] o = new Object[7];
+			o[0] = v.getPatente();
+			o[1] = v.getMarca();
+			o[2] = v.getModelo();
+			o[3] = v.getColor();
+			o[4] = v.getYear();
+			o[5] = v.getPvc();
+			o[6] = v.getCondicion();
+			
+			((DefaultTableModel) tablaStock.getModel()).addRow(o);
+		}
+		
+		
 	}
 
 

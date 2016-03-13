@@ -1,13 +1,16 @@
 package moduloVenta;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import exceptions.DBException;
 import objetos.Cuota;
 import objetos.DetalleVenta;
 import objetos.Persona;
@@ -46,13 +49,19 @@ public class VentasView implements VentasInterface {
 	private ListenerSeleccionar listenerSeleccionar;
 	private ListenerVolverVentaStock listenerVolverVenta;
 	private ListenerDetalleVehiculo listenerDetalle;
-	private ListenerComboModelo listenerComboModelo;
 	private ListenerReiniciarVenta listenerReiniciar;
 	private ListenerDate listenerDate;
 
 	private ListenerAceptarDetalle listenerAceptarDetalle;
 
+	private ListenerFiltroStock listenerFiltroStock;
+
+	private ListenerCombo listenerMarca;
+
+	private ListenerCombo listenerYear;
+
 	public VentasView(){
+		
 		panelVentasMenu= new VentasMenu();
 		panelVentas = new PanelVentas();
 	
@@ -295,9 +304,15 @@ public class VentasView implements VentasInterface {
 		listenerSeleccionar = new ListenerSeleccionar(ventasController);
 		listenerDetalle = new ListenerDetalleVehiculo(ventasController);
 		listenerVolverVenta = new ListenerVolverVentaStock(ventasController);
-		listenerComboModelo = new ListenerComboModelo(ventasController);
+		listenerFiltroStock = new ListenerFiltroStock(ventasController);
+		listenerYear = new ListenerCombo(ventasController);
+		listenerMarca = new ListenerCombo(ventasController);
+		
 
-		panelVehiculos.getComboListModelo().addActionListener(listenerComboModelo);
+		panelVehiculos.getComboListMarca().addItemListener(listenerMarca);
+		panelVehiculos.getComboListYear().addItemListener(listenerYear);
+		
+		panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
 		panelVehiculos.getBtnVolverVenta().addActionListener(listenerVolverVenta);
 		panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
 		panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
@@ -338,7 +353,7 @@ public class VentasView implements VentasInterface {
 
 
 	@Override
-	public void ingresarDetalleVenta(int idVenta, String cliente, String garante, String vehiculo, int precio){
+	public void ingresarDetalleVenta(int idVenta, Persona cliente, Persona garante, Vehiculo vehiculo, int precio){
 		
 		PantallaUtil.remove(panelVentas);
 		PantallaUtil.refresh(frame);
@@ -363,8 +378,14 @@ public class VentasView implements VentasInterface {
 	
 	@Override
 	public int getCuotas() {
+		int cuota;
 		
-		return Integer.valueOf(panelVentas.getCuotasText().getText());
+		try {
+			cuota = Integer.valueOf(panelVentas.getCuotasText().getText());
+		} catch (NumberFormatException e) {
+			cuota = 0;
+		}
+		return cuota;
 	}
 
 	@Override
@@ -386,6 +407,63 @@ public class VentasView implements VentasInterface {
 	@Override
 	public void mostrarBuscarVenta() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getMarca() {
+		// TODO Auto-generated method stub
+		return panelVehiculos.getComboListMarca().getSelectedItem().toString();
+				
+	}
+
+
+	@Override
+	public String getYear() {
+		// TODO Auto-generated method stub
+		return panelVehiculos.getComboListYear().getSelectedItem().toString();
+	}
+
+
+	@Override
+	public void actualizoStock(List<Stock> stockAMostrar) {
+		panelVehiculos.getPanelStock().actualizoStock(stockAMostrar);
+		
+	}
+
+
+	@Override
+	public void ventaDesdeCliente(String dni) {
+
+panelVentas.showNuevaVenta();
+		
+		listenerValidarC = new ListenerValidarC(ventasController);
+		listenerBuscarV = new ListenerBuscarVehiculoV(ventasController);
+		listenerValidarG = new ListenerValidarG(ventasController);
+		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
+		listenerAceptarV = new ListenerValidarVenta(ventasController);
+		listenerReiniciar = new ListenerReiniciarVenta(ventasController);
+		
+		panelVentas.getBtnValidarDniC().addActionListener(listenerValidarC);
+		panelVentas.getBtnBuscarVehiculo().addActionListener(listenerBuscarV);
+		panelVentas.getBtnValidarDniG().addActionListener(listenerValidarG);
+		panelVentas.getBtnVolverNewVenta().addActionListener(listenerVolverAVentas);
+		panelVentas.getBtnAceptarNewVenta().addActionListener(listenerAceptarV);
+		panelVentas.getBtnReset().addActionListener(listenerReiniciar);
+
+		panelVentas.getDniCompradorText().setText(dni);
+		
+		try {
+			ventasController.validarCliente();
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		PantallaUtil.refresh(frame);
+		
+
+		
 		
 	}
 

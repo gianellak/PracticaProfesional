@@ -20,26 +20,27 @@ public class VehiculosView implements VehiculosInterface {
 
 	private JFrame frmVehiculo;
 	private VehiculosController vc;
+	private JButton btnSalir, btnBuscar, btnNuevo, btnStock;
+	private VehiculosMenu panelVehiculosMenu;
+	private PanelVehiculos panelVehiculos;
+	private VehiculosController cc;
+	private JFrame frame;
 
 	// LISTENERS
 
 	private ListenerNuevoVehiculo listenerNuevo;
 	private ListenerBuscarVehiculo listenerBuscar;
 	private ListenerStock listenerStock;
-	private JButton btnSalir;
-	private JButton btnBuscar;
-	private JButton btnNuevo;
-	private JButton btnStock;
-	private VehiculosMenu panelVehiculosMenu;
-	private PanelVehiculos panelVehiculos;
-	private VehiculosController cc;
-	private JFrame frame;
 	private ListenerVehiculoVolver listenerVolver;
 	private ListenerBuscarPatente listenerBuscarPatente;
 	private ListenerSeleccionar listenerSeleccionar;
 	private ListenerDetalleVehiculo listenerDetalle;
 	private ListenerAceptarAltaVehiculo listenerAceptarAlta;
 	private ListenerVehiculoVolver listenerVolverAlta;
+	private ListenerFiltroStock listenerFiltroStock;
+	private ListenerCombo listenerMarca;
+	private ListenerCombo listenerYear;
+	private ListenerCopiar listenerCopiar;
 
 	
 
@@ -140,6 +141,19 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.menuVerStock();
 		panelVehiculos.preparoFiltros(comboMarca, comboModelo, comboYear);
 		
+		listenerMarca = new ListenerCombo(vc);
+		panelVehiculos.getComboListMarca().addItemListener(listenerMarca);
+		listenerYear = new ListenerCombo(vc);
+		panelVehiculos.getComboListYear().addItemListener(listenerYear);
+		listenerDetalle = new ListenerDetalleVehiculo(vc);
+		panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
+		listenerFiltroStock = new ListenerFiltroStock(vc);
+		panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
+		listenerCopiar = new ListenerCopiar(vc);
+		panelVehiculos.getBtnCopiar().addActionListener(listenerCopiar);
+		
+		
+		
 		frame.add(panelVehiculos);
 		
 		PantallaUtil.refresh(frame);
@@ -161,22 +175,48 @@ public class VehiculosView implements VehiculosInterface {
 
 	public Vehiculo getDatosNuevoVehiculo() {
 		
+		
+		
+		int km, pvc, pro, cli;
+		
+		try {
+			km = Integer.parseInt(panelVehiculos.getTxtKm().getText());
+		} catch (NumberFormatException e) {
+			km = 0;
+		}
+		
+		try {
+			pvc = Integer.parseInt(panelVehiculos.getTxtPvc().getText());
+		} catch (NumberFormatException e) {
+			pvc = 0;
+		}
+		try {
+			pro = Integer.parseInt(panelVehiculos.getTxtProveedor().getText());
+		} catch (NumberFormatException e) {
+			pro = 0;
+		}
+		try {
+			cli = Integer.parseInt(panelVehiculos.getTxtCliente().getText());
+		} catch (NumberFormatException e) {
+			cli = 0;
+		}
+		
 		Vehiculo v = new Vehiculo(
 				
-				panelVehiculos.getTxtPatente().getText(),
+				panelVehiculos.getTxtPatente().getText().toUpperCase(),
 				panelVehiculos.getTxtMarca().getText(),
 				panelVehiculos.getTxtModelo().getText(),
 				panelVehiculos.getTxtYear().getText(),
 				panelVehiculos.getTxtColor().getText(),
-				Integer.parseInt(panelVehiculos.getTxtKm().getText()),
-				panelVehiculos.getTxtMotor().getText(),
-				panelVehiculos.getTxtDominio().getText(),
-				Integer.parseInt(panelVehiculos.getTxtPvc().getText()),
+				km,
+				panelVehiculos.getTxtMotor().getText().toUpperCase(),
+				panelVehiculos.getTxtDominio().getText().toUpperCase(),
+				pvc,
 				panelVehiculos.getTxtFechaIngreso().getText(),
 				panelVehiculos.getTxtFechaVenta().getText(), 
-				panelVehiculos.getTxtCondicion().getText(), 
-				Integer.parseInt(panelVehiculos.getTxtProveedor().getText()),
-				Integer.parseInt(panelVehiculos.getTxtCliente().getText()),
+				panelVehiculos.getTxtCondicion().getText().toUpperCase(), 
+				pro,
+				cli,
 				panelVehiculos.getTxtComentarios().getText());
 
 		return v;
@@ -307,13 +347,18 @@ public class VehiculosView implements VehiculosInterface {
 			
 			frame.add(panelVehiculos);
 			
-			listenerSeleccionar = new ListenerSeleccionar(vc);
+			listenerMarca = new ListenerCombo(vc);
+			panelVehiculos.getComboListMarca().addItemListener(listenerMarca);
+			listenerYear = new ListenerCombo(vc);
+			panelVehiculos.getComboListYear().addItemListener(listenerYear);
 			
-			listenerDetalle = new ListenerDetalleVehiculo(vc);
-			
-			
+			listenerSeleccionar = new ListenerSeleccionar(vc);			
 			panelVehiculos.getBtnSeleccionar().addActionListener(listenerSeleccionar);
+			listenerDetalle = new ListenerDetalleVehiculo(vc);
 			panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
+			listenerFiltroStock = new ListenerFiltroStock(vc);
+			panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
+			
 			
 			PantallaUtil.refresh(frame);
 					
@@ -334,6 +379,48 @@ public class VehiculosView implements VehiculosInterface {
 		PantallaUtil.refresh(frame);
 	}
 
+
+	@Override
+	public String getMarca() {
+		// TODO Auto-generated method stub
+		return panelVehiculos.getComboListMarca().getSelectedItem().toString();
+				
+	}
+
+
+	@Override
+	public String getYear() {
+		// TODO Auto-generated method stub
+		return panelVehiculos.getComboListYear().getSelectedItem().toString();
+	}
+
+
+	@Override
+	public void actualizoStock(List<Stock> stockAMostrar) {
+		panelVehiculos.getPanelStock().actualizoStock(stockAMostrar);
+		
+	}
+
+
+	@Override
+	public void copioVehiculo(Vehiculo vehiculo) {
+		
+		PantallaUtil.remove(panelVehiculos);
+		
+		panelVehiculos.copioVehiculo(vehiculo);
+		
+		listenerAceptarAlta =new ListenerAceptarAltaVehiculo(vc);
+		listenerVolverAlta =new ListenerVehiculoVolver(vc);
+		
+		panelVehiculos.getBtnAceptar().addActionListener(listenerAceptarAlta);
+		panelVehiculos.getBtnCancelar().addActionListener(listenerVolver);
+		
+		PantallaUtil.refresh(frame);
+		
+	}
+
+
+	
 	
 
 }

@@ -39,7 +39,9 @@ public class VehiculosDB  {
 
 	private static final String SQL_FIND_BY_PATENTE = "SELECT * FROM Vehiculo WHERE patente=? OR motor=?";
 
-	private static final String SQL_SELECT_BY_COMBO = "SELECT * FROM Vehiculo WHERE marca=? OR modelo=? OR year=?";
+	private static final String SQL_SELECT_BY_COMBO = "SELECT * FROM Vehiculo WHERE marca=? OR year=?";
+
+	private static final String SQL_ALL_BY_COMBO = "SELECT * FROM Vehiculo WHERE marca=? AND year=?";
 
 	private static final String SQL_SELECT_LIST_MODELO = "SELECT DISTINCT modelo FROM Vehiculo";
 	
@@ -164,13 +166,18 @@ public class VehiculosDB  {
 	 * getAllVehiculos by ComboList selection. devuelve una lista de todos los vehiculos en base a los filtros aplicados.
 	 * 
 	 */
-	public List<Vehiculo> getFilterVehiculos() throws DBException {
+	public List<Vehiculo> getFilterVehiculos(String marca, String year) throws DBException {
 		
 		List<Vehiculo> stock = new ArrayList<>();
 		
+		Object[] values = {
+				marca,
+				year
+		};
+
+		
 		try (Connection connection = this.connectionProvider.getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement(SQL_SELECT_BY_COMBO);
+				PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_SELECT_BY_COMBO, false, values);
 				ResultSet rs = statement.executeQuery();) {
 			while (rs.next()) {
 				
@@ -345,5 +352,31 @@ public class VehiculosDB  {
             throw new DBException(e);
         }
 		}
-	}
+
+	public List<Vehiculo> getBothFilters(String marca, String year) throws DBException {
+		
+		List<Vehiculo> stock = new ArrayList<>();
+				
+		Object[] values = {
+					marca,
+					year
+			};
+
+			
+			try (Connection connection = this.connectionProvider.getConnection();
+					PreparedStatement statement = DBUtil.prepareStatement(connection, SQL_ALL_BY_COMBO, false, values);
+					ResultSet rs = statement.executeQuery();) {
+				while (rs.next()) {
+					
+					stock.add(map(rs));
+					
+				}
+			} catch (SQLException e) {
+				throw new DBException(e);
+			}
+			
+			return stock;
+		}
+	
+}
 
