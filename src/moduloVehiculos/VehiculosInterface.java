@@ -41,6 +41,8 @@ public interface VehiculosInterface {
 				ArrayList<String> comboYear);
 		public String getVehiculoTabla();
 		public void mostrarDetalleVehiculo(Vehiculo vehiculo);
+
+		public void refresh();
 		public String getMarca();
 		public String getYear();
 		public void actualizoStock(List<Stock> stockAMostrar);

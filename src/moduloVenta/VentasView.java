@@ -21,7 +21,6 @@ import utilitarios.PantallaUtil;
 import moduloClientes.paneles.*;
 import moduloPrincipal.paneles.PanelGeneral;
 import moduloVehiculos.paneles.PanelVehiculos;
-import moduloVehiculos.listener.*;
 import moduloVenta.listener.*;
 import moduloVenta.paneles.PanelVentas;
 import moduloVenta.paneles.VentasMenu;
