@@ -203,9 +203,8 @@ public class ClientesController {
 					Sintaxis.analizoTexto(persona.getApellido()) &&
 					Sintaxis.analizoTelefono(persona.getTelefonoP())){
 					
-						int codigo = Mensajes.showToUpdate(persona);
-				
-						if (codigo==JOptionPane.YES_OPTION){
+						
+						if (Mensajes.showToUpdate(cDB.getPersona(persona.getDni()))==JOptionPane.YES_OPTION){
 							if(cDB.updatePersona(persona)){
 							
 								Mensajes.mensajeInfo(StringMsj.MSG_CLI_MOD_OK);;
