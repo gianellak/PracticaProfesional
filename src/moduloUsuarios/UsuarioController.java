@@ -330,36 +330,39 @@ public class UsuarioController {
 
 		if (u != null) {
 
-			int cod = ui.showToDeleteBoth(u);
-
-			if (cod == JOptionPane.YES_OPTION) {
+			if (ui.showToDeleteBoth(u) == JOptionPane.YES_OPTION) {
 				if (uDB.delete(u.getUsername())) {
 
 					Mensajes.mensajeInfo(StringMsj.MSG_USER_DEL_OK);
 
-					if (e != null) {
-
-						int codigo = ui.showToDelete(e);
-
-						if (codigo == JOptionPane.YES_OPTION) {
-							if (uDB.deleteEmpleado(dni)) {
-
-								Mensajes.mensajeInfo(StringMsj.MSG_EMP_DEL_OK);
-							} else {
-								Mensajes.mensajeInfo(StringMsj.MSG_EMP_DEL_BAD);
-							}
-						}
-
-					} else {
-						ui.showNotFound();
-					}
+					eliminarEmpleado(e, dni);
 
 				} else {
-					Mensajes.mensajeInfo(StringMsj.MSG_USER_DEL_BAD);
+					ui.showNotFound();
+				}
+
+			} else {
+				Mensajes.mensajeInfo(StringMsj.MSG_USER_DEL_BAD);
+			}
+
+		} else {
+
+			eliminarEmpleado(e, dni);
+
+		}
+	}
+
+	public void eliminarEmpleado(Empleado e, int dni) throws DBException {
+		if (e != null) {
+
+			if (ui.showToDelete(e) == JOptionPane.YES_OPTION) {
+				if (uDB.deleteEmpleado(dni)) {
+					Mensajes.mensajeInfo(StringMsj.MSG_EMP_DEL_OK);
+				} else {
+					Mensajes.mensajeInfo(StringMsj.MSG_EMP_DEL_BAD);
 				}
 			}
 		}
-		
 
 	}
 

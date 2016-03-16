@@ -16,8 +16,7 @@ public class ListenerCajaVolver implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		cc.cleanCaja();
-
+		cc.getBack();
 	}
 
 }

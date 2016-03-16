@@ -419,7 +419,7 @@ public class UsuarioView implements UsuarioInterface {
 
 	@Override
 	public int getBajaEmpleado() {
-		return Integer.parseInt(panelUsuario.getDniText().getText());
+		return Integer.parseInt(panelUsuario.getDniEText().getText());
 	}
 
 	@Override
