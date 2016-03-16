@@ -217,10 +217,7 @@ public class CajaView implements CajaInterface {
 		listenerAceptarMod = new ListenerAceptarMod(cajaController);
 		panelCaja.getBtnAlta().removeActionListener(listenerAltaMovimiento);
 		panelCaja.getBtnAlta().addActionListener(listenerAceptarMod);
-		
-		
-		
+				
 	}
-
 
 }

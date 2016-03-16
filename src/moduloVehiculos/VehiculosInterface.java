@@ -48,8 +48,6 @@ public interface VehiculosInterface {
 		public String vehiculoVenta();
 		public JPanel getPanel();
 	
-	
-		
 		
 		
 }
