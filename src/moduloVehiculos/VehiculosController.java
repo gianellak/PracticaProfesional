@@ -146,9 +146,7 @@ public class VehiculosController {
 				|| (newVehiculoAInsertar.getPvc() == 0)
 				|| (newVehiculoAInsertar.getMotor().isEmpty())) {
 			
-			System.out.println("NOT_OBLI");
-		
-			Mensajes.mensajeWarning(StringMsj.MSG_NOT_OBLI);
+			Mensajes.mensajeWarning(StringMsj.MSG_OBLI);
 			
 
 		} else {
@@ -263,6 +261,7 @@ public class VehiculosController {
 	}
 
 	public void getCombos() {
+		
 		marca = vi.getMarca();
 		year = vi.getYear();
 		
@@ -272,16 +271,25 @@ public class VehiculosController {
 
 	public void aplicoFiltros() throws DBException {
 
+		getCombos();
+		
 		List<Vehiculo> lista;
+		
+		System.out.println("Filtro desde vehiculo");
 		
 		try {
 			if(marca.equals("-") || year.equals("-"))
 			{
 				lista = vDB.getFilterVehiculos(marca, year);
+				System.out.println(lista.size());
 			}else{
 				lista = vDB.getBothFilters(marca, year);
+				System.out.println(lista.size());
 			}
+			
 			List<Stock> stockAMostrar = new ArrayList<Stock>();
+			
+			System.out.println("Lista: " + lista.size());
 
 			for (int i = 0; i < lista.size(); i++) {
 
@@ -314,9 +322,6 @@ public class VehiculosController {
 		} catch (NullPointerException e) {
 			
 		}
-		
-		
-		
 		
 	}
 

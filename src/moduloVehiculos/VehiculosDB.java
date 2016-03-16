@@ -170,6 +170,7 @@ public class VehiculosDB  {
 		return stock;
 	}
 	
+	
 	public ArrayList<String> getComboModelo() throws DBException {
 
 		ArrayList<String> combo = new ArrayList<>();

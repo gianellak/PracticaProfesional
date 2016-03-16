@@ -108,6 +108,7 @@ public class FormStock extends JPanel {
 
 	public void actualizoStock(List<Stock> stockAMostrar) {
 
+		System.out.println("actualizo: " + stockAMostrar.size());
 		((DefaultTableModel) tablaStock.getModel()).setRowCount(0);
 		
 

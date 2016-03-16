@@ -494,6 +494,8 @@ public class VentasController {
 
 	public void aplicoFiltros() throws DBException {
 
+		getCombos();
+		
 		List<Vehiculo> lista;
 		
 		if(marca.equals("-") || year.equals("-"))
