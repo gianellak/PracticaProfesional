@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import objetos.Stock;
 import objetos.Usuario;
@@ -45,6 +46,7 @@ public interface VehiculosInterface {
 		public void actualizoStock(List<Stock> stockAMostrar);
 		public void copioVehiculo(Vehiculo vehiculo);
 		public String vehiculoVenta();
+		public JPanel getPanel();
 	
 	
 		

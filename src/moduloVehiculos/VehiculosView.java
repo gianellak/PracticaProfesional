@@ -15,6 +15,7 @@ import moduloVehiculos.listener.*;
 import moduloVehiculos.paneles.PanelVehiculos;
 import moduloVehiculos.paneles.VehiculosMenu;
 import moduloVenta.listener.ListenerCombo;
+import moduloVenta.listener.ListenerVolverVentaStock;
 
 
 public class VehiculosView implements VehiculosInterface {
@@ -37,12 +38,15 @@ public class VehiculosView implements VehiculosInterface {
 	private ListenerSeleccionar listenerSeleccionar;
 	private ListenerDetalleVehiculo listenerDetalle;
 	private ListenerAceptarAltaVehiculo listenerAceptarAlta;
-	private ListenerVehiculoVolver listenerVolverAlta;
+	private ListenerVolverAVehiculo listenerVolverAlta;
 	private ListenerFiltroStock listenerFiltroStock;
 	private ListenerCombo listenerMarca;
 	private ListenerCombo listenerYear;
 	private ListenerCopiar listenerCopiar;
 	private ListenerVenderVehiculo listenerVender;
+	private ListenerVolverAVehiculo listenerVolverVehiculo;
+	private ListenerVolverVentaStock listenerVolverVenta;
+	private ListenerVenderVehiculoDetalle listenerVenderDetalle;
 
 	
 
@@ -103,7 +107,7 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.onNuevoVehiculo();
 		
 		listenerAceptarAlta =new ListenerAceptarAltaVehiculo(vc);
-		listenerVolverAlta =new ListenerVehiculoVolver(vc);
+		listenerVolver =new ListenerVehiculoVolver(vc);
 		
 		panelVehiculos.getBtnAceptar().addActionListener(listenerAceptarAlta);
 		panelVehiculos.getBtnCancelar().addActionListener(listenerVolver);
@@ -120,10 +124,10 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.onModificarVehiculo();
 
 
-	//	listenerVolver = new ListenerVolverAVehiculo(vc);
+		listenerVolverVehiculo = new ListenerVolverAVehiculo(vc);
 		//listenerModificar = new ListenerModificarVehiculo(vc);
 
-	//	panelModificarVehiculo.getBtnCancelar().addActionListener(listenerVolver);
+		panelVehiculos.getBtnCancelar().addActionListener(listenerVolverVehiculo);
 		//panelModificarVehiculo.getBtnAceptar().addActionListener(listenerModificar);
 	}
 
@@ -156,7 +160,8 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
 		listenerCopiar = new ListenerCopiar(vc);
 		panelVehiculos.getBtnCopiar().addActionListener(listenerCopiar);
-		
+		listenerVolverVehiculo = new ListenerVolverAVehiculo(vc);
+		panelVehiculos.getBtnVolverVenta().addActionListener(listenerVolverVehiculo);
 		
 		
 		frame.add(panelVehiculos);
@@ -166,11 +171,6 @@ public class VehiculosView implements VehiculosInterface {
 
 	@Override
 	public void refresh() {
-	//	frmVehiculo.remove(panelVehiculo);
-		// frmVehiculo.remove(panelStock);
-	//	panelVehiculo = null;
-	//	panelStock = null;
-	//	panel.setVisible(true);
 
 		frmVehiculo.invalidate();
 		frmVehiculo.validate();
@@ -274,40 +274,7 @@ public class VehiculosView implements VehiculosInterface {
 
 	}
 
-	// GETTERS Y SETTERS
-
-	public JButton getBtnSalir() {
-		return btnSalir;
-	}
-
-	public void setBtnSalir(JButton btnSalir) {
-		this.btnSalir = btnSalir;
-	}
-
-	public JButton getBtnBuscar() {
-		return btnBuscar;
-	}
-
-	public void setBtnBuscar(JButton btnBuscar) {
-		this.btnBuscar = btnBuscar;
-	}
-
-	public JButton getBtnNuevo() {
-		return btnNuevo;
-	}
-
-	public void setBtnNuevo(JButton btnNuevo) {
-		this.btnNuevo = btnNuevo;
-	}
-
-	public JButton getBtnStock() {
-		return btnStock;
-	}
-
-	public void setBtnStock(JButton btnStock) {
-		this.btnStock = btnStock;
-	}
-
+	
 
 	@Override
 	public void cleanPanelVehiculo() {
@@ -324,7 +291,9 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.onBuscarVehiculo();
 		listenerBuscarPatente = new ListenerBuscarPatente(vc);
 		panelVehiculos.getBtnBuscar().addActionListener(listenerBuscarPatente);
-		
+	
+		listenerVolverVehiculo = new ListenerVolverAVehiculo(vc);
+		panelVehiculos.getBtnVolver().addActionListener(listenerVolverVehiculo);
 		PantallaUtil.refresh(frame);
 		
 	}
@@ -365,8 +334,7 @@ public class VehiculosView implements VehiculosInterface {
 			panelVehiculos.getBtnDetalle().addActionListener(listenerDetalle);
 			listenerFiltroStock = new ListenerFiltroStock(vc);
 			panelVehiculos.getBtnFiltrar().addActionListener(listenerFiltroStock);
-			
-			
+		
 			PantallaUtil.refresh(frame);
 					
 		}
@@ -382,6 +350,10 @@ public class VehiculosView implements VehiculosInterface {
 	public void mostrarDetalleVehiculo(Vehiculo vehiculo) {
 
 		panelVehiculos.mostrarDetalleVehiculo(vehiculo);
+		listenerVenderDetalle = new ListenerVenderVehiculoDetalle(vc);			
+		panelVehiculos.getBtnVender().addActionListener(listenerVenderDetalle);
+		listenerVolverVehiculo = new ListenerVolverAVehiculo(vc);
+		panelVehiculos.getBtnVolverAStock().addActionListener(listenerVolverVehiculo);
 		
 		PantallaUtil.refresh(frame);
 	}
@@ -415,7 +387,7 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.copioVehiculo(vehiculo);
 		
 		listenerAceptarAlta =new ListenerAceptarAltaVehiculo(vc);
-		listenerVolverAlta =new ListenerVehiculoVolver(vc);
+		listenerVolverAlta =new ListenerVolverAVehiculo(vc);
 		
 		panelVehiculos.getBtnAceptar().addActionListener(listenerAceptarAlta);
 		panelVehiculos.getBtnCancelar().addActionListener(listenerVolver);
@@ -430,6 +402,12 @@ public class VehiculosView implements VehiculosInterface {
 		
 		return panelVehiculos.getPatenteText().getText();
 		
+	}
+
+
+	@Override
+	public JPanel getPanel() {
+		return panelVehiculos;
 	}
 
 

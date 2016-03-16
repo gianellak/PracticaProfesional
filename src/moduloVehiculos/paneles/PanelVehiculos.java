@@ -270,7 +270,7 @@ public class PanelVehiculos extends JPanel {
 		this.add(lblProveedor);
 
 		JLabel lblFechaVenta = new JLabel("Fecha condicion: ");
-		lblFechaVenta.setBounds(50, 290, 90, 25);
+		lblFechaVenta.setBounds(50, 290, 120, 25);
 		this.add(lblFechaVenta);
 		
 		JLabel lblCondicion = new JLabel("Condicion: ");
@@ -306,13 +306,12 @@ public class PanelVehiculos extends JPanel {
 		
 		notEditableTextFields();
 		
-		
 
-		btnElegir = new JButton("Seleccionar Vehiculo");
-		btnElegir.setBounds(700, 220, 160, 25);
-		this.add(btnElegir);
+		btnVender = new JButton("Vender Vehiculo");
+		btnVender.setBounds(700, 220, 160, 25);
+		this.add(btnVender);
 
-		btnVolverAStock = new JButton("Volver a Stock");
+		btnVolverAStock = new JButton("Volver");
 		btnVolverAStock.setBounds(700, 250, 160, 25);
 		this.add(btnVolverAStock);
 

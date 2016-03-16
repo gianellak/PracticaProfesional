@@ -164,6 +164,7 @@ public class VehiculosController {
 			if (v == null) {
 				if (vDB.createVehiculo(newVehiculoAInsertar)) {
 					Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
+					cleanVehiculo();
 				} else {
 					Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
 				}
@@ -248,8 +249,6 @@ public class VehiculosController {
 		String p = vi.getVehiculoTabla();
 
 		if (p != null) {
-
-			System.out.println("COPIO");
 
 			vehiculo = vDB.getVehiculo(p);
 
@@ -390,8 +389,32 @@ public class VehiculosController {
 
 		String p = vi.getVehiculoTabla();
 
-		vc.ventaDesdeVehiculo(p);
+		if(p != null){
+		
+			vc.ventaDesdeVehiculo(p);
+		}
 
+		else {
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
+		}
+	}
+	
+	public void seleccionaVehiculoDetalle() {
+		
+		vtai = new VentasView();
+		
+		VentasController vc = new VentasController(vtai, pc);
+		
+		String p = vi.getPatenteABuscar();
+		
+		if(p != null){
+			
+			vc.ventaDesdeVehiculo(p);
+		}
+		
+		else {
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
+		}
 	}
 
 }
