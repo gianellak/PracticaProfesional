@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import moduloVenta.VentasController;
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
@@ -47,6 +48,8 @@ public interface VehiculosInterface {
 		public void copioVehiculo(Vehiculo vehiculo);
 		public String vehiculoVenta();
 		public JPanel getPanel();
+		public void removePanelVehiculos();
+		void nuevoVehiculoVenta(String patente, VentasController vc);
 	
 		
 		

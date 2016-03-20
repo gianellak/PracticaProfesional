@@ -60,6 +60,8 @@ public class VentasView implements VentasInterface {
 
 	private ListenerCombo listenerYear;
 
+	private ListenerAdqUnidad listenerAdqUnidad;
+
 	public VentasView(){
 		
 		panelVentasMenu= new VentasMenu();
@@ -364,9 +366,11 @@ public class VentasView implements VentasInterface {
 		
 		panelVentas.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
 		
-		listenerAceptarDetalle = new ListenerAceptarDetalle(ventasController);
-		
+		listenerAceptarDetalle = new ListenerAceptarDetalle(ventasController);		
 		panelVentas.getBtnAceptarDetalle().addActionListener(listenerAceptarDetalle);
+		
+		listenerAdqUnidad = new ListenerAdqUnidad(ventasController);
+		panelVentas.getBtnAdqUnidad().addActionListener(listenerAdqUnidad);
 	}
 
 	@Override
@@ -495,10 +499,31 @@ public class VentasView implements VentasInterface {
 			
 		PantallaUtil.refresh(frame);
 		
-
-		
-		
 		
 	}
+
+	@Override
+	public String getVehiculoAdq() {
+		return panelVentas.getNuevaPatenteText().getText();
+		
+	}
+
+
+	@Override
+	public PanelVentas getPanelVentas() {
+		return panelVentas;
+		
+	}
+
+	@Override
+	public void prosigoVenta(String patente,Integer precio, String texto) {
+	
+		System.out.println("prosigoVenta");
+		panelVentas.actualizoNuevaUnidad(patente, precio, texto);
+		PantallaUtil.refresh(frame);
+		
+	}
+
+	
 
 }

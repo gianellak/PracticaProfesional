@@ -14,6 +14,7 @@ import moduloPrincipal.paneles.PanelGeneral;
 import moduloVehiculos.listener.*;
 import moduloVehiculos.paneles.PanelVehiculos;
 import moduloVehiculos.paneles.VehiculosMenu;
+import moduloVenta.VentasController;
 import moduloVenta.listener.ListenerCombo;
 import moduloVenta.listener.ListenerVolverVentaStock;
 
@@ -47,6 +48,8 @@ public class VehiculosView implements VehiculosInterface {
 	private ListenerVolverAVehiculo listenerVolverVehiculo;
 	private ListenerVolverVentaStock listenerVolverVenta;
 	private ListenerVenderVehiculoDetalle listenerVenderDetalle;
+	private ListenerAceptarAltaVenta listenerAceptarAltaVenta;
+	private ListenerVehiculoVolverVenta listenerVolverVehiculoVenta;
 
 	
 
@@ -55,6 +58,14 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculosMenu= new VehiculosMenu();
 		panelVehiculos = new PanelVehiculos();
 
+		
+	}
+	public VehiculosView(JFrame f) {
+		
+		panelVehiculosMenu= new VehiculosMenu();
+		panelVehiculos = new PanelVehiculos();
+		frame = f;
+		
 		
 	}
 
@@ -283,6 +294,7 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.repaint();
 		
 	}
+	
 
 
 	@Override
@@ -411,6 +423,31 @@ public class VehiculosView implements VehiculosInterface {
 	}
 
 
+	@Override
+	public void nuevoVehiculoVenta(String patente, VentasController vc) {
+
+		System.out.println(patente);
 		
+		
+		panelVehiculos.onNuevoVehiculoVenta(patente);
+		
+		listenerAceptarAltaVenta =new ListenerAceptarAltaVenta(vc);
+		listenerVolverVehiculoVenta =new ListenerVehiculoVolverVenta(vc);
+		
+		panelVehiculos.getBtnAceptar().addActionListener(listenerAceptarAltaVenta);
+		panelVehiculos.getBtnCancelar().addActionListener(listenerVolver);
+		
+		PantallaUtil.refresh(frame);
+
+	}
+
+
+	@Override
+	public void removePanelVehiculos() {
+		
+		PantallaUtil.remove(panelVehiculos);
+	}
+
+
 
 }

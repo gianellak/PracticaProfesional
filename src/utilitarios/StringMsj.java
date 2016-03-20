@@ -68,6 +68,9 @@ public class StringMsj {
 	public static final String MSG_MOV_NOT_MOD = 
 			"No está autorizado a modificar este movimiento. ";
 	
+	public static final String MSG_CJA_NOT_SEL = 
+			"No se ha registrado la selección de ninguna fecha. ";
+	
 	public static final String MSG_MOD_MOV_BAD = 
 			"Ha ocurrido un problema al intentar modificar el movimiento. Por favor reintente.";
 
@@ -149,6 +152,9 @@ public class StringMsj {
 	
 	public static final String MSG_VEH_INS_BAD = 
 			"No ha sido posible registrar la nueva unidad. Por favor verifique los datos ingresados y reintente.";
+
+	public static final String MSG_BAD_PTT = 
+			"No se ha registrado el ingreso de una patente válida.";
 	
 	
 }

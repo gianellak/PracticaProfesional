@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import moduloVenta.paneles.PanelVentas;
 import objetos.*;
 
 public interface VentasInterface {
@@ -78,6 +79,12 @@ public interface VentasInterface {
 	void ventaDesdeCliente(String dni);
 
 	void ventaDesdeVehiculo(String dominio);
+
+	String getVehiculoAdq();
+
+	PanelVentas getPanelVentas();
+
+	void prosigoVenta(String patente, Integer precio, String texto);
 
 
 

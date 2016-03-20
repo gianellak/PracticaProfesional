@@ -17,6 +17,7 @@ import objetos.Vehiculo;
 import utilitarios.*;
 import exceptions.DBException;
 import moduloPrincipal.PrincipalController;
+import moduloVehiculos.paneles.PanelVehiculos;
 import moduloVenta.VentasController;
 import moduloVenta.VentasView;
 
@@ -164,7 +165,7 @@ public class VehiculosController {
 			if (v == null) {
 				if (vDB.createVehiculo(newVehiculoAInsertar)) {
 					Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
-					cleanVehiculo();
+					vi.removePanelVehiculos();
 				} else {
 					Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
 				}
@@ -173,6 +174,7 @@ public class VehiculosController {
 			}
 		}
 	}
+
 
 	public void onMenuVehiculo() {
 
@@ -183,6 +185,7 @@ public class VehiculosController {
 	public void cleanVehiculo() {
 		vi.cleanPanelVehiculo();
 	}
+	
 
 	public void onBuscarVehiculo() {
 		vi.onBuscarVehiculo();
@@ -401,20 +404,42 @@ public class VehiculosController {
 	
 	public void seleccionaVehiculoDetalle() {
 		
+		System.out.println("seleccionaVehiculoDetalle");
 		vtai = new VentasView();
 		
 		VentasController vc = new VentasController(vtai, pc);
 		
 		String p = vi.getPatenteABuscar();
 		
-		if(p != null){
-			
-			vc.ventaDesdeVehiculo(p);
-		}
+		Vehiculo v = vDB.getVehiculo(p);
 		
-		else {
-			Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
+		if(v== null){
+			
+		}else{
+		
+			Mensajes.mensajeInfo(StringMsj.MSG_VEH_DUP);
+
+			if (p != null) {
+
+				vc.ventaDesdeVehiculo(p);
+			}
+
+			else {
+				Mensajes.mensajeInfo(StringMsj.MSG_BAD_PTT);
+			}
 		}
 	}
+
+	public void nuevoVehiculoVenta(String patente,
+			VentasController ventasController) {
+		
+		onMenuVehiculo();
+		
+		vi.nuevoVehiculoVenta(patente, ventasController);
+		
+	}
+
+	
+	
 
 }

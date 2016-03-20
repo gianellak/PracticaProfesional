@@ -774,7 +774,34 @@ public void muestroStock(List<Stock> lista) {
 		this.btnVender = btnVender;
 	}
 
-	
+	public void onNuevoVehiculoVenta(String patente) {
+		
+		System.out.println("onNuevoVehiculoVenta");
+		this.removeAll();
+
+		JLabel datosLabel = new JLabel("Por favor, ingrese los datos de la nueva unidad.");
+		datosLabel.setBounds(50	, 40, 360, 25);
+		this.add(datosLabel);
+
+		labels();
+		
+		textFields();
+		
+		txtPatente.setText(patente);
+		txtPatente.setEditable(false);
+		
+		btnAceptar = new JButton("Guardar");
+		btnAceptar.setBounds(100, 440, 100, 25);
+		this.add(btnAceptar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(210, 440, 100, 25);
+		this.add(btnCancelar);
+		
+		this.validate();
+		this.repaint();
+		
+	}
 
 
 	

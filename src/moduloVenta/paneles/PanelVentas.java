@@ -7,9 +7,11 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,6 +26,7 @@ import moduloVenta.listener.ListenerDetalleTotal;
 import com.toedter.calendar.JDateChooser;
 
 import objetos.*;
+import utilitarios.Mensajes;
 
 
 public class PanelVentas extends JPanel {
@@ -47,6 +50,10 @@ public class PanelVentas extends JPanel {
 	private JPanel detallePanel;
 	private JPanel pagoPanel;
 	private JButton btnAdqUnidad;
+	private JButton btnBuscarVenta;
+	private String nuevoVehiculoText;
+	private JTextField nuevaPatenteText;
+	private JLabel vehiculoALabel;
 
 	public PanelVentas() {
 
@@ -182,11 +189,20 @@ public class PanelVentas extends JPanel {
 
 	public Boolean getButtonState() {
 
-		if (btnValidarDniG.isEnabled() || btnValidarDniC.isEnabled()
+		if (btnValidarDniC.isEnabled()
 				|| btnBuscarVehiculo.isEnabled()) {
 			return false;
 		} else {
-			return true;
+			if(btnValidarDniG.isEnabled()){
+				int codigo= Mensajes.msjOkCancel("¿Está seguro de que desea iniciar laventa sin ingresar un garante?", "Confirmar");
+				
+				if (codigo == JOptionPane.YES_OPTION) {
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+			return true;}
 		}
 	}
 
@@ -213,15 +229,31 @@ public class PanelVentas extends JPanel {
 		dniCompradorLabel.setBounds(280, 20, 260, 20);
 		detallePanel.add(dniCompradorLabel);
 
+		try {
+			if(!garante.equals(null)){
+			
+				JLabel garanteLabel = new JLabel("Garante: "
+						+ garante.getApellido() + " " + garante.getNombre());
+				garanteLabel.setBounds(20, 50, 260, 20);
+				detallePanel.add(garanteLabel);
+
+				JLabel dniGaranteLabel = new JLabel("DNI: " + garante.getDni());
+				dniGaranteLabel.setBounds(280, 50, 260, 20);
+				detallePanel.add(dniGaranteLabel);
+
+			}
+		} catch (Exception e) {
+			
+			JLabel garanteLabel = new JLabel("Garante: - ");
+			garanteLabel.setBounds(20, 50, 260, 20);
+			detallePanel.add(garanteLabel);
+			
+			JLabel dniGaranteLabel = new JLabel("DNI: - ");
+			dniGaranteLabel.setBounds(280, 50, 260, 20);
+			detallePanel.add(dniGaranteLabel);
+
+		}
 		
-		JLabel garanteLabel = new JLabel("Garante: " + garante.getApellido() + " " + garante.getNombre());
-		garanteLabel.setBounds(20, 50, 260, 20);
-		detallePanel.add(garanteLabel);
-
-		JLabel dniGaranteLabel = new JLabel("DNI: " + garante.getDni());
-		dniGaranteLabel.setBounds(280, 50, 260, 20);
-		detallePanel.add(dniGaranteLabel);
-
 		JLabel vehiculoLabel = new JLabel("Unidad vendida: " + vehiculo.getMarca() + " " + vehiculo.getModelo());
 		vehiculoLabel.setBounds(20, 80, 260, 20);
 		detallePanel.add(vehiculoLabel);
@@ -230,16 +262,22 @@ public class PanelVentas extends JPanel {
 		patenteLabel.setBounds(280, 80, 150, 20);
 		detallePanel.add(patenteLabel);
 		
-		JLabel vehiculoALabel = new JLabel("Unidad adquirida: " );
+		nuevoVehiculoText = new String("-");
+
+		vehiculoALabel = new JLabel("Unidad adquirida: " + nuevoVehiculoText);
 		vehiculoALabel.setBounds(20, 110, 260, 20);
-		detallePanel.add(vehiculoALabel);
+		detallePanel.add(vehiculoALabel);		
 		
 		JLabel patenteALabel = new JLabel("Dominio: ");
-		patenteALabel.setBounds(280, 110, 150, 20);
+		patenteALabel.setBounds(280, 110, 90, 20);
 		detallePanel.add(patenteALabel);
+		
+		nuevaPatenteText = new JTextField();
+		nuevaPatenteText.setBounds(380, 110, 100, 20);
+		detallePanel.add(nuevaPatenteText);
 
 		btnAdqUnidad = new JButton("Ingresar Unidad");
-		btnAdqUnidad.setBounds(440, 110, 150, 20);
+		btnAdqUnidad.setBounds(490, 110, 150, 20);
 		detallePanel.add(btnAdqUnidad);
 
 		JLabel yearLabel = new JLabel("Año: " + vehiculo.getYear());
@@ -282,7 +320,7 @@ public class PanelVentas extends JPanel {
 		precioFText.setBounds(280, 20, 100, 20);
 		pagoPanel.add(precioFText);
 
-		JLabel adelantoLabel = new JLabel("Adelanto: ");
+		JLabel adelantoLabel = new JLabel("Adelanto Efvo.: ");
 		adelantoLabel.setBounds(20, 50, 100, 20);
 		pagoPanel.add(adelantoLabel);
 
@@ -374,7 +412,7 @@ public class PanelVentas extends JPanel {
 		btnAceptarDetalle = new JButton("Aceptar");
 		btnAceptarDetalle.setPreferredSize(preferredSize);
 		btnAceptarDetalle.setBounds(650, 300, 150, 25);
-		this.add(btnAceptarDetalle);
+		pagoPanel.add(btnAceptarDetalle);
 
 		this.validate();
 		this.repaint();
@@ -436,7 +474,7 @@ public class PanelVentas extends JPanel {
 		pagoPanel.add(calendario);
 
 		dateChooser = new JDateChooser();
-		dateChooser.setBounds(310, 140, 200, 20);
+		dateChooser.setBounds(535, 140, 200, 20);
 
 		pagoPanel.add(dateChooser);
 
@@ -456,9 +494,9 @@ public class PanelVentas extends JPanel {
         dniCompradorText.setBounds(300, 60, 160, 25);
         this.add(dniCompradorText);
 
-        btnValidarVenta = new JButton("Ver ventas");
-        btnValidarVenta.setBounds(480, 60, 160, 25);
-        this.add(btnValidarVenta);
+        btnBuscarVenta = new JButton("Ver ventas");
+        btnBuscarVenta.setBounds(480, 60, 160, 25);
+        this.add(btnBuscarVenta);
 
         this.validate();
         this.repaint();
@@ -468,9 +506,35 @@ public class PanelVentas extends JPanel {
 
 	public DetalleVenta getNewDetalle() {
 		
-		DetalleVenta v  = new DetalleVenta(idV, idVehiculo, p , Integer.valueOf(cuotasText.getText()), 
-				Double.valueOf(saldoText.getText()), Double.valueOf(adelantoText.getText()), Double.valueOf(comisionText.getText()), 
-				comentarioText.getText());
+		int c; 
+		Double a, s, co;
+		
+		try {
+			c = Integer.valueOf(cuotasText.getText());
+		} catch (NumberFormatException e) {
+			c = 0;
+		}
+		
+		try {
+			a = Double.valueOf(adelantoText.getText());
+		} catch (NumberFormatException e) {
+			a =  Double.valueOf(0);
+		}
+		
+		try {
+			co = Double.valueOf(comisionText.getText());
+		} catch (NumberFormatException e) {
+			co =  Double.valueOf(0);
+		}
+		try {
+			s = Double.valueOf(saldoText.getText());
+		} catch (NumberFormatException e) {
+			s =  Double.valueOf(0);
+		}
+		
+		
+		DetalleVenta v  = new DetalleVenta(idV, idVehiculo, p , c, 
+				s, a, co, comentarioText.getText());
 		
 		return v;
 	}
@@ -479,12 +543,16 @@ public class PanelVentas extends JPanel {
 		
 		try {
 			comision = new Double(comisionText.getText());
-			descuento = new Double(descuentoText.getText());
 		    }
 		    catch (NumberFormatException e) {
 		        comision = Double.valueOf(0);
-		        descuento = Double.valueOf(0);
 		    }
+		try {
+			descuento = new Double(descuentoText.getText());
+		}
+		catch (NumberFormatException e) {
+			descuento = Double.valueOf(0);
+		}
 		
 		Double f = (double) (p + comision - descuento);
 		
@@ -500,14 +568,23 @@ public class PanelVentas extends JPanel {
 		
 		try {
 			comision = new Double(comisionText.getText());
-			descuento = new Double(descuentoText.getText());
-			adelanto = new Double(adelantoText.getText());
 		    }
 		    catch (NumberFormatException | NullPointerException e ) {
 		        comision = Double.valueOf(0);
-		        descuento = Double.valueOf(0);
-		        adelanto = Double.valueOf(0);
-		        		    }
+		    }
+		try {
+			descuento = new Double(descuentoText.getText());			
+		}
+		catch (NumberFormatException | NullPointerException e ) {
+			descuento = Double.valueOf(0);
+		}
+		try {
+			adelanto = new Double(adelantoText.getText());			
+		}
+		catch (NumberFormatException | NullPointerException e ) {
+			adelanto = Double.valueOf(0);
+		}
+		        		    
 		Double s = (double) (p - descuento + comision - adelanto);
 		
 		saldoText.setText(String.valueOf(s));
@@ -669,5 +746,78 @@ public class PanelVentas extends JPanel {
 	}
 
 
+	public JButton getBtnBuscarVenta() {
+		return btnBuscarVenta;
+	}
+
+
+	public void setBtnBuscarVenta(JButton btnBuscarVenta) {
+		this.btnBuscarVenta = btnBuscarVenta;
+	}
+
+
+
+
+	public JTextField getNuevaPatenteText() {
+		return nuevaPatenteText;
+	}
+
+
+	public void setNuevaPatenteText(JTextField nuevaPatenteText) {
+		this.nuevaPatenteText = nuevaPatenteText;
+	}
+
+
+	public JTextField getComisionText() {
+		return comisionText;
+	}
+
+
+	public void setComisionText(JTextField comisionText) {
+		this.comisionText = comisionText;
+	}
+
+
+	public JTextField getDescuentoText() {
+		return descuentoText;
+	}
+
+
+	public void setDescuentoText(JTextField descuentoText) {
+		this.descuentoText = descuentoText;
+	}
+
+
+	public JTextField getPrecioFText() {
+		return precioFText;
+	}
+
+
+	public void setPrecioFText(JTextField precioFText) {
+		this.precioFText = precioFText;
+	}
+
+
+	public String getNuevoVehiculoText() {
+		return nuevoVehiculoText;
+	}
+
+
+	public void setNuevoVehiculoText(String nuevoVehiculoText) {
+		this.nuevoVehiculoText = nuevoVehiculoText;
+	}
+	
+	public void actualizoNuevaUnidad(String patente, Integer precio, String texto){
+		
+		nuevaPatenteText.setText(patente);
+		descuentoText.setText(String.valueOf(precio));
+		nuevaPatenteText.setEditable(false);
+		descuentoText.setEditable(false);
+		btnAdqUnidad.setEnabled(false);
+		setNuevoVehiculoText(texto);
+		
+		vehiculoALabel.setText("Unidad adquirida: " + nuevoVehiculoText);
+		
+	}
 
 }

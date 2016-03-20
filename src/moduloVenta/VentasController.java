@@ -33,6 +33,7 @@ public class VentasController {
 	private int idVenta;
 	private String marca;
 	private String year;
+	private VehiculosView vhI;
 
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -87,6 +88,8 @@ public class VentasController {
 
 	public void showNuevaVenta() {
 
+		garante = null;
+		
 		vi.showNuevaVenta();
 
 	}
@@ -346,8 +349,15 @@ public class VentasController {
 			System.out.println(idVenta);
 			// falta idEmpleado
 
+			int dni = 0;
+			try {
+				dni = garante.getDni();
+			} catch (NullPointerException e) {
+			}
+			
+			
 			Venta v = new Venta(idVenta + 1, stringDate, cliente.getDni(),
-					garante.getDni(), 1);
+					dni, pc.getUser().getDniUsuario());
 
 			if (vDB.insertVenta(v)) {
 
@@ -554,5 +564,77 @@ public class VentasController {
 		
 		vi.ventaDesdeVehiculo(dominio);
 	}
+
+	public void nuevaUnidad() {
+		System.out.println("nuevaUnidad");
+
+		vhI = new VehiculosView(pc.getView());
+		
+		VehiculosController vhC = new VehiculosController(vhI, pc);
+		
+		String patente = vi.getVehiculoAdq().toUpperCase();
+		
+		if(!patente.isEmpty()){
+			
+			Vehiculo v = vhDB.getVehiculo(patente);
+					
+			if(v== null){
+				
+				vi.getPanelVentas().setVisible(false);
+				vhC.nuevoVehiculoVenta(patente, this);				
+				
+			}else{
+			
+				Mensajes.mensajeInfo(StringMsj.MSG_VEH_DUP);
+			}
+		}else{
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_PTT);			
+		}
+	}
+	
+	
+
+public void altaDesdeVenta() throws DBException {
+	System.out.println("altaDesdeVenta");
+		
+	
+		
+		Vehiculo newVehiculoAInsertar = vhI.getDatosNuevoVehiculo();
+
+		if ((newVehiculoAInsertar.getPatente().isEmpty())
+				|| (newVehiculoAInsertar.getMarca().isEmpty())
+				|| (newVehiculoAInsertar.getModelo().isEmpty())
+				|| (newVehiculoAInsertar.getColor().isEmpty())
+				|| (newVehiculoAInsertar.getYear().isEmpty())
+				|| (newVehiculoAInsertar.getPvc() == 0)
+				|| (newVehiculoAInsertar.getMotor().isEmpty())) {
+			
+			Mensajes.mensajeWarning(StringMsj.MSG_OBLI);
+			
+
+		} else {
+
+			if ((newVehiculoAInsertar.getCondicion() == "")
+					|| (newVehiculoAInsertar.getCondicion().isEmpty())) {
+				newVehiculoAInsertar.setCondicion("STOCK");
+			}
+
+			
+				if (vhDB.createVehiculo(newVehiculoAInsertar)) {
+					Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
+					vi.showMenuVentas(this, pc.getView(), pc.getUser());
+					vhI.removePanelVehiculos();
+					vi.getPanelVentas().setVisible(true);
+					PantallaUtil.refresh(pc.getView());
+					String texto = String.valueOf(newVehiculoAInsertar.getMarca() + " " + newVehiculoAInsertar.getMarca());
+					vi.prosigoVenta(newVehiculoAInsertar.getPatente(), newVehiculoAInsertar.getPvc(), texto);
+					
+				} else {
+					Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
+				}
+			}
+	}
+
+	
 
 }

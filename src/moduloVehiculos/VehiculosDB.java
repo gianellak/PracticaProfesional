@@ -69,6 +69,7 @@ public class VehiculosDB  {
 
 		Vehiculo vehiculo = null;
 		
+		System.out.println(patenteInput);
 		Object[] values = {
 				patenteInput,
 				patenteInput
@@ -82,8 +83,10 @@ public class VehiculosDB  {
 			if (rs.next()) {
 				
 				vehiculo = map(rs);
-
+				return vehiculo;
 				
+			}else{
+				return null;
 			}
 
 		} catch (SQLException e) {
