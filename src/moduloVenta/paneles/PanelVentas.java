@@ -20,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
 import moduloVenta.listener.ListenerDetalleTotal;
 
 import com.toedter.calendar.JDateChooser;
@@ -315,7 +314,7 @@ public class PanelVentas extends JPanel {
 		precioTLabel.setBounds(170, 20, 100, 20);
 		pagoPanel.add(precioTLabel);
 		
-		precioFText = new JTextField("0");
+		precioFText = new JTextField(String.valueOf(precio));
 		precioFText.setEditable(false);
 		precioFText.setBounds(280, 20, 100, 20);
 		pagoPanel.add(precioFText);
@@ -380,7 +379,7 @@ public class PanelVentas extends JPanel {
 		saldoLabel.setBounds(20, 110, 100, 20);
 		pagoPanel.add(saldoLabel);
 
-		saldoText = new JTextField("0");
+		saldoText = new JTextField(String.valueOf(precio));
 		saldoText.setBounds(110, 110, 160, 20);
 		pagoPanel.add(saldoText);
 
@@ -390,13 +389,6 @@ public class PanelVentas extends JPanel {
 
 		cuotasText = new JTextField();
 		cuotasText.setBounds(165, 140, 50, 20);
-		cuotasText.addKeyListener(new KeyAdapter() {
-	        @Override
-	        public void keyTyped(KeyEvent e) {
-	           recalcularSaldo();
-	           recalcularFinal();
-	        }
-	    });
 		pagoPanel.add(cuotasText);
 
 		calendar();

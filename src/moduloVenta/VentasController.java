@@ -412,12 +412,6 @@ public class VentasController {
 
 	}
 
-	public void filtrarModelo() {
-
-		System.out.println("FILTRO");
-
-	}
-
 	public void veoFecha(Date fecha) {
 
 		int cant = vi.getCuotas();
@@ -634,6 +628,18 @@ public void altaDesdeVenta() throws DBException {
 				}
 			}
 	}
+
+public void recalculoFecha() {
+	System.out.println("Recalculando...");
+	try {
+		veoFecha(vi.getDateCuotas());
+	} catch (NullPointerException e) {
+		
+	}
+	
+}
+
+
 
 	
 

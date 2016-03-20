@@ -3,6 +3,7 @@ package moduloVenta;
 import java.awt.BorderLayout;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -364,6 +365,8 @@ public class VentasView implements VentasInterface {
 		
 		listenerDate= new ListenerDate(ventasController);
 		
+		panelVentas.getCuotasText().addKeyListener(new ListenerCuotas(ventasController));
+		
 		panelVentas.getDateChooser().getDateEditor().addPropertyChangeListener(listenerDate);
 		
 		listenerAceptarDetalle = new ListenerAceptarDetalle(ventasController);		
@@ -522,6 +525,15 @@ public class VentasView implements VentasInterface {
 		panelVentas.actualizoNuevaUnidad(patente, precio, texto);
 		PantallaUtil.refresh(frame);
 		
+	}
+
+	@Override
+	public Date getDateCuotas() {
+		try {
+			return panelVentas.getDateChooser().getDate();
+		} catch (NullPointerException e) {
+			return null;
+		}
 	}
 
 	

@@ -1,6 +1,7 @@
 package moduloVenta;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -85,6 +86,8 @@ public interface VentasInterface {
 	PanelVentas getPanelVentas();
 
 	void prosigoVenta(String patente, Integer precio, String texto);
+
+	Date getDateCuotas();
 
 
 
