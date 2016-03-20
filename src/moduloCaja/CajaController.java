@@ -35,16 +35,14 @@ public class CajaController {
 		this.ci = ci;
 		this.pc = pc;
 	}
-	
-	public static String globalSelectedDate  ="";
-    public static String globalPath = "C:\\Tias\\";
 
-	
+	public static String globalSelectedDate = "";
+	public static String globalPath = "C:\\Tias\\";
+
 	public void verMovimientos() throws DBException {
 
 		System.out.println("Ver Movimientos - Controller");
 
-		
 		String format = new String("dd/MM/yy");
 		Date d = new Date();
 		SimpleDateFormat df = new SimpleDateFormat(format);
@@ -52,18 +50,16 @@ public class CajaController {
 		System.out.println(stringDate);
 
 		List<Movimiento> lista = cDB.findByDay(stringDate);
-		
-		if(lista.size() == 0){
-			
+
+		if (lista.size() == 0) {
+
 			Mensajes.mensajeInfo(StringMsj.MSG_FIRST_MOV);
 			ci.abroCaja();
-			
-		} else{
+
+		} else {
 			int i = cDB.countAll(stringDate);
 			ci.onVer(i, lista);
 		}
-
-		
 
 	}
 
@@ -72,7 +68,6 @@ public class CajaController {
 		ConnectionProvider pro = new DBConnection();
 
 		SchemaGenerator s = new SchemaGenerator(pro);
-		
 
 		try {
 			pro.getConnection();
@@ -80,7 +75,7 @@ public class CajaController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			s.generateSchema();
 		} catch (SQLException e1) {
@@ -97,63 +92,56 @@ public class CajaController {
 		pc.getBack();
 	}
 
-
-
-	
 	public void bajaMovimiento(Movimiento mov) throws DBException {
 
-		
-		
 		int codigo = Mensajes.msjOkCancel(StringMsj.MSG_DEL_MOV, "Eliminar");
-		
-		if (codigo ==JOptionPane.YES_OPTION){
-			
-			
-			mov.setMarca(false);
-			mov.setDescripcion("Movimiento eliminado por Usuario: " + pc.getUser().getUsername());
 
-			if(cDB.delete(mov)){
+		if (codigo == JOptionPane.YES_OPTION) {
+
+			mov.setMarca(false);
+			mov.setDescripcion("Movimiento eliminado por Usuario: "
+					+ pc.getUser().getUsername());
+
+			if (cDB.delete(mov)) {
 				Mensajes.mensajeInfo(StringMsj.MSG_DEL_MOV_OK);
-				
+
 				verMovimientos();
-				
-			}else{
+
+			} else {
 				Mensajes.mensajeInfo(StringMsj.MSG_DEL_MOV_BAD);
-				
+
 			}
 		}
-		
 
 	}
-	
+
 	public void movimientoModificado() throws DBException {
-		
+
 		Movimiento m = ci.getNuevoMovimiento();
-		
+
 		int codigo = Mensajes.msjOkCancel(StringMsj.MSG_MOD_MOV, "Modificar");
-		
-		if (codigo ==JOptionPane.YES_OPTION){
-			
-			
+
+		if (codigo == JOptionPane.YES_OPTION) {
+
 			mov.setMarca(false);
-			
-			if(cDB.insert(m)){
+
+			if (cDB.insert(m)) {
 				Mensajes.mensajeInfo(StringMsj.MSG_MOD_MOV_OK);
-				
-				if(cDB.update(mov)){
-				verMovimientos();
+
+				if (cDB.update(mov)) {
+					verMovimientos();
 				}
-			}else{
+			} else {
 				Mensajes.mensajeInfo(StringMsj.MSG_MOD_MOV_BAD);
 				verMovimientos();
 			}
-		}else{
-			if (codigo ==JOptionPane.CANCEL_OPTION){
+		} else {
+			if (codigo == JOptionPane.CANCEL_OPTION) {
 				verMovimientos();
-				
+
 			}
 		}
-		
+
 	}
 
 	public void altaMovimiento() throws DBException {
@@ -164,15 +152,13 @@ public class CajaController {
 
 			Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_OK);
 			verMovimientos();
-			
+
 		} else {
 			Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_BAD);
-			
+
 		}
 	}
 
-	
-	
 	public void showCaja() {
 
 		ci.showMenuCaja(this, pc.getView(), pc.getUser());
@@ -180,80 +166,82 @@ public class CajaController {
 	}
 
 	public void verOtrosMovimientos() {
-		
-		ci.verOtrosMovimientos();		
+
+		ci.verOtrosMovimientos();
 	}
 
-
 	public void veoFecha(Date fecha) {
-		
+
 		String format = new String("dd/MM/yy");
 		SimpleDateFormat df = new SimpleDateFormat(format);
 		String stringDate = df.format(fecha);
-		
+
 		System.out.println(stringDate);
-		
+
 		List<Movimiento> listaMov = cDB.findByDay(stringDate);
+
 		globalSelectedDate = stringDate;
-		
-		if(listaMov.size() == 0){
-			
+
+		if (listaMov.size() == 0) {
 			Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_MOV);
-			
-		} else{
-			
-			ci.onVerOtro(listaMov, stringDate);		
+		} else {
+			System.out.println("date: " + stringDate);
+			ci.onVerOtro(listaMov, stringDate);
 		}
+
 	}
-	
-	
-	
+
 	public void cleanCaja() {
 		ci.cleanPanelCaja();
-		
+
 	}
 
-	
-	public void generarArchivoLog(){
-	
+	public void generarArchivoLog() {
+
 		Date fechaActual = new Date();
 		DateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-	    DateFormat formatoHora = new SimpleDateFormat("HH.mm.ss");	    
-	 
-	    String nameOfFile = "log_"+formatoFecha.format(fechaActual)+"_"+formatoHora.format(fechaActual)+".txt";
-	    
-	    File f = new File(globalPath+nameOfFile);
-		
-	    try {
+		DateFormat formatoHora = new SimpleDateFormat("HH.mm.ss");
+
+		String nameOfFile = "log_" + formatoFecha.format(fechaActual) + "_"
+				+ formatoHora.format(fechaActual) + ".txt";
+
+		File f = new File(globalPath + nameOfFile);
+
+		try {
 			FileWriter w;
-			w = new FileWriter(f,true);
+			w = new FileWriter(f, true);
 			BufferedWriter bw = new BufferedWriter(w);
-					
-			PrintWriter wr = new PrintWriter(bw);  
-			
-		//	wr.write("Hola");
 
-		
-			List<Movimiento> listaMov = cDB.findAllByDay(globalSelectedDate);
-			
-			if(listaMov.size() == 0){
-				
-				Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_MOV);
-				wr.write("No hay movimientos registrados.");
-			} else{
-				
-				int i = 0;
+			PrintWriter wr = new PrintWriter(bw);
 
-				for (Movimiento m : listaMov) {
-					i++;	
-					String linea = "";
-					linea = linea + i+","+ m.getDescripcion()+","+m.getIngreso()+","+m.getEgreso()+","+
-					m.getFecha()+","+m.getUsuario();
-					wr.println(linea);
+			// wr.write("Hola");
+
+			System.out.println("Date: "+ globalSelectedDate);
+			if (globalSelectedDate.isEmpty()) {
+				Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_SEL);
+			} else {
+
+				List<Movimiento> listaMov = cDB.findAllByDay(globalSelectedDate);
+
+				if (listaMov.size() == 0) {
+
+					Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_MOV);
+					wr.write("No hay movimientos registrados.");
+				} else {
+
+					int i = 0;
+
+					for (Movimiento m : listaMov) {
+						i++;
+						String linea = "";
+						linea = linea + i + "," + m.getDescripcion() + ","
+								+ m.getIngreso() + "," + m.getEgreso() + ","
+								+ m.getFecha() + "," + m.getUsuario();
+						wr.println(linea);
+					}
 				}
 			}
 
-			
 			wr.close();
 			bw.close();
 		} catch (IOException e) {
@@ -264,28 +252,27 @@ public class CajaController {
 
 	public void eliminarMov() throws NumberFormatException, DBException {
 
-
 		String idMov = ci.getMovimientoTabla();
-		
-		Movimiento m  = cDB.findId(Integer.valueOf(idMov));
-		
+
+		Movimiento m = cDB.findId(Integer.valueOf(idMov));
+
 		System.out.println(m.getDescripcion());
-		
+
 		bajaMovimiento(m);
-		
+
 	}
 
 	public void modMovimiento() throws NumberFormatException, DBException {
 
 		String idMov = ci.getMovimientoTabla();
-		
-		mov  = cDB.findId(Integer.valueOf(idMov));
-		
-		if(String.valueOf(mov.getId()).matches("[1][0-9]{6}")){
-			Mensajes.mensajeInfo(StringMsj.MSG_MOV_NOT_MOD);			
-		} else{
+
+		mov = cDB.findId(Integer.valueOf(idMov));
+
+		if (String.valueOf(mov.getId()).matches("[1][0-9]{6}")) {
+			Mensajes.mensajeInfo(StringMsj.MSG_MOV_NOT_MOD);
+		} else {
 			ci.mostrarMovimientoMod(mov);
 		}
-		
+
 	}
 }

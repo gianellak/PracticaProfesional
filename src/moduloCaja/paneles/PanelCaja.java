@@ -315,6 +315,7 @@ public class PanelCaja extends JPanel {
 
 	
 	private void cargarTabla(List<Movimiento> lista) {
+		
 		int i = 0;
 
 		for (Movimiento m : lista) {
