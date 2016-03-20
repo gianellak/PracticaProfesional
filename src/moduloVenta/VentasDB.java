@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import connections.ConnectionProvider;
 import exceptions.DBException;
+import objetos.DetalleVenta;
 import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
@@ -24,6 +25,8 @@ public class VentasDB {
 
 	private static final String SQL_INSERT_PERSONA = "INSERT INTO Persona VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+	private static final String SQL_INSERT_DVENTA = "INSERT INTO detalleventa VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
 	private static final String SQL_INSERT_VENTA = "INSERT INTO Venta VALUES (?, ?, ?, ?, ?)";
 
 	private static final String SQL_COUNT_VENTA = "SELECT COUNT(idVenta) AS count FROM Venta";
@@ -80,6 +83,28 @@ public class VentasDB {
 				throw new DBException(
 						"Inserting user failed, no rows affected.");
 
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean insertDVenta(DetalleVenta v) throws DBException {
+		
+		Object[] values = { v.getIdVenta(), v.getIdVehiculo(), v.getPrecio(), v.getCuotas(),v.getDeuda(),
+				v.getAdelanto(),v.getComision(), v.getDescuento(), v.getDetalle()};
+		
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = DBUtil.prepareStatement(
+						connection, SQL_INSERT_DVENTA, false, values);) {
+			int affectedRows = statement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new DBException(
+						"Inserting user failed, no rows affected.");
+				
 			} else {
 				return true;
 			}

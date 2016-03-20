@@ -477,6 +477,8 @@ public class VentasController {
 
 		DetalleVenta dv = vi.getNewDetalle();
 		
+		vDB.insertDVenta(dv);
+		
 		if (dv.getAdelanto() != 0 ){
 			
 			
@@ -523,6 +525,7 @@ public class VentasController {
 			
 		}
 		
+	
 
 	}
 

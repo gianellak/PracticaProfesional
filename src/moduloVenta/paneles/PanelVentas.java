@@ -499,8 +499,13 @@ public class PanelVentas extends JPanel {
 	public DetalleVenta getNewDetalle() {
 		
 		int c; 
-		Double a, s, co;
+		Double a, s, co, d;
 		
+		try {
+			d = Double.valueOf(descuentoText.getText());
+		} catch (NumberFormatException e) {
+			d = Double.valueOf(0);
+		}
 		try {
 			c = Integer.valueOf(cuotasText.getText());
 		} catch (NumberFormatException e) {
@@ -526,7 +531,7 @@ public class PanelVentas extends JPanel {
 		
 		
 		DetalleVenta v  = new DetalleVenta(idV, idVehiculo, p , c, 
-				s, a, co, comentarioText.getText());
+				s, a, co, d, comentarioText.getText());
 		
 		return v;
 	}
