@@ -535,7 +535,6 @@ public class VentasView implements VentasInterface {
 			return null;
 		}
 	}
-
 	
 
 }

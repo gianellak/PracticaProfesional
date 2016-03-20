@@ -16,6 +16,7 @@ import objetos.*;
 import utilitarios.*;
 import exceptions.DBException;
 import exceptions.LexicalException;
+import moduloCaja.CajaDB;
 import moduloClientes.*;
 import moduloPrincipal.PrincipalController;
 import moduloVehiculos.*;
@@ -34,6 +35,7 @@ public class VentasController {
 	private String marca;
 	private String year;
 	private VehiculosView vhI;
+	private CajaDB mDB;
 
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -64,6 +66,7 @@ public class VentasController {
 		vDB = new VentasDB(pro);
 		cDB = new ClientesDB(pro);
 		vhDB = new VehiculosDB(pro);
+		mDB = new CajaDB(pro);
 
 	}
 
@@ -358,6 +361,8 @@ public class VentasController {
 			
 			Venta v = new Venta(idVenta + 1, stringDate, cliente.getDni(),
 					dni, pc.getUser().getDniUsuario());
+			
+			idVenta ++;
 
 			if (vDB.insertVenta(v)) {
 
@@ -460,7 +465,7 @@ public class VentasController {
 		return lista;
 	}
 
-	public void insertarDetalleVenta() {
+	public void insertarDetalleVenta() throws DBException {
 
 		String idVehiculo;
 
@@ -471,7 +476,53 @@ public class VentasController {
 		}
 
 		DetalleVenta dv = vi.getNewDetalle();
-		System.out.println(dv.getAdelanto());
+		
+		if (dv.getAdelanto() != 0 ){
+			
+			
+			
+			String format = new String("dd/MM/yy");
+			Date d = new Date();
+			SimpleDateFormat df = new SimpleDateFormat(format);
+			String stringDate = df.format(d);
+			System.out.println(stringDate);
+			
+			String format2 = new String("ddMMYY");
+			
+			SimpleDateFormat df2 = new SimpleDateFormat(format2);
+			String stringDate2 = df2.format(d);
+			    
+			
+
+			List<Movimiento> lista = mDB.findByDay(stringDate);
+
+			int i ;
+			
+			if (lista.size() == 0) {
+
+				i = 1;
+
+			} else {
+				i = mDB.countAll(stringDate);
+			}
+			
+			String s = String.valueOf(i + 1) + stringDate2;
+			
+			String descripcion = String.valueOf("Adelanto efvo por venta " + dv.getIdVenta() + " - Unidad: " + dv.getIdVehiculo());
+			
+			Movimiento movimiento = new Movimiento(Integer.parseInt(s), descripcion, dv.getAdelanto(), Double.valueOf(0), stringDate, pc.getUser().getUsername(), true);
+			
+			if (mDB.insert(movimiento)) {
+
+				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_OK);
+			
+			} else {
+				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_BAD);
+
+			}
+			
+		}
+		
 
 	}
 
