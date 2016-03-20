@@ -337,12 +337,47 @@ public class VentasController {
 
 	}
 
-	public void validarVenta() throws DBException {
+	public void validarVenta() throws DBException, NumberFormatException,
+			ParseException {
 
+
+		
+		int dni = vi.getDniBuscarG();
+
+		//Si el garante es cero, pregunto si deseo continuar.
+		if (dni == 0) {
+
+			int codigo = Mensajes
+					.msjOkCancel(
+							"¿Está seguro de que desea iniciar laventa sin ingresar un garante?",
+							"Confirmar");
+
+			//Si deseo continuar, prosigo con la venta.
+			if (codigo == JOptionPane.YES_OPTION) {
+
+				continuoVenta();
+				} 
+		}else {
+			validarGarante();
+			continuoVenta();
+			
+		}
+
+	}
+
+	private void continuoVenta() throws DBException {
+	
 		Boolean botones = vi.getButtonState();
-
+		
 		if (botones == true) {
-
+			
+			int dni;
+			try {
+				dni = garante.getDni();
+			} catch (NullPointerException e) {
+				dni = 0;
+			} 
+			
 			String format = new String("dd/MM/yy");
 			Date d = new Date();
 			SimpleDateFormat df = new SimpleDateFormat(format);
@@ -352,17 +387,10 @@ public class VentasController {
 			System.out.println(idVenta);
 			// falta idEmpleado
 
-			int dni = 0;
-			try {
-				dni = garante.getDni();
-			} catch (NullPointerException e) {
-			}
-			
-			
-			Venta v = new Venta(idVenta + 1, stringDate, cliente.getDni(),
-					dni, pc.getUser().getDniUsuario());
-			
-			idVenta ++;
+			Venta v = new Venta(idVenta + 1, stringDate,
+					cliente.getDni(), dni, pc.getUser().getDniUsuario());
+
+			idVenta++;
 
 			if (vDB.insertVenta(v)) {
 
@@ -374,9 +402,8 @@ public class VentasController {
 
 					Mensajes.mensajeInfo(StringMsj.MSG_VTA_OK);
 
-					
-					vi.ingresarDetalleVenta(idVenta, cliente, garante, vehiculo,
-							vehiculo.getPvc());
+					vi.ingresarDetalleVenta(idVenta, cliente, garante,
+							vehiculo, vehiculo.getPvc());
 
 				} else {
 
@@ -389,8 +416,9 @@ public class VentasController {
 		} else {
 			vi.msjVentaIncompleta();
 		}
-
-	}
+}
+		
+	
 
 	public void seleccionaVehiculo() {
 

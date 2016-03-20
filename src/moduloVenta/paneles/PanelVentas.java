@@ -191,18 +191,8 @@ public class PanelVentas extends JPanel {
 		if (btnValidarDniC.isEnabled()
 				|| btnBuscarVehiculo.isEnabled()) {
 			return false;
-		} else {
-			if(btnValidarDniG.isEnabled()){
-				int codigo= Mensajes.msjOkCancel("¿Está seguro de que desea iniciar laventa sin ingresar un garante?", "Confirmar");
-				
-				if (codigo == JOptionPane.YES_OPTION) {
-					return true;
-				}else{
-					return false;
-				}
-			}else{
-			return true;}
-		}
+		} 
+		return true;
 	}
 
 	public void mostrarDetalleVenta(int idVenta, Persona cliente,

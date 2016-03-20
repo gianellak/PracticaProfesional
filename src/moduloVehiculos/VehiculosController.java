@@ -405,29 +405,22 @@ public class VehiculosController {
 	public void seleccionaVehiculoDetalle() {
 		
 		System.out.println("seleccionaVehiculoDetalle");
+		
 		vtai = new VentasView();
 		
 		VentasController vc = new VentasController(vtai, pc);
 		
-		String p = vi.getPatenteABuscar();
+		String p = vi.getDatosNuevoVehiculo().getPatente();
+		
 		
 		Vehiculo v = vDB.getVehiculo(p);
+
+		if(v != null){
 		
-		if(v== null){
-			
-		}else{
-		
-			Mensajes.mensajeInfo(StringMsj.MSG_VEH_DUP);
-
-			if (p != null) {
-
-				vc.ventaDesdeVehiculo(p);
-			}
-
-			else {
-				Mensajes.mensajeInfo(StringMsj.MSG_BAD_PTT);
-			}
+			vc.ventaDesdeVehiculo(p);
 		}
+		
+		
 	}
 
 	public void nuevoVehiculoVenta(String patente,

@@ -50,6 +50,7 @@ public class VehiculosView implements VehiculosInterface {
 	private ListenerVenderVehiculoDetalle listenerVenderDetalle;
 	private ListenerAceptarAltaVenta listenerAceptarAltaVenta;
 	private ListenerVehiculoVolverVenta listenerVolverVehiculoVenta;
+	private ListenerStock listenerVolverStock;
 
 	
 
@@ -364,8 +365,8 @@ public class VehiculosView implements VehiculosInterface {
 		panelVehiculos.mostrarDetalleVehiculo(vehiculo);
 		listenerVenderDetalle = new ListenerVenderVehiculoDetalle(vc);			
 		panelVehiculos.getBtnVender().addActionListener(listenerVenderDetalle);
-		listenerVolverVehiculo = new ListenerVolverAVehiculo(vc);
-		panelVehiculos.getBtnVolverAStock().addActionListener(listenerVolverVehiculo);
+		listenerVolverStock = new ListenerStock(vc);
+		panelVehiculos.getBtnVolverAStock().addActionListener(listenerVolverStock);
 		
 		PantallaUtil.refresh(frame);
 	}
