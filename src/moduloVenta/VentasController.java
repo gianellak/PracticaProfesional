@@ -94,7 +94,7 @@ public class VentasController {
 	public void showNuevaVenta() {
 
 		garante = null;
-		
+
 		vi.showNuevaVenta();
 
 	}
@@ -261,9 +261,9 @@ public class VentasController {
 					if (cod == JOptionPane.YES_OPTION) {
 
 						List<Vehiculo> lista = vhDB.getAllVehiculos();
-						
+
 						muestroStock(lista);
-			
+
 					} else {
 						if (cod == JOptionPane.NO_OPTION) {
 
@@ -342,11 +342,9 @@ public class VentasController {
 	public void validarVenta() throws DBException, NumberFormatException,
 			ParseException {
 
-
-		
 		int dni = vi.getDniBuscarG();
 
-		//Si el garante es cero, pregunto si deseo continuar.
+		// Si el garante es cero, pregunto si deseo continuar.
 		if (dni == 0) {
 
 			int codigo = Mensajes
@@ -354,32 +352,32 @@ public class VentasController {
 							"¿Está seguro de que desea iniciar laventa sin ingresar un garante?",
 							"Confirmar");
 
-			//Si deseo continuar, prosigo con la venta.
+			// Si deseo continuar, prosigo con la venta.
 			if (codigo == JOptionPane.YES_OPTION) {
 
 				continuoVenta();
-				} 
-		}else {
+			}
+		} else {
 			validarGarante();
 			continuoVenta();
-			
+
 		}
 
 	}
 
 	private void continuoVenta() throws DBException {
-	
+
 		Boolean botones = vi.getButtonState();
-		
+
 		if (botones == true) {
-			
+
 			int dni;
 			try {
 				dni = garante.getDni();
 			} catch (NullPointerException e) {
 				dni = 0;
-			} 
-			
+			}
+
 			String format = new String("dd/MM/yy");
 			Date d = new Date();
 			SimpleDateFormat df = new SimpleDateFormat(format);
@@ -389,8 +387,8 @@ public class VentasController {
 			System.out.println(idVenta);
 			// falta idEmpleado
 
-			Venta v = new Venta(idVenta + 1, stringDate,
-					cliente.getDni(), dni, pc.getUser().getDniUsuario());
+			Venta v = new Venta(idVenta + 1, stringDate, cliente.getDni(), dni,
+					pc.getUser().getDniUsuario());
 
 			idVenta++;
 
@@ -418,16 +416,14 @@ public class VentasController {
 		} else {
 			vi.msjVentaIncompleta();
 		}
-}
-		
-	
+	}
 
 	public void seleccionaVehiculo() {
 
 		String p = vi.getVehiculoTabla();
 
 		vehiculo = vhDB.getVehiculo(p);
-		
+
 		vi.mostrarPatente(vehiculo);
 
 	}
@@ -480,14 +476,16 @@ public class VentasController {
 
 		Double valorCuota = new Double(saldo / cant);
 
-		Cuota c = new Cuota(1, stringDate, valorCuota, new Double(0), "-" , new Double(0), new Double(0), new Double(0));
+		Cuota c = new Cuota(1, stringDate, valorCuota, new Double(0), "-",
+				new Double(0), new Double(0), new Double(0));
 
 		lista.add(c);
 
 		for (int i = 0; i < cant - 1; i++) {
 
 			c = new Cuota(i + 2, df.format(c1.getTime()), valorCuota,
-					new Double(0), "-", new Double(0), new Double(0), new Double(0));
+					new Double(0), "-", new Double(0), new Double(0),
+					new Double(0));
 			c1.add(Calendar.MONTH, 1);
 			lista.add(c);
 		}
@@ -506,32 +504,28 @@ public class VentasController {
 		}
 
 		DetalleVenta dv = vi.getNewDetalle();
-		
+
 		vDB.insertDVenta(dv);
-		
+
 		insertCuotas();
-		
-		if (dv.getAdelanto() != 0 ){
-			
-			
-			
+
+		if (dv.getAdelanto() != 0) {
+
 			String format = new String("dd/MM/yy");
 			Date d = new Date();
 			SimpleDateFormat df = new SimpleDateFormat(format);
 			String stringDate = df.format(d);
 			System.out.println(stringDate);
-			
+
 			String format2 = new String("ddMMYY");
-			
+
 			SimpleDateFormat df2 = new SimpleDateFormat(format2);
 			String stringDate2 = df2.format(d);
-			    
-			
 
 			List<Movimiento> lista = mDB.findByDay(stringDate);
 
-			int i ;
-			
+			int i;
+
 			if (lista.size() == 0) {
 
 				i = 1;
@@ -539,59 +533,54 @@ public class VentasController {
 			} else {
 				i = mDB.countAll(stringDate);
 			}
-			
+
 			String s = String.valueOf(i + 1) + stringDate2;
-			
-			String descripcion = String.valueOf("Adelanto efvo por venta " + dv.getIdVenta() + " - Unidad: " + dv.getIdVehiculo());
-			
-			Movimiento movimiento = new Movimiento(Integer.parseInt(s), descripcion, dv.getAdelanto(), Double.valueOf(0), stringDate, pc.getUser().getUsername(), true);
-			
+
+			String descripcion = String.valueOf("Adelanto efvo por venta "
+					+ dv.getIdVenta() + " - Unidad: " + dv.getIdVehiculo());
+
+			Movimiento movimiento = new Movimiento(Integer.parseInt(s),
+					descripcion, dv.getAdelanto(), Double.valueOf(0),
+					stringDate, pc.getUser().getUsername(), true);
+
 			if (mDB.insert(movimiento)) {
 
 				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_OK);
-				
+
 			} else {
 				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_BAD);
 
 			}
-			
+
 		}
-		
-	
 
 	}
 
 	private void insertCuotas() throws DBException {
-		
+
 		for (Cuota c : lista) {
 
 			String cuota = String.valueOf(idVenta) + c.getCuota();
-			
+
 			int idCuota = Integer.parseInt(cuota);
-			
+
 			c.setCuota(idCuota);
 			vDB.insertCuota(c);
 		}
-
-		
-	}
-
-	public void buscarVentaPantalla() {
-		System.out.println("Buscar Venta Pantalla");
-
-		vi.mostrarBuscarVenta();
 
 	}
 
 	public void buscarVenta() {
 
+		System.out.println("buscarVenta()");
+		vi.mostrarBuscarVenta();
 		// int dni = vi.getDniBuscarC();
 		int dni = 12345678;
 
 		// NO DEVUELVE UNA LISTA List<Venta> listaV = vDB.findByDNI(dni);
 
 	}
-	
+
 	public void getCombos() {
 		marca = vi.getMarca();
 		year = vi.getYear();
@@ -600,16 +589,15 @@ public class VentasController {
 	public void aplicoFiltros() throws DBException {
 
 		getCombos();
-		
+
 		List<Vehiculo> lista;
-		
-		if(marca.equals("-") || year.equals("-"))
-		{
+
+		if (marca.equals("-") || year.equals("-")) {
 			lista = vhDB.getFilterVehiculos(marca, year);
-		}else{
+		} else {
 			lista = vhDB.getBothFilters(marca, year);
 		}
-		
+
 		List<Stock> stockAMostrar = new ArrayList<Stock>();
 
 		for (int i = 0; i < lista.size(); i++) {
@@ -647,16 +635,16 @@ public class VentasController {
 		vi.showMenuVentas(this, pc.getView(), pc.getUser());
 
 		this.conectar();
-		
+
 		vi.ventaDesdeCliente(dni);
 	}
-	
+
 	public void ventaDesdeVehiculo(String dominio) {
-		
+
 		vi.showMenuVentas(this, pc.getView(), pc.getUser());
-		
+
 		this.conectar();
-		
+
 		vi.ventaDesdeVehiculo(dominio);
 	}
 
@@ -664,36 +652,32 @@ public class VentasController {
 		System.out.println("nuevaUnidad");
 
 		vhI = new VehiculosView(pc.getView());
-		
+
 		VehiculosController vhC = new VehiculosController(vhI, pc);
-		
+
 		String patente = vi.getVehiculoAdq().toUpperCase();
-		
-		if(!patente.isEmpty()){
-			
+
+		if (!patente.isEmpty()) {
+
 			Vehiculo v = vhDB.getVehiculo(patente);
-					
-			if(v== null){
-				
+
+			if (v == null) {
+
 				vi.getPanelVentas().setVisible(false);
-				vhC.nuevoVehiculoVenta(patente, this);				
-				
-			}else{
-			
+				vhC.nuevoVehiculoVenta(patente, this);
+
+			} else {
+
 				Mensajes.mensajeInfo(StringMsj.MSG_VEH_DUP);
 			}
-		}else{
-			Mensajes.mensajeInfo(StringMsj.MSG_BAD_PTT);			
+		} else {
+			Mensajes.mensajeInfo(StringMsj.MSG_BAD_PTT);
 		}
 	}
-	
-	
 
-public void altaDesdeVenta() throws DBException {
-	System.out.println("altaDesdeVenta");
-		
-	
-		
+	public void altaDesdeVenta() throws DBException {
+		System.out.println("altaDesdeVenta");
+
 		Vehiculo newVehiculoAInsertar = vhI.getDatosNuevoVehiculo();
 
 		if ((newVehiculoAInsertar.getPatente().isEmpty())
@@ -703,9 +687,8 @@ public void altaDesdeVenta() throws DBException {
 				|| (newVehiculoAInsertar.getYear().isEmpty())
 				|| (newVehiculoAInsertar.getPvc() == 0)
 				|| (newVehiculoAInsertar.getMotor().isEmpty())) {
-			
+
 			Mensajes.mensajeWarning(StringMsj.MSG_OBLI);
-			
 
 		} else {
 
@@ -714,34 +697,69 @@ public void altaDesdeVenta() throws DBException {
 				newVehiculoAInsertar.setCondicion("STOCK");
 			}
 
-			
-				if (vhDB.createVehiculo(newVehiculoAInsertar)) {
-					Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
-					vi.showMenuVentas(this, pc.getView(), pc.getUser());
-					vhI.removePanelVehiculos();
-					vi.getPanelVentas().setVisible(true);
-					PantallaUtil.refresh(pc.getView());
-					String texto = String.valueOf(newVehiculoAInsertar.getMarca() + " " + newVehiculoAInsertar.getMarca());
-					vi.prosigoVenta(newVehiculoAInsertar.getPatente(), newVehiculoAInsertar.getPvc(), texto);
-					
-				} else {
-					Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
-				}
+			if (vhDB.createVehiculo(newVehiculoAInsertar)) {
+				Mensajes.mensajeInfo(StringMsj.MSG_VEH_INS_OK);
+				vi.showMenuVentas(this, pc.getView(), pc.getUser());
+				vhI.removePanelVehiculos();
+				vi.getPanelVentas().setVisible(true);
+				PantallaUtil.refresh(pc.getView());
+				String texto = String.valueOf(newVehiculoAInsertar.getMarca()
+						+ " " + newVehiculoAInsertar.getMarca());
+				vi.prosigoVenta(newVehiculoAInsertar.getPatente(),
+						newVehiculoAInsertar.getPvc(), texto);
+
+			} else {
+				Mensajes.mensajeWarning(StringMsj.MSG_VEH_INS_BAD);
 			}
+		}
 	}
 
-public void recalculoFecha() {
-	System.out.println("Recalculando...");
-	try {
-		veoFecha(vi.getDateCuotas());
-	} catch (NullPointerException e) {
+	public void recalculoFecha() {
+		System.out.println("Recalculando...");
+		try {
+			veoFecha(vi.getDateCuotas());
+		} catch (NullPointerException e) {
+
+		}
+
+	}
+
+	public void buscarVentasCliente() throws DBException {
 		
+		int dni = vi.getDniBuscarC();
+		
+		try {
+			if (Sintaxis.analizoDNI(String.valueOf(dni))) {
+				
+				Persona p = cDB.findId(dni);
+
+				if (p != null) {
+					
+					List<Venta> ventas =vDB.findByDNI(dni);
+					
+					if (ventas.size() == 0) {
+						Mensajes.mensajeInfo(StringMsj.MSG_VTA_NOT_CLI);
+					}else
+					{
+					 vi.muestroVentas(ventas);
+					}
+
+
+				} else {
+					
+					Mensajes.mensajeInfo(StringMsj.MSG_CLI_NOT_FOUND);
+
+					}
+			
+				
+			} else {
+				Mensajes.mensajeWarning(StringMsj.MSG_DNI_NOT_VALID);
+			}
+		} catch (LexicalException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
-}
-
-
-
 	
 
 }

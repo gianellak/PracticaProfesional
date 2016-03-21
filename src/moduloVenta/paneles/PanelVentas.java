@@ -7,10 +7,13 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -55,6 +58,10 @@ public class PanelVentas extends JPanel {
 	private String nuevoVehiculoText;
 	private JTextField nuevaPatenteText;
 	private JLabel vehiculoALabel;
+	private JButton btnBuscar;
+	private JButton btnVolver;
+	private JTextField ventasText;
+	private JComboBox<String> comboVentas;
 
 	public PanelVentas() {
 
@@ -819,6 +826,83 @@ public class PanelVentas extends JPanel {
 		
 		vehiculoALabel.setText("Unidad adquirida: " + nuevoVehiculoText);
 		
+	}
+
+
+	public void buscarVenta() {
+		JLabel datosLabel = new JLabel(
+				"Por favor, ingrese DNI del cliente a consultar.");
+		datosLabel.setBounds(50	, 40, 360, 25);
+		this.add(datosLabel);
+
+		JLabel dniCompradorLabel = new JLabel("DNI(*): ");
+		dniCompradorLabel.setBounds(50, 90, 70, 25);
+		this.add(dniCompradorLabel);
+
+		dniCompradorText = new JTextField(9);
+		dniCompradorText.setBounds(130, 90, 100, 25);
+		this.add(dniCompradorText);
+		
+		JLabel ventasLabel = new JLabel("Ventas: ");
+		ventasLabel.setBounds(240, 90, 70, 25);
+		this.add(ventasLabel);
+		
+		comboVentas = new JComboBox();
+		comboVentas.setBounds(320, 90, 160, 25);
+		comboVentas.setEnabled(false);
+		this.add(comboVentas);
+		
+		btnBuscar = new JButton("Buscar Cliente");
+		btnBuscar.setBounds(70, 160, 160, 25);
+		this.add(btnBuscar);
+
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(240, 160, 160, 25);
+		this.add(btnVolver);
+
+		this.validate();
+		this.repaint();
+		
+	}
+
+
+	public JButton getBtnBuscar() {
+		return btnBuscar;
+	}
+
+
+	public void setBtnBuscar(JButton btnBuscar) {
+		this.btnBuscar = btnBuscar;
+	}
+
+
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+
+
+	public void setBtnVolver(JButton btnVolver) {
+		this.btnVolver = btnVolver;
+	}
+
+
+	public void preparoComboVentas(List<Venta> lista) {
+		
+		List<String> listaV = new ArrayList<String>();
+		
+		for(Venta v : lista){
+			
+			String s = "Venta: " + v.getIdVenta() + " - " + v.getFecha();
+			
+			listaV.add(s);
+			
+		}
+		
+		comboVentas.setModel(new DefaultComboBoxModel((listaV.toArray())));
+		comboVentas.setEnabled(true);
+		
+		this.revalidate();
+		this.repaint();
 	}
 
 }

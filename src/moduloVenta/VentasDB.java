@@ -36,7 +36,7 @@ public class VentasDB {
 
 	private static final String SQL_FIND_BY_ID = "SELECT * FROM Persona WHERE dni=?";
 
-	private static final String SQL_FIND_VENTA_BY_DNI = "SELECT * FROM Venta WHERE dni = ?";
+	private static final String SQL_FIND_VENTA_BY_DNI = "SELECT * FROM Venta WHERE idCliente = ?";
 
 	private static final String SQL_UPDATE = "UPDATE Persona SET telefono_p=?, telefono_c=?, telefono_l=?, nombre=?, apellido=?, domicilio=?,"
 			+ "ciudad=?, provincia=?, domicilio_l=?, empresa=? WHERE DNI=?";
@@ -220,18 +220,21 @@ public class VentasDB {
 		return persona;
 	}
 
-	public Venta findByDNI(int dni) throws DBException {
+	public List<Venta> findByDNI(int dni) throws DBException {
 
-		Venta venta = null;
+		List<Venta> venta = new ArrayList<Venta>();
 
 		Object[] values = { dni };
 
 		try (Connection connection = this.connectionProvider.getConnection();
 				PreparedStatement statement = DBUtil.prepareStatement(
 						connection, SQL_FIND_VENTA_BY_DNI, false, values);
-				ResultSet resultSet = statement.executeQuery();) {
-			if (resultSet.next()) {
-				venta = mapVenta(resultSet);
+				ResultSet rs = statement.executeQuery();) {
+	
+			while (rs.next()) {
+				
+				venta.add(mapVenta(rs));
+
 			}
 
 		} catch (SQLException e) {

@@ -22,7 +22,7 @@ public class ListenerNuevaCompra implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		vc.getBack();
+		vc.buscarVenta();
 		
 		
 	}

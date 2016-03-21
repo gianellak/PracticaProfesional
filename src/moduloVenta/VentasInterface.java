@@ -89,6 +89,8 @@ public interface VentasInterface {
 
 	Date getDateCuotas();
 
+	void muestroVentas(List<Venta> lista);
+
 
 
 	

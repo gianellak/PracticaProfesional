@@ -110,6 +110,9 @@ public class StringMsj {
 	public static final String MSG_VTA_OK = 
 			"Venta generada con éxito. Por favor, complete los datos de pago.";
 	
+	public static final String MSG_VTA_NOT_CLI = 
+			"No hay ventas registradas para ese cliente.";
+	
 	//USUARIO
 	
 	public static final String MSG_EMP_MOD_OK =

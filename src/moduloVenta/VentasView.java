@@ -16,6 +16,7 @@ import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
 import objetos.Vehiculo;
+import objetos.Venta;
 import utilitarios.PantallaUtil;
 import moduloClientes.paneles.*;
 import moduloPrincipal.paneles.PanelGeneral;
@@ -62,6 +63,8 @@ public class VentasView implements VentasInterface {
 	private ListenerCombo listenerYear;
 
 	private ListenerAdqUnidad listenerAdqUnidad;
+
+	private ListenerBuscarClienteVentas listenerBuscarClienteVentas;
 
 	public VentasView(){
 		
@@ -413,7 +416,14 @@ public class VentasView implements VentasInterface {
 
 	@Override
 	public void mostrarBuscarVenta() {
-		// TODO Auto-generated method stub
+		panelVentas.buscarVenta();
+		
+		listenerBuscarClienteVentas = new ListenerBuscarClienteVentas(ventasController);
+		listenerVolverAVentas = new ListenerVolverVentas(ventasController);
+		
+		panelVentas.getBtnBuscar().addActionListener(listenerBuscarClienteVentas);
+		panelVentas.getBtnVolver().addActionListener(listenerVolverAVentas);
+		
 		
 	}
 
@@ -535,6 +545,14 @@ public class VentasView implements VentasInterface {
 			return null;
 		}
 	}
+
+	@Override
+	public void muestroVentas(List<Venta> lista) {
+		
+		panelVentas.preparoComboVentas(lista);
+		
+	}
+
 	
 
 }
