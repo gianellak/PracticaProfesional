@@ -328,12 +328,12 @@ public class VehiculosController {
 
 	}
 
-	public void readCvs() {
+	public void readCvs() throws DBException {
 
-		String csvFile = "C:\\Tias\\STOCK.cvs"; // ACÁ PONER URL QUE INGRESO
+		String csvFile = "C:\\Tias\\STOCK.csv"; // ACÁ PONER URL QUE INGRESO
 		BufferedReader br = null;
 		String line = "";
-		String cvsSplitBy = ",";
+		String cvsSplitBy = "";
 
 		try {
 
@@ -349,20 +349,22 @@ public class VehiculosController {
 						vehiculo[2],
 						vehiculo[3],
 						vehiculo[4],
-						Integer.parseInt(vehiculo[5]),
+						0,
+						//Integer.parseInt(vehiculo[5]),
 						vehiculo[6],
 						vehiculo[7],
-						Integer.parseInt(vehiculo[8]),
+						0,
+						//Integer.parseInt(vehiculo[8]),
 						vehiculo[9],
 						vehiculo[10],
 						vehiculo[11],
-						Integer.parseInt(vehiculo[12]),
-						Integer.parseInt(vehiculo[13]),
+						0,
+						0,
+						//Integer.parseInt(vehiculo[12]),
+						//Integer.parseInt(vehiculo[13]),
 						vehiculo[14]);
-
-				// System.out.println("Country [code= " + country[4] +
-				// " , name="
-				// + country[5] + "]");
+				
+				vDB.createVehiculo(v);
 
 			}
 

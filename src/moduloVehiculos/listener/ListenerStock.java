@@ -17,6 +17,7 @@ public class ListenerStock implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
+			vc.readCvs();
 			vc.onStock();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
