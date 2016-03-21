@@ -13,8 +13,32 @@ public class SchemaGenerator {
 		this.connection = connection;
 	}
 	
-	public boolean generateSchema() throws SQLException {
 		
+	public boolean generateSchemaCuotas() throws SQLException {
+		
+		Connection c = this.connection.getConnection();		
+		Statement statement = c.createStatement();
+		String sql ="create table Cuotas (cuota INTEGER PRIMARY KEY, " +
+		"vencimiento VARCHAR(8), " +
+		"valor REAL, " +
+		"adelanto REAL, " +
+		"recibo VARCHAR(9), " +
+		"intereses REAL, " +
+		"pago REAL, " +
+		"saldo REAL)";
+	 
+		try {
+	    	statement.execute(sql);
+	    	return true;
+		} catch (SQLException e) {
+			return false;
+		}
+		
+		
+	
+	}
+	
+	public boolean generateSchema() throws SQLException {
 		Connection c = this.connection.getConnection();		
 		Statement statement = c.createStatement();
 		String sql ="create table Movimiento (ID INTEGER PRIMARY KEY, Descripcion VARCHAR(140), "

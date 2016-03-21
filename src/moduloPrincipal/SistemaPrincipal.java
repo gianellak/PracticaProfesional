@@ -46,6 +46,7 @@ public class SistemaPrincipal {
 				hayTablaE = true;
 			
 			s.generateSchema();
+			s.generateSchemaCuotas();
 			s.generateSchemaPersona();
 			s.generateSchemaDetalleVenta();
 			if (s.generateSchemaUsuario()) 

@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import connections.*;
 import objetos.*;
@@ -36,6 +37,7 @@ public class VentasController {
 	private String year;
 	private VehiculosView vhI;
 	private CajaDB mDB;
+	private ArrayList<Cuota> lista;
 
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -459,11 +461,11 @@ public class VentasController {
 
 	private List<Cuota> cargarLista(Date fecha, int cant, Double saldo) {
 
-		List<Cuota> lista = new ArrayList<Cuota>();
+		lista = new ArrayList<Cuota>();
 
 		Calendar c1 = GregorianCalendar.getInstance();
 
-		String format = new String("yyyy-MM-dd");
+		String format = new String("yy-MM-dd");
 
 		SimpleDateFormat df = new SimpleDateFormat(format);
 
@@ -478,14 +480,14 @@ public class VentasController {
 
 		Double valorCuota = new Double(saldo / cant);
 
-		Cuota c = new Cuota(1, stringDate, valorCuota, new Double(0));
+		Cuota c = new Cuota(1, stringDate, valorCuota, new Double(0), "-" , new Double(0), new Double(0), new Double(0));
 
 		lista.add(c);
 
 		for (int i = 0; i < cant - 1; i++) {
 
 			c = new Cuota(i + 2, df.format(c1.getTime()), valorCuota,
-					new Double(0));
+					new Double(0), "-", new Double(0), new Double(0), new Double(0));
 			c1.add(Calendar.MONTH, 1);
 			lista.add(c);
 		}
@@ -506,6 +508,8 @@ public class VentasController {
 		DetalleVenta dv = vi.getNewDetalle();
 		
 		vDB.insertDVenta(dv);
+		
+		insertCuotas();
 		
 		if (dv.getAdelanto() != 0 ){
 			
@@ -545,7 +549,7 @@ public class VentasController {
 			if (mDB.insert(movimiento)) {
 
 				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_OK);
-			
+				
 			} else {
 				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_BAD);
 
@@ -555,6 +559,21 @@ public class VentasController {
 		
 	
 
+	}
+
+	private void insertCuotas() throws DBException {
+		
+		for (Cuota c : lista) {
+
+			String cuota = String.valueOf(idVenta) + c.getCuota();
+			
+			int idCuota = Integer.parseInt(cuota);
+			
+			c.setCuota(idCuota);
+			vDB.insertCuota(c);
+		}
+
+		
 	}
 
 	public void buscarVentaPantalla() {

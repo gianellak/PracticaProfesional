@@ -788,6 +788,7 @@ public void muestroStock(List<Stock> lista) {
 		textFields();
 		
 		txtPatente.setText(patente);
+		txtMotor.setText(patente);
 		txtPatente.setEditable(false);
 		
 		btnAceptar = new JButton("Guardar");

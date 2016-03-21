@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import connections.ConnectionProvider;
 import exceptions.DBException;
+import objetos.Cuota;
 import objetos.DetalleVenta;
 import objetos.Movimiento;
 import objetos.Persona;
@@ -26,6 +27,8 @@ public class VentasDB {
 	private static final String SQL_INSERT_PERSONA = "INSERT INTO Persona VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String SQL_INSERT_DVENTA = "INSERT INTO detalleventa VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	private static final String SQL_INSERT_CUOTAS = "INSERT INTO cuota VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SQL_INSERT_VENTA = "INSERT INTO Venta VALUES (?, ?, ?, ?, ?)";
 
@@ -278,6 +281,29 @@ public class VentasDB {
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
+	}
+
+	public boolean insertCuota(Cuota c) throws DBException {
+		Object[] values = { c.getCuota(), c.getVencimiento(), c.getValor(), c.getAdelanto(), c.getRecibo(), c.getIntereses(),
+				c.getPago(), c.getSaldo()};
+
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = DBUtil.prepareStatement(
+						connection, SQL_INSERT_CUOTAS, false, values);) {
+			int affectedRows = statement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new DBException(
+						"Inserting cuota failed, no rows affected.");
+
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
 
 }

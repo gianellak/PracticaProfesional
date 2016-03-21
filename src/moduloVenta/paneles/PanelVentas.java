@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
 import moduloVenta.listener.ListenerDetalleTotal;
 
 import com.toedter.calendar.JDateChooser;
@@ -406,10 +408,22 @@ public class PanelVentas extends JPanel {
 		((DefaultTableModel) tabla.getModel()).setRowCount(0);
 
 		for (Cuota c : lista) {
+			
+			String day = c.getVencimiento();
+			
+			String format = new String("dd-MM-yy");
+
+			SimpleDateFormat df = new SimpleDateFormat(format);
+
+			String[] partes = day.split("-");
+
+			String date = new String(partes[2] + "/" + partes[1] + "/" + partes[0]);
+			
+			
 
 			Object[] o = new Object[6];
 			o[0] = c.getCuota();
-			o[1] = c.getVencimiento();
+			o[1] = date;
 			o[2] = c.getValor();
 			o[3] = c.getAdelanto();
 
