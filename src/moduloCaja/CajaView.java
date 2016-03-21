@@ -33,6 +33,8 @@ public class CajaView implements CajaInterface {
 	private ListenerModMovimiento listenerModMovimiento;
 	private ListenerEliminarMovimiento listenerEliminarMovimiento;
 	private ListenerAceptarMod listenerAceptarMod;
+	private ListenerCerrarCaja listenerCerrarCaja;
+	private ListenerAceptarCierre listenerAceptarCierre;
 
 	public CajaView(){
 	
@@ -93,10 +95,13 @@ public class CajaView implements CajaInterface {
 		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
 		listenerModMovimiento = new ListenerModMovimiento(cajaController);
 		listenerEliminarMovimiento = new ListenerEliminarMovimiento(cajaController);
-		
+		listenerCerrarCaja = new ListenerCerrarCaja(cajaController);
 		
 		panelCaja.getBtnMod().addActionListener(listenerModMovimiento);
+		
 		panelCaja.getBtnEliminar().addActionListener(listenerEliminarMovimiento);
+		
+		panelCaja.getBtnCierre().addActionListener(listenerCerrarCaja);
 		
 		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimiento);
 		
@@ -107,14 +112,24 @@ public class CajaView implements CajaInterface {
 	
 	}
 	
-	
-
 	@Override
-	public int getBajaMovimiento() {
-
-		return 0;
+	public void onVerCierre(int i, List<Movimiento> lista) {
+		
+		PantallaUtil.remove(panelCaja);
+		
+		panelCaja.onVer(usuario, lista);
+		
+		panelCaja.onCierre();
+		
+		
+		listenerVolver = new ListenerCajaVolver(cajaController);
+		panelCaja.getBtnVolver().addActionListener(listenerCajaVolver);
+		
+		
+		PantallaUtil.refresh(frame);
+		
 	}
-
+	
 
 
 // NO HAY MODIFICACIÓN DE MOVIMIENTOS
@@ -190,6 +205,21 @@ public class CajaView implements CajaInterface {
 		
 		
 	}
+	
+	@Override
+	public void cierroCaja(int i) {
+		
+		panelCaja.cierroCaja(i, usuario);
+		
+		
+		listenerAceptarCierre = new ListenerAceptarCierre(cajaController);
+		
+		panelCaja.getBtnAlta().addActionListener(listenerAceptarCierre);
+		
+		PantallaUtil.refresh(frame);
+		
+		
+	}
 
 	@Override
 	public void onVerOtro(List<Movimiento> lista, String date) {
@@ -219,5 +249,7 @@ public class CajaView implements CajaInterface {
 		panelCaja.getBtnAlta().addActionListener(listenerAceptarMod);
 				
 	}
+
+
 
 }

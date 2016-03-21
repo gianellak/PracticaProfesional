@@ -209,8 +209,83 @@ public class PanelCaja extends JPanel {
 		this.repaint();
 		
 	}
+	public void cierroCaja(int i, Usuario usuario) {
+		
+		System.out.println("cierroCaja()");
+		
+		
+		String format = new String("dd/MM/yy");
+		String format2 = new String("dd/MM/yy - HH:mm"  );
+		Date d = new Date();
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		SimpleDateFormat df2 = new SimpleDateFormat(format2);
+		String stringDate = df.format(d);
+		String stringDate2 = df2.format(d);
+		
+		
+		idText.setText(String.valueOf(i+1) );
+		String closeText = new String("Cierre de caja - "+ stringDate2 );
+		descripcionText.setText(closeText);
+		descripcionText.setEditable(false);
+		
+		dateField.setText(stringDate);
+	
+		usuarioText.setText(usuario.getUsername());
+		
+		Double montoTotal = new Double(calculoTotal());
+		
+		montoText.setText(String.valueOf(montoTotal));
+		montoText.setEditable(false);
+	
+		if(Double.valueOf(montoText.getText()) > 0){
+			ingresoButton.setSelected(true);
+		}else{
+			egresoButton.setSelected(true);
+		}
+		
+		egresoButton.setEnabled(false);
+		ingresoButton.setEnabled(false);
+		
+		btnAlta.setText("Cerrar Caja");
+		
+		this.validate();
+		this.repaint();
+		
+	}
 
 	
+
+	private double calculoTotal() {
+		
+		System.out.println("CalculoTotal()");		
+		
+		int rows = tabla.getRowCount();
+		
+		System.out.println("Filas: " + rows);
+		
+		Double total = new Double(0);
+		
+		
+		for(int i = 0; i < rows; i++){
+	 
+			String in = String.valueOf(tabla.getModel().getValueAt(i, 2));
+			String eg = String.valueOf(tabla.getModel().getValueAt(i, 3));
+			
+			if(in.equals("0.0")){
+				total = total - (Double.valueOf(eg));
+			}else{
+				total = total + (Double.valueOf(in));
+				
+			}
+			
+			System.out.println(i+ "-" + rows + " - Total: " + total);
+		
+		}
+		
+		return total;
+	
+	}
+
 	public void onVer(Usuario usuario, List<Movimiento> lista) {
 
 		this.removeAll();
@@ -372,11 +447,12 @@ public class PanelCaja extends JPanel {
 		Double i ;
 		Double e;
 		if(ingresoButton.isSelected()){
+			System.out.println("ingreso");
 			i = new Double(montoText.getText());
 			e = new Double(0);
 		
 		} else{
-			
+			System.out.println("egreso");
 			e = new Double(montoText.getText());
 			i = new Double(0);
 		}
@@ -577,6 +653,24 @@ public class PanelCaja extends JPanel {
 	
 		this.validate();
 		this.repaint();
+		
+	}
+
+	public JButton getBtnCierre() {
+		return btnCierre;
+	}
+
+	public void setBtnCierre(JButton btnCierre) {
+		this.btnCierre = btnCierre;
+	}
+
+	public void onCierre() {
+		btnMod.setVisible(false);
+		
+		btnEliminar.setVisible(false);
+		
+		btnCierre.setVisible(false);
+		
 		
 	}
 

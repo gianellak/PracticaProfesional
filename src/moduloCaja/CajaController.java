@@ -20,8 +20,10 @@ import javax.swing.table.DefaultTableModel;
 import connections.*;
 import objetos.*;
 import utilitarios.Mensajes;
+import utilitarios.Sintaxis;
 import utilitarios.StringMsj;
 import exceptions.DBException;
+import exceptions.LexicalException;
 import moduloPrincipal.PrincipalController;
 
 public class CajaController {
@@ -39,7 +41,7 @@ public class CajaController {
 	public static String globalSelectedDate = "";
 	public static String globalPath = "C:\\Tias\\";
 
-	public void verMovimientos() throws DBException {
+	public void verMovimientos() throws DBException{
 
 		System.out.println("Ver Movimientos - Controller");
 
@@ -58,11 +60,31 @@ public class CajaController {
 
 		} else {
 			int i = cDB.countAll(stringDate);
-			ci.onVer(i, lista);
-		}
-
+			
+			int size = lista.size();
+			
+			for(int a = 0; a < i; a++){
+				try {
+					if(Sintaxis.analizoCierre(lista.get(a).getDescripcion())){
+						System.out.println("es cierre");
+						String s = lista.get(a).getDescripcion();
+						s = s.replace("XXX - ", "");
+						
+						lista.get(a).setDescripcion(s);
+						
+						ci.onVerCierre(i, lista);
+					}				
+				} catch (LexicalException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			
+			}
 	}
 
+	
 	private void conectar() {
 
 		ConnectionProvider pro = new DBConnection();
@@ -159,6 +181,30 @@ public class CajaController {
 		}
 	}
 
+	
+	public void aceptoCierre() throws DBException {
+
+		int codigo = Mensajes.msjOkCancel(StringMsj.MSG_MOV_CLO, "Confirmar");
+
+		if (codigo == JOptionPane.YES_OPTION) {
+
+			Movimiento movimiento = ci.getNuevoMovimiento();
+			
+			String s = "XXX - " + movimiento.getDescripcion();
+			movimiento.setDescripcion(s);
+
+			if (cDB.insert(movimiento)) {
+
+				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_OK);
+				verMovimientos();
+
+			} else {
+				Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_BAD);
+
+			}
+		}
+	}
+
 	public void showCaja() {
 
 		ci.showMenuCaja(this, pc.getView(), pc.getUser());
@@ -216,12 +262,13 @@ public class CajaController {
 
 			// wr.write("Hola");
 
-			System.out.println("Date: "+ globalSelectedDate);
+			System.out.println("Date: " + globalSelectedDate);
 			if (globalSelectedDate.isEmpty()) {
 				Mensajes.mensajeInfo(StringMsj.MSG_CJA_NOT_SEL);
 			} else {
 
-				List<Movimiento> listaMov = cDB.findAllByDay(globalSelectedDate);
+				List<Movimiento> listaMov = cDB
+						.findAllByDay(globalSelectedDate);
 
 				if (listaMov.size() == 0) {
 
@@ -273,6 +320,22 @@ public class CajaController {
 		} else {
 			ci.mostrarMovimientoMod(mov);
 		}
+
+	}
+
+	public void cerrarCaja() {
+		
+		String format = new String("dd/MM/yy");
+
+		Date fecha = new Date();
+
+		SimpleDateFormat df = new SimpleDateFormat(format);
+
+		String stringDate = df.format(fecha);
+
+		int i = cDB.countAll(stringDate);
+
+		ci.cierroCaja(i);
 
 	}
 }

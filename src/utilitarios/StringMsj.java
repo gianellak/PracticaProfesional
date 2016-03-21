@@ -68,6 +68,9 @@ public class StringMsj {
 	public static final String MSG_MOV_NOT_MOD = 
 			"No está autorizado a modificar este movimiento. ";
 	
+	public static final String MSG_MOV_CLO = 
+			"¿Está seguro deque desea cerrar la caja? No podrá ingresar nuevos movimentos para este día. ";
+	
 	public static final String MSG_CJA_NOT_SEL = 
 			"No se ha registrado la selección de ninguna fecha. ";
 	

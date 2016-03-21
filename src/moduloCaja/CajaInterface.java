@@ -1,5 +1,6 @@
 package moduloCaja;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ public interface CajaInterface {
 	// CONSULTAS 
 	
 	void onVer(int i, List<Movimiento> lista);
-	int getBajaMovimiento();
+
 	public Movimiento getNuevoMovimiento();
 	
 	//public void onMod(); NO HAY MODIFICACIÓN DE MOVIMIENTOS. PERO LO DEJO POR LAS DUDAS POR SI LO VES!
@@ -32,5 +33,8 @@ public interface CajaInterface {
 	void cleanPanelCaja();
 	String getMovimientoTabla();
 	void mostrarMovimientoMod(Movimiento m);
+	void cierroCaja(int i);
+
+	void onVerCierre(int i, List<Movimiento> lista);
 	
 }
