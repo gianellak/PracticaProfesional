@@ -248,6 +248,7 @@ public class VehiculosController {
 	}
 
 	public void copiarVechiulo() {
+		System.out.println("copiarVehiculo()");
 
 		String p = vi.getVehiculoTabla();
 
@@ -276,6 +277,7 @@ public class VehiculosController {
 
 	public void aplicoFiltros() throws DBException {
 
+		System.out.println("aplicoFiltros()");
 		getCombos();
 		
 		List<Vehiculo> lista;
@@ -328,63 +330,63 @@ public class VehiculosController {
 
 	}
 
-	public void readCvs() throws DBException {
-
-		String csvFile = "C:\\Tias\\STOCK.csv"; // ACÁ PONER URL QUE INGRESO
-		BufferedReader br = null;
-		String line = "";
-		String cvsSplitBy = "";
-
-		try {
-
-			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
-				String[] vehiculo = line.split(cvsSplitBy);
-
-				Vehiculo v = new objetos.Vehiculo(
-						vehiculo[0],
-						vehiculo[1],
-						vehiculo[2],
-						vehiculo[3],
-						vehiculo[4],
-						0,
-						//Integer.parseInt(vehiculo[5]),
-						vehiculo[6],
-						vehiculo[7],
-						0,
-						//Integer.parseInt(vehiculo[8]),
-						vehiculo[9],
-						vehiculo[10],
-						vehiculo[11],
-						0,
-						0,
-						//Integer.parseInt(vehiculo[12]),
-						//Integer.parseInt(vehiculo[13]),
-						vehiculo[14]);
-				
-				vDB.createVehiculo(v);
-
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		System.out.println("Done");
-
-	}
+//	public void readCvs() throws DBException {
+//
+//		String csvFile = "C:\\Tias\\STOCK.csv"; // ACÁ PONER URL QUE INGRESO
+//		BufferedReader br = null;
+//		String line = "";
+//		String cvsSplitBy = "";
+//
+//		try {
+//
+//			br = new BufferedReader(new FileReader(csvFile));
+//			while ((line = br.readLine()) != null) {
+//
+//				// use comma as separator
+//				String[] vehiculo = line.split(cvsSplitBy);
+//
+//				Vehiculo v = new objetos.Vehiculo(
+//						vehiculo[0],
+//						vehiculo[1],
+//						vehiculo[2],
+//						vehiculo[3],
+//						vehiculo[4],
+//						0,
+//						//Integer.parseInt(vehiculo[5]),
+//						vehiculo[6],
+//						vehiculo[7],
+//						0,
+//						//Integer.parseInt(vehiculo[8]),
+//						vehiculo[9],
+//						vehiculo[10],
+//						vehiculo[11],
+//						0,
+//						0,
+//						//Integer.parseInt(vehiculo[12]),
+//						//Integer.parseInt(vehiculo[13]),
+//						vehiculo[14]);
+//				
+//				vDB.createVehiculo(v);
+//
+//			}
+//
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (br != null) {
+//				try {
+//					br.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//
+//		System.out.println("Done");
+//
+//	}
 
 	public void seleccionaVehiculo() {
 

@@ -65,8 +65,6 @@ public class PanelVentas extends JPanel {
 
 	public PanelVentas() {
 
-		System.out.println("Creo nuevo panel Venta");
-
 		Double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		w = width.intValue();
 		

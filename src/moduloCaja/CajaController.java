@@ -27,6 +27,7 @@ import exceptions.LexicalException;
 import moduloPrincipal.PrincipalController;
 
 public class CajaController {
+	
 
 	private CajaInterface ci;
 	private PrincipalController pc;
@@ -41,15 +42,15 @@ public class CajaController {
 	public static String globalSelectedDate = "";
 	public static String globalPath = "C:\\Tias\\";
 
+	
 	public void verMovimientos() throws DBException{
 
-		System.out.println("Ver Movimientos - Controller");
+		System.out.println("verMovimientos - Controller");
 
 		String format = new String("dd/MM/yy");
 		Date d = new Date();
 		SimpleDateFormat df = new SimpleDateFormat(format);
 		String stringDate = df.format(d);
-		System.out.println(stringDate);
 
 		List<Movimiento> lista = cDB.findByDay(stringDate);
 
@@ -63,7 +64,7 @@ public class CajaController {
 			
 			int size = lista.size();
 			
-			for(int a = 0; a < i; a++){
+			for(int a = 0; a < size; a++){
 				try {
 					if(Sintaxis.analizoCierre(lista.get(a).getDescripcion())){
 						System.out.println("es cierre");
@@ -73,7 +74,9 @@ public class CajaController {
 						lista.get(a).setDescripcion(s);
 						
 						ci.onVerCierre(i, lista);
-					}				
+					}else{
+						ci.onVer(i, lista);
+					}
 				} catch (LexicalException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -115,6 +118,8 @@ public class CajaController {
 	}
 
 	public void bajaMovimiento(Movimiento mov) throws DBException {
+		
+		System.out.println("bajaMovimiento - Controller");
 
 		int codigo = Mensajes.msjOkCancel(StringMsj.MSG_DEL_MOV, "Eliminar");
 
@@ -138,6 +143,8 @@ public class CajaController {
 	}
 
 	public void movimientoModificado() throws DBException {
+		
+		System.out.println("movimientoModificado - Controller");
 
 		Movimiento m = ci.getNuevoMovimiento();
 
@@ -167,6 +174,8 @@ public class CajaController {
 	}
 
 	public void altaMovimiento() throws DBException {
+		
+		System.out.println("altaMovimiento - Controller");
 
 		Movimiento movimiento = ci.getNuevoMovimiento();
 
@@ -183,6 +192,8 @@ public class CajaController {
 
 	
 	public void aceptoCierre() throws DBException {
+		
+		System.out.println("aceptoCierre - Controller");
 
 		int codigo = Mensajes.msjOkCancel(StringMsj.MSG_MOV_CLO, "Confirmar");
 
@@ -206,17 +217,23 @@ public class CajaController {
 	}
 
 	public void showCaja() {
+		
+		System.out.println("showCaja - Controller");
 
 		ci.showMenuCaja(this, pc.getView(), pc.getUser());
 		this.conectar();
 	}
 
 	public void verOtrosMovimientos() {
+		
+		System.out.println("verOtrosMovimientos - Controller");
 
 		ci.verOtrosMovimientos();
 	}
 
 	public void veoFecha(Date fecha) {
+		
+		System.out.println("VeoFecha - Controller");
 
 		String format = new String("dd/MM/yy");
 		SimpleDateFormat df = new SimpleDateFormat(format);
@@ -238,12 +255,14 @@ public class CajaController {
 	}
 
 	public void cleanCaja() {
+		System.out.println("cleanCaja -COntroller");
 		ci.cleanPanelCaja();
 
 	}
 
 	public void generarArchivoLog() {
 
+		System.out.println("generarArchivo - Controller");
 		Date fechaActual = new Date();
 		DateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
 		DateFormat formatoHora = new SimpleDateFormat("HH.mm.ss");
@@ -299,6 +318,7 @@ public class CajaController {
 
 	public void eliminarMov() throws NumberFormatException, DBException {
 
+		System.out.println("eliminarMovimiento - Controller");
 		String idMov = ci.getMovimientoTabla();
 
 		Movimiento m = cDB.findId(Integer.valueOf(idMov));
@@ -310,6 +330,8 @@ public class CajaController {
 	}
 
 	public void modMovimiento() throws NumberFormatException, DBException {
+		
+		System.out.println("modMovimiento - Controller");
 
 		String idMov = ci.getMovimientoTabla();
 
@@ -324,6 +346,8 @@ public class CajaController {
 	}
 
 	public void cerrarCaja() {
+		
+		System.out.println("cerrarCaja - Controller");
 		
 		String format = new String("dd/MM/yy");
 
