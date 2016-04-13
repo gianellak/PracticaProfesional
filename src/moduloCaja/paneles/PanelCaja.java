@@ -29,6 +29,10 @@ public class PanelCaja extends JPanel {
 	private JDateChooser dateChooser;
 	private JButton btnCierre;
 	private JTextField saldoText;
+	private JTextField cuotaText;
+	private JTextField intText;
+	private JTextField restoText;
+	private JTextField adelantoText;
 	
 	public PanelCaja() {
 
@@ -749,11 +753,20 @@ public class PanelCaja extends JPanel {
 		usuarioText.setBounds(340, 350, 80, 25);
 		this.add(usuarioText);
 		
-		JLabel montoLabel = new JLabel("Monto: ");
-		montoLabel.setBounds(0, 430, 80, 25);
+		JLabel montoLabel = new JLabel("Monto a pagar: ");
+		montoLabel.setBounds(0, 430, 100, 25);
 		this.add(montoLabel);
+		
+		Double monto = c.getValor() + c.getSaldo() + c.getIntereses();
 
-		montoText = new JTextField(String.valueOf(c.getValor()));
+		montoText = new JTextField(String.valueOf(monto));
+		montoText.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyTyped(KeyEvent e) {
+	           recalcularSaldo();
+	           recalcularAdelanto();
+	        }			
+	    });
 		montoText.setBounds(100, 430, 160, 25);
 		this.add(montoText);
 
@@ -773,17 +786,51 @@ public class PanelCaja extends JPanel {
 	    buttonGroup.add(ingresoButton);
 	    buttonGroup.add(egresoButton);
 
-	    JLabel saldoLabel = new JLabel("Saldo anterior: ");
-		saldoLabel.setBounds(0, 460, 100, 25);
-		this.add(saldoLabel);
+	    JLabel cuotaLabel = new JLabel("Valor Cuota: ");
+		cuotaLabel.setBounds(0, 460, 100, 25);
+		this.add(cuotaLabel);
 		
-		saldoText = new JTextField(c.getCuota());
-		saldoText.setBounds(110, 460, 160, 25);
-		this.add(saldoText);
+		cuotaText = new JTextField(String.valueOf(c.getValor()));
+		cuotaText.setEditable(false);
+		cuotaText.setBounds(110, 460, 160, 25);
+		this.add(cuotaText);
 
 	
+		JLabel saldoLabel = new JLabel("Saldo anterior: ");
+		saldoLabel.setBounds(280, 460, 100, 25);
+		this.add(saldoLabel);
+			
+		saldoText = new JTextField(String.valueOf(c.getSaldo()));
+		saldoText.setEditable(false);
+		saldoText.setBounds(390, 460, 160, 25);
+		this.add(saldoText);
 
-	   
+		JLabel intLabel = new JLabel("Intereses: ");
+		intLabel.setBounds(0, 490, 100, 25);
+		this.add(intLabel);
+		
+		intText = new JTextField(String.valueOf(c.getIntereses()));
+		intText.setEditable(false);
+		intText.setBounds(110, 490, 160, 25);
+		this.add(intText);
+		
+		JLabel restoLabel = new JLabel("Saldo Actual: ");
+		restoLabel.setBounds(280, 460, 100, 25);
+		this.add(restoLabel);
+			
+		restoText = new JTextField("0");
+		restoText.setEditable(false);
+		restoText.setBounds(390, 460, 160, 25);
+		this.add(restoText);
+		
+		JLabel adelantoLabel = new JLabel("Adelanto: ");
+		adelantoLabel.setBounds(560, 460, 100, 25);
+		this.add(adelantoLabel);
+		
+		adelantoText = new JTextField("0");
+		adelantoText.setEditable(false);
+		adelantoText.setBounds(670, 460, 160, 25);
+		this.add(adelantoText);
 	    
 	    this.add(ingresoButton);
 	    this.add(egresoButton);
@@ -796,6 +843,31 @@ public class PanelCaja extends JPanel {
 		this.repaint();
 
 	}
+	private void recalcularSaldo() {
+		
+		Double monto = new Double(montoText.getText());
+		Double cuota = new Double(cuotaText.getText());
+		Double saldo = null, adelanto = null;
+		if(monto<cuota){
+			saldo = new Double(cuota - monto);			
+		}else{
+			adelanto = new Double (monto - cuota);
+		}
+		
+		restoText.setText(String.valueOf(saldo));
+		adelantoText.setText(String.valueOf(adelanto));
+		
+		this.revalidate();
+		this.repaint();
+	
+	}
 
+	private void recalcularAdelanto() {
+
+		
+		this.revalidate();
+		this.repaint();
+		
+	}
 
 }
