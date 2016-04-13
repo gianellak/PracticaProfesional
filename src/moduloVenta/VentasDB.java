@@ -38,6 +38,12 @@ public class VentasDB {
 
 	private static final String SQL_FIND_VENTA_BY_DNI = "SELECT * FROM Venta WHERE idCliente = ?";
 
+	private static final String SQL_FIND_CUOTAS_BY_ID = "SELECT * FROM Cuota WHERE cuota LIKE ?";
+
+	private static final String SQL_FIND_VENTA_BY_ID = "SELECT * FROM Venta WHERE idVenta = ?";
+	
+	private static final String SQL_FIND_DVENTA_BY_ID = "SELECT * FROM detalleVenta WHERE idVenta = ?";
+
 	private static final String SQL_UPDATE = "UPDATE Persona SET telefono_p=?, telefono_c=?, telefono_l=?, nombre=?, apellido=?, domicilio=?,"
 			+ "ciudad=?, provincia=?, domicilio_l=?, empresa=? WHERE DNI=?";
 
@@ -307,6 +313,98 @@ public class VentasDB {
 		}
 		return false;
 		
+	}
+
+	public Venta findVenta(int idVenta) throws DBException {
+		
+		Venta v = null;
+
+		Object[] values = { idVenta };
+
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = DBUtil.prepareStatement(
+						connection, SQL_FIND_VENTA_BY_ID, false, values);
+				ResultSet rs = statement.executeQuery();) {
+	
+			while (rs.next()) {
+				
+				v = mapVenta(rs);
+
+			}
+
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+
+		return v;
+	}
+
+	public DetalleVenta findDetalle(int idVenta) throws DBException {
+		
+		DetalleVenta dv = null;
+
+		Object[] values = { idVenta };
+
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = DBUtil.prepareStatement(
+						connection, SQL_FIND_DVENTA_BY_ID, false, values);
+				ResultSet rs = statement.executeQuery();) {
+	
+			while (rs.next()) {
+				
+				dv = mapDetalleVenta(rs);
+
+			}
+
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+
+		return dv;
+	}
+
+	private DetalleVenta mapDetalleVenta(ResultSet resultSet) throws SQLException {
+		DetalleVenta dv = new DetalleVenta(resultSet.getInt("idVenta"),
+				resultSet.getString("idvehiculo"), resultSet.getDouble("precio"),
+				resultSet.getInt("cuotas"), resultSet.getDouble("deuda"), resultSet.getDouble("adelanto"),
+				resultSet.getDouble("comision"), resultSet.getDouble("descuento"),resultSet.getString("detalle")
+		);
+
+		return dv;
+	}
+
+	public List<Cuota> findCuotas(String idC) throws DBException {
+		
+		List<Cuota> c = new ArrayList<Cuota>();
+
+		Object[] values = { idC };
+
+		try (Connection connection = this.connectionProvider.getConnection();
+				PreparedStatement statement = DBUtil.prepareStatement(
+						connection, SQL_FIND_CUOTAS_BY_ID, false, values);
+				ResultSet rs = statement.executeQuery();) {
+	
+			while (rs.next()) {
+				
+				c.add(mapCuota(rs));
+
+			}
+
+		} catch (SQLException e) {
+			throw new DBException(e);
+		}
+
+		return c;
+	}
+
+	private Cuota mapCuota(ResultSet resultSet) throws SQLException {
+		Cuota c = new Cuota(resultSet.getString("cuota"),
+				resultSet.getString("vencimiento"), resultSet.getDouble("valor"),
+				resultSet.getDouble("adelanto"), resultSet.getString("recibo"),
+				resultSet.getDouble("intereses"), resultSet.getDouble("pago"),resultSet.getDouble("saldo")
+		);
+
+		return c;
 	}
 
 }

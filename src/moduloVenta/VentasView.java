@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import exceptions.DBException;
 import objetos.Cuota;
 import objetos.DetalleVenta;
+import objetos.MuestroVenta;
 import objetos.Persona;
 import objetos.Stock;
 import objetos.Usuario;
@@ -65,6 +66,10 @@ public class VentasView implements VentasInterface {
 	private ListenerAdqUnidad listenerAdqUnidad;
 
 	private ListenerBuscarClienteVentas listenerBuscarClienteVentas;
+
+	private ListenerUnaVenta listenerUnaVenta;
+
+	private ListenerPagarCuota listenerPagarCuota;
 
 	public VentasView(){
 		
@@ -551,8 +556,37 @@ public class VentasView implements VentasInterface {
 		
 		panelVentas.preparoComboVentas(lista);
 		
+
+		listenerUnaVenta = new ListenerUnaVenta(ventasController);
+		
+
+		panelVentas.getBtnBuscar().addActionListener(listenerUnaVenta);
+		
+		
 	}
 
 	
+	@Override
+	public String getVenta() {
+		// TODO Auto-generated method stub
+		return panelVentas.getComboVentas().getSelectedItem().toString();
+				
+	}
 
+	@Override
+	public void mostrarVenta(MuestroVenta v,  List<Cuota> c) {
+		panelVentas.mostrarVenta(v, c);
+		
+		listenerPagarCuota = new ListenerPagarCuota(ventasController); 
+		
+		panelVentas.getBtnPagarCuota().addActionListener(listenerPagarCuota);
+		
+	}
+
+	@Override
+	public Cuota getCuotaTabla() {
+		return panelVentas.getCuotaTabla();
+	}
+
+	
 }

@@ -91,7 +91,11 @@ public interface VentasInterface {
 
 	void muestroVentas(List<Venta> lista);
 
+	String getVenta();
 
+	void mostrarVenta(MuestroVenta v, List<Cuota> c);
+
+	Cuota getCuotaTabla();
 
 	
 	

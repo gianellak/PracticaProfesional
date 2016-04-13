@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class PanelVentas extends JPanel {
 	private FocusListener l;
 	private JDateChooser dateChooser;
 	private JTable tabla;
+	private JTable tablaVenta;
 	private int idV;
 	private String idVehiculo;
 	private Double p,comision,descuento,adelanto;
@@ -62,6 +64,9 @@ public class PanelVentas extends JPanel {
 	private JButton btnVolver;
 	private JTextField ventasText;
 	private JComboBox<String> comboVentas;
+	DecimalFormat dfD = new DecimalFormat("#.00");
+	private JButton btnPagarCuota; 
+	
 
 	public PanelVentas() {
 
@@ -429,7 +434,7 @@ public class PanelVentas extends JPanel {
 			Object[] o = new Object[6];
 			o[0] = c.getCuota();
 			o[1] = date;
-			o[2] = c.getValor();
+			o[2] = dfD.format(c.getValor());
 			o[3] = c.getAdelanto();
 
 			((DefaultTableModel) tabla.getModel()).addRow(o);
@@ -828,6 +833,8 @@ public class PanelVentas extends JPanel {
 
 
 	public void buscarVenta() {
+		this.removeAll();
+		
 		JLabel datosLabel = new JLabel(
 				"Por favor, ingrese DNI del cliente a consultar.");
 		datosLabel.setBounds(50	, 40, 360, 25);
@@ -899,8 +906,194 @@ public class PanelVentas extends JPanel {
 		comboVentas.setModel(new DefaultComboBoxModel((listaV.toArray())));
 		comboVentas.setEnabled(true);
 		
+		btnBuscar.setText("Seleccionar");
+		
+		
 		this.revalidate();
 		this.repaint();
 	}
+
+
+	public JComboBox<String> getComboVentas() {
+		return comboVentas;
+	}
+
+
+	public void setComboVentas(JComboBox<String> comboVentas) {
+		this.comboVentas = comboVentas;
+	}
+
+
+	public void mostrarVenta(MuestroVenta v, List<Cuota> c) {
+		
+		
+		this.removeAll();
+		
+		detallePanel = new JPanel();
+		detallePanel.setLayout(null);
+	    detallePanel.setBorder(new TitledBorder(new LineBorder(Color.black, 1),
+	            "Detalle de Venta N°: " + v.getIdVenta() + "  " ));
+	    detallePanel.setBounds(20, 20, w - 290, 200);
+	    this.add(detallePanel);
+
+		
+	    JLabel clienteLabel = new JLabel(v.getNombreComprador());
+	    clienteLabel.setBounds(20, 20, 260, 20);
+	    detallePanel.add(clienteLabel);
+
+	    JLabel garanteLabel = new JLabel(v.getNombreGarante());
+	    garanteLabel.setBounds(20, 50, 260, 20);
+	    detallePanel.add(garanteLabel);
+		
+		JLabel vehiculoLabel = new JLabel(v.getIdVehiculo());
+		vehiculoLabel.setBounds(20, 80, 260, 20);
+		detallePanel.add(vehiculoLabel);
+		
+		JLabel precioLabel = new JLabel("Precio: $" + v.getPrecio());
+		precioLabel.setBounds(20, 110, 100, 20);
+		detallePanel.add(precioLabel);
+		
+		JLabel adelantoLabel = new JLabel("Adelanto Efvo.: " + v.getAdelanto());
+		adelantoLabel.setBounds(180, 110, 150, 20);
+		detallePanel.add(adelantoLabel);
+
+		JLabel comisionLabel = new JLabel("Comision: " + v.getComision());
+		comisionLabel.setBounds(360, 110, 100, 20);
+		detallePanel.add(comisionLabel);
+
+		JLabel descuentoLabel = new JLabel("Descuento: " + v.getDescuento());
+		descuentoLabel.setBounds(480, 110, 100, 20);
+		detallePanel.add(descuentoLabel);
+		
+		JLabel comentarioLabel = new JLabel("Comentarios: " + v.getDetalle());
+		comentarioLabel.setBounds(20, 140, 250, 20);
+		detallePanel.add(comentarioLabel);
+
+		JLabel saldoLabel = new JLabel("Saldo: " + v.getDeuda());
+		saldoLabel.setBounds(20, 170, 100, 20);
+		detallePanel.add(saldoLabel);
+
+		
+
+		
+
+		tablaVenta = tablaVenta();
+
+		JScrollPane jp = new JScrollPane(tablaVenta);
+
+		jp.setBounds(20, 230, w - 290, 250);
+
+		this.add(jp);
+		
+		cargarTablaVenta(c);
+
+		
+
+		btnPagarCuota = new JButton("Pagar Cuota");
+		btnPagarCuota.setPreferredSize(preferredSize);
+		btnPagarCuota.setBounds(800, 490, 150, 25);
+		this.add(btnPagarCuota);
+		
+		
+		this.revalidate();
+		this.repaint();
+	}
+
+
+	private JTable tablaVenta() {
+		
+	
+		String columnNames[] = { "Cuota", "Vencimiento", "Valor", "Adelanto", "Recibo", "Intereses", "Pago", "Saldo"};
+
+		JTable tabla = new JTable();
+		
+		DefaultTableModel modelo = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+
+		};
+
+		tabla.getTableHeader().setReorderingAllowed(false);
+
+		tabla.setModel(modelo);
+
+		modelo.setColumnIdentifiers(columnNames);
+
+
+		
+		return tabla;
+	}
+
+
+	public JButton getBtnPagarCuota() {
+		return btnPagarCuota;
+	}
+
+
+	public void setBtnPagarCuota(JButton btnPagarCuota) {
+		this.btnPagarCuota = btnPagarCuota;
+	}
+
+
+	public Cuota getCuotaTabla() {
+
+		int a = tablaVenta.getSelectedRow();
+		
+		
+		
+		Cuota c = null;
+			
+			try {
+				String valor = String.valueOf(tablaVenta.getModel().getValueAt(a,2));			
+				String adelanto = String.valueOf(tablaVenta.getModel().getValueAt(a,3));
+				String intereses = String.valueOf(tablaVenta.getModel().getValueAt(a,5));
+				String pago = String.valueOf(tablaVenta.getModel().getValueAt(a,6));
+				String saldo = String.valueOf(tablaVenta.getModel().getValueAt(a,7));
+				
+				c = new Cuota(String.valueOf(tablaVenta.getModel().getValueAt(a,0)),
+						String.valueOf(tablaVenta.getModel().getValueAt(a,1)),
+						Double.parseDouble(valor.replace(",", ".")),
+						Double.parseDouble(adelanto.replace(",", ".")),
+						String.valueOf(tablaVenta.getModel().getValueAt(a,4)),
+						Double.parseDouble(intereses.replace(",", ".")),
+						Double.parseDouble(pago.replace(",", ".")),
+						Double.parseDouble(saldo.replace(",", ".")));
+			} catch (Exception e) {
+				return null;
+			}
+					
+		return c;
+		
+	}
+	
+	public void cargarTablaVenta(List<Cuota> lista) {
+
+		((DefaultTableModel) tablaVenta.getModel()).setRowCount(0);
+
+		for (Cuota c : lista) {
+			
+			
+
+			Object[] o = new Object[8];
+			o[0] = c.getCuota();
+			o[1] = c.getVencimiento();
+			o[2] = dfD.format(c.getValor());
+			o[3] = c.getAdelanto();
+			o[4] = c.getRecibo();
+			o[5] = c.getIntereses();
+			o[6] = c.getPago();
+			o[7] = c.getSaldo();
+
+			((DefaultTableModel) tablaVenta.getModel()).addRow(o);
+
+			this.validate();
+			this.repaint();
+		}
+
+	}
+
+
+	
 
 }

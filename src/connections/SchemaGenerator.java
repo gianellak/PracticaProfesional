@@ -18,7 +18,7 @@ public class SchemaGenerator {
 		
 		Connection c = this.connection.getConnection();		
 		Statement statement = c.createStatement();
-		String sql ="create table Cuotas (cuota INTEGER PRIMARY KEY, " +
+		String sql ="create table Cuota (cuota VARCHAR(20) PRIMARY KEY, " +
 		"vencimiento VARCHAR(8), " +
 		"valor REAL, " +
 		"adelanto REAL, " +

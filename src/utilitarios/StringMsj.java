@@ -98,6 +98,9 @@ public class StringMsj {
 	public static final String MSG_MOV_INS_BAD= 
 			"Ha ocurrido un error al intentar ingresar el movimiento. Por favor, revise los datos ingresados y reintente.";
 	
+	public static final String MSG_CUOTA_CLOSE= 
+			"No es posible registrar un pago en este momento. La caja se encuentra cerrada.";
+	
 	
 	//VENTAS
 

@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+import objetos.Cuota;
 import objetos.Movimiento;
 import objetos.Usuario;
 
@@ -27,6 +28,7 @@ public class PanelCaja extends JPanel {
 	private JRadioButton ingresoButton, egresoButton;
 	private JDateChooser dateChooser;
 	private JButton btnCierre;
+	private JTextField saldoText;
 	
 	public PanelCaja() {
 
@@ -36,6 +38,7 @@ public class PanelCaja extends JPanel {
 		int w = width.intValue() - 250;
 		
 		Double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+
 		int h = height.intValue() - 150;
 		
 		this.setPreferredSize(new Dimension(w, h));
@@ -672,6 +675,126 @@ public class PanelCaja extends JPanel {
 		btnCierre.setVisible(false);
 		
 		
+	}
+
+	public void onVerCuota(Usuario usuario, List<Movimiento> lista, Cuota c) {
+		this.removeAll();
+		System.out.println("OnVer()");
+
+		JLabel hoyLabel = new JLabel("Movimientos de hoy: " );
+		hoyLabel.setBounds(10, 60, 280, 25);
+		this.add(hoyLabel);
+
+		tabla = this.createTablaMovimientos();
+		
+		
+		this.cargarTabla(lista);
+		
+		JScrollPane jp= new JScrollPane(tabla);
+		
+		jp.setBounds(10, 90, 800, 200);
+		
+		this.add(jp);
+		
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(720, 300, 80, 25);
+		this.add(btnVolver);
+		
+
+		JLabel idLabel = new JLabel("ID: ");
+		idLabel.setBounds(0, 350, 30, 25);
+		this.add(idLabel);
+
+		idText = new JLabel(String.valueOf(lista.size()+ 1));
+		idText.setBounds(30, 350, 40, 25);
+		this.add(idText);
+
+		JLabel passLabel = new JLabel("Descripcion");
+		passLabel.setBounds(0, 390, 80, 25);
+		this.add(passLabel);
+
+		descripcionText = new JTextField("Pago de Cuota N° " + c.getCuota());
+		
+		descripcionText.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyTyped(KeyEvent e) {
+	            if (descripcionText.getText().length() >= 140 )
+	                e.consume();
+	        }
+	    });
+
+
+		descripcionText.setBounds(100, 390, 700, 30);
+	    this.add(descripcionText);
+
+		JLabel nombreLabel = new JLabel("Fecha: ");
+		nombreLabel.setBounds(100, 350, 50, 25);
+		this.add(nombreLabel);
+
+		String format = new String("dd/MM/yy");
+		Date d = new Date();
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		String stringDate = df.format(d);
+		    
+		dateField = new JLabel(stringDate);
+		dateField.setBounds(160, 350, 80, 25);
+		this.add(dateField);
+
+		JLabel usuarioLabel = new JLabel("Usuario: ");
+		usuarioLabel.setBounds(280, 350, 50, 25);
+		this.add(usuarioLabel);
+
+		usuarioText = new JLabel(usuario.getUsername());
+		usuarioText.setBounds(340, 350, 80, 25);
+		this.add(usuarioText);
+		
+		JLabel montoLabel = new JLabel("Monto: ");
+		montoLabel.setBounds(0, 430, 80, 25);
+		this.add(montoLabel);
+
+		montoText = new JTextField(String.valueOf(c.getValor()));
+		montoText.setBounds(100, 430, 160, 25);
+		this.add(montoText);
+
+		ingresoButton = new JRadioButton("Ingreso");
+		ingresoButton.setMnemonic(KeyEvent.VK_C); 
+		ingresoButton.setSelected(true);
+		ingresoButton.setBounds(270, 430, 80, 25);
+
+	    egresoButton = new JRadioButton("Egreso");
+	    egresoButton.setMnemonic(KeyEvent.VK_G); 
+	    egresoButton.setSelected(false);
+	    egresoButton.setEnabled(false);
+	    egresoButton.setBounds(360, 430, 80, 25);
+	    
+	    
+	    ButtonGroup buttonGroup = new ButtonGroup();
+	    buttonGroup.add(ingresoButton);
+	    buttonGroup.add(egresoButton);
+
+	    JLabel saldoLabel = new JLabel("Saldo anterior: ");
+		saldoLabel.setBounds(0, 460, 100, 25);
+		this.add(saldoLabel);
+		
+		saldoText = new JTextField(c.getCuota());
+		saldoText.setBounds(110, 460, 160, 25);
+		this.add(saldoText);
+
+	
+
+	   
+	    
+	    this.add(ingresoButton);
+	    this.add(egresoButton);
+	    
+	    btnAlta = new JButton("Cobrar Cuota");
+		btnAlta.setBounds(460, 430, 200, 25);
+		this.add(btnAlta);
+
+		this.validate();
+		this.repaint();
+
 	}
 
 

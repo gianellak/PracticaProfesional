@@ -250,6 +250,23 @@ public class CajaView implements CajaInterface {
 				
 	}
 
+	@Override
+	public void verCuota(int i, List<Movimiento> lista, Cuota c) {
+
+		System.out.println("verCuota");
+		PantallaUtil.remove(panelCaja);
+		
+		panelCaja.onVerCuota(usuario, lista, c);
+		
+		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
+		
+		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimiento);
+		
+		PantallaUtil.refresh(frame);
+		
+	}
+
+	
 
 
 }

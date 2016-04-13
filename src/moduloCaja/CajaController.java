@@ -135,7 +135,7 @@ public class CajaController {
 				verMovimientos();
 
 			} else {
-				Mensajes.mensajeInfo(StringMsj.MSG_DEL_MOV_BAD);
+				Mensajes.mensajeWarning(StringMsj.MSG_DEL_MOV_BAD);
 
 			}
 		}
@@ -361,5 +361,39 @@ public class CajaController {
 
 		ci.cierroCaja(i);
 
+	}
+	
+
+
+	public void mostrarCuota(Cuota c) throws DBException {
+		
+		showCaja();
+		
+		String format = new String("dd/MM/yy");
+		Date d = new Date();
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		String stringDate = df.format(d);
+		
+		List<Movimiento> lista = cDB.findByDay(stringDate);
+
+		int i = cDB.countAll(stringDate);
+		
+		int size = lista.size();
+		
+		for(int a = 0; a < size; a++){
+			try {
+				if(Sintaxis.analizoCierre(lista.get(a).getDescripcion())){
+					Mensajes.mensajeWarning(StringMsj.MSG_CUOTA_CLOSE);
+				}else{
+				
+					ci.verCuota(i, lista, c);
+				}
+			} catch (LexicalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 }

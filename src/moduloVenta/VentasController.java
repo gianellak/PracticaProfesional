@@ -1,5 +1,7 @@
 package moduloVenta;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,7 +19,10 @@ import objetos.*;
 import utilitarios.*;
 import exceptions.DBException;
 import exceptions.LexicalException;
+import moduloCaja.CajaController;
 import moduloCaja.CajaDB;
+import moduloCaja.CajaInterface;
+import moduloCaja.CajaView;
 import moduloClientes.*;
 import moduloPrincipal.PrincipalController;
 import moduloVehiculos.*;
@@ -38,6 +43,7 @@ public class VentasController {
 	private VehiculosView vhI;
 	private CajaDB mDB;
 	private ArrayList<Cuota> lista;
+	private Persona personaVenta;
 
 	public VentasController(VentasInterface vi, PrincipalController pc) {
 		this.vi = vi;
@@ -476,14 +482,14 @@ public class VentasController {
 
 		Double valorCuota = new Double(saldo / cant);
 
-		Cuota c = new Cuota(1, stringDate, valorCuota, new Double(0), "-",
+	Cuota c = new Cuota("1", stringDate, valorCuota, new Double(0), "-",
 				new Double(0), new Double(0), new Double(0));
 
 		lista.add(c);
 
 		for (int i = 0; i < cant - 1; i++) {
 
-			c = new Cuota(i + 2, df.format(c1.getTime()), valorCuota,
+			c = new Cuota(String.valueOf(i + 2), df.format(c1.getTime()), valorCuota,
 					new Double(0), "-", new Double(0), new Double(0),
 					new Double(0));
 			c1.add(Calendar.MONTH, 1);
@@ -560,11 +566,10 @@ public class VentasController {
 
 		for (Cuota c : lista) {
 
-			String cuota = String.valueOf(idVenta) + c.getCuota();
+			String cuota = String.valueOf(idVenta) + "-" + c.getCuota();
 
-			int idCuota = Integer.parseInt(cuota);
-
-			c.setCuota(idCuota);
+			c.setCuota(cuota);
+			
 			vDB.insertCuota(c);
 		}
 
@@ -726,14 +731,16 @@ public class VentasController {
 
 	public void buscarVentasCliente() throws DBException {
 		
+		System.out.println("buscarVentasCliente()");
+		
 		int dni = vi.getDniBuscarC();
 		
 		try {
 			if (Sintaxis.analizoDNI(String.valueOf(dni))) {
 				
-				Persona p = cDB.findId(dni);
+				personaVenta = cDB.findId(dni);
 
-				if (p != null) {
+				if (personaVenta != null) {
 					
 					List<Venta> ventas =vDB.findByDNI(dni);
 					
@@ -761,5 +768,105 @@ public class VentasController {
 
 	}
 	
+	public void muestroUnaVenta() throws DBException{
+		
+		String venta = vi.getVenta();
+		
+		System.out.println(venta);
+		
+		String[] partes = venta.split(" ");
+
+		String id = new String(partes[1]);
+		
+		int idVenta = Integer.parseInt(id);
+		
+		Venta v = vDB.findVenta(idVenta);
+		
+		DetalleVenta dv = vDB.findDetalle(idVenta);
+		
+		String idC = idVenta + "-%" ;
+		
+		List<Cuota> c = vDB.findCuotas(idC);
+		
+		String s  = "¿Está seguro de que desea ver la venta N° " + id + "?";
+		
+		int codigo = Mensajes.msjOkCancel(s,
+				"Confirmar");
+
+		if (codigo == JOptionPane.YES_OPTION) {
+
+			String nombreComprador = "Combrador: " + personaVenta.getApellido() + " " + personaVenta.getNombre() + 
+					"  DNI: " + personaVenta.getDni();
+			
+			Persona garante = vDB.findId(v.getIdGarante());
+			
+			String nombreGarante = "Sin garante";
+			
+			if (garante != null) {
+				
+				nombreGarante = "Garante: " + garante.getApellido() + " " + garante.getNombre() + 
+						"  DNI: " + String.valueOf(v.getIdGarante());
+			}else{
+				
+			}
+			
+			Vehiculo vh = vhDB.getVehiculo(dv.getIdVehiculo());
+			
+			String nombreVehiculo = "Vehiculo:  - ";
+
+			if (vh != null) {
+				
+				nombreVehiculo = "Vehiculo: " + vh.getMarca() + " " + vh.getModelo() + 
+						"  Patente: " + dv.getIdVehiculo();
+			}
+			
+			MuestroVenta mv = new MuestroVenta(v.getIdVenta(), 
+					nombreComprador, nombreGarante, nombreVehiculo, 
+					dv.getPrecio(),dv.getCuotas(),
+					dv.getDeuda(), dv.getAdelanto(),
+					dv.getComision(), dv.getDescuento(), dv.getDetalle());
+		
+			vi.mostrarVenta(mv, c);
+		} 
+		
+	}
+
+	public void pagarCuota() throws DBException {
+		
+		Cuota c = vi.getCuotaTabla();
+
+	
+			if(c != null){
+				String s  = "¿Está seguro de que desea pagar la cuota con N° " + c.getCuota() + 
+						" con vencimiento " + c.getVencimiento() + "?";
+				
+				int codigo = Mensajes.msjOkCancel(s,
+						"Confirmar");
+
+				if (codigo == JOptionPane.YES_OPTION) {
+			
+					detallePagoCuota(c);
+				}
+			}else{
+
+				Mensajes.mensajeInfo(StringMsj.MSG_BAD_ROW);
+			}
+
+		
+	}
+
+	private void detallePagoCuota(Cuota c) throws DBException {
+		
+		Cuota cuota = c;
+		CajaView movI = new CajaView();
+		
+		CajaController cCon = new CajaController(movI, pc);
+		
+		vi.cleanPanelVentas();
+		
+		cCon.mostrarCuota(cuota);
+
+		
+	}
 
 }

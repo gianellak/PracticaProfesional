@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import exceptions.DBException;
+import objetos.Cuota;
 import objetos.Movimiento;
 import objetos.Persona;
 import objetos.Usuario;
@@ -36,5 +37,7 @@ public interface CajaInterface {
 	void cierroCaja(int i);
 
 	void onVerCierre(int i, List<Movimiento> lista);
+
+	void verCuota(int i, List<Movimiento> lista, Cuota c);
 	
 }
