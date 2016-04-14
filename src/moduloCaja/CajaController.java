@@ -396,4 +396,37 @@ public class CajaController {
 		
 		
 	}
+
+
+	public void altaMovimientoCuota() throws DBException {
+	
+		Movimiento movimiento = ci.getNuevoMovimiento();
+		
+		Cuota c = ci.getNuevaCuota();
+		
+		if(c.getAdelanto() > 0 ){
+			
+			
+			String[] cuota = c.getCuota().split("-");
+
+			String c1 = String.valueOf(cuota[0]) + "-" + String.valueOf(Integer.valueOf(cuota[2])+1);
+			
+			cDB.getSiguiente(c1);
+			
+			//grabo siguiente
+		}
+		
+		//RegraboCuota actual
+
+		if (cDB.insert(movimiento)) {
+
+			Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_OK);
+			verMovimientos();
+
+		} else {
+			Mensajes.mensajeInfo(StringMsj.MSG_MOV_INS_BAD);
+
+		}
+		
+	}
 }

@@ -24,7 +24,7 @@ public class ListenerAltaMovimiento implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			cc.altaMovimiento();
+			cc.altaMovimientoCuota();
 		} catch (DBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

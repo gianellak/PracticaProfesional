@@ -35,6 +35,7 @@ public class CajaView implements CajaInterface {
 	private ListenerAceptarMod listenerAceptarMod;
 	private ListenerCerrarCaja listenerCerrarCaja;
 	private ListenerAceptarCierre listenerAceptarCierre;
+	private ListenerAltaMovimiento listenerAltaMovimientoCuota;
 
 	public CajaView(){
 	
@@ -258,12 +259,17 @@ public class CajaView implements CajaInterface {
 		
 		panelCaja.onVerCuota(usuario, lista, c);
 		
-		listenerAltaMovimiento = new ListenerAltaMovimiento(cajaController);
+		listenerAltaMovimientoCuota = new ListenerAltaMovimiento(cajaController);
 		
-		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimiento);
+		panelCaja.getBtnAlta().addActionListener(listenerAltaMovimientoCuota);
 		
 		PantallaUtil.refresh(frame);
 		
+	}
+
+	@Override
+	public Cuota getNuevaCuota() {
+		return panelCaja.getNuevaCuota();
 	}
 
 	

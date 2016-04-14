@@ -315,4 +315,9 @@ public class CajaDB {
 		return movimientos;
 	}
 
+	public void getSiguiente(String cuota) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

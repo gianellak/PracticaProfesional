@@ -39,5 +39,7 @@ public interface CajaInterface {
 	void onVerCierre(int i, List<Movimiento> lista);
 
 	void verCuota(int i, List<Movimiento> lista, Cuota c);
+
+	Cuota getNuevaCuota();
 	
 }
